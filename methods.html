@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Les Hyperion – R Scripts</title>
+  <title>Les Hyperion – Methods</title>
   <link rel="stylesheet" href="assets/css/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +22,7 @@
       <nav class="nav">
         <a href="terrestrial.html">Terrestrial</a>
         <a href="marine.html">Marine</a>
-        <a href="methods.html">Methods</a>
+        <a href="methods.html" class="active">Methods</a>
       </nav>
       <button id="theme-toggle" class="theme-toggle" aria-label="Toggle colour theme">
         <span class="theme-icon theme-icon--light">☀️</span>
@@ -34,19 +34,27 @@
   <main>
     <section class="section">
       <div class="section-header">
-        <h3>R notebooks</h3>
+        <h3>Methods and cross‑cutting tools</h3>
         <p>
-          The following R notebooks and scripts are available in this repository. Each
-          card links to an HTML render. For reproducibility, the source
-          <code>.Rmd</code> or <code>.R</code> files are available on GitHub.
+          The methods section documents analytical techniques, workflows and cross‑cutting tools applied throughout Les Hyperion. Here you will find notebooks on species distribution modelling (Maxent and ensemble approaches), data ingestion and preprocessing, remote sensing workflows with hyperspectral and LiDAR data, and general GIS utilities. Each entry offers commentary on methodological choices and links to reusable scripts.
         </p>
       </div>
-      <div class="cards-grid" id="r-list">
-        <!-- Example card -->
+      <div class="cards-grid">
+        <!-- Placeholder cards for methods -->
         <article class="card">
-          <h4>Example R Analysis</h4>
-          <p>Placeholder for a real R notebook description.</p>
-          <a href="notebooks/example_r.html" class="card-link">Open notebook →</a>
+          <h4>Species distribution modelling (Maxent)</h4>
+          <p>Demonstrating Maxent and ensemble modelling techniques for predicting species distributions.</p>
+          <a href="notebooks/sdm_methods.html" class="card-link">Open methods →</a>
+        </article>
+        <article class="card">
+          <h4>Hyperspectral and LiDAR processing pipelines</h4>
+          <p>Reusable workflows for processing raw hyperspectral and LiDAR datasets, including calibration and mosaicking.</p>
+          <a href="notebooks/remote_sensing_methods.html" class="card-link">Open methods →</a>
+        </article>
+        <article class="card">
+          <h4>GIS utilities and data ingestion</h4>
+          <p>Scripts for downloading, converting and reprojecting spatial datasets from diverse sources.</p>
+          <a href="notebooks/gis_utilities.html" class="card-link">Open methods →</a>
         </article>
       </div>
     </section>

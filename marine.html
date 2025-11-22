@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Les Hyperion – Marine</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand" aria-label="Back to homepage">
+        <img src="assets/img/logo.png" alt="Les Hyperion logo" class="brand-logo">
+        <div class="brand-text">
+          <h1>Les Hyperion</h1>
+          <p>Earth observation from the southern tip</p>
+        </div>
+      </a>
+      <nav class="nav">
+        <a href="terrestrial.html">Terrestrial</a>
+        <a href="marine.html" class="active">Marine</a>
+        <a href="methods.html">Methods</a>
+      </nav>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle colour theme">
+        <span class="theme-icon theme-icon--light">☀️</span>
+        <span class="theme-icon theme-icon--dark">🌙</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="section-header">
+        <h3>Marine analyses</h3>
+        <p>
+          The marine section brings together analyses of South Africa’s coastal and oceanic systems. Here you will find notebooks examining kelp forests, marine organism distributions, marine heatwaves, and the interactions between oceanographic drivers and coastal ecosystems. Each card links to a rendered notebook with data sources and reproducible code.
+        </p>
+      </div>
+      <div class="cards-grid">
+        <!-- Placeholder cards for marine studies -->
+        <article class="card">
+          <h4>Kelp forests and coastal productivity</h4>
+          <p>Quantifying kelp canopy area and productivity along the western and southern coasts.</p>
+          <a href="notebooks/kelp_studies.html" class="card-link">Open analysis →</a>
+        </article>
+        <article class="card">
+          <h4>Marine organism distributions</h4>
+          <p>Mapping the spatial distribution of marine fauna using occurrence records and environmental variables.</p>
+          <a href="notebooks/marine_distributions.html" class="card-link">Open analysis →</a>
+        </article>
+        <article class="card">
+          <h4>Marine heatwaves and climate variability</h4>
+          <p>Detecting marine heatwaves and assessing their frequency, duration and impact on coastal ecosystems.</p>
+          <a href="notebooks/marine_heatwaves.html" class="card-link">Open analysis →</a>
+        </article>
+        <article class="card">
+          <h4>Lighthouses and coastal infrastructure</h4>
+          <p>Exploring the distribution of lighthouses and other navigational aids along South Africa’s coast.</p>
+          <a href="notebooks/lighthouses.html" class="card-link">Open analysis →</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> Les Hyperion.</p>
+  </footer>
+
+  <script src="assets/js/theme-toggle.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

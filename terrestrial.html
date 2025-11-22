@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Les Hyperion – Terrestrial</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand" aria-label="Back to homepage">
+        <img src="assets/img/logo.png" alt="Les Hyperion logo" class="brand-logo">
+        <div class="brand-text">
+          <h1>Les Hyperion</h1>
+          <p>Earth observation from the southern tip</p>
+        </div>
+      </a>
+      <nav class="nav">
+        <a href="terrestrial.html" class="active">Terrestrial</a>
+        <a href="marine.html">Marine</a>
+        <a href="methods.html">Methods</a>
+      </nav>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle colour theme">
+        <span class="theme-icon theme-icon--light">☀️</span>
+        <span class="theme-icon theme-icon--dark">🌙</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="section-header">
+        <h3>Terrestrial analyses</h3>
+        <p>
+          This section hosts notebooks focused on land-based phenomena and resources across South Africa. Topics include recent fire regimes, rainfall and drought, groundwater dynamics, elevation and topography, ecosystem services, and the distributions of terrestrial flora and fauna. Each card will link to a rendered notebook and provide a summary of the questions addressed and data used.
+        </p>
+      </div>
+      <div class="cards-grid">
+        <!-- Placeholder cards for terrestrial studies -->
+        <article class="card">
+          <h4>Fire regimes and landscape dynamics</h4>
+          <p>Analysing spatial and temporal patterns of fire occurrence across the fynbos and savanna biomes.</p>
+          <a href="notebooks/fire_regimes.html" class="card-link">Open analysis →</a>
+        </article>
+        <article class="card">
+          <h4>Precipitation and drought indices</h4>
+          <p>Exploring rainfall variability and drought using satellite-derived precipitation datasets and ground stations.</p>
+          <a href="notebooks/precipitation_drought.html" class="card-link">Open analysis →</a>
+        </article>
+        <article class="card">
+          <h4>Groundwater and hydrology</h4>
+          <p>Mapping aquifer levels and recharge zones to assess water security and ecosystem health.</p>
+          <a href="notebooks/groundwater.html" class="card-link">Open analysis →</a>
+        </article>
+        <article class="card">
+          <h4>Elevation, terrain and ecosystem services</h4>
+          <p>Assessing topographic complexity and its relationship to carbon storage, tourism and other ecosystem services.</p>
+          <a href="notebooks/elevation_services.html" class="card-link">Open analysis →</a>
+        </article>
+        <article class="card">
+          <h4>Species distributions and Maxent models</h4>
+          <p>Building species distribution models for terrestrial fauna and flora using environmental predictors and occurrence data.</p>
+          <a href="notebooks/sdm_terrestrial.html" class="card-link">Open analysis →</a>
+        </article>
+        <article class="card">
+          <h4>Hyperspectral imaging in the Cape Floristic Region</h4>
+          <p>Using AVIRIS-NG and other hyperspectral sensors to classify vegetation and detect invasive species in biodiversity hotspots.</p>
+          <a href="notebooks/hyperspectral_cfr.html" class="card-link">Open analysis →</a>
+        </article>
+        <article class="card">
+          <h4>LiDAR surveys of forest structure</h4>
+          <p>Analysing airborne LiDAR data to measure canopy height, biomass and structural diversity in indigenous forests.</p>
+          <a href="notebooks/lidar_cfr.html" class="card-link">Open analysis →</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> Les Hyperion.</p>
+  </footer>
+
+  <script src="assets/js/theme-toggle.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
