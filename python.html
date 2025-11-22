@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Les Hyperion – Python Scripts</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand" aria-label="Back to homepage">
+        <img src="assets/img/logo.png" alt="Les Hyperion logo" class="brand-logo">
+        <div class="brand-text">
+          <h1>Les Hyperion</h1>
+          <p>Earth observation from the southern tip</p>
+        </div>
+      </a>
+      <nav class="nav">
+        <a href="python.html" class="active">Python</a>
+        <a href="r.html">R</a>
+      </nav>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle colour theme">
+        <span class="theme-icon theme-icon--light">☀️</span>
+        <span class="theme-icon theme-icon--dark">🌙</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="section-header">
+        <h3>Python notebooks</h3>
+        <p>
+          The following Python notebooks are available in this repository. Each link
+          opens a rendered HTML version of the notebook. You can also access
+          the underlying <code>.ipynb</code> file in the GitHub repository to run
+          the analysis yourself.
+        </p>
+      </div>
+      <div class="cards-grid" id="python-list">
+        <!-- List items will be manually curated or generated via pre-processing. -->
+        <!-- Example card -->
+        <article class="card">
+          <h4>Example Python Analysis</h4>
+          <p>Placeholder for a real Python notebook description.</p>
+          <a href="notebooks/example_python.html" class="card-link">Open notebook →</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> Les Hyperion.</p>
+  </footer>
+
+  <script src="assets/js/theme-toggle.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

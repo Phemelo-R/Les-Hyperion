@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Les Hyperion – R Scripts</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand" aria-label="Back to homepage">
+        <img src="assets/img/logo.png" alt="Les Hyperion logo" class="brand-logo">
+        <div class="brand-text">
+          <h1>Les Hyperion</h1>
+          <p>Earth observation from the southern tip</p>
+        </div>
+      </a>
+      <nav class="nav">
+        <a href="python.html">Python</a>
+        <a href="r.html" class="active">R</a>
+      </nav>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle colour theme">
+        <span class="theme-icon theme-icon--light">☀️</span>
+        <span class="theme-icon theme-icon--dark">🌙</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="section-header">
+        <h3>R notebooks</h3>
+        <p>
+          The following R notebooks and scripts are available in this repository. Each
+          card links to an HTML render. For reproducibility, the source
+          <code>.Rmd</code> or <code>.R</code> files are available on GitHub.
+        </p>
+      </div>
+      <div class="cards-grid" id="r-list">
+        <!-- Example card -->
+        <article class="card">
+          <h4>Example R Analysis</h4>
+          <p>Placeholder for a real R notebook description.</p>
+          <a href="notebooks/example_r.html" class="card-link">Open notebook →</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> Les Hyperion.</p>
+  </footer>
+
+  <script src="assets/js/theme-toggle.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
