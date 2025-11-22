@@ -1,9 +1,10 @@
-/* ----------------------------------------------------------
+/* =========================================================
    LES HYPERION — GLOBAL STYLE SHEET
-   Modern, scientific, GIS-inspired aesthetic
-   ---------------------------------------------------------- */
+   Flat light theme, dark theme, responsive layout
+   ========================================================= */
 
-/* ---------------------- RESET ---------------------------- */
+/* ------------ BASIC RESET ------------ */
+
 *,
 *::before,
 *::after {
@@ -15,22 +16,21 @@ html, body {
   padding: 0;
 }
 
-/* ---------------------- THEME TOKENS ---------------------- */
+/* ------------ THEME TOKENS ------------ */
 
 :root {
   --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
-  /* Light theme (clean and white) */
+  /* Light theme: fully flat, white page */
   --bg-page: #ffffff;
-  --bg: #fafafa;
-  --bg-elevated: #ffffff;
-  --bg-soft: #f0f4f8;
+  --bg-surface: #ffffff;
+  --bg-soft: #f3f4f6;
 
   --text: #0f172a;
-  --text-soft: #64748b;
+  --text-soft: #6b7280;
 
-  --accent: #1e88e5;           /* Blue: water */
-  --accent-green: #22a36b;     /* Green: land */
+  --accent: #1e88e5;           /* water */
+  --accent-green: #22a36b;     /* land */
   --accent-soft: rgba(30, 136, 229, 0.12);
 
   --border-subtle: rgba(15, 23, 42, 0.08);
@@ -38,11 +38,11 @@ html, body {
 }
 
 /* Dark theme overrides */
+
 html[data-theme="dark"] {
   --bg-page: #020617;
-  --bg: #020617;
-  --bg-elevated: #0a1226;
-  --bg-soft: #0a1226;
+  --bg-surface: #020617;
+  --bg-soft: #020617;
 
   --text: #e5e7eb;
   --text-soft: #9ca3af;
@@ -51,14 +51,14 @@ html[data-theme="dark"] {
   --accent-green: #4ade80;
   --accent-soft: rgba(56, 189, 248, 0.12);
 
-  --border-subtle: rgba(148, 163, 184, 0.25);
-  --shadow-soft: 0 22px 55px rgba(0,0,0,0.6);
+  --border-subtle: rgba(148, 163, 184, 0.28);
+  --shadow-soft: 0 22px 55px rgba(0, 0, 0, 0.7);
 }
 
-/* ---------------------- GLOBAL ---------------------------- */
+/* ------------ GLOBAL ELEMENTS ---------- */
 
 body {
-  background: var(--bg-page);   /* NO GRADIENT ANYMORE */
+  background-color: var(--bg-page);   /* NO gradient */
   color: var(--text);
   font-family: var(--font-sans);
   line-height: 1.6;
@@ -67,41 +67,43 @@ body {
 img {
   max-width: 100%;
   height: auto;
+  display: block;
 }
 
-/* ---------------------- LAYOUT CONTAINERS ----------------- */
+/* Outer layout: full width, but with padding so it touches the corners nicely */
 
 main,
 .site-header,
 .site-footer {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 0 1.6rem;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0 2.5rem;
 }
 
-/* ---------------------- HEADER ---------------------------- */
+/* ------------ HEADER / TOP BAR ---------- */
 
 .site-header {
   position: sticky;
   top: 0;
-  z-index: 50;
-  backdrop-filter: blur(14px);
-  background: var(--bg-page);
+  z-index: 40;
+  background-color: var(--bg-surface);      /* flat, no gradient */
   border-bottom: 1px solid var(--border-subtle);
-  padding: 0.8rem 1.6rem;
+  backdrop-filter: blur(10px);
 }
 
 .header-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 1.2rem;
+  min-height: 3.2rem;
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 0.75rem;
 }
 
 .brand-logo {
@@ -112,34 +114,35 @@ main,
 
 .brand-text h1 {
   margin: 0;
-  font-size: 1.15rem;
+  font-size: 1.1rem;
 }
 
 .brand-text p {
-  margin: 0;
-  font-size: 0.82rem;
+  margin: 0.15rem 0 0;
+  font-size: 0.83rem;
   color: var(--text-soft);
 }
 
-/* ---------------------- NAVIGATION ------------------------- */
+/* Navigation tabs */
 
 .nav {
   display: flex;
-  gap: 1.2rem;
+  gap: 1.1rem;
+  align-items: center;
 }
 
 .nav a {
   text-decoration: none;
+  font-size: 0.9rem;
   color: var(--text-soft);
-  font-size: 0.92rem;
-  padding: 0.3rem 0.5rem;
-  border-radius: 6px;
-  transition: 0.2s ease;
+  padding: 0.3rem 0.45rem;
+  border-radius: 999px;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 .nav a:hover {
   color: var(--accent);
-  background: var(--accent-soft);
+  background-color: var(--accent-soft);
 }
 
 .nav a.active {
@@ -147,18 +150,17 @@ main,
   font-weight: 600;
 }
 
-/* ---------------------- THEME TOGGLE ------------------------ */
+/* Theme toggle */
 
 .theme-toggle {
-  border: 1px solid var(--border-subtle);
-  background: var(--bg-elevated);
-  padding: 0.25rem 0.8rem;
   border-radius: 999px;
-  cursor: pointer;
+  border: 1px solid var(--border-subtle);
+  background-color: var(--bg-soft);
+  padding: 0.25rem 0.75rem;
   display: flex;
-  gap: 0.4rem;
   align-items: center;
-  transition: background 0.25s ease;
+  gap: 0.35rem;
+  cursor: pointer;
 }
 
 .theme-toggle .theme-icon {
@@ -166,93 +168,126 @@ main,
   transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
-html[data-theme="light"] .theme-icon--dark { opacity: 0; transform: translateY(6px); }
-html[data-theme="dark"] .theme-icon--light { opacity: 0; transform: translateY(-6px); }
-
-/* Force moon to be white in dark mode */
-html[data-theme="dark"] .theme-icon--dark {
-  filter: invert(1) grayscale(1) brightness(1.5);
+html[data-theme="light"] .theme-icon--dark {
+  opacity: 0;
+  transform: translateY(6px);
 }
 
-/* ---------------------- HERO SECTION ------------------------ */
+html[data-theme="dark"] .theme-icon--light {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+/* Make the dark-mode moon appear white */
+html[data-theme="dark"] .theme-icon--dark {
+  filter: invert(1) grayscale(1) brightness(1.6);
+}
+
+/* ------------ HERO SECTION ------------- */
 
 .hero {
-  padding: 3rem 1.6rem;
+  padding: 3rem 0 2.6rem;
   position: relative;
 }
 
 .hero-inner {
   display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-  gap: 2.5rem;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 2.4rem;
   align-items: center;
 }
 
 .hero-text h2 {
   margin: 0 0 0.7rem;
-  font-size: clamp(1.9rem, 2.9vw, 2.3rem);
+  font-size: clamp(2rem, 3vw, 2.4rem);
 }
 
 .hero-text p {
   margin: 0;
-  max-width: 40rem;
+  max-width: 42rem;
   color: var(--text-soft);
 }
 
 .hero-actions {
-  margin-top: 1.4rem;
+  margin-top: 1.5rem;
   display: flex;
-  gap: 0.8rem;
   flex-wrap: wrap;
+  gap: 0.8rem;
 }
 
 /* Buttons */
 
 .btn {
-  font-size: 0.9rem;
-  padding: 0.6rem 1.4rem;
-  border-radius: 999px;
-  text-decoration: none;
-  cursor: pointer;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1.5rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: 0.9rem;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--accent), var(--accent-green));
-  color: #fff;
+  background-image: linear-gradient(135deg, var(--accent), var(--accent-green));
+  color: #ffffff;
   box-shadow: var(--shadow-soft);
 }
 
 .btn-outline {
-  border: 1px solid var(--border-subtle);
+  background-color: var(--bg-surface);
+  border-color: var(--border-subtle);
   color: var(--text-soft);
 }
 
-/* Hero card */
+/* Hero visual card */
+
+.hero-visual {
+  display: flex;
+  justify-content: flex-end;
+}
 
 .hero-card {
-  background: var(--bg-elevated);
-  border-radius: 16px;
+  background-color: var(--bg-surface);
+  border-radius: 18px;
   padding: 1.2rem;
   box-shadow: var(--shadow-soft);
   border: 1px solid var(--border-subtle);
-  max-width: 340px;
+  max-width: 360px;
 }
 
-/* Subtle grid texture (scotch pattern) */
+/* Optional: keep subtle “scotch” grid but no colour gradient */
 
 .hero-overlay-grid {
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px);
-  background-size: 28px 28px;
   pointer-events: none;
-  opacity: 0.2;
+  opacity: 0.08;
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.35) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.35) 1px, transparent 1px);
+  background-size: 30px 30px;
 }
 
-/* ---------------------- CARDS ------------------------------- */
+/* ------------ GENERIC SECTIONS ---------- */
+
+.section {
+  padding: 2.4rem 0 0;
+}
+
+.section-header h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1.15rem;
+}
+
+.section-header p {
+  margin: 0;
+  max-width: 40rem;
+  color: var(--text-soft);
+}
+
+/* Cards grid for notebooks / projects */
 
 .cards-grid {
   margin-top: 1.5rem;
@@ -262,48 +297,91 @@ html[data-theme="dark"] .theme-icon--dark {
 }
 
 .card {
-  background: var(--bg-elevated);
+  background-color: var(--bg-surface);
   border-radius: 14px;
-  padding: 1rem 1.2rem;
+  padding: 1rem 1.2rem 1.1rem;
   border: 1px solid var(--border-subtle);
-  box-shadow: 0 10px 32px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
 }
 
 .card h4 {
-  margin: 0 0 0.4rem;
+  margin: 0 0 0.3rem;
+  font-size: 1rem;
 }
 
 .card p {
   margin: 0;
+  font-size: 0.9rem;
   color: var(--text-soft);
 }
 
-/* ---------------------- FOOTER ------------------------------- */
+.card-link {
+  display: inline-block;
+  margin-top: 0.7rem;
+  font-size: 0.88rem;
+  text-decoration: none;
+  color: var(--accent);
+}
+
+/* ------------ FOOTER -------------------- */
 
 .site-footer {
-  margin-top: 3rem;
-  padding: 1.4rem 1.6rem;
   border-top: 1px solid var(--border-subtle);
-  text-align: center;
+  padding: 1.4rem 0 1.6rem;
   font-size: 0.82rem;
   color: var(--text-soft);
+  text-align: center;
 }
 
-/* ---------------------- RESPONSIVE --------------------------- */
+/* ------------ RESPONSIVE BREAKPOINTS ----- */
 
 /* Tablets & small laptops */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+  main,
+  .site-header,
+  .site-footer {
+    padding: 0 1.8rem;
+  }
+
   .hero-inner {
     grid-template-columns: 1fr;
   }
-  .hero-visual { justify-content: center; }
+
+  .hero-visual {
+    justify-content: flex-start;
+  }
 }
 
 /* Phones */
-@media (max-width: 480px) {
-  .header-inner { gap: 0.6rem; }
-  .brand-text h1 { font-size: 1rem; }
-  .hero-text h2 { font-size: 1.55rem; }
-  #map { height: 260px; }
-  .cards-grid { grid-template-columns: 1fr; }
+@media (max-width: 600px) {
+  main,
+  .site-header,
+  .site-footer {
+    padding: 0 1.2rem;
+  }
+
+  .header-inner {
+    gap: 0.6rem;
+  }
+
+  .brand-text h1 {
+    font-size: 1rem;
+  }
+
+  .brand-text p {
+    font-size: 0.8rem;
+  }
+
+  .hero {
+    padding-top: 2.4rem;
+    padding-bottom: 2.2rem;
+  }
+
+  .hero-text h2 {
+    font-size: 1.7rem;
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
 }
