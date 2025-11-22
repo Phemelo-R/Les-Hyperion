@@ -63,7 +63,9 @@ html[data-theme="dark"] {
 
 body {
   font-family: var(--font-sans);
-  background: radial-gradient(circle at top left, #0f172a 0, var(--bg) 40%);
+  /* Plain background colour: for the light mode choose a single hue rather
+     than a radial gradient; dark mode overrides via theme variables. */
+  background: var(--bg);
   color: var(--text);
   line-height: 1.6;
 }
@@ -141,6 +143,12 @@ main,
   background: var(--accent-soft);
 }
 
+/* Highlight active navigation link */
+.nav a.active {
+  color: var(--accent);
+  font-weight: 600;
+}
+
 /* Theme toggle */
 .theme-toggle {
   border: 1px solid var(--border-subtle);
@@ -157,6 +165,11 @@ main,
 
 .theme-toggle .theme-icon {
   transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+/* make the dark-mode moon icon white by inverting and desaturating the emoji */
+html[data-theme="dark"] .theme-icon--dark {
+  filter: invert(1) grayscale(1) brightness(1.2);
 }
 
 html[data-theme="light"] .theme-icon--dark {
@@ -207,11 +220,14 @@ html[data-theme="dark"] .theme-icon--light {
 }
 
 .hero-card {
-  background: radial-gradient(circle at top, rgba(0, 128, 167, 0.2), rgba(15, 23, 42, 0.9));
+  /* Use a single colour for the card background instead of a dramatic gradient.
+     In light mode the card adopts the elevated panel colour; in dark mode
+     the same variable resolves to a deeper tone. */
+  background: var(--bg-elevated);
   border-radius: 18px;
   padding: 1rem;
   box-shadow: var(--shadow-soft);
-  border: 1px solid rgba(148, 163, 184, 0.4);
+  border: 1px solid var(--border-subtle);
   max-width: 320px;
 }
 
