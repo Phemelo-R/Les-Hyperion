@@ -21,16 +21,16 @@ html, body {
 :root {
   --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
-  /* Light theme: fully flat, white page */
-  --bg-page: #f8f8ff;
-  --bg-surface: #f0f8ff;
-  --bg-soft: #f3f4f6;
+  /* Light theme: soft, almost-white blue */
+  --bg-page: #f7fbff; 
+  --bg-surface: #ffffff;
+  --bg-soft: #eef4fa;
 
   --text: #0f172a;
   --text-soft: #6b7280;
 
-  --accent: #1e88e5;           /* water */
-  --accent-green: #22a36b;     /* land */
+  --accent: #1e88e5;
+  --accent-green: #22a36b;
   --accent-soft: rgba(30, 136, 229, 0.12);
 
   --border-subtle: rgba(15, 23, 42, 0.08);
@@ -58,7 +58,7 @@ html[data-theme="dark"] {
 /* ------------ GLOBAL ELEMENTS ---------- */
 
 body {
-  background-color: var(--bg-page);   /* NO gradient */
+  background-color: var(--bg-page); 
   color: var(--text);
   font-family: var(--font-sans);
   line-height: 1.6;
