@@ -44,91 +44,94 @@
   </header>
 
   <main>
-    <!-- Introduction section -->
-    <section class="hero">
-      <div class="hero-inner">
-        <div class="hero-text">
-          <h2>Watching from above, rooted in the South</h2>
-          <p>
-            Les Hyperion is a repository and a public notebook for exploring South African
-            landscapes and oceans through code. Analyses are grouped under
-            three sections—<strong>Terrestrial</strong>, <strong>Marine</strong>, and <strong>Methods</strong>—that
-            collectively span topics such as fire regimes, precipitation patterns,
-            groundwater flows, elevation, species distributions, hyperspectral and
-            lidar surveys of the Cape Floristic Region, kelp forests, marine
-            organisms, and heatwaves. Each entry exposes both the data and the
-            scripts that produced the figures and maps.
-          </p>
-          <p>
-            The name comes from the Titan Hyperion, whose name means
-            <em>“he who goes above”</em> or <em>“the one who bears witness”</em>【460086239780605†L21-L60】. In Greek myth
-            he is associated with heavenly light and observation【460086239780605†L21-L65】, an apt
-            metaphor for the satellite sensors and surveyors that allow us to
-            watch the Earth from above. We prefix it with
-            <em>Les</em>—as in “Les Codex”—to signal continuity with our earlier
-            projects and to echo the French article for “the,” underscoring the
-            collective nature of the work. Put together, Les Hyperion evokes
-            observers working together to illuminate the southern African region.
-          </p>
-        </div>
-        <div class="hero-visual">
-          <div class="hero-card">
-            <img src="assets/img/logo.png" alt="Les Hyperion emblem" class="hero-logo">
-            <p class="hero-caption">
-              Sensing light and land: from Titan myths to satellite platforms.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="hero-overlay hero-overlay--grid"></div>
-      <div class="hero-overlay hero-overlay--gradient"></div>
-    </section>
-
-    <!-- Map section -->
-    <section class="section map-section">
-      <div class="section-header">
-        <h3>South African context</h3>
+  <!-- Introduction section -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <h2>Mapping living landscapes and oceans</h2>
         <p>
-          This interactive map centres on southern Africa. Use the zoom
-          controls to explore terrestrial and marine environments. The basemap
-          automatically switches between light and dark tiles when you toggle
-          themes.
+          Les&nbsp;Hyperion is a space for exploring southern African land and sea through geographic data.
+          The site brings together open satellite products, elevation models, biodiversity records and survey
+          layers, and works through them with code to build maps, indicators and simple models. Content is
+          organised into three strands—<strong>Terrestrial</strong>, <strong>Marine</strong> and <strong>Methods</strong>—so that
+          users can move from broad context maps to focused ecological questions and the workflows that support them.
+        </p>
+        <p>
+          The name draws on Hyperion, a Titan in Greek mythology whose name is often translated as
+          <em>“he who goes above”</em> or <em>“the one who watches from above.”</em> He is linked to light,
+          celestial motion and observation—an obvious parallel to the satellite platforms, aircraft and
+          survey systems that now trace energy, structure and movement across Earth’s surface. The prefix
+          <em>Les</em> echoes a collective vantage point: a reminder that the work here is not only about
+          remote sensing technology, but also about many eyes and instruments building a shared view of
+          southern African ecosystems.
+        </p>
+        <p>
+          Although the tools are GIS and remote sensing, the questions are ecological and biological at heart:
+          how species and habitats are distributed, how fire and land use reshape them, how ocean conditions
+          affect marine communities, and where conservation effort might matter most. Engaging with the site
+          should leave you with working examples of code, a clearer sense of available datasets, and a set of
+          patterns for turning raw spatial data into ecological insight.
         </p>
       </div>
-      <div id="map" class="map-container"></div>
-    </section>
+      <div class="hero-visual">
+        <div class="hero-card">
+          <img src="assets/img/logo.png" alt="Les&nbsp;Hyperion emblem" class="hero-logo">
+          <p class="hero-caption">
+            From myth to measurement: Hyperion’s vantage recast as satellite and survey.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="hero-overlay hero-overlay--grid"></div>
+    <div class="hero-overlay hero-overlay--gradient"></div>
+  </section>
 
-    <!-- About section -->
-    <section class="section about">
-      <div class="section-header">
-        <h3>About the site</h3>
+  <!-- Map section -->
+  <section class="section map-section">
+    <div class="section-header">
+      <h3>South African context</h3>
+      <p>
+        This interactive map centres on southern Africa and anchors the spatial frame used across the site.
+        Use the zoom controls to move between continental scale and local detail in terrestrial and marine
+        settings. The basemap responds to the theme toggle, switching between light and dark tiles to match
+        your viewing preference.
+      </p>
+    </div>
+    <div id="map" class="map-container"></div>
+  </section>
+
+  <!-- About section -->
+  <section class="section about">
+    <div class="section-header">
+      <h3>About the site</h3>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p>
+          The site is a static front-end served via GitHub Pages, with all notebooks and scripts stored in
+          the <a href="https://github.com/YOUR_USERNAME/LesHyperion" target="_blank" rel="noopener">Les&nbsp;Hyperion
+          repository</a>. The navigation links—<em>Terrestrial</em>, <em>Marine</em> and <em>Methods</em>—group
+          related work: land-based analyses, ocean-focused material, and cross-cutting workflows. Each entry
+          points to a rendered notebook so you can read through the analysis, inspect the maps and figures,
+          and trace the code that produced them.
+        </p>
       </div>
-      <div class="about-grid">
-        <div>
-          <p>
-            This site is a static front‑end served via GitHub Pages. All
-            notebooks and scripts live in the <a href="https://github.com/YOUR_USERNAME/LesHyperion" target="_blank" rel="noopener">Les Hyperion
-            repository</a> on GitHub. The top navigation links—<em>Terrestrial</em>,
-            <em>Marine</em> and <em>Methods</em>—lead to pages where relevant analyses are
-            listed and described. Each entry links to a rendered notebook so you
-            can read and reproduce the results, and the underlying code is
-            available in the same repository.
-          </p>
-        </div>
-        <div>
-          <p>
-            Our geographic focus is southern Africa—both its land and oceans. All
-            analyses draw on open data sources, from Landsat and MODIS imagery to
-            bathymetry and biodiversity surveys. We are committed to open science
-            and welcome contributions or issue reports via GitHub.
-          </p>
-        </div>
+      <div>
+        <p>
+          The geographic focus is southern Africa, across both land and ocean domains. Analyses draw on
+          openly licensed datasets such as satellite imagery, digital elevation models, land-cover products,
+          protected-area layers and biodiversity records from portals like GBIF. The Methods section highlights
+          recurring tasks—data access, cleaning, projections, joining tables to geometries, building simple
+          models and visualisations—so that the same techniques can be reused in new ecological and biological
+          studies. Contributions, adaptations and issue reports are welcome via GitHub.
+        </p>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
+</main>
 
   <footer class="site-footer">
-    <p>© <span id="year"></span> Les Hyperion · Built with R, Python and GitHub Pages.</p>
+    <p>© <span id="year"></span> Les Hyperion · Built by Phemelo-R with R, Python and GitHub Pages.</p>
   </footer>
 
   <!-- Scripts -->
