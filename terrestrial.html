@@ -36,45 +36,148 @@
       <div class="section-header">
         <h3>Terrestrial analyses</h3>
         <p>
-          This section hosts notebooks focused on land-based phenomena and resources across South Africa. Topics include recent fire regimes, rainfall and drought, groundwater dynamics, elevation and topography, ecosystem services, and the distributions of terrestrial flora and fauna. Each card will link to a rendered notebook and provide a summary of the questions addressed and data used.
+          This section is an introduction to Python-based GIS through a sequence of small, practical notebooks that use freely available spatial data for South Africa. The materials move from simple basemaps and administrative boundaries to land cover, vegetation, wildfire history, elevation, biodiversity records and basic species distribution modelling. Each card links to a rendered notebook that explains the data sources, the code used, and the ecological reasoning behind each map.
         </p>
       </div>
       <div class="cards-grid">
-        <!-- Placeholder cards for terrestrial studies -->
+        <!-- 1. Absolute beginner: get something on a map -->
+        <article class="card">
+          <h4>Getting started with Python GIS</h4>
+          <p>
+            Setting up a simple Python environment for mapping, loading a basemap of
+            South Africa with Folium, and placing a few reference points to orient the map.
+          </p>
+          <a href="notebooks/Terrestrial/intro_python_gis.html" class="card-link">Open analysis →</a>
+        </article>
+
+        <!-- 2. Administrative framework: provinces + districts -->
         <article class="card">
           <h4>South African administrative boundaries</h4>
-          <p>Mapping the national provincial and district framework using GeoJSON data, aligned to Esri satellite imagery and displayed with interactive tooltips.</p>
+          <p>
+            Mapping the national provincial and district framework using GeoJSON data,
+            aligned to Esri satellite imagery and displayed with interactive tooltips.
+          </p>
           <a href="notebooks/Terrestrial/sa_admin_boundaries.html" class="card-link">Open analysis →</a>
         </article>
+
+        <!-- 3. Protected areas -->
+        <article class="card">
+          <h4>Protected areas and national parks</h4>
+          <p>
+            Working with open protected area layers to highlight national parks, nature reserves
+            and other conservation lands on top of a satellite basemap.
+          </p>
+          <a href="notebooks/Terrestrial/protected_areas.html" class="card-link">Open analysis →</a>
+        </article>
+
+        <!-- 4. Land cover map -->
+        <article class="card">
+          <h4>Land cover of South Africa</h4>
+          <p>
+            Using freely available global or national land cover products to map croplands,
+            urban areas, grasslands and forests, and summarising land cover composition by province.
+          </p>
+          <a href="notebooks/Terrestrial/land_cover_sa.html" class="card-link">Open analysis →</a>
+        </article>
+
+        <!-- 5. Vegetation / biome map -->
+        <article class="card">
+          <h4>Vegetation types and biomes</h4>
+          <p>
+            Visualising South Africa’s major biomes and vegetation types from open datasets, and
+            linking them to climate, elevation and protected area coverage.
+          </p>
+          <a href="notebooks/Terrestrial/vegetation_biomes_sa.html" class="card-link">Open analysis →</a>
+        </article>
+
+        <!-- 6. Wildfire / burn history -->
+        <article class="card">
+          <h4>Wildfires and burn history</h4>
+          <p>
+            Mapping recent wildfire activity using open satellite-derived burn products and exploring
+            how fire patterns intersect with vegetation types and protected areas.
+          </p>
+          <a href="notebooks/Terrestrial/wildfires_sa.html" class="card-link">Open analysis →</a>
+        </article>
+
+        <!-- 7. Conservation priority layers -->
+        <article class="card">
+          <h4>Conservation priorities and planning layers</h4>
+          <p>
+            Exploring freely available conservation planning products such as critical biodiversity
+            areas and ecological support areas, and overlaying them with land cover and protection.
+          </p>
+          <a href="notebooks/Terrestrial/conservation_priority.html" class="card-link">Open analysis →</a>
+        </article>
+
+        <!-- 8. Elevation / hypsometric map -->
         <article class="card">
           <h4>South Africa hypsometric elevation</h4>
-          <p>A terrain visualisation built from the WorldClim DEM, clipped to the national boundary and coloured to show major elevation gradients across the country.</p>
+          <p>
+            A terrain visualisation built from a WorldClim digital elevation model, clipped to the
+            national boundary and coloured to show major elevation gradients across the country.
+          </p>
           <a href="notebooks/Terrestrial/sa_hypsometric_map.html" class="card-link">Open analysis →</a>
         </article>
+
+        <!-- 9. GBIF basics: pulling occurrences -->
         <article class="card">
-          <h4>iNaturalist observations of Protea</h4>
-          <p>Using community science observations to visualise where Protea species have been recorded on the landscape.</p>
-          <a href="notebooks/03_inaturalist_protea_observations.html" class="card-link">Open analysis →</a>
+          <h4>Species records from GBIF</h4>
+          <p>
+            Using the GBIF API to download occurrence records for plants, birds, mammals and insects
+            in South Africa, then plotting the points on an interactive map.
+          </p>
+          <a href="notebooks/Terrestrial/gbif_occurrences_sa.html" class="card-link">Open analysis →</a>
         </article>
+
+        <!-- 10. Richness summaries -->
         <article class="card">
           <h4>Species richness by province</h4>
-          <p>Summarising terrestrial species counts per province to compare biodiversity patterns across South Africa.</p>
-          <a href="notebooks/07_species_richness_province.html" class="card-link">Open analysis →</a>
+          <p>
+            Grouping GBIF records by province to calculate simple species richness metrics and
+            map terrestrial biodiversity patterns across South Africa.
+          </p>
+          <a href="notebooks/Terrestrial/species_richness_province.html" class="card-link">Open analysis →</a>
         </article>
+
+        <!-- 11. Simple distribution / priority view -->
         <article class="card">
-          <h4>Species distributions and Maxent models</h4>
-          <p>Building species distribution models for terrestrial fauna and flora using environmental predictors and occurrence data.</p>
-          <a href="notebooks/sdm_terrestrial.html" class="card-link">Open analysis →</a>
+          <h4>Species distributions and simple models</h4>
+          <p>
+            Building basic species distribution maps from presence-only data and environmental layers,
+            introducing the ideas behind Maxent-style models in a gentle, code-focused way.
+          </p>
+          <a href="notebooks/Terrestrial/sdm_terrestrial.html" class="card-link">Open analysis →</a>
         </article>
+
+        <!-- 12. Ecosystem services (beginner level) -->
+        <article class="card">
+          <h4>Ecosystem services from spatial layers</h4>
+          <p>
+            Combining land cover, elevation and vegetation maps to build simple spatial indicators
+            for services such as carbon storage, erosion control and water yield at catchment scale.
+          </p>
+          <a href="notebooks/Terrestrial/ecosystem_services_sa.html" class="card-link">Open analysis →</a>
+        </article>
+
+        <!-- 13. Hyperspectral – advanced terrestrial remote sensing -->
         <article class="card">
           <h4>Hyperspectral imaging in the Cape Floristic Region</h4>
-          <p>Using AVIRIS-NG and other hyperspectral sensors to classify vegetation and detect invasive species in biodiversity hotspots.</p>
-          <a href="notebooks/hyperspectral_cfr.html" class="card-link">Open analysis →</a>
+          <p>
+            Using AVIRIS-NG and related hyperspectral datasets to classify vegetation types and
+            detect invasive species in selected fynbos landscapes.
+          </p>
+          <a href="notebooks/Terrestrial/hyperspectral_cfr.html" class="card-link">Open analysis →</a>
         </article>
+
+        <!-- 14. LiDAR – advanced structure mapping -->
         <article class="card">
           <h4>LiDAR surveys of forest structure</h4>
-          <p>Analysing airborne LiDAR data to measure canopy height, biomass and structural diversity in indigenous forests.</p>
-          <a href="notebooks/lidar_cfr.html" class="card-link">Open analysis →</a>
+          <p>
+            Analysing airborne LiDAR data to estimate canopy height, biomass and structural variation
+            in indigenous forest patches, connecting point clouds to ecological questions.
+          </p>
+          <a href="notebooks/Terrestrial/lidar_cfr.html" class="card-link">Open analysis →</a>
         </article>
       </div>
     </section>
