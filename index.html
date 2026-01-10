@@ -1,150 +1,64 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="light">
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Les Hyperion</title>
-
-  <!-- Leaflet mapping library -->
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-XQoYMqMTK8LvdxXYG3nZLZ6gX0p2ccMGGak/qqxj4Io="
-    crossorigin=""
-  />
-
-  <!-- Google fonts for a modern sans serif stack -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
-  <!-- Main stylesheet -->
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Les Hyperion</title>
+  <link rel="stylesheet" href="assets/css/rebrand.css" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="site-header">
-    <div class="header-inner">
-      <a href="/" class="brand" aria-label="Les Hyperion home">
-        <img src="assets/img/logo.png" alt="Les Hyperion logo" class="brand-logo">
-        <div class="brand-text">
-          <h1>Les Hyperion</h1>
-          <p>Earth observation from the southern tip</p>
-        </div>
-      </a>
+    <div class="container">
+      <h1 class="brand">Les Hyperion</h1>
       <nav class="nav">
-        <a href="terrestrial.html">Terrestrial</a>
-        <a href="marine.html">Marine</a>
-        <a href="methods.html">Methods</a>
+        <a href="index.html" aria-current="page">Home</a>
+        <a href="about.html">About</a>
+        <a href="interactive.html">Interactive</a>
+        <a href="#biostatistics">Biostatistics</a>
       </nav>
-      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle colour theme">
-        <span class="theme-icon theme-icon--light">☀️</span>
-        <span class="theme-icon theme-icon--dark">🌙</span>
-      </button>
+      <div class="controls">
+        <button id="toggle-theme" aria-label="Toggle theme">Toggle theme</button>
+      </div>
     </div>
   </header>
 
-  <main>
-  <!-- Introduction section -->
-  <section class="hero">
-    <div class="hero-inner">
-      <div class="hero-text">
-        <h2>Mapping living landscapes and oceans</h2>
-        <p>
-          Les&nbsp;Hyperion is a space for exploring southern African land and sea through geographic data.
-          The site brings together open satellite products, elevation models, biodiversity records and survey
-          layers, and works through them with code to build maps, indicators and simple models. Content is
-          organised into three strands—<strong>Terrestrial</strong>, <strong>Marine</strong> and <strong>Methods</strong>—so that
-          users can move from broad context maps to focused ecological questions and the workflows that support them.
-        </p>
-        <p>
-          The name draws on Hyperion, a Titan in Greek mythology whose name is often translated as
-          <em>“he who goes above”</em> or <em>“the one who watches from above.”</em> He is linked to light,
-          celestial motion and observation—an obvious parallel to the satellite platforms, aircraft and
-          survey systems that now trace energy, structure and movement across Earth’s surface. The prefix
-          <em>Les</em> echoes a collective vantage point: a reminder that the work here is not only about
-          remote sensing technology, but also about many eyes and instruments building a shared view of
-          southern African ecosystems.
-        </p>
-        <p>
-          Although the tools are GIS and remote sensing, the questions are ecological and biological at heart:
-          how species and habitats are distributed, how fire and land use reshape them, how ocean conditions
-          affect marine communities, and where conservation effort might matter most. Engaging with the site
-          should leave you with working examples of code, a clearer sense of available datasets, and a set of
-          patterns for turning raw spatial data into ecological insight.
-        </p>
-      </div>
-      <div class="hero-visual">
-        <div class="hero-card">
-          <img src="assets/img/logo.png" alt="Les&nbsp;Hyperion emblem" class="hero-logo">
-          <p class="hero-caption">
-            From myth to measurement: Hyperion’s vantage recast as satellite and survey.
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="hero-overlay hero-overlay--grid"></div>
-    <div class="hero-overlay hero-overlay--gradient"></div>
-  </section>
+  <main class="container main-grid">
+    <section class="card">
+      <h2>Welcome to Les Hyperion</h2>
+      <p class="note">Reproducible analyses in GIS, Quantitative Ecology and Biostatistics. Use the Interactive page to run short R and Python snippets in your browser.</p>
+    </section>
 
-  <!-- Map section -->
-  <section class="section map-section">
-    <div class="section-header">
-      <h3>South African context</h3>
-      <p>
-        This interactive map centres on southern Africa and anchors the spatial frame used across the site.
-        Use the zoom controls to move between continental scale and local detail in terrestrial and marine
-        settings. The basemap responds to the theme toggle, switching between light and dark tiles to match
-        your viewing preference.
-      </p>
-    </div>
-    <div id="map" class="map-container"></div>
-  </section>
+    <!-- Biostatistics section: populated by assets/js/biostats-loader.mjs -->
+    <section id="biostatistics" class="card">
+      <h2>Biostatistics</h2>
+      <p class="note">R/biostatistics pages (click a card to open the page).</p>
+      <div id="biostats-list" class="biostats-list">
+        <em>Loading biostatistics pages…</em>
+      </div>
+    </section>
 
-  <!-- About section -->
-  <section class="section about">
-    <div class="section-header">
-      <h3>About the site</h3>
-    </div>
-    <div class="about-grid">
-      <div>
-        <p>
-          The site is a static front-end served via GitHub Pages, with all notebooks and scripts stored in
-          the <a href="https://github.com/YOUR_USERNAME/LesHyperion" target="_blank" rel="noopener">Les&nbsp;Hyperion
-          repository</a>. The navigation links—<em>Terrestrial</em>, <em>Marine</em> and <em>Methods</em>—group
-          related work: land-based analyses, ocean-focused material, and cross-cutting workflows. Each entry
-          points to a rendered notebook so you can read through the analysis, inspect the maps and figures,
-          and trace the code that produced them.
-        </p>
-      </div>
-      <div>
-        <p>
-          The geographic focus is southern Africa, across both land and ocean domains. Analyses draw on
-          openly licensed datasets such as satellite imagery, digital elevation models, land-cover products,
-          protected-area layers and biodiversity records from portals like GBIF. The Methods section highlights
-          recurring tasks—data access, cleaning, projections, joining tables to geometries, building simple
-          models and visualisations—so that the same techniques can be reused in new ecological and biological
-          studies. Contributions, adaptations and issue reports are welcome via GitHub.
-        </p>
-      </div>
-    </div>
-  </section>
-</main>
+    <!-- Other content could go here (e.g., feature cards, interactive link, etc.) -->
+  </main>
 
   <footer class="site-footer">
-    <p>© <span id="year"></span> Les Hyperion · Built by Phemelo-R with R, Python and GitHub Pages.</p>
+    <div class="container">
+      <small>Les Hyperion — Built by Phemelo-R • © <span id="year"></span></small>
+    </div>
   </footer>
 
-  <!-- Scripts -->
-  <script
-    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-o1Q2cJCDyweli32tE8PRPTT5zYYz/5OLOa6H51hyXKQ="
-    crossorigin=""
-  ></script>
-  <script src="assets/js/theme-toggle.js"></script>
-  <script src="assets/js/main.js"></script>
   <script>
-    // Set current year in footer
+    // small theme support reused by other pages
+    const saved = localStorage.getItem('lh-theme');
+    if (saved === 'light') document.documentElement.classList.add('theme-light');
+    document.getElementById('toggle-theme').addEventListener('click', () => {
+      const isLight = document.documentElement.classList.toggle('theme-light');
+      localStorage.setItem('lh-theme', isLight ? 'light' : 'dark');
+    });
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
+
+  <!-- Biostatistics loader -->
+  <script type="module" src="assets/js/biostats-loader.mjs"></script>
 </body>
 </html>
