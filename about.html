@@ -3,77 +3,75 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Les Hyperion — About</title>
+  <title>About — Les Hyperion</title>
   <link rel="stylesheet" href="assets/css/rebrand.css" />
-  <link rel="stylesheet" href="assets/css/styles.css" />
+  <script>
+    // same inline theme initializer as index.html
+    (function() {
+      try {
+        const saved = localStorage.getItem('lh-theme');
+        if (saved === 'light') document.documentElement.classList.add('theme-light');
+        else if (saved === 'dark') document.documentElement.classList.remove('theme-light');
+        else {
+          if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) document.documentElement.classList.add('theme-light');
+        }
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container">
-      <h1 class="brand">Les Hyperion</h1>
-      <nav class="nav">
-        <a href="index.html">Home</a>
-        <a href="about.html" aria-current="page">About</a>
-        <a href="interactive.html">Interactive</a>
-      </nav>
-      <div class="controls">
-        <button id="toggle-theme" aria-label="Toggle theme">Toggle theme</button>
-      </div>
+  <header class="site-header about-header">
+    <a href="index.html" class="logo-link">
+      <img src="assets/image/logo.png" alt="Les Hyperion logo" class="logo" />
+      <span class="site-title">Les Hyperion</span>
+    </a>
+
+    <nav class="main-nav" aria-label="Main">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link" aria-current="page">About</a>
+      <a href="#biostatistics" class="nav-link">Biostatistics</a>
+      <a href="#quantitative-ecology" class="nav-link">Quantitative Ecology</a>
+      <a href="#gis" class="nav-link">GIS</a>
+    </nav>
+
+    <div class="controls">
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle light or dark"><span id="theme-icon">🌙</span></button>
     </div>
   </header>
 
-  <main class="container main-grid">
-    <section class="intro card">
-      <h2>Welcome</h2>
-      <p id="site-intro">Loading...</p>
-      <div class="meta">
-        <dl>
-          <dt>Author</dt><dd id="meta-author"></dd>
-          <dt>Created</dt><dd id="meta-created"></dd>
-          <dt>Updated</dt><dd id="meta-updated"></dd>
-          <dt>Update frequency</dt><dd id="meta-frequency"></dd>
-          <dt>Focus areas</dt><dd id="meta-analyses"></dd>
-        </dl>
-      </div>
-      <p>
-        This site presents reproducible analyses in GIS, Quantitative Ecology, and Biostatistics — examples are available in both R and Python.
-      </p>
-      <p>
-        Want to try live code? Visit the <a href="interactive.html">Interactive Runner</a> to experiment in-browser with R and Python.
-      </p>
-    </section>
+  <main class="page about-page">
+    <article class="about-card">
+      <h1>About Les Hyperion</h1>
 
-    <section class="features card">
-      <h3>What you'll find here</h3>
+      <h2>Why this site exists</h2>
+      <p>Les Hyperion is a personal scholarly portfolio and learning resource created to present reproducible analyses I’ve worked on throughout my life. It collects notebooks, rendered reports and short tutorials that span GIS, quantitative ecology and biostatistics. The aim is to keep work discoverable, reusable and easy to explore — whether for students, collaborators, or future-me.</p>
+
+      <h2>What the name means</h2>
+      <p>"Les Hyperion" is a name that blends the French article "Les" (the) with "Hyperion", a Titan in Greek mythology associated with observation and light — a symbolic nod to exploring and shedding light on ecological patterns using data and code. The name reflects my interest in observation-driven science: measuring, modeling and illuminating natural processes.</p>
+
+      <h2>About the author</h2>
+      <p>Hi — I am <strong>Phemelo Rutlokoane</strong>, also known as Phemelo-R going forth. I use R and Python to answer questions about ecology and public health, focusing on careful statistical modeling, transparent workflows and reproducible code. I aim to grow as a scientist and a communicator: publishing analyses that are robust, understandable and useful to others. On this site you’ll find rendered notebooks, documentation and examples designed both for demonstration and for reuse.</p>
+
+      <h2>What you’ll find here</h2>
       <ul>
-        <li>Reproducible analyses using R and Python (notebooks & scripts).</li>
-        <li>GIS workflows, spatial analyses, species distribution & abundance models.</li>
-        <li>Quantitative ecology: population models, diversity metrics, mixed models.</li>
-        <li>Biostatistics: experimental design, survival analysis, GLMs, diagnostics.</li>
+        <li>R and Python analyses spanning biostatistics, population and community ecology, and geospatial workflows.</li>
+        <li>Rendered notebooks and reports (HTML) you can read, share and cite.</li>
+        <li>Occasional tutorials and walk-throughs aimed at students and collaborators.</li>
       </ul>
-      <h3>Interactive & portable</h3>
-      <p>
-        Try short code snippets directly in your browser — no server setup required. All interactive execution uses in-browser runtimes (Pyodide for Python, WebR for R).
-      </p>
-    </section>
 
-    <section class="examples card">
-      <h3>Quick start</h3>
-      <ol>
-        <li>Click <a href="interactive.html">Run code → Interactive</a>.</li>
-        <li>Choose R or Python from the language switcher.</li>
-        <li>Edit the example and click Run. Output and plots appear below the editor.</li>
-      </ol>
-      <p class="note">If you'd like, I can help port a set of your notebooks into the interactive examples or wire a Binder/JupyterHub link.</p>
-    </section>
+      <h2>Updates and contributions</h2>
+      <p>I update the site periodically as I finish new analyses — check the file timestamps in the repository for recency. If you have suggestions, find bugs, or want to collaborate, reach out via GitHub (open an issue or a PR) and I’ll respond as soon as I can.</p>
+    </article>
   </main>
 
   <footer class="site-footer">
-    <div class="container">
-      <small>Les Hyperion — Built by <span id="footer-author"></span>. © <span id="footer-year"></span></small>
+    <div class="footer-inner">
+      <div>Les Hyperion — Built by Phemelo-R</div>
+      <div class="small-muted">© <span id="year2"></span></div>
     </div>
   </footer>
 
-  <script type="module" src="assets/js/runner.mjs"></script>
+  <script type="module" src="assets/js/main.mjs"></script>
+  <script>document.getElementById('year2').textContent = new Date().getFullYear();</script>
 </body>
 </html>
