@@ -1,18 +1,18 @@
 {
   "items": [
     {
-      "title": "1.1 Biostatistics",
+      "title": "Effects of Mercury-Contaminated Fish Consumption on Chromosomes",
       "path": "R/Biostatistics/1.1_Biostatistics.html",
       "language": "R",
       "topics": ["Biostatistics"],
-      "description": "Biostatistics example 1.1 (HTML-rendered notebook)."
+      "description": "Study focusing on mercury levels in blood, and proportions of cells exhibiting abnormalities and chromosome aberrations"
     },
     {
-      "title": "1.2 Biostatistics",
+      "title": "Malignant Glioma Pilot Study",
       "path": "R/Biostatistics/1.2_Biostatistics.html",
       "language": "R",
       "topics": ["Biostatistics"],
-      "description": "Biostatistics example 1.2 (HTML-rendered notebook)."
+      "description": "Study focusing on patients with malignant glioma who underwent pretargeted adjuvant radioimmunotherapy using yttrium-90-biotin"
     }
   ]
 }
