@@ -4,61 +4,117 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Les Hyperion</title>
+
+  <!-- Main stylesheet -->
   <link rel="stylesheet" href="assets/css/rebrand.css" />
-  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Inline theme initializer to avoid flash of white on load -->
+  <script>
+    (function() {
+      try {
+        const saved = localStorage.getItem('lh-theme');
+        if (saved === 'light') {
+          document.documentElement.classList.add('theme-light');
+        } else if (saved === 'dark') {
+          document.documentElement.classList.remove('theme-light');
+        } else {
+          // follow system preference by default
+          const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+          if (prefersLight) document.documentElement.classList.add('theme-light');
+        }
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
 </head>
 <body>
   <header class="site-header">
-    <div class="container">
-      <h1 class="brand">Les Hyperion</h1>
-      <nav class="nav">
-        <a href="index.html" aria-current="page">Home</a>
-        <a href="about.html">About</a>
-        <a href="interactive.html">Interactive</a>
-        <a href="#biostatistics">Biostatistics</a>
-      </nav>
-      <div class="controls">
-        <button id="toggle-theme" aria-label="Toggle theme">Toggle theme</button>
-      </div>
+    <div class="site-brand">
+      <!-- Path to logo -->
+      <a href="index.html" class="logo-link">
+        <img src="assets/img/logo.png" alt="Les Hyperion logo" class="logo" />
+        <span class="site-title">Les Hyperion</span>
+      </a>
+    </div>
+
+    <nav class="main-nav" aria-label="Main">
+      <a href="#work" class="nav-link">Work</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="#biostatistics" class="nav-link">Biostatistics</a>
+      <a href="#quantitative-ecology" class="nav-link">Quantitative Ecology</a>
+      <a href="#gis" class="nav-link">GIS</a>
+      <a href="R/Biostatistics/1.1_Biostatistics.html" class="nav-link nav-inline">R Work</a>
+      <a href="#" class="nav-link nav-inline">Python Work</a>
+    </nav>
+
+    <div class="controls">
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle light or dark">
+        <span id="theme-icon">🌙</span>
+      </button>
     </div>
   </header>
 
-  <main class="container main-grid">
-    <section class="card">
-      <h2>Welcome to Les Hyperion</h2>
-      <p class="note">Reproducible analyses in GIS, Quantitative Ecology and Biostatistics. Use the Interactive page to run short R and Python snippets in your browser.</p>
+  <main class="page">
+    <section class="hero">
+      <h1>Reproducible analyses in GIS, Quantitative Ecology & Biostatistics</h1>
+      <p class="lead">A curated collection of R and Python analyses, notebooks, and reports by Phemelo-R. Explore by language or by topic below.</p>
     </section>
 
-    <!-- Biostatistics section: populated by assets/js/biostats-loader.mjs -->
-    <section id="biostatistics" class="card">
-      <h2>Biostatistics</h2>
-      <p class="note">R/biostatistics pages (click a card to open the page).</p>
-      <div id="biostats-list" class="biostats-list">
-        <em>Loading biostatistics pages…</em>
+    <section id="work" class="filters-section">
+      <div class="filters-row">
+        <div class="filter-group">
+          <label>Language</label>
+          <div id="lang-filters" class="pills">
+            <button class="pill active" data-lang="all">All</button>
+            <button class="pill" data-lang="R">R</button>
+            <button class="pill" data-lang="Python">Python</button>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <label>Topic</label>
+          <div id="topic-filters" class="pills">
+            <button class="pill active" data-topic="all">All</button>
+            <button class="pill" data-topic="Biostatistics">Biostatistics</button>
+            <button class="pill" data-topic="Quantitative Ecology">Quantitative Ecology</button>
+            <button class="pill" data-topic="GIS">GIS</button>
+          </div>
+        </div>
+
+        <div class="search-group">
+          <label for="site-search" class="sr-only">Search work</label>
+          <input id="site-search" placeholder="Search titles or descriptions…" />
+        </div>
+      </div>
+
+      <div id="work-list" class="work-list" aria-live="polite">
+        <p class="muted">Loading content…</p>
       </div>
     </section>
 
-    <!-- Other content could go here (e.g., feature cards, interactive link, etc.) -->
+    <section id="intro" class="intro-text">
+      <h2>Welcome</h2>
+      <p>This site collects and presents reproducible analyses across R and Python, focusing on Biostatistics, Quantitative Ecology and GIS. Use the filters above to find work by language or topic, then click a title to open the report or notebook as an HTML page.</p>
+    </section>
+
+    <!-- Quick links to the Biostatistics HTML files -->
+    <section id="biostatistics" class="section-links">
+      <h3>Biostatistics</h3>
+      <ul>
+        <li><a href="R/Biostatistics/1.1_Biostatistics.html">1.1 Biostatistics</a></li>
+        <li><a href="R/Biostatistics/1.2_Biostatistics.html">1.2 Biostatistics</a></li>
+      </ul>
+    </section>
+
   </main>
 
   <footer class="site-footer">
-    <div class="container">
-      <small>Les Hyperion — Built by Phemelo-R • © <span id="year"></span></small>
+    <div class="footer-inner">
+      <div>Les Hyperion — Built by Phemelo-R</div>
+      <div class="small-muted">© <span id="year"></span></div>
     </div>
   </footer>
 
-  <script>
-    // small theme support reused by other pages
-    const saved = localStorage.getItem('lh-theme');
-    if (saved === 'light') document.documentElement.classList.add('theme-light');
-    document.getElementById('toggle-theme').addEventListener('click', () => {
-      const isLight = document.documentElement.classList.toggle('theme-light');
-      localStorage.setItem('lh-theme', isLight ? 'light' : 'dark');
-    });
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
-
-  <!-- Biostatistics loader -->
-  <script type="module" src="assets/js/biostats-loader.mjs"></script>
+  <script type="module" src="assets/js/main.mjs"></script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
