@@ -49,3 +49,7 @@ textarea#code { min-height:260px; width:100%; padding:1rem; border-radius:8px; b
 
 /* Footer */
 .site-footer{ margin-top:2rem; padding:1rem 0; color:var(--muted); text-align:center; }
+
+/* Rules */
+.biostats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 0.5rem; }
+.biostats-item img { border-radius: 6px; display: block; margin-bottom: 0.5rem; }
