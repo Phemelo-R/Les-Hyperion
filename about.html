@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Les Hyperion — About</title>
+  <link rel="stylesheet" href="assets/css/rebrand.css" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="brand">Les Hyperion</h1>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="about.html" aria-current="page">About</a>
+        <a href="interactive.html">Interactive</a>
+      </nav>
+      <div class="controls">
+        <button id="toggle-theme" aria-label="Toggle theme">Toggle theme</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container main-grid">
+    <section class="intro card">
+      <h2>Welcome</h2>
+      <p id="site-intro">Loading...</p>
+      <div class="meta">
+        <dl>
+          <dt>Author</dt><dd id="meta-author"></dd>
+          <dt>Created</dt><dd id="meta-created"></dd>
+          <dt>Updated</dt><dd id="meta-updated"></dd>
+          <dt>Update frequency</dt><dd id="meta-frequency"></dd>
+          <dt>Focus areas</dt><dd id="meta-analyses"></dd>
+        </dl>
+      </div>
+      <p>
+        This site presents reproducible analyses in GIS, Quantitative Ecology, and Biostatistics — examples are available in both R and Python.
+      </p>
+      <p>
+        Want to try live code? Visit the <a href="interactive.html">Interactive Runner</a> to experiment in-browser with R and Python.
+      </p>
+    </section>
+
+    <section class="features card">
+      <h3>What you'll find here</h3>
+      <ul>
+        <li>Reproducible analyses using R and Python (notebooks & scripts).</li>
+        <li>GIS workflows, spatial analyses, species distribution & abundance models.</li>
+        <li>Quantitative ecology: population models, diversity metrics, mixed models.</li>
+        <li>Biostatistics: experimental design, survival analysis, GLMs, diagnostics.</li>
+      </ul>
+      <h3>Interactive & portable</h3>
+      <p>
+        Try short code snippets directly in your browser — no server setup required. All interactive execution uses in-browser runtimes (Pyodide for Python, WebR for R).
+      </p>
+    </section>
+
+    <section class="examples card">
+      <h3>Quick start</h3>
+      <ol>
+        <li>Click <a href="interactive.html">Run code → Interactive</a>.</li>
+        <li>Choose R or Python from the language switcher.</li>
+        <li>Edit the example and click Run. Output and plots appear below the editor.</li>
+      </ol>
+      <p class="note">If you'd like, I can help port a set of your notebooks into the interactive examples or wire a Binder/JupyterHub link.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>Les Hyperion — Built by <span id="footer-author"></span>. © <span id="footer-year"></span></small>
+    </div>
+  </footer>
+
+  <script type="module" src="assets/js/runner.mjs"></script>
+</body>
+</html>
