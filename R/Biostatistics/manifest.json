@@ -1,14 +1,17 @@
 {
-  "title": "Biostatistics examples",
-  "pages": [
+  "items": [
     {
       "title": "1.1 Biostatistics",
       "path": "R/Biostatistics/1.1_Biostatistics.html",
+      "language": "R",
+      "topics": ["Biostatistics"],
       "description": "Biostatistics example 1.1 (HTML-rendered notebook)."
     },
     {
       "title": "1.2 Biostatistics",
       "path": "R/Biostatistics/1.2_Biostatistics.html",
+      "language": "R",
+      "topics": ["Biostatistics"],
       "description": "Biostatistics example 1.2 (HTML-rendered notebook)."
     }
   ]
