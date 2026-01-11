@@ -28,10 +28,9 @@
 </head>
 <body>
   <header class="site-header">
-    <div class="site-brand">
-      <!-- Path to logo -->
+    <div class="left-head">
       <a href="index.html" class="logo-link">
-        <img src="assets/img/logo.png" alt="Les Hyperion logo" class="logo" />
+        <img src="assets/image/logo.png" alt="Les Hyperion logo" class="logo" />
         <span class="site-title">Les Hyperion</span>
       </a>
     </div>
@@ -46,21 +45,30 @@
       <a href="#" class="nav-link nav-inline">Python Work</a>
     </nav>
 
-    <div class="controls">
-      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle light or dark">
-        <span id="theme-icon">🌙</span>
-      </button>
+    <div class="right-head">
+      <div class="search-wrap">
+        <label for="site-search" class="sr-only">Search site</label>
+        <input id="site-search" class="header-search" placeholder="Search titles or descriptions…" />
+      </div>
+
+      <div class="controls">
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle light or dark">
+          <span id="theme-icon">🌙</span>
+        </button>
+      </div>
     </div>
   </header>
 
   <main class="page">
+    <!-- Welcome / Hero -->
     <section class="hero">
       <h1>Reproducible analyses in GIS, Quantitative Ecology & Biostatistics</h1>
       <p class="lead">A curated collection of R and Python analyses, notebooks, and reports by Phemelo-R. Explore by language or by topic below.</p>
     </section>
 
+    <!-- Filters and content -->
     <section id="work" class="filters-section">
-      <div class="filters-row">
+      <div class="filters-row spaced">
         <div class="filter-group">
           <label>Language</label>
           <div id="lang-filters" class="pills">
@@ -79,30 +87,11 @@
             <button class="pill" data-topic="GIS">GIS</button>
           </div>
         </div>
-
-        <div class="search-group">
-          <label for="site-search" class="sr-only">Search work</label>
-          <input id="site-search" placeholder="Search titles or descriptions…" />
-        </div>
       </div>
 
       <div id="work-list" class="work-list" aria-live="polite">
         <p class="muted">Loading content…</p>
       </div>
-    </section>
-
-    <section id="intro" class="intro-text">
-      <h2>Welcome</h2>
-      <p>This site collects and presents reproducible analyses across R and Python, focusing on Biostatistics, Quantitative Ecology and GIS. Use the filters above to find work by language or topic, then click a title to open the report or notebook as an HTML page.</p>
-    </section>
-
-    <!-- Quick links to the Biostatistics HTML files -->
-    <section id="biostatistics" class="section-links">
-      <h3>Biostatistics</h3>
-      <ul>
-        <li><a href="R/Biostatistics/1.1_Biostatistics.html">1.1 Biostatistics</a></li>
-        <li><a href="R/Biostatistics/1.2_Biostatistics.html">1.2 Biostatistics</a></li>
-      </ul>
     </section>
 
   </main>
