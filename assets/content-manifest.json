@@ -19,7 +19,7 @@
       "path": "R/Biostatistics/1.3_Biostatistics.html",
       "language": "R",
       "topics": ["Biostatistics"],
-      "description": "Combined analysis of UKDriverDeaths and Seatbelts (1969–1984). Faceted monthly mean trends for drivers, front/rear passengers and van fatalities, contrasted by seatbelt law status."
+      "description": "Mean trends of UKDriverDeaths and Seatbelts law status (1969–1984)"
     }
   ]
 }
