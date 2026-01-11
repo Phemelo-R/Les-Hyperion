@@ -13,6 +13,13 @@
       "language": "R",
       "topics": ["Biostatistics"],
       "description": "Study focusing on patients with malignant glioma who underwent pretargeted adjuvant radioimmunotherapy using yttrium-90-biotin"
+    },
+    {
+      "title": "Road casualty time‑series — Monthly trends and law effects",
+      "path": "R/Biostatistics/1.3_Biostatistics.html",
+      "language": "R",
+      "topics": ["Biostatistics"],
+      "description": "Combined analysis of UKDriverDeaths and Seatbelts (1969–1984). Faceted monthly mean trends for drivers, front/rear passengers and van fatalities, contrasted by seatbelt law status."
     }
   ]
 }
