@@ -1,5 +1,4 @@
 // main.mjs - controls theme (sun/moon) and loads the site content manifest with filtering.
-// This script is a module and expected to be loaded in index.html and about.html.
 
 const ICON_LIGHT = '☀️';
 const ICON_DARK = '🌙';
@@ -20,7 +19,7 @@ function toggleTheme() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Attach to toggle buttons (may exist on multiple pages)
+  // Attach theme toggle
   document.querySelectorAll('#theme-toggle').forEach(btn => btn.addEventListener('click', toggleTheme));
   setThemeIcon();
 
@@ -40,7 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
       renderList(content);
     } catch (err) {
       console.warn(err);
-      // Fallback: show Biostatistics quick links if content unavailable
       workList.innerHTML = '<p class="muted">Could not load content manifest. If you recently added files, ensure <code>assets/content-manifest.json</code> is present.</p>';
     }
   }
@@ -60,12 +58,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const left = document.createElement('div');
       left.className = 'item-left';
 
-      // optional small thumbnail — not using boxes but allow thumb if present
+      // optional small thumbnail
       if (it.thumbnail) {
         const img = document.createElement('img');
         img.src = it.thumbnail;
         img.alt = it.title;
-        img.style.height = '40px';
+        img.style.height = '48px';
         img.style.width = 'auto';
         img.style.borderRadius = '6px';
         left.appendChild(img);
@@ -129,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderList(filtered);
   }
 
-  function wirePills(selector, dataAttr) {
+  function wirePills(selector) {
     const container = document.querySelector(selector);
     if (!container) return;
     container.addEventListener('click', (e) => {
