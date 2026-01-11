@@ -20,6 +20,13 @@
       "language": "R",
       "topics": ["Biostatistics"],
       "description": "Mean trends of UKDriverDeaths and Seatbelts law status (1969–1984)"
+    },
+    {
+      "title": "NYCFlights13 Practice Exercise — Flight Patterns, Delays & Weather (2013)",
+      "path": "R/Biostatistics/1.4_Biostatistics.html",
+      "language": "R",
+      "topics": ["Biostatistics"],
+      "description": "A hands‑on practice set using the `nycflights13` data to test and build skills"
     }
   ]
 }
