@@ -27,6 +27,41 @@
       "language": "R",
       "topics": ["Biostatistics"],
       "description": "A hands‑on practice set using the `nycflights13` data to test and build skills"
-    }
+    }, 
+    {
+      "title": "Hypsometric map of South Africa",
+      "path": "R/GIS/1.1_GIS.html",
+      "language": "R",
+      "topics": ["GIS"],
+      "description": "Making an elevation map of South Africa using `elevatr`."
+    },
+    {
+      "title": "Mean annual precipitation of South Africa",
+      "path": "R/GIS/1.2_GIS.html",
+      "language": "R",
+      "topics": ["GIS"],
+      "description": "Making a mean annual precipiation map of South Africa."
+    },
+    {
+      "title": "Mean annual temperature of South Africa",
+      "path": "R/GIS/1.3_GIS.html",
+      "language": "R",
+      "topics": ["GIS"],
+      "description": "Making a mean annual temperature map of South Africa."
+    },
+    {
+      "title": "Annual water balance (P - PET) of the Western Cape, South Africa",
+      "path": "R/GIS/1.4_GIS.html",
+      "language": "R",
+      "topics": ["GIS"],
+      "description": "Calculating the annual water balance of the Western Cape and mapping it."
+    },
+    {
+      "title": "Flood-risk index for Mpumalanga, South Africa",
+      "path": "R/GIS/1.5_GIS.html",
+      "language": "R",
+      "topics": ["GIS"],
+      "description": "Making a flood-risk map for Mpumalanga and shwoing municipalities most affected."
+    },
   ]
 }
