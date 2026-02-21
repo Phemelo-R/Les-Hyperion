@@ -1,1 +1,159 @@
+# Notebooks — Les Hyperion
 
+This directory contains all Jupyter notebooks for the Les Hyperion portfolio. The site reads `index.json` to discover and display notebooks automatically.
+
+---
+
+## Adding a New Notebook
+
+### Step 1 — Create your notebook
+
+Write your analysis in a Jupyter notebook (`.ipynb`). Save it in this `notebooks/` folder.
+
+### Step 2 — Register it in `index.json`
+
+Open `notebooks/index.json` and add an entry following this format:
+
+```json
+{
+  "file":     "My_Analysis.ipynb",
+  "category": "Remote Sensing",
+  "title":    "My Analysis Title",
+  "desc":     "A short description shown on the portfolio card.",
+  "keywords": ["keyword1", "keyword2", "keyword3"],
+  "date":     "2026-02-21",
+  "lang":     "R"
+}
+```
+
+| Field | Required | Notes |
+|---|---|---|
+| `file` | ✅ | Filename including `.ipynb` extension |
+| `category` | ✅ | One of: `GIS`, `Remote Sensing`, `Biodiversity`, `Biostatistics`, `Research` |
+| `title` | ✅ | Display title on the portfolio card |
+| `desc` | ✅ | One-sentence description (shown on card) |
+| `keywords` | ✅ | Array of 2–5 keyword strings |
+| `date` | ✅ | ISO 8601 format: `YYYY-MM-DD` |
+| `lang` | ✅ | Primary language: `R` or `Python` |
+
+### Step 3 — Commit and push
+
+```bash
+git add notebooks/My_Analysis.ipynb notebooks/index.json
+git commit -m "Add My Analysis notebook"
+git push
+```
+
+The portfolio site will automatically pick up the new notebook.
+
+---
+
+## Notebook Style Guide
+
+To ensure your notebooks render well on the portfolio site, follow these conventions:
+
+**Markdown cells:**
+- Use `#` for top-level section headings (rendered as large headings in the viewer)
+- Use `##` for sub-headings (rendered in accent colour)
+- Keep paragraphs concise — the viewer shows the first 1000 characters per cell
+
+**Code cells:**
+- Include meaningful comments
+- Print informative output (e.g., `cat(...)` in R, `print(...)` in Python) — the first output line is used as the card preview
+
+**Cell order:**
+- Start with a markdown title cell (`# My Title`)
+- Follow with an abstract or introduction paragraph
+- Then code → output → explanation
+
+---
+
+## Current Notebooks
+
+| File | Category | Date | Language |
+|---|---|---|---|
+| `About_Me.ipynb` | — | 2026-02-05 | R |
+| `Introduction_to_R.ipynb` | Biostatistics | 2025-08-12 | R |
+| `Data_manipulation.ipynb` | Biostatistics | 2025-08-13 | R |
+| `Data_visualisation.ipynb` | Biostatistics | 2025-08-13 | R |
+| `Spatial_data.ipynb` | Remote Sensing | 2026-02-06 | R |
+| `Mapping_projections.ipynb` | Remote Sensing | 2026-02-07 | R |
+| `Satellite_imagery_R.ipynb` | Remote Sensing | 2026-02-10 | R |
+
+---
+
+## `index.json` Reference
+
+The full current manifest for copy-paste convenience:
+
+```json
+[
+  {
+    "file":     "About_Me.ipynb",
+    "category": "Remote Sensing",
+    "title":    "About Me",
+    "desc":     "All you need to know about me.",
+    "keywords": ["About Me", "Honours Project", "Research", "Skills"],
+    "date":     "2026-02-05",
+    "lang":     "R"
+  },
+  {
+    "file":     "Introduction_to_R.ipynb",
+    "category": "Biostatistics",
+    "title":    "Introduction to R",
+    "desc":     "An Introduction to R: From Installation to Reading and Writing Data.",
+    "keywords": ["Base R", "Functions", "Data Types", "Data Inspection"],
+    "date":     "2025-08-12",
+    "lang":     "R"
+  },
+  {
+    "file":     "Data_manipulation.ipynb",
+    "category": "Biostatistics",
+    "title":    "Data manipulation in R",
+    "desc":     "An Introduction to Data Manipulation in R: From Data Creation to Data Wrangling",
+    "keywords": ["Tidyverse", "palmerpenguins", "Wide Data", "Long Data"],
+    "date":     "2025-08-13",
+    "lang":     "R"
+  },
+  {
+    "file":     "Data_visualisation.ipynb",
+    "category": "Biostatistics",
+    "title":    "Data visualisations in R",
+    "desc":     "An Introduction to Data Visualisation in R: From Base Scatter Plots to facetting ggplots.",
+    "keywords": ["Base R", "ggplot2", "Graphics", "Tidyverse"],
+    "date":     "2025-08-13",
+    "lang":     "R"
+  },
+  {
+    "file":     "Spatial_data.ipynb",
+    "category": "Remote Sensing",
+    "title":    "Spatial data in R",
+    "desc":     "An Introduction look at spatial analyses, plotting, manipulation and combination.",
+    "keywords": ["sf", "terra", "Temperature", "Rivers"],
+    "date":     "2026-02-06",
+    "lang":     "R"
+  },
+  {
+    "file":     "Mapping_projections.ipynb",
+    "category": "Remote Sensing",
+    "title":    "Rasters in different projections",
+    "desc":     "Mapping in R: From Reading in Shape files and Rasters to plotting Shape files alongside Rasters in different Projections.",
+    "keywords": ["CSR", "Projections", "Bathymetry", "Complex Maps"],
+    "date":     "2026-02-07",
+    "lang":     "R"
+  },
+  {
+    "file":     "Satellite_imagery_R.ipynb",
+    "category": "Remote Sensing",
+    "title":    "Mapping with Satellite imagery",
+    "desc":     "Using Satellite Imagery for Mapping in R.",
+    "keywords": ["Landsat", "NDVI", "Spectral Resolution", "RGB Plotting"],
+    "date":     "2026-02-10",
+    "lang":     "R"
+  }
+]
+```
+
+---
+
+*Part of the [Les Hyperion](https://github.com/Phemelo-R/Les-Hyperion) portfolio by Phemelo Rutlokoane.*
