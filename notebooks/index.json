@@ -1,5 +1,13 @@
 [
   {
+    "file":     "About_Me.ipynb",
+    "category": "Remote Sensing",
+    "title":    "About Me",
+    "desc":     "All you need to know about me.",
+    "keywords": ["About Me", "Honours Project", "Research", "Skills"],
+    "date":     "2026-02-05"
+  },
+  {
     "file":     "Introduction_to_R.ipynb",
     "category": "Biostatistics",
     "title":    "Introduction to R",
@@ -24,27 +32,27 @@
     "date":     "2025-08-13"
   },
   {
-    "file":     "land_cover_rf.ipynb",
+    "file":     "Spatial_data.ipynb",
     "category": "Remote Sensing",
-    "title":    "Land Cover Classification with Random Forest",
-    "desc":     "Supervised classification of Sentinel-2 imagery using randomForest in R.",
-    "keywords": ["Sentinel-2", "Random Forest", "Land Cover", "R"],
-    "date":     "2024-03-12"
+    "title":    "Spatial data in R",
+    "desc":     "An Introduction look at spatial analyses, plotting, manipulation and combination.",
+    "keywords": ["sf", "terra", "Temperature", "Rivers"],
+    "date":     "2026-02-06"
   },
   {
-    "file":     "sdm_maxent.ipynb",
-    "category": "Biodiversity",
-    "title":    "Species Distribution Modelling: MaxEnt in R",
-    "desc":     "Habitat suitability modelling using GBIF occurrence records and ENMeval.",
-    "keywords": ["MaxEnt", "SDM", "GBIF", "Habitat Suitability"],
-    "date":     "2024-01-28"
+    "file":     "Mapping_projections.ipynb",
+    "category": "Remote Sensing",
+    "title":    "Rasters in different projections",
+    "desc":     "Mapping in R: From Reading in Shape files and Rasters to plotting Shape files alongside Rasters in different Projections.",
+    "keywords": ["CSR", "Projections", "Bathymetry", "Complex Maps"],
+    "date":     "2026-02-07"
   },
   {
-    "file":     "nmds_permanova.ipynb",
-    "category": "Biostatistics",
-    "title":    "Community Composition: NMDS & PERMANOVA",
-    "desc":     "Multivariate analysis of plant communities along an environmental gradient.",
-    "keywords": ["NMDS", "PERMANOVA", "Community Ecology", "vegan"],
-    "date":     "2023-11-05"
+    "file":     "Satellite_imagery_R.ipynb",
+    "category": "Remote Sensing",
+    "title":    "Mapping with Satellite imagery",
+    "desc":     "Using Satellite Imagery for Mapping in R.",
+    "keywords": ["Landsat", "NDVI", "Spectral Resolution", "RGB Plotting"],
+    "date":     "2026-02-10"
   }
 ]
