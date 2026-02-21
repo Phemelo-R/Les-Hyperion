@@ -1,15 +1,7 @@
 [
   {
-    "file":     "About_Me.ipynb",
-    "category": "Remote Sensing",
-    "title":    "About Me",
-    "desc":     "All you need to know about me.",
-    "keywords": ["About Me", "Honours Project", "Research", "Skills"],
-    "date":     "2026-02-05"
-  },
-  {
     "file":     "Introduction_to_R.ipynb",
-    "category": "Biostatistics",
+    "category": "Misc",
     "title":    "Introduction to R",
     "desc":     "An Introduction to R: From Installation to Reading and Writing Data.",
     "keywords": ["Base R", "Functions", "Data Types", "Data Inspection"],
@@ -17,22 +9,22 @@
   },
   {
     "file":     "Data_manipulation.ipynb",
-    "category": "Biostatistics",
+    "category": "Misc",
     "title":    "Data manipulation in R",
     "desc":     "An Introduction to Data Manipulation in R: From Data Creation to Data Wrangling",
     "keywords": ["Tidyverse", "palmerpenguins", "Wide Data", "Long Data"],
     "date":     "2025-08-13"
   },
   {
-    "file":     "Data_visualisation",
-    "category": "Biostatistics",
+    "file":     "Data_visualisation.ipynb",
+    "category": "Misc",
     "title":    "Data visualisations in R",
     "desc":     "An Introduction to Data Visualisation in R: From Base Scatter Plots to facetting ggplots.",
     "keywords": ["Base R", "ggplot2", "Graphics", "Tidyverse"],
     "date":     "2025-08-13"
   },
   {
-    "file":     "Spatial_data.ipynb",
+    "file":     "Spatial_data_R.ipynb",
     "category": "Remote Sensing",
     "title":    "Spatial data in R",
     "desc":     "An Introduction look at spatial analyses, plotting, manipulation and combination.",
@@ -44,7 +36,7 @@
     "category": "Remote Sensing",
     "title":    "Rasters in different projections",
     "desc":     "Mapping in R: From Reading in Shape files and Rasters to plotting Shape files alongside Rasters in different Projections.",
-    "keywords": ["CSR", "Projections", "Bathymetry", "Complex Maps"],
+    "keywords": ["CSR", "Projections", "Bathymetry", "3D"],
     "date":     "2026-02-07"
   },
   {
