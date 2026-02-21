@@ -1,0 +1,26 @@
+[
+  {
+    "file":     "land_cover_rf.ipynb",
+    "category": "Remote Sensing",
+    "title":    "Land Cover Classification with Random Forest",
+    "desc":     "Supervised classification of Sentinel-2 imagery using randomForest in R.",
+    "keywords": ["Sentinel-2", "Random Forest", "Land Cover", "R"],
+    "date":     "2024-03-12"
+  },
+  {
+    "file":     "sdm_maxent.ipynb",
+    "category": "Biodiversity",
+    "title":    "Species Distribution Modelling: MaxEnt in R",
+    "desc":     "Habitat suitability modelling using GBIF occurrence records and ENMeval.",
+    "keywords": ["MaxEnt", "SDM", "GBIF", "Habitat Suitability"],
+    "date":     "2024-01-28"
+  },
+  {
+    "file":     "nmds_permanova.ipynb",
+    "category": "Biostatistics",
+    "title":    "Community Composition: NMDS & PERMANOVA",
+    "desc":     "Multivariate analysis of plant communities along an environmental gradient.",
+    "keywords": ["NMDS", "PERMANOVA", "Community Ecology", "vegan"],
+    "date":     "2023-11-05"
+  }
+]
