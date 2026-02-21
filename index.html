@@ -334,6 +334,7 @@
       <li><a href="#expertise">Expertise</a></li>
       <li><a href="#work">Notebooks</a></li>
       <li><a href="#about">About</a></li>
+      <li><a href="about.html">About Me ↗</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
@@ -353,6 +354,7 @@
     <li><a href="#expertise" onclick="closeNav()">Expertise</a></li>
     <li><a href="#work"      onclick="closeNav()">Notebooks</a></li>
     <li><a href="#about"     onclick="closeNav()">About</a></li>
+    <li><a href="about.html" onclick="closeNav()">About Me ↗</a></li>
     <li><a href="#contact"   onclick="closeNav()">Contact</a></li>
   </ul>
 </div>
@@ -437,7 +439,7 @@
   <div class="section-inner">
     <div class="about-grid">
       <div class="about-sidebar fade-up">
-        <div class="about-avatar"><div class="avatar-grid"></div>🌿</div>
+        <div class="about-avatar"><div class="avatar-grid"></div><img src="images/profile.jpg" alt="Phemelo Rutlokoane" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;border-radius:var(--radius);" onerror="this.style.display='none';document.getElementById('avatar-fallback').style.display='flex'"><span id="avatar-fallback" style="display:none;align-items:center;justify-content:center;width:100%;height:100%;font-size:clamp(3rem,8vw,5rem)">🌿</span></div>
         <div class="about-quick-info" id="quick-info"></div>
       </div>
       <div class="about-content fade-up">
@@ -463,9 +465,9 @@
     <h2 class="section-title fade-up">Let's Collaborate</h2>
     <p class="contact-desc fade-up">Interested in GIS consultancy, research collaboration, or spatial data science? I'd love to connect.</p>
     <div class="contact-links fade-up">
-      <a href="#" id="Phemelorutlokoane001@icloud.com" class="btn btn-primary">✉ Email Me</a>
-      <a href="#" id="https://github.com/Phemelo-R" class="btn btn-ghost" target="_blank" rel="noopener">⌥ GitHub</a>
-      <a href="#" id="www.linkedin.com/in/phemelo-rutlokoane-4a8826235" class="btn btn-ghost" target="_blank" rel="noopener">in LinkedIn</a>
+      <a href="mailto:Phemelorutlokoane001@icloud.com" id="email-link" class="btn btn-primary">✉ Email Me</a>
+      <a href="https://github.com/Phemelo-R" id="github-link" class="btn btn-ghost" target="_blank" rel="noopener">⌥ GitHub</a>
+      <a href="https://www.linkedin.com/in/phemelo-rutlokoane-4a8826235" id="linkedin-link" class="btn btn-ghost" target="_blank" rel="noopener">in LinkedIn</a>
     </div>
   </div>
 </section>
@@ -567,26 +569,56 @@ const CATEGORIES=["All","GIS","Remote Sensing","Biodiversity","Biostatistics","R
    Push to GitHub → site auto-reads the .ipynb files!
 ===================================================== */
 
+/* =====================================================
+   NOTEBOOK LOADER
+   ---
+   Reads notebooks/index.json, then fetches each .ipynb.
+   Falls back to DEMO_NOTEBOOKS if fetch fails (e.g., local file://).
+   Also uses NOTEBOOK_INDEX as an offline fallback for the manifest.
+===================================================== */
+
+// Embedded copy of notebooks/index.json — kept in sync with the file
+const NOTEBOOK_INDEX=[
+  {"file":"About_Me.ipynb","category":"Remote Sensing","title":"About Me","desc":"All you need to know about me.","keywords":["About Me","Honours Project","Research","Skills"],"date":"2026-02-05","lang":"R"},
+  {"file":"Introduction_to_R.ipynb","category":"Biostatistics","title":"Introduction to R","desc":"An Introduction to R: From Installation to Reading and Writing Data.","keywords":["Base R","Functions","Data Types","Data Inspection"],"date":"2025-08-12","lang":"R"},
+  {"file":"Data_manipulation.ipynb","category":"Biostatistics","title":"Data manipulation in R","desc":"An Introduction to Data Manipulation in R: From Data Creation to Data Wrangling","keywords":["Tidyverse","palmerpenguins","Wide Data","Long Data"],"date":"2025-08-13","lang":"R"},
+  {"file":"Data_visualisation.ipynb","category":"Biostatistics","title":"Data visualisations in R","desc":"An Introduction to Data Visualisation in R: From Base Scatter Plots to facetting ggplots.","keywords":["Base R","ggplot2","Graphics","Tidyverse"],"date":"2025-08-13","lang":"R"},
+  {"file":"Spatial_data.ipynb","category":"Remote Sensing","title":"Spatial data in R","desc":"An Introduction look at spatial analyses, plotting, manipulation and combination.","keywords":["sf","terra","Temperature","Rivers"],"date":"2026-02-06","lang":"R"},
+  {"file":"Mapping_projections.ipynb","category":"Remote Sensing","title":"Rasters in different projections","desc":"Mapping in R: From Reading in Shape files and Rasters to plotting Shape files alongside Rasters in different Projections.","keywords":["CSR","Projections","Bathymetry","Complex Maps"],"date":"2026-02-07","lang":"R"},
+  {"file":"Satellite_imagery_R.ipynb","category":"Remote Sensing","title":"Mapping with Satellite imagery","desc":"Using Satellite Imagery for Mapping in R.","keywords":["Landsat","NDVI","Spectral Resolution","RGB Plotting"],"date":"2026-02-10","lang":"R"}
+];
+
 let activeFilter="All";
 let allNotebooks=[];
 
 async function loadNotebooks(){
   try{
-    const res=await fetch('notebooks/index.json');
-    if(!res.ok)throw new Error('no index');
-    const index=await res.json();
+    // Try fetching real notebooks
+    let index;
+    try{
+      const res=await fetch('notebooks/index.json');
+      if(res.ok)index=await res.json();
+    }catch(_){}
+
+    // Fall back to embedded manifest
+    if(!index||!index.length)index=NOTEBOOK_INDEX;
 
     const results=await Promise.allSettled(
       index.map((meta,i)=>fetchAndParse(meta,i+1))
     );
 
-    allNotebooks=results
+    const parsed=results
       .filter(r=>r.status==='fulfilled'&&r.value)
       .map(r=>r.value);
 
-    if(!allNotebooks.length)throw new Error('empty');
+    if(parsed.length){
+      // Filter out About Me from the main grid (it has its own page)
+      allNotebooks=parsed.filter(n=>n.file!=='About_Me.ipynb');
+    }else{
+      // No real notebooks could be fetched — use demo set
+      allNotebooks=DEMO_NOTEBOOKS;
+    }
   }catch(e){
-    // Show demo notebooks when no real ones exist yet
     allNotebooks=DEMO_NOTEBOOKS;
   }
   renderFilters();
@@ -738,7 +770,6 @@ function closeModal(e){
   document.getElementById('modal-overlay').classList.remove('open');
   document.body.style.overflow='';
 }
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 
 /* =====================================================
    DEMO NOTEBOOKS (shown before real ones are added)
@@ -786,9 +817,11 @@ function toggleTheme(){
   document.getElementById('theme-label').textContent=dark?'Dark':'Light';
   localStorage.setItem('lh-theme',dark?'light':'dark');
 }
-const saved=localStorage.getItem('lh-theme')||'dark';
-document.documentElement.setAttribute('data-theme',saved);
-document.getElementById('theme-label').textContent=saved==='dark'?'Light':'Dark';
+// Apply saved theme immediately (before DOM ready) to avoid flash
+(function(){
+  const saved=localStorage.getItem('lh-theme')||'dark';
+  document.documentElement.setAttribute('data-theme',saved);
+})();
 
 /* =====================================================
    MOBILE NAV
@@ -803,11 +836,6 @@ function closeNav(){
   document.getElementById('hamburger').classList.remove('open');
   document.getElementById('nav-drawer').classList.remove('open');
 }
-document.addEventListener('click',e=>{
-  const d=document.getElementById('nav-drawer');
-  const b=document.getElementById('hamburger');
-  if(d.classList.contains('open')&&!d.contains(e.target)&&!b.contains(e.target))closeNav();
-});
 
 /* =====================================================
    SCROLL ANIMATIONS
@@ -820,7 +848,6 @@ function observeFadeUps(){
   },{threshold:.07});
   document.querySelectorAll('.fade-up:not(.visible)').forEach(el=>obs.observe(el));
 }
-observeFadeUps();
 
 const skillObs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
@@ -829,55 +856,81 @@ const skillObs=new IntersectionObserver(entries=>{
 },{threshold:.2});
 
 /* =====================================================
-   BOOT
+   BOOT (runs after DOM is ready)
 ===================================================== */
-document.getElementById('footer-year').textContent=new Date().getFullYear();
+document.addEventListener('DOMContentLoaded',function(){
 
-// Update contact links
-document.getElementById('email-link').href=`mailto:${SITE.email}`;
-document.getElementById('github-link').href=SITE.github;
-document.getElementById('linkedin-link').href=SITE.linkedin;
+  // Set theme label correctly
+  const currentTheme=document.documentElement.getAttribute('data-theme')||'dark';
+  document.getElementById('theme-label').textContent=currentTheme==='dark'?'Light':'Dark';
 
-// Marquee
-const mt=document.getElementById('marquee');
-[...MARQUEE_ITEMS,...MARQUEE_ITEMS].forEach(item=>{
-  const el=document.createElement('div');
-  el.className='marquee-item';
-  el.innerHTML=`<div class="marquee-dot"></div>${item}`;
-  mt.appendChild(el);
+  // Footer year
+  document.getElementById('footer-year').textContent=new Date().getFullYear();
+
+  // Mobile nav click-outside
+  document.addEventListener('click',e=>{
+    const d=document.getElementById('nav-drawer');
+    const b=document.getElementById('hamburger');
+    if(d&&d.classList.contains('open')&&!d.contains(e.target)&&!b.contains(e.target))closeNav();
+  });
+
+  // Escape key closes modal
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+  // Marquee
+  const mt=document.getElementById('marquee');
+  if(mt){
+    [...MARQUEE_ITEMS,...MARQUEE_ITEMS].forEach(item=>{
+      const el=document.createElement('div');
+      el.className='marquee-item';
+      el.innerHTML=`<div class="marquee-dot"></div>${item}`;
+      mt.appendChild(el);
+    });
+  }
+
+  // Expertise
+  const eg=document.getElementById('expertise-grid');
+  if(eg){
+    EXPERTISE.forEach(e=>{
+      eg.innerHTML+=`
+        <div class="expertise-card fade-up" style="--card-accent:${e.accent}">
+          <span class="expertise-icon">${e.icon}</span>
+          <div class="expertise-title">${e.title}</div>
+          <p class="expertise-desc">${e.desc}</p>
+          <div class="tag-list">${e.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+        </div>`;
+    });
+  }
+
+  // About bio
+  const bio=document.getElementById('about-bio');
+  if(bio)bio.innerHTML=`<p>${SITE.bio}</p>`;
+
+  const qi=document.getElementById('quick-info');
+  if(qi)qi.innerHTML=QUICK_INFO.map(i=>`
+    <div class="info-row">
+      <span class="info-icon">${i.icon}</span>
+      <div><div class="info-label">${i.label}</div><div class="info-value">${i.value}</div></div>
+    </div>`).join('');
+
+  const sl=document.getElementById('skills-list');
+  if(sl){
+    SKILLS.forEach(s=>{
+      sl.innerHTML+=`<div class="skill-item">
+        <div class="skill-header"><span>${s.name}</span><span class="skill-pct">${s.pct}%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:0" data-pct="${s.pct}"></div></div>
+      </div>`;
+    });
+    const ss=document.querySelector('.skills-list');
+    if(ss)skillObs.observe(ss);
+  }
+
+  // Load notebooks
+  loadNotebooks();
+
+  // Scroll animations
+  observeFadeUps();
 });
-
-// Expertise
-EXPERTISE.forEach(e=>{
-  document.getElementById('expertise-grid').innerHTML+=`
-    <div class="expertise-card" style="--card-accent:${e.accent}">
-      <span class="expertise-icon">${e.icon}</span>
-      <div class="expertise-title">${e.title}</div>
-      <p class="expertise-desc">${e.desc}</p>
-      <div class="tag-list">${e.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
-    </div>`;
-});
-
-// About
-document.getElementById('about-bio').innerHTML=`<p>${SITE.bio}</p>`;
-document.getElementById('quick-info').innerHTML=QUICK_INFO.map(i=>`
-  <div class="info-row">
-    <span class="info-icon">${i.icon}</span>
-    <div><div class="info-label">${i.label}</div><div class="info-value">${i.value}</div></div>
-  </div>`).join('');
-
-const sl=document.getElementById('skills-list');
-SKILLS.forEach(s=>{
-  sl.innerHTML+=`<div class="skill-item">
-    <div class="skill-header"><span>${s.name}</span><span class="skill-pct">${s.pct}%</span></div>
-    <div class="skill-bar"><div class="skill-fill" style="width:0" data-pct="${s.pct}"></div></div>
-  </div>`;
-});
-const ss=document.querySelector('.skills-list');
-if(ss)skillObs.observe(ss);
-
-// Load notebooks
-loadNotebooks();
 </script>
 </body>
 </html>
