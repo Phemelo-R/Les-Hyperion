@@ -1,5 +1,29 @@
 [
   {
+    "file":     "Introduction_to_R.ipynb",
+    "category": "Biostatistics",
+    "title":    "Introduction to R",
+    "desc":     "An Introduction to R: From Installation to Reading and Writing Data.",
+    "keywords": ["Base R", "Functions", "Data Types", "Data Inspection"],
+    "date":     "2025-08-12"
+  },
+  {
+    "file":     "Data_manipulation.ipynb",
+    "category": "Biostatistics",
+    "title":    "Data manipulation in R",
+    "desc":     "An Introduction to Data Manipulation in R: From Data Creation to Data Wrangling",
+    "keywords": ["Tidyverse", "palmerpenguins", "Wide Data", "Long Data"],
+    "date":     "2025-08-13"
+  },
+  {
+    "file":     "Data_visualisation",
+    "category": "Biostatistics",
+    "title":    "Data visualisations in R",
+    "desc":     "An Introduction to Data Visualisation in R: From Base Scatter Plots to facetting ggplots.",
+    "keywords": ["Base R", "ggplot2", "Graphics", "Tidyverse"],
+    "date":     "2025-08-13"
+  },
+  {
     "file":     "land_cover_rf.ipynb",
     "category": "Remote Sensing",
     "title":    "Land Cover Classification with Random Forest",
