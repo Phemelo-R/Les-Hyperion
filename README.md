@@ -48,9 +48,9 @@ All analyses are in the `notebooks/` directory. Each notebook is self-contained 
 | Notebook | Category | Description |
 |---|---|---|
 | `About_Me.ipynb` | — | Background, skills, and research overview |
-| `Introduction_to_R.ipynb` | - | R from installation to reading/writing data |
-| `Data_manipulation.ipynb` | - | Data wrangling with Tidyverse |
-| `Data_visualisation.ipynb` | - | Base R graphics and ggplot2 |
+| `Introduction_to_R.ipynb` | Misc | R from installation to reading/writing data |
+| `Data_manipulation.ipynb` | Misc | Data wrangling with Tidyverse |
+| `Data_visualisation.ipynb` | Misc | Base R graphics and ggplot2 |
 | `Spatial_data.ipynb` | Remote Sensing | Spatial analysis with sf and terra |
 | `Mapping_projections.ipynb` | Remote Sensing | Rasters, shapefiles and coordinate reference systems |
 | `Satellite_imagery_R.ipynb` | Remote Sensing | Landsat imagery, NDVI, and RGB plotting |
