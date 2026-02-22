@@ -5,17 +5,17 @@
 [![Python](https://img.shields.io/badge/Python-3.x-3776AB?style=flat-square&logo=python)](https://www.python.org/)
 [![Jupyter](https://img.shields.io/badge/Jupyter-Notebooks-F37626?style=flat-square&logo=jupyter)](https://jupyter.org/)
 
-# Les Hyperion — GIS & Remote Sensing Portfolio
-
 > A personal research portfolio built with vanilla HTML, CSS and JavaScript — no frameworks, no build tools. Reads Jupyter notebooks directly from the repo and renders them in an interactive modal viewer.
-
-**Live site:** [phemelo-r.github.io/Les-Hyperion](https://phemelo-r.github.io/Les-Hyperion)
-
----
 
 ## About
 
-This is the portfolio site of **Phemelo Mojalefa Rutlokoane**, a GIS analyst and spatial ecologist based in Johannesburg, South Africa. The site showcases research projects and Jupyter notebooks covering:
+**Phemelo Rutlokoane** | GIS Analyst & Researcher  
+University of the Western Cape · Johannesburg, South Africa  
+[phemelorutlokoane001@icloud.com](mailto:phemelorutlokoane001@icloud.com) · [LinkedIn](https://www.linkedin.com/in/phemelo-rutlokoane-4a8826235) · [GitHub](https://github.com/Phemelo-R)
+
+This repository hosts my research portfolio site and the Jupyter notebooks behind it. 
+
+Research projects and Jupyter notebooks cover:
 
 - Remote sensing & satellite imagery analysis
 - Species distribution modelling (SDM)
@@ -24,7 +24,6 @@ This is the portfolio site of **Phemelo Mojalefa Rutlokoane**, a GIS analyst and
 - Biodiversity informatics
 
 ---
-
 ## Site Structure
 
 ```
