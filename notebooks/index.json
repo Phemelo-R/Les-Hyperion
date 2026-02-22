@@ -46,5 +46,16 @@
     "desc":     "Using Satellite Imagery for Mapping in R.",
     "keywords": ["Landsat", "NDVI", "Spectral Resolution", "RGB Plotting"],
     "date":     "2026-02-10"
+  },
+  {
+    "file":     "Diel vertical migration of Euphausia lucens.ipynb",
+    "category": "Research",
+    "title":    "Diel Vertical Migration of Euphausia lucens (euphausiid) at inshore and offshore stations in St Helena Bay, South Africa.",
+    "desc":     "I analysed the diel vertical migration of Antarctic krill (Euphausia lucens) using quantitative ecological analyses. 
+    The aim was to investigate environmental drivers of vertical distribution and explore how spatial structure influences abundance estimates 
+    at inshore versus offshore stations. My work involved data cleaning, spatial interpolation, and modelling relationships between krill density 
+    and environmental variables.",
+    "keywords": ["Marine Ecology", "R", "St Helena Bay", "Oceanography"],
+    "date":     "2025-06-10"
   }
 ]
