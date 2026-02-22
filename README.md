@@ -169,4 +169,3 @@ GitHub Pages serves the files statically. The notebook fetch uses relative URLs 
 ## License
 
 This portfolio template is open for personal use. Research content and writing are copyright © Phemelo Rutlokoane.
-This repository is for personal portfolio use. The code structure is free to adapt with attribution. All research content and notebooks are © Phemelo Rutlokoane.
