@@ -232,12 +232,13 @@
     .nb-h2{font-family:var(--font-d);font-size:clamp(.95rem,2vw,1.1rem);font-weight:600;margin:1.4rem 0 .6rem;color:var(--accent2);}
     .nb-p{color:var(--text-muted);line-height:1.85;margin-bottom:.9rem;font-size:.94rem;}
     .nb-code-block{background:var(--bg);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:1.1rem;}
-    .nb-output-block{background:rgba(56,201,138,.04);border:1px solid rgba(56,201,138,.15);border-radius:8px;padding:.75rem 1.1rem;margin-bottom:1.1rem;font-family:var(--font-m);font-size:clamp(.65rem,1.4vw,.76rem);color:var(--text-muted);}
+    .nb-output-block{background:rgba(56,201,138,.04);border:1px solid rgba(56,201,138,.15);border-radius:8px;padding:.75rem 1.1rem;margin-bottom:1.1rem;font-family:var(--font-m);font-size:clamp(.65rem,1.4vw,.76rem);color:var(--text-muted);max-height:200px;overflow:auto;resize:vertical;}
+    .nb-output-block pre{white-space:pre;overflow:visible;margin:0;}
     .nb-out-label{font-size:.58rem;color:var(--accent2);letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px;}
     .nb-code-topbar{background:var(--bg3);padding:5px 12px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border);}
     .nb-code-lang{font-family:var(--font-m);font-size:.6rem;color:var(--text-faint);letter-spacing:.08em;}
     .nb-code-num{font-family:var(--font-m);font-size:.58rem;color:var(--text-faint);background:rgba(74,158,255,.1);padding:1px 6px;border-radius:4px;}
-    .nb-code-content{padding:.9rem 1.1rem;font-family:var(--font-m);font-size:clamp(.68rem,1.5vw,.78rem);line-height:1.7;color:var(--text);white-space:pre;overflow-x:auto;display:block;}
+    .nb-code-content{padding:.9rem 1.1rem;font-family:var(--font-m);font-size:clamp(.68rem,1.5vw,.78rem);line-height:1.7;color:var(--text);white-space:pre;overflow:auto;display:block;max-height:380px;}
     /* CODE SYNTAX HIGHLIGHTING (Prism One Dark) */
     code[class*="language-"],pre[class*="language-"]{color:#abb2bf;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.7;tab-size:2;hyphens:none;}
     .token.comment,.token.prolog,.token.doctype,.token.cdata{color:#5c6370;font-style:italic;}
@@ -279,23 +280,6 @@
     .nb-h4{font-family:var(--font-d);font-size:.9rem;font-weight:600;margin:1rem 0 .4rem;color:var(--text-faint);text-transform:uppercase;letter-spacing:.05em;}
 
 
-    /* ABOUT */
-    #about{background:var(--bg2);border-top:1px solid var(--border);}
-    .about-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:clamp(2rem,5vw,5rem);align-items:start;}
-    .about-avatar{width:100%;aspect-ratio:1;border-radius:var(--radius);background:var(--bg3);border:1px solid var(--card-border);display:flex;align-items:center;justify-content:center;font-size:clamp(3rem,8vw,5rem);margin-bottom:1.3rem;position:relative;overflow:hidden;}
-    .avatar-grid{position:absolute;inset:0;opacity:.1;background-image:linear-gradient(rgba(74,158,255,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(74,158,255,.5) 1px,transparent 1px);background-size:20px 20px;}
-    .about-quick-info{display:flex;flex-direction:column;gap:11px;}
-    .info-row{display:flex;align-items:flex-start;gap:11px;}
-    .info-icon{flex-shrink:0;font-size:1.1rem;}
-    .info-label{font-family:var(--font-m);font-size:.62rem;color:var(--text-faint);letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px;}
-    .info-value{color:var(--text-muted);font-size:.84rem;}
-    .about-bio{color:var(--text-muted);line-height:1.88;margin-bottom:1.8rem;font-size:.95rem;}
-    .skills-list{display:flex;flex-direction:column;gap:11px;margin-bottom:1.8rem;}
-    .skill-item{display:flex;flex-direction:column;gap:5px;}
-    .skill-header{display:flex;justify-content:space-between;font-family:var(--font-m);font-size:.7rem;color:var(--text-muted);}
-    .skill-pct{color:var(--accent);}
-    .skill-bar{height:3px;background:var(--border);border-radius:2px;overflow:hidden;}
-    .skill-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;transition:width 1.6s cubic-bezier(.4,0,.2,1);}
 
     /* CONTACT */
     #contact{background:var(--bg);border-top:1px solid var(--border);}
@@ -320,10 +304,6 @@
       .hero-ctas{justify-content:center;}
       .hero-visual{display:none;}
       .scroll-hint{display:none;}
-      .about-grid{grid-template-columns:1fr;}
-      .about-avatar{max-width:180px;margin:0 auto 1.3rem;}
-      .about-sidebar{order:2;}
-      .about-content{order:1;}
       .nav-links{display:none;}
       .hamburger{display:flex;}
       .expertise-grid{grid-template-columns:repeat(2,1fr);}
@@ -374,8 +354,9 @@
     <ul class="nav-links">
       <li><a href="#expertise">Expertise</a></li>
       <li><a href="#work">Notebooks</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="about.html">About Me ↗</a></li>
+      <li><a href="notebooks.html">All Notebooks</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="about.html">About Me</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
@@ -393,10 +374,11 @@
 <div class="nav-drawer" id="nav-drawer">
   <ul>
     <li><a href="#expertise" onclick="closeNav()">Expertise</a></li>
-    <li><a href="#work"      onclick="closeNav()">Notebooks</a></li>
-    <li><a href="#about"     onclick="closeNav()">About</a></li>
-    <li><a href="about.html" onclick="closeNav()">About Me ↗</a></li>
-    <li><a href="#contact"   onclick="closeNav()">Contact</a></li>
+    <li><a href="#work" onclick="closeNav()">Notebooks</a></li>
+    <li><a href="notebooks.html" onclick="closeNav()">All Notebooks</a></li>
+    <li><a href="research.html" onclick="closeNav()">Research</a></li>
+    <li><a href="about.html" onclick="closeNav()">About Me</a></li>
+    <li><a href="#contact" onclick="closeNav()">Contact</a></li>
   </ul>
 </div>
 
@@ -459,45 +441,22 @@
     <div class="section-header fade-up">
       <div class="section-tag">Portfolio</div>
       <h2 class="section-title">Research &amp; Notebooks</h2>
-      <p class="section-desc">
-        Research projects and activities I have done throughout my career.
-      </p>
+      <p class="section-desc">Selected notebooks from my research and coursework.</p>
     </div>
-    <div class="filter-bar" id="filter-bar"></div>
     <div class="notebooks-grid" id="notebooks-grid">
       <div class="nb-loader">
         <div style="margin-bottom:1rem">
           <span class="nb-loader-dot"></span><span class="nb-loader-dot"></span><span class="nb-loader-dot"></span>
         </div>
-        Loading notebooks…
+        Loading notebooks...
       </div>
+    </div>
+    <div class="fade-up" style="text-align:center;margin-top:2.5rem;">
+      <a href="notebooks.html" class="btn btn-ghost">Browse All Notebooks &rarr;</a>
     </div>
   </div>
 </section>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="section-inner">
-    <div class="about-grid">
-      <div class="about-sidebar fade-up">
-        <div class="about-avatar"><div class="avatar-grid"></div><img src="images/profile.jpg" alt="Phemelo Rutlokoane" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;border-radius:var(--radius);" onerror="this.style.display='none';document.getElementById('avatar-fallback').style.display='flex'"><span id="avatar-fallback" style="display:none;align-items:center;justify-content:center;width:100%;height:100%;font-size:clamp(3rem,8vw,5rem)">🌿</span></div>
-        <div class="about-quick-info" id="quick-info"></div>
-      </div>
-      <div class="about-content fade-up">
-        <div class="section-header">
-          <div class="section-tag">About Me</div>
-          <h2 class="section-title">Researcher &amp;<br>Spatial Analyst</h2>
-        </div>
-        <div class="about-bio" id="about-bio"></div>
-        <div class="skills-list" id="skills-list"></div>
-        <div style="display:flex;gap:.9rem;flex-wrap:wrap;">
-          <a href="#work" class="btn btn-primary">View My Work</a>
-          <a href="#contact" class="btn btn-ghost">Get In Touch</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- CONTACT -->
 <section id="contact">
@@ -587,7 +546,7 @@ const QUICK_INFO=[
 
 const MARQUEE_ITEMS=["GIS","Remote Sensing","R","Python","Jupyter","MaxEnt","Random Forest","NDVI","Sentinel-2","Landsat", "AVIRIS-NG", "LiDAR", "GBIF","Species Distribution Modelling","vegan","terra","sf","tmap","ggplot2","Biostatistics","NMDS","PERMANOVA","WhiteboxTools","Darwin Core","Biodiversity Networks","Open Science","Reproducible Research"];
 
-const CATEGORIES=["All","GIS","Remote Sensing","Biodiversity","Biostatistics","Research", "Misc"];
+const CATEGORIES=["All","GIS","Remote Sensing","Biodiversity","Biostatistics","Research"];
 
 /* =====================================================
    NOTEBOOK LOADER
@@ -771,15 +730,24 @@ function mdToHtml(src, attachments){
   return html;
 }
 
-let copyTimeouts={};
-function copyCode(btn,code){
-  navigator.clipboard.writeText(code).then(()=>{
-    btn.textContent='✓ Copied';
-    btn.classList.add('copied');
-    const id=btn.dataset.cid;
-    clearTimeout(copyTimeouts[id]);
-    copyTimeouts[id]=setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('copied');},2000);
-  }).catch(()=>{btn.textContent='Error';setTimeout(()=>btn.textContent='Copy',1500);});
+const CODE_STORE={};
+function copyCode(btn){
+  const code=CODE_STORE[btn.dataset.cid]||'';
+  if(navigator.clipboard&&window.isSecureContext){
+    navigator.clipboard.writeText(code).then(()=>showCopied(btn)).catch(()=>fallbackCopy(btn,code));
+  }else{fallbackCopy(btn,code);}
+}
+function fallbackCopy(btn,code){
+  const ta=document.createElement('textarea');
+  ta.value=code;ta.style.cssText='position:fixed;opacity:0;top:0;left:0';
+  document.body.appendChild(ta);ta.select();
+  try{document.execCommand('copy');showCopied(btn);}catch(e){btn.textContent='!Error';}
+  document.body.removeChild(ta);
+}
+function showCopied(btn){
+  btn.textContent='Copied!';btn.classList.add('copied');
+  clearTimeout(btn._t);
+  btn._t=setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('copied');},2000);
 }
 
 function renderNotebooks(){
@@ -796,7 +764,7 @@ function renderNotebooks(){
     return;
   }
 
-  grid.innerHTML=list.map(nb=>`
+  grid.innerHTML=list.slice(0,6).map(nb=>`
     <div class="notebook-card fade-up" onclick="openNotebook(${nb.id})" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openNotebook(${nb.id})">
       <div class="notebook-preview" style="background:${nbBg(nb.lang)}">
         <div class="nb-pattern">
@@ -852,9 +820,8 @@ function openNotebook(id){
       h+=mdToHtml(s.src, s.attachments||{});
     }
     if(s.type==='code'){
-      const cid='c'+(cellIdx++);
+      const cid='c'+(cellIdx++);CODE_STORE[cid]=s.code;
       const escapedCode=esc(s.code);
-      const rawCode=s.code.replace(/'/g,"\\'").replace(/\n/g,'\\n');
       const lang=(s.lang||'r').toLowerCase();
       h+=`<div class="nb-code-block">
         <div class="nb-code-topbar">
@@ -1029,28 +996,6 @@ document.addEventListener('DOMContentLoaded',function(){
     });
   }
 
-  // About bio
-  const bio=document.getElementById('about-bio');
-  if(bio)bio.innerHTML=`<p>${SITE.bio}</p>`;
-
-  const qi=document.getElementById('quick-info');
-  if(qi)qi.innerHTML=QUICK_INFO.map(i=>`
-    <div class="info-row">
-      <span class="info-icon">${i.icon}</span>
-      <div><div class="info-label">${i.label}</div><div class="info-value">${i.value}</div></div>
-    </div>`).join('');
-
-  const sl=document.getElementById('skills-list');
-  if(sl){
-    SKILLS.forEach(s=>{
-      sl.innerHTML+=`<div class="skill-item">
-        <div class="skill-header"><span>${s.name}</span><span class="skill-pct">${s.pct}%</span></div>
-        <div class="skill-bar"><div class="skill-fill" style="width:0" data-pct="${s.pct}"></div></div>
-      </div>`;
-    });
-    const ss=document.querySelector('.skills-list');
-    if(ss)skillObs.observe(ss);
-  }
 
   // Load notebooks
   loadNotebooks();
