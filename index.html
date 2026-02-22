@@ -262,10 +262,10 @@
     .nb-code-copy:hover{border-color:var(--accent2);color:var(--accent2);}
     .nb-code-copy.copied{border-color:var(--accent2);color:var(--accent2);}
 
-    /* NOTEBOOK IMAGES */
-    .nb-img-wrap{margin:1.2rem 0;border-radius:10px;overflow:hidden;border:1px solid var(--border);background:var(--bg3);}
-    .nb-img-wrap img{display:block;max-width:100%;height:auto;margin:0 auto;}
-    .nb-img-caption{font-family:var(--font-m);font-size:.68rem;color:var(--text-faint);text-align:center;padding:.6rem 1rem;font-style:italic;background:var(--bg3);}
+    /* NOTEBOOK FIGURES — image + caption together */
+    .nb-fig-wrap{margin:1.4rem 0;border-radius:12px;overflow:hidden;border:1px solid var(--border);background:var(--bg3);}
+    .nb-fig-wrap img{display:block;max-width:100%;height:auto;margin:0 auto;padding:.6rem .6rem 0;}
+    .nb-img-caption{font-family:var(--font-m);font-size:.7rem;color:var(--text-faint);text-align:center;padding:.5rem 1.2rem .85rem;font-style:italic;border-top:1px solid var(--border);margin-top:.5rem;}
 
     /* MARKDOWN RENDERED */
     .nb-p strong{color:var(--text);font-weight:700;}
@@ -353,7 +353,6 @@
   <div class="nav-right">
     <ul class="nav-links">
       <li><a href="#expertise">Expertise</a></li>
-      <li><a href="#work">Notebooks</a></li>
       <li><a href="notebooks.html">All Notebooks</a></li>
       <li><a href="research.html">Research</a></li>
       <li><a href="about.html">About Me</a></li>
@@ -374,7 +373,6 @@
 <div class="nav-drawer" id="nav-drawer">
   <ul>
     <li><a href="#expertise" onclick="closeNav()">Expertise</a></li>
-    <li><a href="#work" onclick="closeNav()">Notebooks</a></li>
     <li><a href="notebooks.html" onclick="closeNav()">All Notebooks</a></li>
     <li><a href="research.html" onclick="closeNav()">Research</a></li>
     <li><a href="about.html" onclick="closeNav()">About Me</a></li>
@@ -397,8 +395,8 @@
       and biodiversity informatics.
     </p>
     <div class="hero-ctas">
-      <a href="#work" class="btn btn-primary">↓ Browse Notebooks</a>
-      <a href="#about" class="btn btn-ghost">About Me</a>
+      <a href="notebooks.html" class="btn btn-primary">Browse Notebooks →</a>
+      <a href="about.html" class="btn btn-ghost">About Me</a>
     </div>
   </div>
   <div class="hero-visual">
@@ -546,7 +544,7 @@ const QUICK_INFO=[
 
 const MARQUEE_ITEMS=["GIS","Remote Sensing","R","Python","Jupyter","MaxEnt","Random Forest","NDVI","Sentinel-2","Landsat", "AVIRIS-NG", "LiDAR", "GBIF","Species Distribution Modelling","vegan","terra","sf","tmap","ggplot2","Biostatistics","NMDS","PERMANOVA","WhiteboxTools","Darwin Core","Biodiversity Networks","Open Science","Reproducible Research"];
 
-const CATEGORIES=["All","GIS","Remote Sensing","Biodiversity","Biostatistics","Research"];
+const CATEGORIES=["All","GIS","Remote Sensing","Biodiversity","Biostatistics","Research", Misc];
 
 /* =====================================================
    NOTEBOOK LOADER
@@ -579,49 +577,38 @@ const CATEGORIES=["All","GIS","Remote Sensing","Biodiversity","Biostatistics","R
 
 // Embedded copy of notebooks/index.json — kept in sync with the file
 const NOTEBOOK_INDEX=[
-  {"file":"About_Me.ipynb","category":"Remote Sensing","title":"About Me","desc":"All you need to know about me.","keywords":["About Me","Honours Project","Research","Skills"],"date":"2026-02-05","lang":"R"},
-  {"file":"Introduction_to_R.ipynb","category":"Biostatistics","title":"Introduction to R","desc":"An Introduction to R: From Installation to Reading and Writing Data.","keywords":["Base R","Functions","Data Types","Data Inspection"],"date":"2025-08-12","lang":"R"},
-  {"file":"Data_manipulation.ipynb","category":"Biostatistics","title":"Data manipulation in R","desc":"An Introduction to Data Manipulation in R: From Data Creation to Data Wrangling","keywords":["Tidyverse","palmerpenguins","Wide Data","Long Data"],"date":"2025-08-13","lang":"R"},
-  {"file":"Data_visualisation.ipynb","category":"Biostatistics","title":"Data visualisations in R","desc":"An Introduction to Data Visualisation in R: From Base Scatter Plots to facetting ggplots.","keywords":["Base R","ggplot2","Graphics","Tidyverse"],"date":"2025-08-13","lang":"R"},
+  {"file":"About_Me.ipynb","category":"Misc","title":"About Me","desc":"All you need to know about me.","keywords":["About Me","Honours Project","Research","Skills"],"date":"2026-02-05","lang":"R"},
+  {"file":"Introduction_to_R.ipynb","category":"Misc","title":"Introduction to R","desc":"An Introduction to R: From Installation to Reading and Writing Data.","keywords":["Base R","Functions","Data Types","Data Inspection"],"date":"2025-08-12","lang":"R"},
+  {"file":"Data_manipulation.ipynb","category":"Misc","title":"Data manipulation in R","desc":"An Introduction to Data Manipulation in R: From Data Creation to Data Wrangling","keywords":["Tidyverse","palmerpenguins","Wide Data","Long Data"],"date":"2025-08-13","lang":"R"},
+  {"file":"Data_visualisation.ipynb","category":"Misc","title":"Data visualisations in R","desc":"An Introduction to Data Visualisation in R: From Base Scatter Plots to facetting ggplots.","keywords":["Base R","ggplot2","Graphics","Tidyverse"],"date":"2025-08-13","lang":"R"},
   {"file":"Spatial_data.ipynb","category":"Remote Sensing","title":"Spatial data in R","desc":"An Introduction look at spatial analyses, plotting, manipulation and combination.","keywords":["sf","terra","Temperature","Rivers"],"date":"2026-02-06","lang":"R"},
   {"file":"Mapping_projections.ipynb","category":"Remote Sensing","title":"Rasters in different projections","desc":"Mapping in R: From Reading in Shape files and Rasters to plotting Shape files alongside Rasters in different Projections.","keywords":["CSR","Projections","Bathymetry","Complex Maps"],"date":"2026-02-07","lang":"R"},
   {"file":"Satellite_imagery_R.ipynb","category":"Remote Sensing","title":"Mapping with Satellite imagery","desc":"Using Satellite Imagery for Mapping in R.","keywords":["Landsat","NDVI","Spectral Resolution","RGB Plotting"],"date":"2026-02-10","lang":"R"}
 ];
 
-let activeFilter="All";
 let allNotebooks=[];
 
 async function loadNotebooks(){
+  // Get manifest: try live fetch first, fall back to embedded index
+  let index;
   try{
-    // Try fetching real notebooks
-    let index;
-    try{
-      const res=await fetch('notebooks/index.json');
-      if(res.ok)index=await res.json();
-    }catch(_){}
+    const res=await fetch('notebooks/index.json');
+    if(res.ok) index=await res.json();
+  }catch(_){}
+  if(!index||!index.length) index=NOTEBOOK_INDEX;
 
-    // Fall back to embedded manifest
-    if(!index||!index.length)index=NOTEBOOK_INDEX;
+  // Strip About_Me (it has its own page)
+  const metas=index.filter(m=>m.file!=='About_Me.ipynb');
 
-    const results=await Promise.allSettled(
-      index.map((meta,i)=>fetchAndParse(meta,i+1))
-    );
+  // Try to fetch each .ipynb for rich content; fall back to manifest-only card
+  const results=await Promise.allSettled(metas.map((meta,i)=>fetchAndParse(meta,i+1)));
+  allNotebooks=metas.map((meta,i)=>{
+    const r=results[i];
+    if(r.status==='fulfilled'&&r.value) return r.value;
+    // .ipynb not available — make a card from the manifest entry alone
+    return{id:i+1,...meta,sections:[],previewCode:'# '+meta.title,previewOutput:''};
+  });
 
-    const parsed=results
-      .filter(r=>r.status==='fulfilled'&&r.value)
-      .map(r=>r.value);
-
-    if(parsed.length){
-      // Filter out About Me from the main grid (it has its own page)
-      allNotebooks=parsed.filter(n=>n.file!=='About_Me.ipynb');
-    }else{
-      // No real notebooks could be fetched — use demo set
-      allNotebooks=DEMO_NOTEBOOKS;
-    }
-  }catch(e){
-    allNotebooks=DEMO_NOTEBOOKS;
-  }
-  renderFilters();
   renderNotebooks();
   observeFadeUps();
 }
@@ -696,33 +683,39 @@ function mdToHtml(src, attachments){
       .replace(/`([^`]+)`/g,'<code>$1</code>');
   };
 
+  let lastWasImg=false;
   lines.forEach(line=>{
-    // Close list if needed
-    if(inList&&!line.match(/^(\s*[-*+]|\s*\d+\.)\s/)){
-      html+='</ul>';inList=false;
-    }
-    if(line.startsWith('#### '))      html+=`<div class="nb-h4">${inlineRender(line.slice(5))}</div>`;
-    else if(line.startsWith('### ')) html+=`<div class="nb-h3">${inlineRender(line.slice(4))}</div>`;
-    else if(line.startsWith('## '))  html+=`<div class="nb-h2">${inlineRender(line.slice(3))}</div>`;
-    else if(line.startsWith('# '))   html+=`<div class="nb-h1">${inlineRender(line.slice(2))}</div>`;
-    else if(line.match(/^(\s*[-*+])\s/)){
+    if(inList&&!line.match(/^(\s*[-*+]|\s*\d+\.)\s/)){html+='</ul>';inList=false;}
+    const s=line.trim();
+    if(!s){lastWasImg=false;return;}
+    if(s.startsWith('#### ')){html+=`<div class="nb-h4">${inlineRender(s.slice(5))}</div>`;lastWasImg=false;}
+    else if(s.startsWith('### ')){html+=`<div class="nb-h3">${inlineRender(s.slice(4))}</div>`;lastWasImg=false;}
+    else if(s.startsWith('## ')){html+=`<div class="nb-h2">${inlineRender(s.slice(3))}</div>`;lastWasImg=false;}
+    else if(s.startsWith('# ')){html+=`<div class="nb-h1">${inlineRender(s.slice(2))}</div>`;lastWasImg=false;}
+    else if(s.match(/^(\s*[-*+])\s/)){
       if(!inList){html+='<ul class="nb-ul">';inList=true;}
-      html+=`<li>${inlineRender(line.replace(/^\s*[-*+]\s/,''))}</li>`;
+      html+=`<li>${inlineRender(s.replace(/^\s*[-*+]\s/,''))}</li>`;lastWasImg=false;
     }
-    else if(line.match(/^\s*\d+\.\s/)){
+    else if(s.match(/^\s*\d+\.\s/)){
       if(!inList){html+='<ul class="nb-ul">';inList=true;}
-      html+=`<li>${inlineRender(line.replace(/^\s*\d+\.\s/,''))}</li>`;
+      html+=`<li>${inlineRender(s.replace(/^\s*\d+\.\s/,''))}</li>`;lastWasImg=false;
     }
-    else if(line.trim()){
-      const rendered=inlineRender(line);
-      // If line is only an image (starts with <img), wrap in figure
-      if(rendered.trimStart().startsWith('<img')){
-        html+=`<div class="nb-img-wrap">${rendered}</div>`;
-      } else if(rendered.trim().startsWith('_')&&rendered.trim().endsWith('_')){
-        // Caption line (italic-only line)
-        html+=`<div class="nb-img-caption">${rendered.replace(/^_|_$/g,'')}</div>`;
-      } else {
-        html+=`<p class="nb-p">${rendered}</p>`;
+    else{
+      const rendered=inlineRender(s);
+      const isImg=s.startsWith('<img')||rendered.trimStart().startsWith('<img');
+      // A caption is an italic-only short line that immediately follows an image
+      const isCaption=lastWasImg&&s.startsWith('_')&&s.endsWith('_')&&s.length<300;
+      if(isCaption){
+        // Inject caption inside the last figure box, before its closing </div>
+        const capHtml='<div class="nb-img-caption">'+inlineRender(s.replace(/^_+|_+$/g,''))+'</div>';
+        const closeIdx=html.lastIndexOf('</div>');
+        html=closeIdx>=0?html.slice(0,closeIdx)+capHtml+'</div>':html+capHtml;
+        lastWasImg=false;
+      }else if(isImg){
+        html+=`<div class="nb-fig-wrap">${s.startsWith('<img')?s:rendered}</div>`;
+        lastWasImg=true;
+      }else{
+        html+=`<p class="nb-p">${rendered}</p>`;lastWasImg=false;
       }
     }
   });
@@ -752,7 +745,7 @@ function showCopied(btn){
 
 function renderNotebooks(){
   const grid=document.getElementById('notebooks-grid');
-  const list=activeFilter==='All'?allNotebooks:allNotebooks.filter(n=>n.category===activeFilter);
+  const list=allNotebooks;
 
   if(!list.length){
     grid.innerHTML=`<div class="notebooks-empty">
@@ -827,7 +820,7 @@ function openNotebook(id){
         <div class="nb-code-topbar">
           <span class="nb-code-lang">${s.lang||'R'}</span>
           <span class="nb-code-num">In ${s.cellNum}</span>
-          <button class="nb-code-copy" data-cid="${cid}" onclick="copyCode(this,'${rawCode.replace(/"/g,'\\"')}')">Copy</button>
+          <button class="nb-code-copy" data-cid="${cid}" onclick="copyCode(this)">Copy</button>
         </div>
         <pre class="nb-code-content language-${lang}"><code class="language-${lang}">${escapedCode}</code></pre>
       </div>`;
@@ -837,7 +830,7 @@ function openNotebook(id){
       </div>`;
       // Image outputs (plots)
       (s.imgOutputs||[]).forEach((src,i)=>{
-        if(src)h+=`<div class="nb-img-wrap"><img src="${src}" alt="Plot output ${i+1}" style="max-width:100%;"></div>`;
+        if(src)h+=`<div class="nb-fig-wrap"><img src="${src}" alt="Plot ${i+1}"><div class="nb-img-caption">Plot output</div></div>`;
       });
     }
   });
@@ -852,12 +845,6 @@ function openNotebook(id){
   document.body.style.overflow='hidden';
 }
 
-function renderFilters(){
-  document.getElementById('filter-bar').innerHTML=
-    CATEGORIES.map(c=>`<button class="filter-btn${c===activeFilter?' active':''}" onclick="setFilter('${c}')">${c}</button>`).join('');
-}
-
-function setFilter(c){activeFilter=c;renderFilters();renderNotebooks();}
 
 function closeModal(e){
   if(e&&e.target!==document.getElementById('modal-overlay'))return;
