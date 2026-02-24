@@ -337,6 +337,14 @@
       .modal-overlay{align-items:flex-start;padding-top:0;}
       .notebook-viewer{height:100dvh;border-radius:0;}
     }
+      /* Series badge on homepage cards */
+    .nb-series-badge{position:absolute;bottom:.7rem;left:.8rem;font-family:var(--font-m);font-size:.55rem;color:var(--accent3);letter-spacing:.08em;text-transform:uppercase;background:rgba(0,0,0,.45);padding:2px 7px;border-radius:4px;}
+    [data-theme="light"] .nb-series-badge{background:rgba(255,255,255,.7);}
+    .nb-part{font-family:var(--font-m);font-size:.58rem;color:var(--accent3);letter-spacing:.06em;}
+    /* Figure wrap */
+    .nb-fig-wrap{margin:1.4rem 0;border-radius:12px;overflow:hidden;border:1px solid var(--border);background:var(--bg3);}
+    .nb-fig-wrap img{display:block;max-width:100%;height:auto;margin:0 auto;padding:.6rem .6rem 0;}
+    .nb-img-caption{font-family:var(--font-m);font-size:.7rem;color:var(--text-faint);text-align:center;padding:.55rem 1.2rem .85rem;font-style:italic;border-top:1px solid var(--border);margin-top:.5rem;}
   </style>
 </head>
 <body>
@@ -498,7 +506,345 @@
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
+const SITE = {
+  name:"Les Hyperion",
+  author:"Phemelo Rutlokoane",
+  role:"GIS Analyst & Researcher",
+  institution:"University of the Western Cape",
+  location:"Johannesburg, South Africa",
+  email:"Phemelorutlokoane001@icloud.com",
+  github:"https://github.com/Phemelo-R",
+  linkedin:"www.linkedin.com/in/phemelo-rutlokoane-4a8826235",
+  bio:`I am a spatial analyst and researcher specialising in GIS, remote sensing, and
+quantitative ecology. My work spans species distribution modelling, landscape ecology,
+and biodiversity information management. I primarily code in R and Python within
+Jupyter notebooks, combining statistical methods with spatial analysis to
+address real-world environmental questions.`,
+};
+
+const EXPERTISE=[
+  {icon:"🛰",title:"Remote Sensing",desc:"Satellite and aerial imagery analysis, land cover classification, change detection and spectral indices.",tags:["NDVI","Landsat","Sentinel","Earth Engine"],accent:"#4a9eff"},
+  {icon:"🗺",title:"GIS & Spatial Analysis",desc:"Vector and raster geoprocessing, spatial statistics, cartographic design and map production in R.",tags:["sf","terra","ggplot2","tmap"],accent:"#38c98a"},
+  {icon:"🧬",title:"Biodiversity & SDM",desc:"Species distribution modelling, biodiversity network theory, occurrence data and trait databases.",tags:["MaxEnt","ENMeval","GBIF","BioTIME"],accent:"#f5a623"},
+  {icon:"📊",title:"Biostatistics",desc:"Multivariate analysis, GLMMs, ordination and community ecology statistics.",tags:["vegan","lme4","glmmTMB","ggeffects"],accent:"#c96aff"},
+  {icon:"🔬",title:"Research",desc:"Reproducible open-science workflows, structured data management and science communication.",tags:["Quarto","RMarkdown","Zenodo","OSF"],accent:"#ff6a88"},
+  {icon:"🐍",title:"Python & Notebooks",desc:"Geospatial Python workflows, data wrangling, and Jupyter notebooks for reproducible analysis.",tags:["geopandas","rasterio","shapely","pandas"],accent:"#4a9eff"},
+];
+
+const SKILLS=[
+  {name:"R — GIS, Statistics & Ecology",pct:90},
+  {name:"Remote Sensing & Earth Observation",pct:82},
+  {name:"Species Distribution Modelling",pct:78},
+  {name:"Python — Geospatial",pct:65},
+  {name:"Biostatistics & Multivariate Analysis",pct:80},
+];
+
+const QUICK_INFO=[
+  {icon:"🎓",label:"Affiliation",value:SITE.institution},
+  {icon:"📍",label:"Location",value:SITE.location},
+  {icon:"💻",label:"Primary Tools",value:"R, Python, QGIS, LaTeX"},
+  {icon:"🔬",label:"Research Interests",value:"Spatial Ecology, Biodiversity Informatics, Climate Oceanography, Landscape Ecology"},
+];
+
+const MARQUEE_ITEMS=["GIS","Remote Sensing","R","Python","Jupyter","MaxEnt","Random Forest","NDVI","Sentinel-2","Landsat", "AVIRIS-NG", "LiDAR", "GBIF","Species Distribution Modelling","vegan","terra","sf","tmap","ggplot2","Biostatistics","NMDS","PERMANOVA","WhiteboxTools","Darwin Core","Biodiversity Networks","Open Science","Reproducible Research"];
+
+const CATEGORIES=["All","R Fundamentals","Spatial & Remote Sensing","Biodiversity","Biostatistics","Research"];
+
+
+const NOTEBOOK_INDEX=[{"file":"Introduction_to_R.ipynb","title":"Introduction to R","series":"R Fundamentals","part":1,"desc":"A foundation in R: installation, data types, functions, and reading and writing data.","date":"2025-08-12","category":"R Fundamentals","keywords":["Base R","Functions","Data Types","Data Inspection","Installation"],"lang":"R","abstract":"The starting point for everything. Covers R installation, RStudio setup, core data types (vectors, lists, data frames), basic functions, and reading/writing CSV and other file formats."},{"file":"Data_manipulation.ipynb","title":"Data Manipulation in R","series":"R Fundamentals","part":2,"desc":"From data creation to wrangling: tidyverse pipelines, wide/long pivots and the Palmer Penguins dataset.","date":"2025-08-13","category":"R Fundamentals","keywords":["Tidyverse","dplyr","tidyr","palmerpenguins","Wide Data","Long Data","Wrangling"],"lang":"R","abstract":"Covers the full tidyverse data manipulation pipeline: filtering, mutating, grouping, summarising, and reshaping data between wide and long formats using the Palmer Penguins dataset."},{"file":"Data_visualisation.ipynb","title":"Data Visualisation in R","series":"R Fundamentals","part":3,"desc":"Base R plots to publication-quality facetted ggplots \u2014 the complete visualisation toolkit.","date":"2025-08-13","category":"R Fundamentals","keywords":["ggplot2","Base R","Graphics","Tidyverse","Facets","Themes"],"lang":"R","abstract":"A thorough introduction to data visualisation in R, from quick base plots to layered, publication-ready ggplot2 figures with custom themes, scales, and facets."},{"file":"Spatial_data.ipynb","title":"Spatial Data in R","series":"Spatial & Remote Sensing","part":1,"desc":"First steps in spatial R: reading, plotting, manipulating and combining vector and raster data.","date":"2026-02-06","category":"Spatial & Remote Sensing","keywords":["sf","terra","Spatial","Temperature","Rivers","Vector","Raster"],"lang":"R","abstract":"An introduction to spatial data science in R using sf and terra. Covers reading shapefiles and rasters, coordinate reference systems, basic spatial operations, and plotting spatial objects."},{"file":"Mapping_projections.ipynb","title":"Rasters in Different Projections","series":"Spatial & Remote Sensing","part":2,"desc":"Coordinate reference systems in practice: bathymetry rasters reprojected and mapped alongside shapefiles.","date":"2026-02-07","category":"Spatial & Remote Sensing","keywords":["CRS","Projections","Bathymetry","Complex Maps","terra","sf"],"lang":"R","abstract":"A deep dive into coordinate reference systems and map projections in R. Reads bathymetry rasters and shapefiles, reprojects them, and builds complex multi-layer maps."},{"file":"Satellite_imagery_R.ipynb","title":"Mapping with Satellite Imagery","series":"Spatial & Remote Sensing","part":3,"desc":"Landsat-based NDVI, spectral resolution and RGB composite mapping in R.","date":"2026-02-10","category":"Spatial & Remote Sensing","keywords":["Landsat","NDVI","Spectral Resolution","RGB Plotting","terra","Remote Sensing"],"lang":"R","abstract":"Working with satellite imagery in R: loading multi-band Landsat rasters, computing NDVI and other spectral indices, producing RGB composites, and interpreting spectral resolution."}];
+
+/* ── Utilities ── */
+function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function fmt(d){if(!d)return'';try{return new Date(d+'T00:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});}catch{return d;}}
+function nbBg(l){return{R:'radial-gradient(ellipse at top left,rgba(74,158,255,.07),transparent)',Python:'radial-gradient(ellipse at top left,rgba(56,201,138,.07),transparent)',Markdown:'radial-gradient(ellipse at top left,rgba(245,166,35,.07),transparent)'}[l]||'radial-gradient(ellipse at top left,rgba(74,158,255,.07),transparent)';}
+
+/* ── Theme ── */
+function toggleTheme(){const h=document.documentElement;const dark=h.getAttribute('data-theme')==='dark';h.setAttribute('data-theme',dark?'light':'dark');document.getElementById('theme-label').textContent=dark?'Dark':'Light';localStorage.setItem('lh-theme',dark?'light':'dark');}
+(function(){const s=localStorage.getItem('lh-theme')||'dark';document.documentElement.setAttribute('data-theme',s);})();
+
+/* ── Mobile nav ── */
+function toggleNav(){document.getElementById('hamburger').classList.toggle('open');document.getElementById('nav-drawer').classList.toggle('open');}
+function closeNav(){document.getElementById('hamburger').classList.remove('open');document.getElementById('nav-drawer').classList.remove('open');}
+
+/* ── Copy code ── */
+const CODE_STORE={};
+function copyCode(btn){
+  const code=CODE_STORE[btn.dataset.cid]||'';
+  if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(code).then(()=>showCopied(btn)).catch(()=>fallbackCopy(btn,code));}
+  else{fallbackCopy(btn,code);}
+}
+function fallbackCopy(btn,code){
+  const ta=document.createElement('textarea');ta.value=code;ta.style.cssText='position:fixed;opacity:0;top:0;left:0';
+  document.body.appendChild(ta);ta.select();
+  try{document.execCommand('copy');showCopied(btn);}catch(e){btn.textContent='Error';}
+  document.body.removeChild(ta);
+}
+function showCopied(btn){btn.textContent='Copied!';btn.classList.add('copied');clearTimeout(btn._t);btn._t=setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('copied');},2000);}
+
+/* ── Parse .ipynb ── */
+function parseIpynb(nb,meta){
+  const cells=nb.cells||nb.worksheets?.[0]?.cells||[];
+  const sections=[];let previewCode='',previewOutput='';
+  const att={};
+  cells.forEach(c=>{if(c.attachments)Object.entries(c.attachments).forEach(([f,d])=>{const m=Object.keys(d)[0];att[f]=`data:${m};base64,${d[m]}`;});});
+  cells.forEach((c,idx)=>{
+    const src=Array.isArray(c.source)?c.source.join(''):c.source||'';
+    if(c.cell_type==='markdown'){sections.push({type:'markdown',src,att});}
+    if(c.cell_type==='code'){
+      const outs=c.outputs||[];let txt='';const imgs=[];
+      outs.forEach(o=>{
+        if(o.text)txt+=Array.isArray(o.text)?o.text.join(''):o.text;
+        if(o.data?.['text/plain']){const t=o.data['text/plain'];txt+=Array.isArray(t)?t.join(''):t;}
+        if(o.data?.['image/png'])imgs.push(`data:image/png;base64,${o.data['image/png']}`);
+      });
+      sections.push({type:'code',lang:meta.lang||'R',cellNum:`[${idx+1}]`,code:src,output:txt.trim(),imgOutputs:imgs});
+      if(!previewCode&&src.trim()){previewCode=src.split('\n').slice(0,6).join('\n');previewOutput=txt.split('\n')[0]||'';}
+    }
+  });
+  return{sections,previewCode,previewOutput};
+}
+
+/* ── Markdown → HTML ── */
+function mdToHtml(src,att){
+  const lines=src.split('\n');let html='';let inList=false;let lastImg=false;
+  const ir=t=>t
+    .replace(/!\[([^\]]*)\]\(attachment:([^)]+)\)/g,(m,a,u)=>{const s=att&&att[u]?att[u]:'';return s?`<img src="${s}" alt="${esc(a)}" style="max-width:100%;">`:''})
+    .replace(/!\[([^\]]*)\]\(([^)]+)\)/g,(m,a,s)=>`<img src="${esc(s)}" alt="${esc(a)}" style="max-width:100%;">`)
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g,(m,t,h)=>`<a href="${esc(h)}" target="_blank" rel="noopener">${esc(t)}</a>`)
+    .replace(/\*\*\*([^*]+)\*\*\*/g,'<strong><em>$1</em></strong>')
+    .replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>')
+    .replace(/\*([^*\n]+)\*/g,'<em>$1</em>')
+    .replace(/_([^_\n]+)_/g,'<em>$1</em>')
+    .replace(/`([^`]+)`/g,'<code>$1</code>');
+  lines.forEach(line=>{
+    if(inList&&!line.match(/^(\s*[-*+]|\s*\d+\.)\s/)){html+='</ul>';inList=false;}
+    const s=line.trim();if(!s){lastImg=false;return;}
+    if(s.startsWith('#### ')){html+=`<div class="nb-h4">${ir(s.slice(5))}</div>`;lastImg=false;}
+    else if(s.startsWith('### ')){html+=`<div class="nb-h3">${ir(s.slice(4))}</div>`;lastImg=false;}
+    else if(s.startsWith('## ')){html+=`<div class="nb-h2">${ir(s.slice(3))}</div>`;lastImg=false;}
+    else if(s.startsWith('# ')){html+=`<div class="nb-h1">${ir(s.slice(2))}</div>`;lastImg=false;}
+    else if(s.match(/^[-*+]\s/)){if(!inList){html+='<ul class="nb-ul">';inList=true;}html+=`<li>${ir(s.replace(/^[-*+]\s/,''))}</li>`;lastImg=false;}
+    else if(s.match(/^\d+\.\s/)){if(!inList){html+='<ul class="nb-ul">';inList=true;}html+=`<li>${ir(s.replace(/^\d+\.\s/,''))}</li>`;lastImg=false;}
+    else{
+      const r=ir(s);
+      const isImg=s.startsWith('<img')||r.trimStart().startsWith('<img');
+      const isCap=lastImg&&s.startsWith('_')&&s.endsWith('_')&&s.length<300;
+      if(isCap){
+        const cap=`<div class="nb-img-caption">${ir(s.replace(/^_+|_+$/g,''))}</div>`;
+        const ci=html.lastIndexOf('</div>');
+        html=ci>=0?html.slice(0,ci)+cap+'</div>':html+cap;
+        lastImg=false;
+      }else if(isImg){
+        html+=`<div class="nb-fig-wrap">${s.startsWith('<img')?s:r}</div>`;lastImg=true;
+      }else{html+=`<p class="nb-p">${r}</p>`;lastImg=false;}
+    }
+  });
+  if(inList)html+='</ul>';return html;
+}
+
+/* ── Open notebook modal ── */
+let _ci=0;
+// allNotebooks must be defined on each page before calling openNotebook
+function openNotebook(nb){
+  if(!nb)return;
+  _ci=0;
+  document.getElementById('modal-title').textContent=nb.title+'.ipynb';
+  let h=`<div class="nb-doc"><div class="nb-doc-header"><div class="nb-doc-title">${nb.title}</div>`;
+  if(nb.series)h+=`<div style="font-family:var(--font-m);font-size:.65rem;color:var(--accent3);letter-spacing:.09em;text-transform:uppercase;margin-bottom:.5rem;">${nb.series}${nb.part?' &mdash; Part '+nb.part:''}</div>`;
+  h+=`<div class="nb-doc-meta">
+    <span>&#x270D; <strong>Author:</strong> Phemelo Rutlokoane</span>
+    <span>&#x1F4C5; <strong>Date:</strong> ${fmt(nb.date)}</span>
+    <span>&#x1F3F7; <strong>Category:</strong> ${nb.category}</span>
+    <span>&#x1F4BB; <strong>Language:</strong> ${nb.lang||'R'}</span>
+  </div></div>`;
+  if(nb.abstract)h+=`<div class="nb-doc-abstract">${nb.abstract}</div>`;
+  if(nb.keywords?.length)h+=`<div class="nb-keywords-block"><span class="nb-kw-label">Keywords</span>${nb.keywords.map(k=>`<span class="kw">${k}</span>`).join('')}</div>`;
+  (nb.sections||[]).forEach(s=>{
+    if(s.type==='markdown'){h+=mdToHtml(s.src,s.att||{});}
+    if(s.type==='code'){
+      const cid='c'+(_ci++);CODE_STORE[cid]=s.code;
+      const lang=(s.lang||'r').toLowerCase();
+      h+=`<div class="nb-code-block"><div class="nb-code-topbar"><span class="nb-code-lang">${s.lang||'R'}</span><span class="nb-code-num">In ${s.cellNum}</span><button class="nb-code-copy" data-cid="${cid}" onclick="copyCode(this)">Copy</button></div><pre class="nb-code-content language-${lang}"><code class="language-${lang}">${esc(s.code)}</code></pre></div>`;
+      if(s.output)h+=`<div class="nb-output-block"><div class="nb-out-label">Output</div><pre>${esc(s.output)}</pre></div>`;
+      (s.imgOutputs||[]).forEach((src,i)=>{if(src)h+=`<div class="nb-fig-wrap"><img src="${src}" alt="Plot ${i+1}"><div class="nb-img-caption">Plot output ${i+1}</div></div>`;});
+    }
+  });
+  h+='</div>';
+  document.getElementById('modal-content').innerHTML=h;
+  if(window.Prism)Prism.highlightAllUnder(document.getElementById('modal-content'));
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(e){
+  if(e&&e.target!==document.getElementById('modal-overlay'))return;
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+/* ── Notebook card ── */
+function nbCard(nb){
+  const seriesBadge=nb.series?`<div class="nb-series-badge">${nb.series}</div>`:'';
+  return `<div class="notebook-card fade-up" onclick="openNotebook(allNotebooks[${allNotebooks.indexOf(nb)}])" role="button" tabindex="0">
+    <div class="notebook-preview" style="background:${nbBg(nb.lang)}">
+      <div class="nb-pattern">
+        <div class="nb-cell-head">In [1]:</div>
+        <div class="nb-code-line">${esc(nb.previewCode||'# '+nb.title)}</div>
+        ${nb.previewOutput?`<div class="nb-out-line">${esc(nb.previewOutput)}</div>`:''}
+      </div>
+      <div class="nb-type-badge">${nb.lang||'R'}</div>
+      ${seriesBadge}
+    </div>
+    <div class="notebook-body">
+      <div class="notebook-meta">
+        <span class="nb-date">${fmt(nb.date)}</span>
+        <span class="nb-cat">${nb.category}</span>
+        ${nb.part?`<span class="nb-part">Part ${nb.part}</span>`:''}
+      </div>
+      <div class="notebook-title">${nb.title}</div>
+      <div class="notebook-desc">${nb.desc}</div>
+      <div class="notebook-keywords">${(nb.keywords||[]).slice(0,5).map(k=>`<span class="kw">${k}</span>`).join('')}</div>
+      <div class="nb-footer">
+        <span class="nb-author">&#x270D; Phemelo Rutlokoane</span>
+        <span class="nb-open-btn">Open &rarr;</span>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ── Fetch + parse a notebook file ── */
+async function fetchNotebook(meta,id){
+  try{
+    const res=await fetch(`notebooks/${meta.file}`);
+    if(!res.ok)return null;
+    const ipynb=await res.json();
+    return{id,...meta,...parseIpynb(ipynb,meta)};
+  }catch{return null;}
+}
+
+/* ── Load all notebooks from manifest ── */
+async function loadAllNotebooks(excludeFiles){
+  let index;
+  try{const res=await fetch('notebooks/index.json');if(res.ok)index=await res.json();}catch(_){}
+  if(!index||!index.length)index=NOTEBOOK_INDEX;
+  const excl=excludeFiles||['About_Me.ipynb'];
+  const metas=index.filter(m=>!excl.includes(m.file));
+  const results=await Promise.allSettled(metas.map((meta,i)=>fetchNotebook(meta,i+1)));
+  return metas.map((meta,i)=>{
+    const r=results[i];
+    if(r.status==='fulfilled'&&r.value)return r.value;
+    // Notebook file not reachable — show card from manifest data only
+    return{id:i+1,...meta,sections:[],previewCode:'# '+meta.title,previewOutput:''};
+  });
+}
+
+/* ── Fade-in animation ── */
+function observeFadeUps(){
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*60);obs.unobserve(e.target);}});
+  },{threshold:.07});
+  document.querySelectorAll('.fade-up:not(.visible)').forEach(el=>obs.observe(el));
+}
+
+/* ── Common boot ── */
+function commonBoot(){
+  const t=document.documentElement.getAttribute('data-theme')||'dark';
+  document.getElementById('theme-label').textContent=t==='dark'?'Light':'Dark';
+  const fy=document.getElementById('footer-year');if(fy)fy.textContent=new Date().getFullYear();
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+  document.addEventListener('click',e=>{
+    const d=document.getElementById('nav-drawer'),b=document.getElementById('hamburger');
+    if(d&&d.classList.contains('open')&&!d.contains(e.target)&&!b.contains(e.target))closeNav();
+  });
+}
+
+
+let allNotebooks=[];
+
+async function loadNotebooks(){
+  allNotebooks=await loadAllNotebooks(['About_Me.ipynb']);
+  renderNotebooks();
+  observeFadeUps();
+}
+
+function renderNotebooks(){
+  const grid=document.getElementById('notebooks-grid');
+  if(!allNotebooks.length){
+    grid.innerHTML='<div class="notebooks-empty"><strong>No notebooks yet</strong><br>Add .ipynb files to notebooks/ and update notebooks/index.json.</div>';
+    return;
+  }
+  // Show first 6 only on homepage
+  grid.innerHTML=allNotebooks.slice(0,6).map(nb=>{
+    const seriesBadge=nb.series?`<div class="nb-series-badge">${nb.series}</div>`:'';
+    return `<div class="notebook-card fade-up" onclick="openNotebook(allNotebooks[${allNotebooks.indexOf(nb)}])" role="button" tabindex="0">
+      <div class="notebook-preview" style="background:${nbBg(nb.lang)}">
+        <div class="nb-pattern">
+          <div class="nb-cell-head">In [1]:</div>
+          <div class="nb-code-line">${esc(nb.previewCode||'# '+nb.title)}</div>
+          ${nb.previewOutput?`<div class="nb-out-line">${esc(nb.previewOutput)}</div>`:''}
+        </div>
+        <div class="nb-type-badge">${nb.lang||'R'}</div>
+        ${seriesBadge}
+      </div>
+      <div class="notebook-body">
+        <div class="notebook-meta">
+          <span class="nb-date">${fmt(nb.date)}</span>
+          <span class="nb-cat">${nb.category}</span>
+          ${nb.part?`<span class="nb-part">Part ${nb.part}</span>`:''}
+        </div>
+        <div class="notebook-title">${nb.title}</div>
+        <div class="notebook-desc">${nb.desc}</div>
+        <div class="notebook-keywords">${(nb.keywords||[]).slice(0,5).map(k=>`<span class="kw">${k}</span>`).join('')}</div>
+        <div class="nb-footer">
+          <span class="nb-author">&#x270D; Phemelo Rutlokoane</span>
+          <span class="nb-open-btn">Open &rarr;</span>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+  observeFadeUps();
+}
+
+function closeModal(e){
+  if(e&&e.target!==document.getElementById('modal-overlay'))return;
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  commonBoot();
+
+  // Marquee
+  const mt=document.getElementById('marquee');
+  if(mt){
+    [...MARQUEE_ITEMS,...MARQUEE_ITEMS].forEach(item=>{
+      const el=document.createElement('div');
+      el.className='marquee-item';
+      el.innerHTML=`<div class="marquee-dot"></div>${item}`;
+      mt.appendChild(el);
+    });
+  }
+
+  // Expertise grid
+  const eg=document.getElementById('expertise-grid');
+  if(eg){
+    EXPERTISE.forEach(e=>{
+      eg.innerHTML+=`<div class="expertise-card fade-up" style="--card-accent:${e.accent}">
+        <span class="expertise-icon">${e.icon}</span>
+        <div class="expertise-title">${e.title}</div>
+        <p class="expertise-desc">${e.desc}</p>
+        <div class="tag-list">${e.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+      </div>`;
+    });
+  }
+
+  loadNotebooks();
+  observeFadeUps();
+});
+
+
+</script>
+<script>
 /* =====================================================
    CONFIGURATION
 ===================================================== */
@@ -544,7 +890,7 @@ const QUICK_INFO=[
 
 const MARQUEE_ITEMS=["GIS","Remote Sensing","R","Python","Jupyter","MaxEnt","Random Forest","NDVI","Sentinel-2","Landsat", "AVIRIS-NG", "LiDAR", "GBIF","Species Distribution Modelling","vegan","terra","sf","tmap","ggplot2","Biostatistics","NMDS","PERMANOVA","WhiteboxTools","Darwin Core","Biodiversity Networks","Open Science","Reproducible Research"];
 
-const CATEGORIES=["All","GIS","Remote Sensing","Biodiversity","Biostatistics","Research", Misc];
+const CATEGORIES=["All","GIS","Remote Sensing","Biodiversity","Biostatistics","Research"];
 
 /* =====================================================
    NOTEBOOK LOADER
@@ -571,16 +917,15 @@ const CATEGORIES=["All","GIS","Remote Sensing","Biodiversity","Biostatistics","R
    NOTEBOOK LOADER
    ---
    Reads notebooks/index.json, then fetches each .ipynb.
-   Falls back to DEMO_NOTEBOOKS if fetch fails (e.g., local file://).
    Also uses NOTEBOOK_INDEX as an offline fallback for the manifest.
 ===================================================== */
 
 // Embedded copy of notebooks/index.json — kept in sync with the file
 const NOTEBOOK_INDEX=[
-  {"file":"About_Me.ipynb","category":"Misc","title":"About Me","desc":"All you need to know about me.","keywords":["About Me","Honours Project","Research","Skills"],"date":"2026-02-05","lang":"R"},
-  {"file":"Introduction_to_R.ipynb","category":"Misc","title":"Introduction to R","desc":"An Introduction to R: From Installation to Reading and Writing Data.","keywords":["Base R","Functions","Data Types","Data Inspection"],"date":"2025-08-12","lang":"R"},
-  {"file":"Data_manipulation.ipynb","category":"Misc","title":"Data manipulation in R","desc":"An Introduction to Data Manipulation in R: From Data Creation to Data Wrangling","keywords":["Tidyverse","palmerpenguins","Wide Data","Long Data"],"date":"2025-08-13","lang":"R"},
-  {"file":"Data_visualisation.ipynb","category":"Misc","title":"Data visualisations in R","desc":"An Introduction to Data Visualisation in R: From Base Scatter Plots to facetting ggplots.","keywords":["Base R","ggplot2","Graphics","Tidyverse"],"date":"2025-08-13","lang":"R"},
+  {"file":"About_Me.ipynb","category":"Remote Sensing","title":"About Me","desc":"All you need to know about me.","keywords":["About Me","Honours Project","Research","Skills"],"date":"2026-02-05","lang":"R"},
+  {"file":"Introduction_to_R.ipynb","category":"Biostatistics","title":"Introduction to R","desc":"An Introduction to R: From Installation to Reading and Writing Data.","keywords":["Base R","Functions","Data Types","Data Inspection"],"date":"2025-08-12","lang":"R"},
+  {"file":"Data_manipulation.ipynb","category":"Biostatistics","title":"Data manipulation in R","desc":"An Introduction to Data Manipulation in R: From Data Creation to Data Wrangling","keywords":["Tidyverse","palmerpenguins","Wide Data","Long Data"],"date":"2025-08-13","lang":"R"},
+  {"file":"Data_visualisation.ipynb","category":"Biostatistics","title":"Data visualisations in R","desc":"An Introduction to Data Visualisation in R: From Base Scatter Plots to facetting ggplots.","keywords":["Base R","ggplot2","Graphics","Tidyverse"],"date":"2025-08-13","lang":"R"},
   {"file":"Spatial_data.ipynb","category":"Remote Sensing","title":"Spatial data in R","desc":"An Introduction look at spatial analyses, plotting, manipulation and combination.","keywords":["sf","terra","Temperature","Rivers"],"date":"2026-02-06","lang":"R"},
   {"file":"Mapping_projections.ipynb","category":"Remote Sensing","title":"Rasters in different projections","desc":"Mapping in R: From Reading in Shape files and Rasters to plotting Shape files alongside Rasters in different Projections.","keywords":["CSR","Projections","Bathymetry","Complex Maps"],"date":"2026-02-07","lang":"R"},
   {"file":"Satellite_imagery_R.ipynb","category":"Remote Sensing","title":"Mapping with Satellite imagery","desc":"Using Satellite Imagery for Mapping in R.","keywords":["Landsat","NDVI","Spectral Resolution","RGB Plotting"],"date":"2026-02-10","lang":"R"}
@@ -852,34 +1197,6 @@ function closeModal(e){
   document.body.style.overflow='';
 }
 
-/* =====================================================
-   DEMO NOTEBOOKS (shown before real ones are added)
-===================================================== */
-const DEMO_NOTEBOOKS=[
-  {id:1,category:"Remote Sensing",title:"Land Cover Classification with Random Forest",desc:"Supervised classification of Sentinel-2 imagery using randomForest in R.",date:"2024-03-12",keywords:["Sentinel-2","Random Forest","Land Cover"],lang:"R",
-   previewCode:"library(terra)\nlibrary(randomForest)\n\ns2 <- rast('data/S2.tif')\ncat('Bands:', nlyr(s2))",previewOutput:"Bands: 10",
-   sections:[{type:'code',lang:'R',cellNum:'[1]',code:"library(terra)\nlibrary(sf)\nlibrary(randomForest)\n\ns2 <- rast('data/S2_clipped.tif')\ncat('Bands:', nlyr(s2), '\\n')\ncat('CRS:', crs(s2, describe=TRUE)$name)",output:"Bands: 10\nCRS: WGS 84 / UTM zone 35S"},
-              {type:'markdown',h1:'2. Model Training',h2:'2.1 Random Forest',p:'Training with 500 trees across 5 land cover classes.'},
-              {type:'code',lang:'R',cellNum:'[2]',code:"rf_model <- randomForest(\n  x = vals[, -1],\n  y = as.factor(vals$class),\n  ntree = 500, importance = TRUE\n)",output:"OOB estimate of error rate: 4.2%"}]},
-  {id:2,category:"Biodiversity",title:"Species Distribution Modelling: MaxEnt in R",desc:"Habitat suitability modelling with GBIF occurrence records and ENMeval.",date:"2024-01-28",keywords:["MaxEnt","SDM","GBIF"],lang:"R",
-   previewCode:"library(rgbif)\nlibrary(ENMeval)\n\nocc <- occ_data(\n  scientificName = 'Protea repens'",previewOutput:"[1] 3841",
-   abstract:"MaxEnt workflow in R for modelling the potential distribution of Protea repens across southern Africa.",
-   sections:[{type:'markdown',h1:'1. Occurrence Data',h2:'1.1 GBIF Download',p:'Fetching Protea repens occurrences from GBIF.'},
-              {type:'code',lang:'R',cellNum:'[1]',code:"occ <- occ_data(\n  scientificName = 'Protea repens',\n  country = 'ZA',\n  hasCoordinate = TRUE, limit = 5000\n)\nnrow(occ$data)",output:"[1] 3841"}]},
-  {id:3,category:"Biostatistics",title:"Community Composition: NMDS & PERMANOVA",desc:"Ordination and multivariate analysis of plant communities along an environmental gradient.",date:"2023-11-05",keywords:["NMDS","PERMANOVA","vegan"],lang:"R",
-   previewCode:"library(vegan)\n\ncomm_h <- decostand(comm, 'hellinger')\nnmds <- metaMDS(comm_h, k=2)",previewOutput:"Stress: 0.1243",
-   sections:[{type:'code',lang:'R',cellNum:'[1]',code:"library(vegan)\ncomm_h <- decostand(comm, 'hellinger')\nset.seed(42)\nnmds <- metaMDS(comm_h, k=2, distance='bray', trymax=100)\ncat('Stress:', round(nmds$stress,4))",output:"Stress: 0.1243"},
-              {type:'code',lang:'R',cellNum:'[2]',code:"adonis2(comm_h ~ altitude + land_use, data=env, permutations=999)",output:"          Df  SumOfSqs   R2      F  Pr(>F)\naltitude   1    4.823  0.312  28.4  0.001 ***"}]},
-  {id:4,category:"GIS",title:"Watershed Delineation & Hydrological Analysis",desc:"Automated watershed delineation from a DEM using whitebox tools.",date:"2023-09-20",keywords:["DEM","Watershed","Hydrology","whitebox"],lang:"R",
-   previewCode:"library(whitebox)\n\nwbt_breach_depressions_least_cost(\n  dem = 'data/dem_30m.tif'",previewOutput:"Flow direction raster created ✓",
-   sections:[{type:'code',lang:'R',cellNum:'[1]',code:"library(whitebox)\nlibrary(terra)\n\nwbt_breach_depressions_least_cost(\n  dem='data/dem_30m.tif',\n  output='output/dem_breached.tif'\n)\nwbt_d8_pointer(\n  dem='output/dem_breached.tif',\n  output='output/flow_dir.tif'\n)\ncat('Flow direction raster created ✓')",output:"Flow direction raster created ✓"}]},
-  {id:5,category:"Research",title:"Biodiversity Information Networks: A Review",desc:"Synthesis on GBIF data quality, Darwin Core standards, and open biodiversity infrastructure.",date:"2024-02-14",keywords:["GBIF","Darwin Core","Open Data"],lang:"Markdown",
-   previewCode:"# Biodiversity Information Networks\n\n## Abstract\nA review of global biodiversity\ndata infrastructure and GBIF.",previewOutput:"",
-   sections:[{type:'markdown',h1:'1. Introduction',h2:'Background',p:'Biodiversity informatics has transformed how researchers access occurrence data at global scales. GBIF now aggregates over 2 billion records from thousands of publishers worldwide. Data quality remains a persistent challenge due to taxonomic heterogeneity, georeferencing errors, and inconsistent metadata.'}]},
-  {id:6,category:"GIS",title:"Urban Heat Island Mapping — Landsat LST",desc:"Land surface temperature from Landsat 8 thermal bands correlated with NDVI for UHI analysis.",date:"2023-07-11",keywords:["Landsat 8","LST","Urban Heat Island","NDVI"],lang:"Python",
-   previewCode:"import numpy as np\nimport rasterio\n\nwith rasterio.open('LC08_B10.TIF') as src:\n    b10 = src.read(1)",previewOutput:"Mean BT: 305.43 K (32.3 °C)",
-   sections:[{type:'code',lang:'Python',cellNum:'[1]',code:"import numpy as np, rasterio\n\nwith rasterio.open('data/LC08_B10.TIF') as src:\n    b10 = src.read(1).astype('float32')\n\nML,AL=3.3420e-04,0.10000\nradiance=ML*b10+AL\nK1,K2=774.8853,1321.0789\nBT=K2/np.log((K1/radiance)+1)\nprint(f'Mean BT: {BT.mean():.2f} K ({BT.mean()-273.15:.1f} °C)')",output:"Mean BT: 305.43 K (32.3 °C)"}]},
-];
 
 /* =====================================================
    HELPERS
