@@ -1,58 +1,117 @@
 [
   {
-    "file":     "Introduction_to_R.ipynb",
-    "category": "Misc",
-    "title":    "Introduction to R",
-    "desc":     "An Introduction to R: From Installation to Reading and Writing Data.",
-    "keywords": ["Base R", "Functions", "Data Types", "Data Inspection"],
-    "date":     "2025-08-12"
+    "file": "Introduction_to_R.ipynb",
+    "title": "Introduction to R",
+    "series": "R Fundamentals",
+    "part": 1,
+    "desc": "A foundation in R: installation, data types, functions, and reading and writing data.",
+    "date": "2025-08-12",
+    "category": "R Fundamentals",
+    "keywords": [
+      "Base R",
+      "Functions",
+      "Data Types",
+      "Data Inspection",
+      "Installation"
+    ],
+    "lang": "R",
+    "abstract": "The starting point for everything. Covers R installation, RStudio setup, core data types (vectors, lists, data frames), basic functions, and reading/writing CSV and other file formats."
   },
   {
-    "file":     "Data_manipulation.ipynb",
-    "category": "Misc",
-    "title":    "Data manipulation in R",
-    "desc":     "An Introduction to Data Manipulation in R: From Data Creation to Data Wrangling",
-    "keywords": ["Tidyverse", "palmerpenguins", "Wide Data", "Long Data"],
-    "date":     "2025-08-13"
+    "file": "Data_manipulation.ipynb",
+    "title": "Data Manipulation in R",
+    "series": "R Fundamentals",
+    "part": 2,
+    "desc": "From data creation to wrangling: tidyverse pipelines, wide/long pivots and the Palmer Penguins dataset.",
+    "date": "2025-08-13",
+    "category": "R Fundamentals",
+    "keywords": [
+      "Tidyverse",
+      "dplyr",
+      "tidyr",
+      "palmerpenguins",
+      "Wide Data",
+      "Long Data",
+      "Wrangling"
+    ],
+    "lang": "R",
+    "abstract": "Covers the full tidyverse data manipulation pipeline: filtering, mutating, grouping, summarising, and reshaping data between wide and long formats using the Palmer Penguins dataset."
   },
   {
-    "file":     "Data_visualisation.ipynb",
-    "category": "Misc",
-    "title":    "Data visualisations in R",
-    "desc":     "An Introduction to Data Visualisation in R: From Base Scatter Plots to facetting ggplots.",
-    "keywords": ["Base R", "ggplot2", "Graphics", "Tidyverse"],
-    "date":     "2025-08-13"
+    "file": "Data_visualisation.ipynb",
+    "title": "Data Visualisation in R",
+    "series": "R Fundamentals",
+    "part": 3,
+    "desc": "Base R plots to publication-quality facetted ggplots \u2014 the complete visualisation toolkit.",
+    "date": "2025-08-13",
+    "category": "R Fundamentals",
+    "keywords": [
+      "ggplot2",
+      "Base R",
+      "Graphics",
+      "Tidyverse",
+      "Facets",
+      "Themes"
+    ],
+    "lang": "R",
+    "abstract": "A thorough introduction to data visualisation in R, from quick base plots to layered, publication-ready ggplot2 figures with custom themes, scales, and facets."
   },
   {
-    "file":     "Spatial_data_R.ipynb",
-    "category": "Remote Sensing",
-    "title":    "Spatial data in R",
-    "desc":     "An Introduction look at spatial analyses, plotting, manipulation and combination.",
-    "keywords": ["sf", "terra", "Temperature", "Rivers"],
-    "date":     "2026-02-06"
+    "file": "Spatial_data.ipynb",
+    "title": "Spatial Data in R",
+    "series": "Spatial & Remote Sensing",
+    "part": 1,
+    "desc": "First steps in spatial R: reading, plotting, manipulating and combining vector and raster data.",
+    "date": "2026-02-06",
+    "category": "Spatial & Remote Sensing",
+    "keywords": [
+      "sf",
+      "terra",
+      "Spatial",
+      "Temperature",
+      "Rivers",
+      "Vector",
+      "Raster"
+    ],
+    "lang": "R",
+    "abstract": "An introduction to spatial data science in R using sf and terra. Covers reading shapefiles and rasters, coordinate reference systems, basic spatial operations, and plotting spatial objects."
   },
   {
-    "file":     "Mapping_projections.ipynb",
-    "category": "Remote Sensing",
-    "title":    "Rasters in different projections",
-    "desc":     "Mapping in R: From Reading in Shape files and Rasters to plotting Shape files alongside Rasters in different Projections.",
-    "keywords": ["CSR", "Projections", "Bathymetry", "3D"],
-    "date":     "2026-02-07"
+    "file": "Mapping_projections.ipynb",
+    "title": "Rasters in Different Projections",
+    "series": "Spatial & Remote Sensing",
+    "part": 2,
+    "desc": "Coordinate reference systems in practice: bathymetry rasters reprojected and mapped alongside shapefiles.",
+    "date": "2026-02-07",
+    "category": "Spatial & Remote Sensing",
+    "keywords": [
+      "CRS",
+      "Projections",
+      "Bathymetry",
+      "Complex Maps",
+      "terra",
+      "sf"
+    ],
+    "lang": "R",
+    "abstract": "A deep dive into coordinate reference systems and map projections in R. Reads bathymetry rasters and shapefiles, reprojects them, and builds complex multi-layer maps."
   },
   {
-    "file":     "Satellite_imagery_R.ipynb",
-    "category": "Remote Sensing",
-    "title":    "Mapping with Satellite imagery",
-    "desc":     "Using Satellite Imagery for Mapping in R.",
-    "keywords": ["Landsat", "NDVI", "Spectral Resolution", "RGB Plotting"],
-    "date":     "2026-02-10"
-  },
-  {
-    "file":     "Diel vertical migration of Euphausia lucens.ipynb",
-    "category": "Research",
-    "title":    "Diel Vertical Migration of Euphausia lucens (euphausiid) at inshore and offshore stations in St Helena Bay, South Africa.",
-    "desc":     "I analysed the diel vertical migration of Antarctic krill (Euphausia lucens) using quantitative ecological analyses. The aim was to investigate environmental drivers of vertical distribution and explore how spatial structure influences abundance estimates at inshore versus offshore stations. My work involved data cleaning, spatial interpolation, and modelling relationships between krill density and environmental variables.",
-    "keywords": ["Marine Ecology", "R", "St Helena Bay", "Oceanography"],
-    "date":     "2025-06-10"
+    "file": "Satellite_imagery_R.ipynb",
+    "title": "Mapping with Satellite Imagery",
+    "series": "Spatial & Remote Sensing",
+    "part": 3,
+    "desc": "Landsat-based NDVI, spectral resolution and RGB composite mapping in R.",
+    "date": "2026-02-10",
+    "category": "Spatial & Remote Sensing",
+    "keywords": [
+      "Landsat",
+      "NDVI",
+      "Spectral Resolution",
+      "RGB Plotting",
+      "terra",
+      "Remote Sensing"
+    ],
+    "lang": "R",
+    "abstract": "Working with satellite imagery in R: loading multi-band Landsat rasters, computing NDVI and other spectral indices, producing RGB composites, and interpreting spectral resolution."
   }
 ]
