@@ -15,7 +15,7 @@
       "Installation"
     ],
     "lang": "R",
-    "abstract": "The starting point for everything. Covers R installation, RStudio setup, core data types (vectors, lists, data frames), basic functions, and reading/writing CSV and other file formats."
+    "abstract": "The starting point for everything. Covers R installation, RStudio setup, core data types, basic functions, and reading/writing files."
   },
   {
     "file": "Data_manipulation.ipynb",
@@ -31,11 +31,10 @@
       "tidyr",
       "palmerpenguins",
       "Wide Data",
-      "Long Data",
-      "Wrangling"
+      "Long Data"
     ],
     "lang": "R",
-    "abstract": "Covers the full tidyverse data manipulation pipeline: filtering, mutating, grouping, summarising, and reshaping data between wide and long formats using the Palmer Penguins dataset."
+    "abstract": "Covers the full tidyverse pipeline: filtering, mutating, grouping, summarising, and reshaping data."
   },
   {
     "file": "Data_visualisation.ipynb",
@@ -54,10 +53,28 @@
       "Themes"
     ],
     "lang": "R",
-    "abstract": "A thorough introduction to data visualisation in R, from quick base plots to layered, publication-ready ggplot2 figures with custom themes, scales, and facets."
+    "abstract": "From quick base plots to layered, publication-ready ggplot2 figures with custom themes, scales, and facets."
   },
   {
-    "file": "Spatial_data.ipynb",
+    "file": "Introduction_to_ML_R.ipynb",
+    "title": "Introduction to Machine Learning in R",
+    "series": "R Fundamentals",
+    "part": 4,
+    "desc": "Supervised and unsupervised ML workflows in R: classification, regression and clustering.",
+    "date": "2026-02-23",
+    "category": "R Fundamentals",
+    "keywords": [
+      "Machine Learning",
+      "Random Forest",
+      "Classification",
+      "caret",
+      "tidymodels"
+    ],
+    "lang": "R",
+    "abstract": "Core ML workflow in R \u2014 data splitting, model training, validation, and evaluation for classification and regression."
+  },
+  {
+    "file": "Spatial_data_R.ipynb",
     "title": "Spatial Data in R",
     "series": "Spatial & Remote Sensing",
     "part": 1,
@@ -74,14 +91,14 @@
       "Raster"
     ],
     "lang": "R",
-    "abstract": "An introduction to spatial data science in R using sf and terra. Covers reading shapefiles and rasters, coordinate reference systems, basic spatial operations, and plotting spatial objects."
+    "abstract": "Introduction to spatial data science in R using sf and terra. CRS, basic operations, and plotting."
   },
   {
     "file": "Mapping_projections.ipynb",
     "title": "Rasters in Different Projections",
     "series": "Spatial & Remote Sensing",
     "part": 2,
-    "desc": "Coordinate reference systems in practice: bathymetry rasters reprojected and mapped alongside shapefiles.",
+    "desc": "CRS in practice: bathymetry rasters reprojected and mapped alongside shapefiles.",
     "date": "2026-02-07",
     "category": "Spatial & Remote Sensing",
     "keywords": [
@@ -93,25 +110,168 @@
       "sf"
     ],
     "lang": "R",
-    "abstract": "A deep dive into coordinate reference systems and map projections in R. Reads bathymetry rasters and shapefiles, reprojects them, and builds complex multi-layer maps."
+    "abstract": "Deep dive into coordinate reference systems in R. Reads bathymetry rasters and shapefiles, reprojects them, and builds complex multi-layer maps."
   },
   {
     "file": "Satellite_imagery_R.ipynb",
     "title": "Mapping with Satellite Imagery",
     "series": "Spatial & Remote Sensing",
     "part": 3,
-    "desc": "Landsat-based NDVI, spectral resolution and RGB composite mapping in R.",
+    "desc": "Landsat-based NDVI, and RGB composite mapping in R.",
     "date": "2026-02-10",
     "category": "Spatial & Remote Sensing",
     "keywords": [
       "Landsat",
       "NDVI",
-      "Spectral Resolution",
       "RGB Plotting",
-      "terra",
+      "terra"
+    ],
+    "lang": "R",
+    "abstract": "Loading multi-band Landsat rasters, producing RGB composites and computing NDVI"
+  },
+  {
+    "file": "Landsat_spectral.ipynb",
+    "title": "Landsat Spectral Band Analysis",
+    "series": "Spatial & Remote Sensing",
+    "part": 4,
+    "desc": "Exploring Landsat spectral bands, band combinations and spectral profiles for land cover discrimination.",
+    "date": "2026-02-11",
+    "category": "Spatial & Remote Sensing",
+    "keywords": [
+      "Landsat",
+      "Spectral Bands",
+      "Band Ratios",
+      "Land Cover",
       "Remote Sensing"
     ],
     "lang": "R",
-    "abstract": "Working with satellite imagery in R: loading multi-band Landsat rasters, computing NDVI and other spectral indices, producing RGB composites, and interpreting spectral resolution."
+    "abstract": "Band combinations, spectral signatures, and how different land cover types appear across the electromagnetic spectrum."
+  },
+  {
+    "file": "NDBI_Gauteng.ipynb",
+    "title": "NDBI & Built-Up Mapping \u2014 Gauteng",
+    "series": "Spatial & Remote Sensing",
+    "part": 5,
+    "desc": "Normalised Difference Built-up Index computed from Landsat to map urban extent across Gauteng.",
+    "date": "2026-02-11",
+    "category": "Spatial & Remote Sensing",
+    "keywords": [
+      "NDBI",
+      "Built-up Index",
+      "Gauteng",
+      "Landsat",
+      "Urban Mapping"
+    ],
+    "lang": "R",
+    "abstract": "Computes NDBI from Landsat imagery to map and quantify urban and built-up land cover across Gauteng."
+  },
+  {
+    "file": "Urban_change_detection.ipynb",
+    "title": "Urban Change Detection \u2014 Gauteng",
+    "series": "Spatial & Remote Sensing",
+    "part": 6,
+    "desc": "Multi-temporal Landsat analysis to detect and quantify urban expansion in Gauteng.",
+    "date": "2026-02-12",
+    "category": "Spatial & Remote Sensing",
+    "keywords": [
+      "Change Detection",
+      "Urban Expansion",
+      "Gauteng",
+      "Landsat",
+      "Multi-temporal"
+    ],
+    "lang": "R",
+    "abstract": "Multi-date Landsat imagery to detect and map urban expansion across Gauteng using change detection methods."
+  },
+  {
+    "file": "Fiji_earthquakes.ipynb",
+    "title": "Fiji Earthquake Data Analysis",
+    "series": "Marine & Environmental",
+    "part": 1,
+    "desc": "Exploratory analysis of the Fiji earthquake dataset: spatial distribution, magnitude and depth patterns.",
+    "date": "2026-02-16",
+    "category": "Marine & Environmental",
+    "keywords": [
+      "Earthquakes",
+      "Fiji",
+      "Spatial Analysis",
+      "Seismology",
+      "Exploratory Analysis"
+    ],
+    "lang": "R",
+    "abstract": "Investigates the spatial distribution of Fiji seismic events, depth and magnitude distributions, and correlations."
+  },
+  {
+    "file": "Fiji_earthquakes_2.ipynb",
+    "title": "Fiji Earthquakes \u2014 Advanced Analysis",
+    "series": "Marine & Environmental",
+    "part": 2,
+    "desc": "A continuation: Interactive map of Fiji seismicity.",
+    "date": "2026-02-18",
+    "category": "Marine & Environmental",
+    "keywords": [
+      "Earthquakes",
+      "Fiji",
+      "Leaflet",
+      "Spatial Clustering",
+      "GLM"
+    ],
+    "lang": "R",
+    "abstract": "Continues from Part 1 with tutorial of plotting an interactive map."
+  },
+  {
+    "file": "Marine_heatwave.ipynb",
+    "title": "Marine Heatwave Analysis",
+    "series": "Marine & Environmental",
+    "part": 3,
+    "desc": "Detection and characterisation of marine heatwave events using sea surface temperature data.",
+    "date": "2026-02-20",
+    "category": "Marine & Environmental",
+    "keywords": [
+      "Marine Heatwave",
+      "SST",
+      "Sea Surface Temperature",
+      "Oceanography",
+      "heatwaveR"
+    ],
+    "lang": "R",
+    "abstract": "Detect and characterise marine heatwave events using SST time series following the Hobday et al. framework."
+  },
+  {
+    "file": "Whales.ipynb",
+    "title": "Whale Occurrence & Distribution Analysis",
+    "series": "Marine & Environmental",
+    "part": 4,
+    "desc": "Spatial analysis of whale occurrence records: distribution mapping, hotspots and environmental drivers.",
+    "date": "2026-02-23",
+    "category": "Marine & Environmental",
+    "keywords": [
+      "Whales",
+      "Marine Mammals",
+      "Occurrence Data",
+      "GBIF",
+      "Spatial Analysis"
+    ],
+    "lang": "R",
+    "abstract": "Maps whale species distribution, identifies hotspot areas, and explores environmental correlates using GBIF data."
+  },
+  {
+    "file": "Diel vertical migration of Euphausia lucens.ipynb",
+    "title": "Diel Vertical Migration of Euphausia lucens",
+    "series": "Ecological Research",
+    "part": 1,
+    "desc": "Quantitative analysis of krill DVM at inshore and offshore stations in St Helena Bay.",
+    "date": "2024-10-01",
+    "category": "Ecological Research",
+    "keywords": [
+      "Krill",
+      "Euphausia lucens",
+      "DVM",
+      "St Helena Bay",
+      "Marine Ecology",
+      "Oceanography"
+    ],
+    "lang": "R",
+    "abstract": "Analysis of diel vertical migration of Euphausia lucens at inshore/offshore stations in St Helena Bay, investigating environmental drivers."
   }
 ]
