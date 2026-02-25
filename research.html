@@ -120,6 +120,19 @@
     .token.comment,.token.prolog{color:#5c6370;font-style:italic;}.token.number,.token.boolean{color:#e06c75;}
     .token.string,.token.char{color:#98c379;}.token.keyword{color:#c678dd;}.token.function{color:#61afef;}
     .token.variable{color:#e5c07b;}.token.operator,.token.punctuation{color:#abb2bf;}
+
+    .nb-blockquote{border-left:3px solid var(--accent);background:rgba(74,158,255,.04);padding:.7rem 1.1rem .7rem 1.2rem;margin:1rem 0 1rem;border-radius:0 8px 8px 0;}
+    .nb-blockquote p{color:var(--text-muted);font-style:italic;font-size:.94rem;line-height:1.75;margin:0;}
+    .nb-hr{border:none;border-top:1px solid var(--border);margin:1.6rem 0;}
+    .nb-table-wrap{overflow-x:auto;margin:1.2rem 0;border-radius:10px;border:1px solid var(--border);}
+    .nb-table{width:100%;border-collapse:collapse;font-family:var(--font-m);font-size:.78rem;}
+    .nb-table th{background:var(--bg3);color:var(--text);font-weight:600;padding:.55rem .9rem;text-align:left;border-bottom:2px solid var(--border);white-space:nowrap;}
+    .nb-table td{color:var(--text-muted);padding:.5rem .9rem;border-bottom:1px solid var(--border);}
+    .nb-table tr:last-child td{border-bottom:none;}
+    .nb-table tr:hover td{background:rgba(74,158,255,.04);}
+    .nb-table td strong{color:var(--text);}
+    .nb-table td em{font-style:italic;}
+    .nb-table td code{font-family:var(--font-m);font-size:.82em;background:var(--bg3);padding:1px 5px;border-radius:4px;color:var(--accent2);}
   </style>
 </head>
 <body>
@@ -137,7 +150,7 @@
       <li><a href="about.html">About Me</a></li>
       <li><a href="index.html#contact">Contact</a></li>
     </ul>
-    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+    <button class="theme-toggle" onclick="toggleTheme(event)" aria-label="Toggle theme">
       <span class="sun-icon">&#x2600;&#xFE0F;</span>
       <span class="moon-icon">&#x1F319;</span>
       <span id="theme-label">Light</span>
@@ -161,7 +174,7 @@
   <div class="page-header fade-up">
     <div class="page-eyebrow">Research</div>
     <h1 class="page-title">Research &amp; Projects</h1>
-    <p class="page-desc">My research was based at the University of the Western Cape focusing on remote sensing, quantitative biodiversity science and marine ecology.</p>
+    <p class="page-desc">My research sits at the intersection of spatial ecology, remote sensing and quantitative biodiversity science.</p>
   </div>
   <div class="research-grid">
   <div class="rc fade-up" style="--rc-accent:var(--accent)">
@@ -240,8 +253,8 @@ const NOTEBOOK_INDEX=[{"file":"Introduction_to_R.ipynb","title":"Introduction to
 
 function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function fmt(d){if(!d)return'';try{return new Date(d+'T00:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});}catch{return d;}}
-function toggleTheme(){const h=document.documentElement;const dark=h.getAttribute('data-theme')==='dark';h.setAttribute('data-theme',dark?'light':'dark');document.getElementById('theme-label').textContent=dark?'Dark':'Light';localStorage.setItem('lh-theme',dark?'light':'dark');}
-(function(){const s=localStorage.getItem('lh-theme')||'dark';document.documentElement.setAttribute('data-theme',s);})();
+function toggleTheme(e){if(e)e.preventDefault();const h=document.documentElement;const dark=h.getAttribute('data-theme')==='dark';const next=dark?'light':'dark';h.setAttribute('data-theme',next);const lbl=document.getElementById('theme-label');if(lbl)lbl.textContent=dark?'Dark':'Light';try{localStorage.setItem('lh-theme',next);}catch(_){}}
+(function(){var s='dark';try{s=localStorage.getItem('lh-theme')||'dark';}catch(_){}document.documentElement.setAttribute('data-theme',s);})();
 function toggleNav(){document.getElementById('hamburger').classList.toggle('open');document.getElementById('nav-drawer').classList.toggle('open');}
 function closeNav(){document.getElementById('hamburger').classList.remove('open');document.getElementById('nav-drawer').classList.remove('open');}
 const CODE_STORE={};
@@ -270,7 +283,12 @@ function parseIpynb(nb,meta){
   return{sections,previewCode,previewOutput};
 }
 function mdToHtml(src,att){
-  const lines=src.split('\n');let html='';let inList=false;let lastImg=false;
+  const lines=src.split('\n');
+  let html='';
+  let inList=false,inOList=false,inBlockquote=false,inTable=false;
+  let tableRows=[];
+  let lastImg=false;
+
   const ir=t=>t
     .replace(/!\[([^\]]*)\]\(attachment:([^)]+)\)/g,(m,a,u)=>{const s=att&&att[u]?att[u]:'';return s?`<img src="${s}" alt="${esc(a)}" style="max-width:100%;">`:''})
     .replace(/!\[([^\]]*)\]\(([^)]+)\)/g,(m,a,s)=>`<img src="${esc(s)}" alt="${esc(a)}" style="max-width:100%;">`)
@@ -280,25 +298,105 @@ function mdToHtml(src,att){
     .replace(/\*([^*\n]+)\*/g,'<em>$1</em>')
     .replace(/_([^_\n]+)_/g,'<em>$1</em>')
     .replace(/`([^`]+)`/g,'<code>$1</code>');
+
+  function closeAll(){
+    if(inList){html+='</ul>';inList=false;}
+    if(inOList){html+='</ol>';inOList=false;}
+    if(inBlockquote){html+='</blockquote>';inBlockquote=false;}
+    if(inTable){flushTable();inTable=false;}
+  }
+  function flushTable(){
+    if(!tableRows.length)return;
+    // First row = header, second row = separator (---|---), rest = body
+    let t='<div class="nb-table-wrap"><table class="nb-table">';
+    const head=tableRows[0];
+    const isSep=r=>r.every(c=>c.trim().match(/^:?-+:?$/));
+    const bodyStart=tableRows.length>1&&isSep(tableRows[1])?2:1;
+    t+='<thead><tr>'+head.map(c=>`<th>${ir(c.trim())}</th>`).join('')+'</tr></thead>';
+    if(bodyStart<tableRows.length){
+      t+='<tbody>'+tableRows.slice(bodyStart).map(r=>'<tr>'+r.map(c=>`<td>${ir(c.trim())}</td>`).join('')+'</tr>').join('')+'</tbody>';
+    }
+    t+='</table></div>';
+    html+=t;
+    tableRows=[];
+  }
+
   lines.forEach(line=>{
-    if(inList&&!line.match(/^(\s*[-*+]|\s*\d+\.)\s/)){html+='</ul>';inList=false;}
-    const s=line.trim();if(!s){lastImg=false;return;}
+    const raw=line;
+    const s=line.trim();
+
+    // Blank line closes most contexts
+    if(!s){closeAll();lastImg=false;return;}
+
+    // Table row: starts and ends with | or has multiple |
+    const isTableRow=s.startsWith('|')&&s.includes('|',1);
+    if(isTableRow){
+      if(inList){html+='</ul>';inList=false;}
+      if(inOList){html+='</ol>';inOList=false;}
+      if(inBlockquote){html+='</blockquote>';inBlockquote=false;}
+      lastImg=false;
+      inTable=true;
+      // Split on | and strip empty first/last cells from leading/trailing |
+      const cells=s.split('|').slice(1,-1);
+      tableRows.push(cells);
+      return;
+    } else if(inTable){
+      flushTable();inTable=false;
+    }
+
+    // Horizontal rule: ---, ***, ___  (3+ chars, same char)
+    if(s.match(/^(-{3,}|\*{3,}|_{3,})$/)){
+      closeAll();html+='<hr class="nb-hr">';lastImg=false;return;
+    }
+
+    // Blockquote: > text
+    if(s.startsWith('> ')||s==='>' ){
+      if(inList){html+='</ul>';inList=false;}
+      if(inOList){html+='</ol>';inOList=false;}
+      lastImg=false;
+      if(!inBlockquote){html+='<blockquote class="nb-blockquote">';inBlockquote=true;}
+      const inner=s.startsWith('> ')?s.slice(2):s.slice(1);
+      html+=inner?`<p>${ir(inner)}</p>`:'';
+      return;
+    } else if(inBlockquote){html+='</blockquote>';inBlockquote=false;}
+
+    // Close lists if line doesn't continue them
+    if(inList&&!s.match(/^[-*+]\s/)){html+='</ul>';inList=false;}
+    if(inOList&&!s.match(/^\d+\.\s/)){html+='</ol>';inOList=false;}
+
+    // Headings
     if(s.startsWith('#### ')){html+=`<div class="nb-h4">${ir(s.slice(5))}</div>`;lastImg=false;}
     else if(s.startsWith('### ')){html+=`<div class="nb-h3">${ir(s.slice(4))}</div>`;lastImg=false;}
     else if(s.startsWith('## ')){html+=`<div class="nb-h2">${ir(s.slice(3))}</div>`;lastImg=false;}
     else if(s.startsWith('# ')){html+=`<div class="nb-h1">${ir(s.slice(2))}</div>`;lastImg=false;}
-    else if(s.match(/^[-*+]\s/)){if(!inList){html+='<ul class="nb-ul">';inList=true;}html+=`<li>${ir(s.replace(/^[-*+]\s/,''))}</li>`;lastImg=false;}
-    else if(s.match(/^\d+\.\s/)){if(!inList){html+='<ul class="nb-ul">';inList=true;}html+=`<li>${ir(s.replace(/^\d+\.\s/,''))}</li>`;lastImg=false;}
+    // Unordered list
+    else if(s.match(/^[-*+]\s/)){
+      if(!inList){html+='<ul class="nb-ul">';inList=true;}
+      html+=`<li>${ir(s.replace(/^[-*+]\s/,''))}</li>`;lastImg=false;
+    }
+    // Ordered list
+    else if(s.match(/^\d+\.\s/)){
+      if(!inOList){html+='<ol class="nb-ol">';inOList=true;}
+      html+=`<li>${ir(s.replace(/^\d+\.\s/,''))}</li>`;lastImg=false;
+    }
     else{
       const r=ir(s);
       const isImg=s.startsWith('<img')||r.trimStart().startsWith('<img');
       const isCap=lastImg&&s.startsWith('_')&&s.endsWith('_')&&s.length<300;
-      if(isCap){const cap=`<div class="nb-img-caption">${ir(s.replace(/^_+|_+$/g,''))}</div>`;const ci=html.lastIndexOf('</div>');html=ci>=0?html.slice(0,ci)+cap+'</div>':html+cap;lastImg=false;}
-      else if(isImg){html+=`<div class="nb-fig-wrap">${s.startsWith('<img')?s:r}</div>`;lastImg=true;}
-      else{html+=`<p class="nb-p">${r}</p>`;lastImg=false;}
+      if(isCap){
+        const cap=`<div class="nb-img-caption">${ir(s.replace(/^_+|_+$/g,''))}</div>`;
+        const ci=html.lastIndexOf('</div>');
+        html=ci>=0?html.slice(0,ci)+cap+'</div>':html+cap;
+        lastImg=false;
+      }else if(isImg){
+        html+=`<div class="nb-fig-wrap">${s.startsWith('<img')?s:r}</div>`;lastImg=true;
+      }else{
+        html+=`<p class="nb-p">${r}</p>`;lastImg=false;
+      }
     }
   });
-  if(inList)html+='</ul>';return html;
+  closeAll();
+  return html;
 }
 let _ci=0;
 let allNotebooks=[];
