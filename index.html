@@ -358,6 +358,13 @@
     .nb-table td strong{color:var(--text);}
     .nb-table td em{font-style:italic;}
     .nb-table td code{font-family:var(--font-m);font-size:.82em;background:var(--bg3);padding:1px 5px;border-radius:4px;color:var(--accent2);}
+
+    .nb-html-out{margin:1.2rem 0;border-radius:12px;overflow:hidden;border:1px solid var(--border);}
+    .nb-map-out{background:#0d1117;}
+    [data-theme="light"] .nb-map-out{background:#f0f4f8;}
+    .nb-map-label{font-family:var(--font-m);font-size:.65rem;color:var(--text-faint);letter-spacing:.1em;text-transform:uppercase;padding:.5rem .9rem;background:var(--bg3);border-bottom:1px solid var(--border);}
+    .nb-map-iframe{width:100%;height:550px;min-height:550px;border:none;display:block;}
+    .nb-html-inline{padding:.8rem 1rem;background:var(--bg2);font-size:.88rem;color:var(--text-muted);}
   </style>
 </head>
 <body>
@@ -767,11 +774,29 @@ function openNotebook(nb){
       (s.htmlOuts||[]).forEach((hOut,i)=>{
         const isMap=hOut.includes('leaflet')||hOut.includes('folium')||hOut.includes('L.map')||hOut.includes('Plotly')||hOut.includes('plotly')||hOut.includes('mapview')||hOut.includes('tmap');
         if(isMap||hOut.length>800){
-          // Large / map HTML: sandbox in an iframe with its own JS scope
-          const encoded=btoa(unescape(encodeURIComponent(hOut)));
+          // Force the map to fill the iframe by injecting a style override + resize script
+          const fillCss=`<style>
+            html,body{margin:0!important;padding:0!important;width:100%!important;height:100%!important;overflow:hidden!important;}
+            *{max-width:none!important;box-sizing:border-box;}
+            [id^="htmlwidget"],[class*="leaflet"],[class*="mapview"],[id*="map"],
+            .html-widget,.leaflet-container,.plotly{
+              width:100%!important;height:100%!important;min-height:100%!important;
+              position:absolute!important;top:0!important;left:0!important;right:0!important;bottom:0!important;
+            }
+            .html-widget-static-bound{width:100%!important;height:100%!important;}
+          </style>`;
+          // Strip hardcoded pixel dimensions from widget root divs (leaflet sets width:Xpx;height:Ypx inline)
+          let fixedHtml=hOut
+            .replace(/(<div[^>]+style=["'][^"']*?)width\s*:\s*\d+px/gi,'$1width:100%')
+            .replace(/(<div[^>]+style=["'][^"']*?)height\s*:\s*\d+px/gi,'$1height:100%');
+          // Inject fill CSS at start of <head> or <body>
+          if(fixedHtml.includes('<head>')){fixedHtml=fixedHtml.replace('<head>','<head>'+fillCss);}
+          else if(fixedHtml.includes('<body>')){fixedHtml=fixedHtml.replace('<body>',fillCss+'<body>');}
+          else{fixedHtml=fillCss+fixedHtml;}
+          const safeHtml=fixedHtml.replace(/"/g,'&quot;').replace(/'/g,'&#39;');
           h+=`<div class="nb-html-out nb-map-out">
             <div class="nb-map-label">&#x1F5FA; Interactive Map</div>
-            <iframe class="nb-map-iframe" srcdoc="${hOut.replace(/"/g,'&quot;').replace(/'/g,'&#39;')}" sandbox="allow-scripts allow-same-origin" loading="lazy" title="Interactive map output ${i+1}"></iframe>
+            <iframe style="width:100%;height:550px;border:none;display:block;" srcdoc="${safeHtml}" sandbox="allow-scripts allow-same-origin" loading="lazy" title="Interactive map output ${i+1}"></iframe>
           </div>`;
         }else{
           // Small HTML: inline (styled tables, small widgets)
