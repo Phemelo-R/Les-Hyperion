@@ -598,13 +598,22 @@ function parseIpynb(nb,meta){
     const src=Array.isArray(c.source)?c.source.join(''):c.source||'';
     if(c.cell_type==='markdown'){sections.push({type:'markdown',src,att});}
     if(c.cell_type==='code'){
-      const outs=c.outputs||[];let txt='';const imgs=[];
+      const outs=c.outputs||[];let txt='';const imgs=[];const htmlOuts=[];
       outs.forEach(o=>{
         if(o.text)txt+=Array.isArray(o.text)?o.text.join(''):o.text;
         if(o.data?.['text/plain']){const t=o.data['text/plain'];txt+=Array.isArray(t)?t.join(''):t;}
         if(o.data?.['image/png'])imgs.push(`data:image/png;base64,${o.data['image/png']}`);
+        // Capture HTML outputs (interactive maps, widgets, folium, leaflet, tmap, etc.)
+        if(o.data?.['text/html']){
+          const h=Array.isArray(o.data['text/html'])?o.data['text/html'].join(''):o.data['text/html'];
+          if(h.trim())htmlOuts.push(h);
+        }
+        // Also handle display_data and execute_result with HTML
+        if((o.output_type==='display_data'||o.output_type==='execute_result')&&o.data?.['text/html']){
+          // already handled above
+        }
       });
-      sections.push({type:'code',lang:meta.lang||'R',cellNum:`[${idx+1}]`,code:src,output:txt.trim(),imgOutputs:imgs});
+      sections.push({type:'code',lang:meta.lang||'R',cellNum:`[${idx+1}]`,code:src,output:txt.trim(),imgOutputs:imgs,htmlOuts});
       if(!previewCode&&src.trim()){previewCode=src.split('\n').slice(0,6).join('\n');previewOutput=txt.split('\n')[0]||'';}
     }
   });
@@ -754,6 +763,21 @@ function openNotebook(nb){
       h+=`<div class="nb-code-block"><div class="nb-code-topbar"><span class="nb-code-lang">${s.lang||'R'}</span><span class="nb-code-num">In ${s.cellNum}</span><button class="nb-code-copy" data-cid="${cid}" onclick="copyCode(this)">Copy</button></div><pre class="nb-code-content language-${lang}"><code class="language-${lang}">${esc(s.code)}</code></pre></div>`;
       if(s.output)h+=`<div class="nb-output-block"><div class="nb-out-label">Output</div><pre>${esc(s.output)}</pre></div>`;
       (s.imgOutputs||[]).forEach((src,i)=>{if(src)h+=`<div class="nb-fig-wrap"><img src="${src}" alt="Plot ${i+1}"><div class="nb-img-caption">Plot output ${i+1}</div></div>`;});
+      // HTML outputs — interactive maps, widgets (leaflet, folium, tmap, plotly, etc.)
+      (s.htmlOuts||[]).forEach((hOut,i)=>{
+        const isMap=hOut.includes('leaflet')||hOut.includes('folium')||hOut.includes('L.map')||hOut.includes('Plotly')||hOut.includes('plotly')||hOut.includes('mapview')||hOut.includes('tmap');
+        if(isMap||hOut.length>800){
+          // Large / map HTML: sandbox in an iframe with its own JS scope
+          const encoded=btoa(unescape(encodeURIComponent(hOut)));
+          h+=`<div class="nb-html-out nb-map-out">
+            <div class="nb-map-label">&#x1F5FA; Interactive Map</div>
+            <iframe class="nb-map-iframe" srcdoc="${hOut.replace(/"/g,'&quot;').replace(/'/g,'&#39;')}" sandbox="allow-scripts allow-same-origin" loading="lazy" title="Interactive map output ${i+1}"></iframe>
+          </div>`;
+        }else{
+          // Small HTML: inline (styled tables, small widgets)
+          h+=`<div class="nb-html-out nb-html-inline">${hOut}</div>`;
+        }
+      });
     }
   });
   h+='</div>';
