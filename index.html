@@ -345,6 +345,19 @@
     .nb-fig-wrap{margin:1.4rem 0;border-radius:12px;overflow:hidden;border:1px solid var(--border);background:var(--bg3);}
     .nb-fig-wrap img{display:block;max-width:100%;height:auto;margin:0 auto;padding:.6rem .6rem 0;}
     .nb-img-caption{font-family:var(--font-m);font-size:.7rem;color:var(--text-faint);text-align:center;padding:.55rem 1.2rem .85rem;font-style:italic;border-top:1px solid var(--border);margin-top:.5rem;}
+
+    .nb-blockquote{border-left:3px solid var(--accent);background:rgba(74,158,255,.04);padding:.7rem 1.1rem .7rem 1.2rem;margin:1rem 0 1rem;border-radius:0 8px 8px 0;}
+    .nb-blockquote p{color:var(--text-muted);font-style:italic;font-size:.94rem;line-height:1.75;margin:0;}
+    .nb-hr{border:none;border-top:1px solid var(--border);margin:1.6rem 0;}
+    .nb-table-wrap{overflow-x:auto;margin:1.2rem 0;border-radius:10px;border:1px solid var(--border);}
+    .nb-table{width:100%;border-collapse:collapse;font-family:var(--font-m);font-size:.78rem;}
+    .nb-table th{background:var(--bg3);color:var(--text);font-weight:600;padding:.55rem .9rem;text-align:left;border-bottom:2px solid var(--border);white-space:nowrap;}
+    .nb-table td{color:var(--text-muted);padding:.5rem .9rem;border-bottom:1px solid var(--border);}
+    .nb-table tr:last-child td{border-bottom:none;}
+    .nb-table tr:hover td{background:rgba(74,158,255,.04);}
+    .nb-table td strong{color:var(--text);}
+    .nb-table td em{font-style:italic;}
+    .nb-table td code{font-family:var(--font-m);font-size:.82em;background:var(--bg3);padding:1px 5px;border-radius:4px;color:var(--accent2);}
   </style>
 </head>
 <body>
@@ -366,7 +379,7 @@
       <li><a href="about.html">About Me</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+    <button class="theme-toggle" onclick="toggleTheme(event)" aria-label="Toggle theme">
       <span class="sun-icon">☀️</span>
       <span class="moon-icon">🌙</span>
       <span class="toggle-label" id="theme-label">Light</span>
@@ -495,7 +508,7 @@
       </div>
       <div class="viewer-title" id="modal-title">notebook.ipynb</div>
       <div class="viewer-actions">
-        <button class="viewer-theme-btn" onclick="toggleTheme()">
+        <button class="viewer-theme-btn" onclick="toggleTheme(event)">
           <span class="sun-icon">☀️ Light</span>
           <span class="moon-icon">🌙 Dark</span>
         </button>
@@ -553,8 +566,8 @@ const CATEGORIES=["All","R Fundamentals","Spatial & Remote Sensing","Marine & En
 function nbBg(l){return{R:'radial-gradient(ellipse at top left,rgba(74,158,255,.07),transparent)',Python:'radial-gradient(ellipse at top left,rgba(56,201,138,.07),transparent)',Markdown:'radial-gradient(ellipse at top left,rgba(245,166,35,.07),transparent)'}[l]||'radial-gradient(ellipse at top left,rgba(74,158,255,.07),transparent)';}
 
 /* ── Theme ── */
-function toggleTheme(){const h=document.documentElement;const dark=h.getAttribute('data-theme')==='dark';h.setAttribute('data-theme',dark?'light':'dark');document.getElementById('theme-label').textContent=dark?'Dark':'Light';localStorage.setItem('lh-theme',dark?'light':'dark');}
-(function(){const s=localStorage.getItem('lh-theme')||'dark';document.documentElement.setAttribute('data-theme',s);})();
+function toggleTheme(e){if(e)e.preventDefault();const h=document.documentElement;const dark=h.getAttribute('data-theme')==='dark';const next=dark?'light':'dark';h.setAttribute('data-theme',next);const lbl=document.getElementById('theme-label');if(lbl)lbl.textContent=dark?'Dark':'Light';try{localStorage.setItem('lh-theme',next);}catch(_){}}
+(function(){var s='dark';try{s=localStorage.getItem('lh-theme')||'dark';}catch(_){}document.documentElement.setAttribute('data-theme',s);})();
 
 /* ── Mobile nav ── */
 function toggleNav(){document.getElementById('hamburger').classList.toggle('open');document.getElementById('nav-drawer').classList.toggle('open');}
@@ -600,7 +613,12 @@ function parseIpynb(nb,meta){
 
 /* ── Markdown → HTML ── */
 function mdToHtml(src,att){
-  const lines=src.split('\n');let html='';let inList=false;let lastImg=false;
+  const lines=src.split('\n');
+  let html='';
+  let inList=false,inOList=false,inBlockquote=false,inTable=false;
+  let tableRows=[];
+  let lastImg=false;
+
   const ir=t=>t
     .replace(/!\[([^\]]*)\]\(attachment:([^)]+)\)/g,(m,a,u)=>{const s=att&&att[u]?att[u]:'';return s?`<img src="${s}" alt="${esc(a)}" style="max-width:100%;">`:''})
     .replace(/!\[([^\]]*)\]\(([^)]+)\)/g,(m,a,s)=>`<img src="${esc(s)}" alt="${esc(a)}" style="max-width:100%;">`)
@@ -610,15 +628,87 @@ function mdToHtml(src,att){
     .replace(/\*([^*\n]+)\*/g,'<em>$1</em>')
     .replace(/_([^_\n]+)_/g,'<em>$1</em>')
     .replace(/`([^`]+)`/g,'<code>$1</code>');
+
+  function closeAll(){
+    if(inList){html+='</ul>';inList=false;}
+    if(inOList){html+='</ol>';inOList=false;}
+    if(inBlockquote){html+='</blockquote>';inBlockquote=false;}
+    if(inTable){flushTable();inTable=false;}
+  }
+  function flushTable(){
+    if(!tableRows.length)return;
+    // First row = header, second row = separator (---|---), rest = body
+    let t='<div class="nb-table-wrap"><table class="nb-table">';
+    const head=tableRows[0];
+    const isSep=r=>r.every(c=>c.trim().match(/^:?-+:?$/));
+    const bodyStart=tableRows.length>1&&isSep(tableRows[1])?2:1;
+    t+='<thead><tr>'+head.map(c=>`<th>${ir(c.trim())}</th>`).join('')+'</tr></thead>';
+    if(bodyStart<tableRows.length){
+      t+='<tbody>'+tableRows.slice(bodyStart).map(r=>'<tr>'+r.map(c=>`<td>${ir(c.trim())}</td>`).join('')+'</tr>').join('')+'</tbody>';
+    }
+    t+='</table></div>';
+    html+=t;
+    tableRows=[];
+  }
+
   lines.forEach(line=>{
-    if(inList&&!line.match(/^(\s*[-*+]|\s*\d+\.)\s/)){html+='</ul>';inList=false;}
-    const s=line.trim();if(!s){lastImg=false;return;}
+    const raw=line;
+    const s=line.trim();
+
+    // Blank line closes most contexts
+    if(!s){closeAll();lastImg=false;return;}
+
+    // Table row: starts and ends with | or has multiple |
+    const isTableRow=s.startsWith('|')&&s.includes('|',1);
+    if(isTableRow){
+      if(inList){html+='</ul>';inList=false;}
+      if(inOList){html+='</ol>';inOList=false;}
+      if(inBlockquote){html+='</blockquote>';inBlockquote=false;}
+      lastImg=false;
+      inTable=true;
+      // Split on | and strip empty first/last cells from leading/trailing |
+      const cells=s.split('|').slice(1,-1);
+      tableRows.push(cells);
+      return;
+    } else if(inTable){
+      flushTable();inTable=false;
+    }
+
+    // Horizontal rule: ---, ***, ___  (3+ chars, same char)
+    if(s.match(/^(-{3,}|\*{3,}|_{3,})$/)){
+      closeAll();html+='<hr class="nb-hr">';lastImg=false;return;
+    }
+
+    // Blockquote: > text
+    if(s.startsWith('> ')||s==='>' ){
+      if(inList){html+='</ul>';inList=false;}
+      if(inOList){html+='</ol>';inOList=false;}
+      lastImg=false;
+      if(!inBlockquote){html+='<blockquote class="nb-blockquote">';inBlockquote=true;}
+      const inner=s.startsWith('> ')?s.slice(2):s.slice(1);
+      html+=inner?`<p>${ir(inner)}</p>`:'';
+      return;
+    } else if(inBlockquote){html+='</blockquote>';inBlockquote=false;}
+
+    // Close lists if line doesn't continue them
+    if(inList&&!s.match(/^[-*+]\s/)){html+='</ul>';inList=false;}
+    if(inOList&&!s.match(/^\d+\.\s/)){html+='</ol>';inOList=false;}
+
+    // Headings
     if(s.startsWith('#### ')){html+=`<div class="nb-h4">${ir(s.slice(5))}</div>`;lastImg=false;}
     else if(s.startsWith('### ')){html+=`<div class="nb-h3">${ir(s.slice(4))}</div>`;lastImg=false;}
     else if(s.startsWith('## ')){html+=`<div class="nb-h2">${ir(s.slice(3))}</div>`;lastImg=false;}
     else if(s.startsWith('# ')){html+=`<div class="nb-h1">${ir(s.slice(2))}</div>`;lastImg=false;}
-    else if(s.match(/^[-*+]\s/)){if(!inList){html+='<ul class="nb-ul">';inList=true;}html+=`<li>${ir(s.replace(/^[-*+]\s/,''))}</li>`;lastImg=false;}
-    else if(s.match(/^\d+\.\s/)){if(!inList){html+='<ul class="nb-ul">';inList=true;}html+=`<li>${ir(s.replace(/^\d+\.\s/,''))}</li>`;lastImg=false;}
+    // Unordered list
+    else if(s.match(/^[-*+]\s/)){
+      if(!inList){html+='<ul class="nb-ul">';inList=true;}
+      html+=`<li>${ir(s.replace(/^[-*+]\s/,''))}</li>`;lastImg=false;
+    }
+    // Ordered list
+    else if(s.match(/^\d+\.\s/)){
+      if(!inOList){html+='<ol class="nb-ol">';inOList=true;}
+      html+=`<li>${ir(s.replace(/^\d+\.\s/,''))}</li>`;lastImg=false;
+    }
     else{
       const r=ir(s);
       const isImg=s.startsWith('<img')||r.trimStart().startsWith('<img');
@@ -630,10 +720,13 @@ function mdToHtml(src,att){
         lastImg=false;
       }else if(isImg){
         html+=`<div class="nb-fig-wrap">${s.startsWith('<img')?s:r}</div>`;lastImg=true;
-      }else{html+=`<p class="nb-p">${r}</p>`;lastImg=false;}
+      }else{
+        html+=`<p class="nb-p">${r}</p>`;lastImg=false;
+      }
     }
   });
-  if(inList)html+='</ul>';return html;
+  closeAll();
+  return html;
 }
 
 /* ── Open notebook modal ── */
@@ -883,7 +976,7 @@ const QUICK_INFO=[
 
 const MARQUEE_ITEMS=["GIS","Remote Sensing","R","Python","Jupyter","MaxEnt","Random Forest","NDVI","Sentinel-2","Landsat", "AVIRIS-NG", "LiDAR", "GBIF","Species Distribution Modelling","vegan","terra","sf","tmap","ggplot2","Biostatistics","NMDS","PERMANOVA","WhiteboxTools","Darwin Core","Biodiversity Networks","Open Science","Reproducible Research"];
 
-const CATEGORIES=["All","R Fundamentals","Spatial & Remote Sensing","Marine & Environmental","Ecological Research"];
+const CATEGORIES=["All","R Fundamentals","Spatial & Remote Sensing","Marine & Environmental","Ecological Research"];let activeFilter="All";
 
 /* =====================================================
    NOTEBOOK LOADER
