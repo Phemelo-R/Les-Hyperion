@@ -140,6 +140,10 @@
     .nb-map-label{font-family:var(--font-m);font-size:.65rem;color:var(--text-faint);letter-spacing:.1em;text-transform:uppercase;padding:.5rem .9rem;background:var(--bg3);border-bottom:1px solid var(--border);}
     .nb-map-iframe{width:100%;height:550px;min-height:550px;border:none;display:block;}
     .nb-html-inline{padding:.8rem 1rem;background:var(--bg2);font-size:.88rem;color:var(--text-muted);}
+
+    .nb-share-btn{background:none;border:1px solid var(--border);border-radius:6px;padding:3px 10px;cursor:pointer;color:var(--text-faint);font-family:var(--font-m);font-size:.62rem;letter-spacing:.06em;transition:all .2s;white-space:nowrap;}
+    .nb-share-btn:hover{border-color:var(--accent);color:var(--accent);}
+    .nb-share-btn.copied{border-color:var(--accent2);color:var(--accent2);}
   </style>
 </head>
 <body>
@@ -249,6 +253,7 @@
     <div class="viewer-topbar">
       <div class="viewer-dots"><div class="viewer-dot vd-r"></div><div class="viewer-dot vd-y"></div><div class="viewer-dot vd-g"></div></div>
       <div class="viewer-title" id="modal-title">notebook.ipynb</div>
+      <button id="nb-share-btn" class="nb-share-btn" onclick="copyNbLink(this)" title="Copy shareable link">&#x1F517; Share</button>
       <button class="viewer-close" onclick="closeModal()" aria-label="Close">&#x2715;</button>
     </div>
     <div class="viewer-content" id="modal-content"></div>
@@ -439,19 +444,12 @@ function openNotebook(nb){
         if(isMap||hOut.length>800){
           // Force the map to fill the iframe by injecting a style override + resize script
           const fillCss=`<style>
-            html,body{margin:0!important;padding:0!important;width:100%!important;height:100%!important;overflow:hidden!important;}
-            *{max-width:none!important;box-sizing:border-box;}
-            [id^="htmlwidget"],[class*="leaflet"],[class*="mapview"],[id*="map"],
-            .html-widget,.leaflet-container,.plotly{
-              width:100%!important;height:100%!important;min-height:100%!important;
-              position:absolute!important;top:0!important;left:0!important;right:0!important;bottom:0!important;
-            }
-            .html-widget-static-bound{width:100%!important;height:100%!important;}
+            html,body{margin:0;padding:0;width:100%;height:100%;background:transparent;}
+            [id^="htmlwidget"],.html-widget{width:100%!important;height:100%!important;}
           </style>`;
           // Strip hardcoded pixel dimensions from widget root divs (leaflet sets width:Xpx;height:Ypx inline)
-          let fixedHtml=hOut
-            .replace(/(<div[^>]+style=["'][^"']*?)width\s*:\s*\d+px/gi,'$1width:100%')
-            .replace(/(<div[^>]+style=["'][^"']*?)height\s*:\s*\d+px/gi,'$1height:100%');
+          // Don't alter the widget HTML — htmlwidgets sizing scripts read the original dims
+          let fixedHtml=hOut;
           // Inject fill CSS at start of <head> or <body>
           if(fixedHtml.includes('<head>')){fixedHtml=fixedHtml.replace('<head>','<head>'+fillCss);}
           else if(fixedHtml.includes('<body>')){fixedHtml=fixedHtml.replace('<body>',fillCss+'<body>');}
@@ -473,11 +471,18 @@ function openNotebook(nb){
   if(window.Prism)Prism.highlightAllUnder(document.getElementById('modal-content'));
   document.getElementById('modal-overlay').classList.add('open');
   document.body.style.overflow='hidden';
+  // Push shareable URL — no reload, just hash change
+  const nbHash='#nb='+encodeURIComponent(nb.file||nb.title);
+  if(history.pushState){history.pushState({nb:nb.file},'',nbHash);}
+  // Update share button
+  const shareBtn=document.getElementById('nb-share-btn');
+  if(shareBtn)shareBtn.dataset.url=location.href;
 }
 function closeModal(e){
   if(e&&e.target!==document.getElementById('modal-overlay'))return;
   document.getElementById('modal-overlay').classList.remove('open');
   document.body.style.overflow='';
+  if(history.pushState){history.pushState({},'',location.pathname+location.search);}
 }
 async function fetchNotebook(meta,id){
   try{const res=await fetch(`notebooks/${encodeURIComponent(meta.file)}`);if(!res.ok)return null;const ipynb=await res.json();return{id,...meta,...parseIpynb(ipynb,meta)};}
@@ -535,6 +540,46 @@ async function openResearchNotebook(filename) {
 document.addEventListener('DOMContentLoaded', function() {
   commonBoot();
   observeFadeUps();
+  // Deep-link support (research page pre-loads notebooks on demand)
+  setTimeout(bootDeepLink,400);
+});
+
+
+function copyNbLink(btn){
+  const url=btn.dataset.url||location.href;
+  if(navigator.clipboard&&window.isSecureContext){
+    navigator.clipboard.writeText(url).then(()=>showShareCopied(btn)).catch(()=>fallbackShareCopy(btn,url));
+  }else{fallbackShareCopy(btn,url);}
+}
+function fallbackShareCopy(btn,url){
+  const ta=document.createElement('textarea');ta.value=url;ta.style.cssText='position:fixed;opacity:0;top:0;left:0';
+  document.body.appendChild(ta);ta.select();
+  try{document.execCommand('copy');showShareCopied(btn);}catch(e){}
+  document.body.removeChild(ta);
+}
+function showShareCopied(btn){
+  const orig=btn.innerHTML;btn.innerHTML='&#x2713; Copied!';btn.classList.add('copied');
+  clearTimeout(btn._t);btn._t=setTimeout(()=>{btn.innerHTML=orig;btn.classList.remove('copied');},2200);
+}
+async function bootDeepLink(){
+  const hash=decodeURIComponent(location.hash);
+  const m=hash.match(/^#nb=(.+)$/);
+  if(!m)return;
+  const file=m[1];
+  let nb=null,tries=0;
+  while(!nb&&tries<40){
+    await new Promise(r=>setTimeout(r,150));
+    nb=(allNotebooks||[]).find(n=>n.file===file);
+    tries++;
+  }
+  if(nb){openNotebook(nb);}
+}
+window.addEventListener('popstate',function(){
+  const overlay=document.getElementById('modal-overlay');
+  if(overlay&&overlay.classList.contains('open')){
+    overlay.classList.remove('open');
+    document.body.style.overflow='';
+  }
 });
 
 </script>
