@@ -59,7 +59,7 @@ canvas{display:block;position:fixed;inset:0;width:100%!important;height:100%!imp
   <div class="corner c-tl"></div><div class="corner c-tr"></div>
   <div class="corner c-bl"></div><div class="corner c-br"></div>
   <div class="hrule" id="rt"></div><div class="hrule" id="rb"></div>
-  <div id="logo"><a href="https://phemelo-r.github.io/Les-Hyperion/"><div id="logo-name">Les Hyperion</div><div id="logo-sub">Solar System · Professional Edition</div></a></div>
+  <div id="logo"><a href="https://phemelo-r.github.io/Les-Hyperion/"><div id="logo-name">Les Hyperion</div><div id="logo-sub">Solar System Explorer</div></a></div>
   <div id="tele">
     <div>FOCUS &nbsp;<b id="tf">Solar System</b></div>
     <div>DIST &nbsp;&nbsp;<b id="td">—</b></div>
@@ -71,7 +71,7 @@ canvas{display:block;position:fixed;inset:0;width:100%!important;height:100%!imp
     <button id="p-back" onclick="window._deselect()">← Back</button>
     <div id="p-name">—</div><div id="p-type">—</div>
     <div class="pdiv"></div><div id="p-data"></div>
-    <div id="p-fact"></div><div id="p-source"></div>
+    <div id="p-fact"></div><div id="p-moons"></div><div id="p-source"></div>
   </div>
   <div id="hint">
     <div>Click &nbsp;·&nbsp; Select object</div>
@@ -80,9 +80,9 @@ canvas{display:block;position:fixed;inset:0;width:100%!important;height:100%!imp
     <div>Esc &nbsp;·&nbsp; Reset view</div>
   </div>
   <div id="timebar">
-    <button onclick="window._speed(1)">1×</button>
+    <button class="on" onclick="window._speed(1)">1×</button>
     <button onclick="window._speed(3600)">1h/s</button>
-    <button class="on" onclick="window._speed(86400)">1d/s</button>
+    <button onclick="window._speed(86400)">1d/s</button>
     <button onclick="window._speed(2592000)">1mo/s</button>
     <button id="pbtn" onclick="window._play()">⏸ Pause</button>
     <div id="simdate">—</div>
@@ -95,7 +95,6 @@ canvas{display:block;position:fixed;inset:0;width:100%!important;height:100%!imp
 'use strict';
 
 // JPL HORIZONS EPHEMERIS (2026)
-// https://ssd.jpl.nasa.gov/horizons/app.html
 const H={
   mercury:{a:.38710,e:.20563,i:7.0051,L:75.5671,w:77.4518,O:48.3309,M0:253.3894,p:87.969},
   venus:  {a:.72333,e:.00677,i:3.3947,L:131.5638,w:131.7658,O:76.6799,M0:181.9790,p:224.701},
@@ -107,15 +106,42 @@ const H={
   neptune:{a:30.0690,e:.00859,i:1.7700,L:304.8804,w:46.6871,O:131.7806,M0:256.2250,p:60182.4}
 };
 
+// MOON ORBITAL DATA (Major moons)
+const MOONS={
+  earth:[{name:'Moon',r:0.27,d:384400,p:27.32}],
+  mars:[{name:'Phobos',r:0.11,d:9376,p:0.319},{name:'Deimos',r:0.06,d:23463,p:1.262}],
+  jupiter:[
+    {name:'Io',r:0.29,d:421600,p:1.769,c:0xdcc830},
+    {name:'Europa',r:0.25,d:671000,p:3.551,c:0xc8baa0},
+    {name:'Ganymede',r:0.27,d:1070000,p:7.155,c:0x8a8478},
+    {name:'Callisto',r:0.24,d:1883000,p:16.69,c:0x6a6258}
+  ],
+  saturn:[
+    {name:'Titan',r:0.40,d:1221870,p:15.95,c:0xcc9944},
+    {name:'Enceladus',r:0.08,d:237948,p:1.370,c:0xeef2f8},
+    {name:'Mimas',r:0.07,d:185539,p:0.942,c:0xd0d0d0},
+    {name:'Rhea',r:0.15,d:527108,p:4.518,c:0xb0b0b0}
+  ],
+  uranus:[
+    {name:'Titania',r:0.12,d:435910,p:8.706,c:0x9a9090},
+    {name:'Oberon',r:0.12,d:583520,p:13.46,c:0x8a8080},
+    {name:'Miranda',r:0.07,d:129390,p:1.413,c:0x7a7a7a}
+  ],
+  neptune:[
+    {name:'Triton',r:0.21,d:354759,p:-5.877,c:0xb0b8c8}
+  ]
+};
+
+// PLANET DATA
 const P=[
-  {id:'mercury',e:H.mercury,name:'Mercury',type:'Rocky terrestrial planet',r:2439.7,m:3.3011e23,d:5.514,g:3.7,t:{a:167},rot:58.646,mo:0,comp:'Silicate rock with Fe core',fact:'Mercury has the most elliptical orbit. Surface temps vary 610°C between day and night.',src:'NASA JPL, MESSENGER',c:0x8C7853},
-  {id:'venus',e:H.venus,name:'Venus',type:'Rocky terrestrial planet',r:6051.8,m:4.8675e24,d:5.204,g:8.87,t:{a:464},rot:-243.018,mo:0,comp:'Silicate rock, CO₂ atmosphere',fact:'Venus rotates retrograde. One day (243 Earth days) is longer than its year (225 days).',src:'NASA JPL, Akatsuki',c:0xFFC649},
-  {id:'earth',e:H.earth,name:'Earth',type:'Rocky terrestrial planet',r:6371.0,m:5.9722e24,d:5.514,g:9.81,t:{a:15},rot:0.9973,mo:1,comp:'Silicate rock, H₂O, N₂/O₂',fact:'Only known biosphere. Moon stabilizes 23.5° tilt, driving seasons.',src:'NOAA, USGS, NASA',c:0x4A90E2},
-  {id:'mars',e:H.mars,name:'Mars',type:'Rocky terrestrial planet',r:3389.5,m:6.4171e23,d:3.933,g:3.71,t:{a:-65},rot:1.0259,mo:2,comp:'Silicate rock, iron oxide dust',fact:'Olympus Mons (22 km) and Valles Marineris (7 km) are largest volcano and canyon in solar system.',src:'USGS Astrogeology',c:0xE27B58},
-  {id:'jupiter',e:H.jupiter,name:'Jupiter',type:'Gas giant',r:69911,m:1.8982e27,d:1.326,g:24.79,t:{a:-110},rot:0.4135,mo:95,comp:'H₂/He atmosphere',fact:'Great Red Spot is a storm wider than Earth, persisting 350+ years.',src:'NASA Horizons, JUNO',c:0xC88B3A},
-  {id:'saturn',e:H.saturn,name:'Saturn',type:'Gas giant + rings',r:58232,m:5.6834e26,d:.687,g:10.44,t:{a:-140},rot:0.4440,mo:146,comp:'H₂/He atmosphere',fact:'Rings span 282,000 km but are ~10 m thick. Mostly ice and rock particles.',src:'NASA, Cassini',c:0xFAD5A5},
-  {id:'uranus',e:H.uranus,name:'Uranus',type:'Ice giant',r:25362,m:8.6810e25,d:1.271,g:8.87,t:{a:-195},rot:-.7200,mo:27,comp:'H₂O/CH₄/NH₃ ices',fact:'Tilted 98°—rolls around Sun. Coldest atmosphere at −224°C.',src:'NASA, Voyager 2',c:0x4FD0E7},
-  {id:'neptune',e:H.neptune,name:'Neptune',type:'Ice giant',r:24622,m:1.02413e26,d:1.638,g:11.15,t:{a:-200},rot:0.6713,mo:16,comp:'H₂O/CH₄/NH₃ ices',fact:'Fastest winds at 2,100 km/h. Moon Triton orbits backwards.',src:'NASA, Voyager 2',c:0x4166F5}
+  {id:'mercury',e:H.mercury,name:'Mercury',type:'Rocky terrestrial planet',r:2439.7,m:3.3011e23,d:5.514,g:3.7,t:{a:167},rot:58.646,mo:0,comp:'Silicate rock with Fe core',fact:'Mercury has the most elliptical orbit. Surface temps vary 610°C between day and night.',src:'NASA JPL, MESSENGER',c:0x8C7853,tex:'https://cdn.jsdelivr.net/gh/mrdoob/three.js@dev/examples/textures/planets/mercury_1024.jpg'},
+  {id:'venus',e:H.venus,name:'Venus',type:'Rocky terrestrial planet',r:6051.8,m:4.8675e24,d:5.204,g:8.87,t:{a:464},rot:-243.018,mo:0,comp:'Silicate rock, CO₂ atmosphere',fact:'Venus rotates retrograde. One day (243 Earth days) is longer than its year (225 days).',src:'NASA JPL, Akatsuki',c:0xFFC649,tex:'https://cdn.jsdelivr.net/gh/mrdoob/three.js@dev/examples/textures/planets/venus_1024.jpg'},
+  {id:'earth',e:H.earth,name:'Earth',type:'Rocky terrestrial planet',r:6371.0,m:5.9722e24,d:5.514,g:9.81,t:{a:15},rot:0.9973,mo:1,comp:'Silicate rock, H₂O, N₂/O₂',fact:'Only known biosphere. Moon stabilizes 23.5° tilt, driving seasons.',src:'NOAA, USGS, NASA',c:0x4A90E2,tex:'https://cdn.jsdelivr.net/gh/mrdoob/three.js@dev/examples/textures/planets/earth_atmos_2048.jpg'},
+  {id:'mars',e:H.mars,name:'Mars',type:'Rocky terrestrial planet',r:3389.5,m:6.4171e23,d:3.933,g:3.71,t:{a:-65},rot:1.0259,mo:2,comp:'Silicate rock, iron oxide dust',fact:'Olympus Mons (22 km) and Valles Marineris (7 km) are largest volcano and canyon in solar system.',src:'USGS Astrogeology',c:0xE27B58,tex:'https://cdn.jsdelivr.net/gh/mrdoob/three.js@dev/examples/textures/planets/mars_1k_cyl.jpg'},
+  {id:'jupiter',e:H.jupiter,name:'Jupiter',type:'Gas giant',r:69911,m:1.8982e27,d:1.326,g:24.79,t:{a:-110},rot:0.4135,mo:95,comp:'H₂/He atmosphere',fact:'Great Red Spot is a storm wider than Earth, persisting 350+ years.',src:'NASA Horizons, JUNO',c:0xC88B3A,tex:'https://cdn.jsdelivr.net/gh/mrdoob/three.js@dev/examples/textures/planets/jupiter_2048.jpg'},
+  {id:'saturn',e:H.saturn,name:'Saturn',type:'Gas giant + rings',r:58232,m:5.6834e26,d:.687,g:10.44,t:{a:-140},rot:0.4440,mo:146,comp:'H₂/He atmosphere',fact:'Rings span 282,000 km but are ~10 m thick. Mostly ice and rock particles.',src:'NASA, Cassini',c:0xFAD5A5,tex:'https://cdn.jsdelivr.net/gh/mrdoob/three.js@dev/examples/textures/planets/saturn_2048.jpg',hasRings:true},
+  {id:'uranus',e:H.uranus,name:'Uranus',type:'Ice giant',r:25362,m:8.6810e25,d:1.271,g:8.87,t:{a:-195},rot:-.7200,mo:27,comp:'H₂O/CH₄/NH₃ ices',fact:'Tilted 98°—rolls around Sun. Coldest atmosphere at −224°C.',src:'NASA, Voyager 2',c:0x4FD0E7,tex:'https://cdn.jsdelivr.net/gh/mrdoob/three.js@dev/examples/textures/planets/uranus_2048.jpg'},
+  {id:'neptune',e:H.neptune,name:'Neptune',type:'Ice giant',r:24622,m:1.02413e26,d:1.638,g:11.15,t:{a:-200},rot:0.6713,mo:16,comp:'H₂O/CH₄/NH₃ ices',fact:'Fastest winds at 2,100 km/h. Moon Triton orbits backwards.',src:'NASA, Voyager 2',c:0x4166F5,tex:'https://cdn.jsdelivr.net/gh/mrdoob/three.js@dev/examples/textures/planets/neptune_2048.jpg'}
 ];
 
 // RENDERER
@@ -132,7 +158,9 @@ camera.position.set(0,20,45);camera.lookAt(0,0,0);
 // TIME
 const EPOCH=new Date('2026-01-01T00:00:00Z').getTime();
 let simDay=(new Date('2026-04-04T14:00:00Z').getTime()-EPOCH)/86400000;
-let simSpeed=86400,playing=true,lastT=performance.now();
+let simSpeed=1;
+let playing=true;
+let lastT=performance.now();
 
 function tickSim(){const now=performance.now();const dt=(now-lastT)/1000;lastT=now;if(playing)simDay+=simSpeed*dt/86400;}
 function simDate(){return new Date(EPOCH+simDay*86400000);}
@@ -149,6 +177,12 @@ function planetPos(e,day){
   const y=r*(Math.sin(Or)*Math.cos(wr+v)+Math.cos(Or)*Math.sin(wr+v)*Math.cos(ir));
   const z=r*(Math.sin(wr+v)*Math.sin(ir));
   return new THREE.Vector3(x,y,z);
+}
+
+function moonPos(moon,parentPos,day){
+  const th=360/Math.abs(moon.p)*day*Math.PI/180*(moon.p<0?-1:1);
+  const d=moon.d/149597870.7;
+  return new THREE.Vector3(parentPos.x+d*Math.cos(th),parentPos.y,parentPos.z+d*Math.sin(th));
 }
 
 // STARS
@@ -172,6 +206,25 @@ function buildStars(){
   return mat;
 }
 
+// ASTEROID BELT
+function buildAsteroidBelt(){
+  const N=8000,pos=new Float32Array(N*3),col=new Float32Array(N*3),sz=new Float32Array(N);
+  let seed=42;const rng=()=>{seed^=seed<<13;seed^=seed>>17;seed^=seed<<5;return((seed>>>0)/0xFFFFFFFF);};
+  for(let i=0;i<N;i++){
+    const a=(2.2+rng()*1.2),th=rng()*Math.PI*2,tilt=(rng()-.5)*.3;
+    pos[i*3]=a*Math.cos(th);pos[i*3+1]=tilt;pos[i*3+2]=a*Math.sin(th);
+    const b=.12+rng()*.14;
+    col[i*3]=b*.9;col[i*3+1]=b*.85;col[i*3+2]=b*.75;
+    sz[i]=.25+rng()*.8;
+  }
+  const geo=new THREE.BufferGeometry();
+  geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  geo.setAttribute('aColor',new THREE.BufferAttribute(col,3));
+  geo.setAttribute('aSize',new THREE.BufferAttribute(sz,1));
+  const mat=new THREE.ShaderMaterial({uniforms:{uPR:{value:renderer.getPixelRatio()}},vertexShader:'attribute float aSize;attribute vec3 aColor;varying vec3 vC;uniform float uPR;void main(){vC=aColor;vec4 mv=modelViewMatrix*vec4(position,1.);float d=length(mv.xyz);gl_PointSize=aSize*uPR*(790./d);gl_Position=projectionMatrix*mv;}',fragmentShader:'varying vec3 vC;void main(){vec2 uv=gl_PointCoord-.5;if(length(uv)>.5)discard;gl_FragColor=vec4(vC,smoothstep(.5,.0,length(uv))*.75);}',transparent:true,depthWrite:false,blending:THREE.AdditiveBlending});
+  scene.add(new THREE.Points(geo,mat));
+}
+
 function buildSun(){
   scene.add(new THREE.Mesh(new THREE.IcosahedronGeometry(.7,16),new THREE.MeshBasicMaterial({color:0xfffbe0})));
   const cm=new THREE.ShaderMaterial({uniforms:{uT:{value:0}},vertexShader:'varying vec3 vN;void main(){vN=normalize(normalMatrix*normal);gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',fragmentShader:'varying vec3 vN;uniform float uT;void main(){vec3 v=normalize(-vN);float f=pow(1.-abs(dot(vN,v)),2.2);gl_FragColor=vec4(1.,.9,.4,f*.55);}',transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,side:THREE.BackSide});
@@ -181,22 +234,59 @@ function buildSun(){
   return cm;
 }
 
-const starMat=buildStars(),sunCorona=buildSun();
+const starMat=buildStars();
+buildAsteroidBelt();
+const sunCorona=buildSun();
+
+// TEXTURE LOADER
+const textureLoader=new THREE.TextureLoader();
+const textureCache={};
+
+async function loadTexture(url){
+  if(textureCache[url])return textureCache[url];
+  try{
+    const tex=await textureLoader.loadAsync(url);
+    tex.colorSpace=THREE.SRGBColorSpace;
+    textureCache[url]=tex;
+    return tex;
+  }catch(e){console.warn('Texture load failed:',url);return null;}
+}
 
 // PLANETS
-const pMesh={},pLabel={};
+const pMesh={},pLabel={},mMesh={},mLabel={};
+
 P.forEach(p=>{
-  const r=Math.max(0.05,Math.log(p.r+1)*0.08);
-  const mesh=new THREE.Mesh(new THREE.IcosahedronGeometry(r,32),new THREE.MeshPhongMaterial({color:p.c,shininess:8}));
+  const scaleFactor=0.7;
+  const r=Math.max(0.05,Math.log(p.r+1)*0.08*scaleFactor);
+  const mesh=new THREE.Mesh(new THREE.IcosahedronGeometry(r,48),new THREE.MeshPhongMaterial({color:p.c,shininess:8}));
   mesh.userData={planet:p};
   scene.add(mesh);
-  pMesh[p.id]={mesh,data:p};
+  pMesh[p.id]={mesh,data:p,tex:p.tex};
+  
+  loadTexture(p.tex).then(tex=>{if(tex)mesh.material.map=tex;mesh.material.needsUpdate=true;});
   
   const orbitPts=[];
-  for(let i=0;i<=180;i++){const th=i/180*Math.PI*2;orbitPts.push(new THREE.Vector3(p.e.a*Math.cos(th),0,p.e.a*Math.sin(th)));}
-  scene.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(orbitPts),new THREE.LineBasicMaterial({color:0x1a2848,transparent:true,opacity:.3,depthWrite:false})));
+  for(let i=0;i<=360;i++){const th=i*Math.PI/180;orbitPts.push(new THREE.Vector3(p.e.a*Math.cos(th),0,p.e.a*Math.sin(th)));}
+  scene.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(orbitPts),new THREE.LineBasicMaterial({color:0x1a2848,transparent:true,opacity:.2,depthWrite:false})));
   
   pLabel[p.id]=(()=>{const el=document.createElement('div');el.className='olabel';el.textContent=p.name;document.body.appendChild(el);return el;})();
+  
+  if(MOONS[p.id]){
+    mMesh[p.id]={};mLabel[p.id]={};
+    MOONS[p.id].forEach(moon=>{
+      const mr=Math.max(0.01,Math.log(moon.r+1)*0.05);
+      const mmesh=new THREE.Mesh(new THREE.IcosahedronGeometry(mr,16),new THREE.MeshPhongMaterial({color:moon.c||0xcccccc,shininess:4}));
+      mmesh.visible=false;
+      scene.add(mmesh);
+      mMesh[p.id][moon.name]=mmesh;
+      
+      const orbitLine=new THREE.Line(new THREE.BufferGeometry().setFromPoints((()=>{const pts=[];const d=moon.d/149597870.7;for(let i=0;i<=80;i++){const th=i/80*Math.PI*2;pts.push(new THREE.Vector3(d*Math.cos(th),0,d*Math.sin(th)));}return pts;})()),new THREE.LineBasicMaterial({color:0x0a3860,transparent:true,opacity:.15,depthWrite:false}));
+      orbitLine.visible=false;
+      scene.add(orbitLine);
+      
+      mLabel[p.id][moon.name]=(()=>{const el=document.createElement('div');el.className='olabel';el.textContent=moon.name;el.style.display='none';document.body.appendChild(el);return el;})();
+    });
+  }
 });
 
 // CAMERA
@@ -237,20 +327,24 @@ function selectPlanet(p){
   html+='<div>Density &nbsp;<b>'+p.d.toFixed(2)+' g/cm³</b></div>';
   html+='<div>Gravity &nbsp;<b>'+p.g.toFixed(2)+' m/s²</b></div>';
   html+='<div>Rotation &nbsp;<b>'+Math.abs(p.rot).toFixed(2)+'h</b></div>';
-  html+='<div>Moons &nbsp;<b>'+p.mo+'</b></div>';
   html+='<div>Orbit period &nbsp;<b>'+p.e.p.toFixed(1)+' days</b></div>';
   if(p.t.a)html+='<div>Avg temp &nbsp;<b>'+p.t.a+'°C</b></div>';
   document.getElementById('p-data').innerHTML=html;
   document.getElementById('p-fact').textContent=p.fact;
+  
+  let moonText='';
+  if(MOONS[p.id]){moonText='<div style="margin-top:9px;border-top:1px solid var(--brd);padding-top:9px;"><strong>Moons:</strong> '+MOONS[p.id].map(m=>m.name).join(', ')+'</div>';}
+  document.getElementById('p-moons').innerHTML=moonText;
   document.getElementById('p-source').innerHTML='<strong>Source:</strong> '+p.src;
+  
   document.getElementById('panel').classList.add('show');
   cam.tTarget.copy(pMesh[p.id].mesh.position);
-  cam.tRadius=p.e.a*0.15;
+  cam.tRadius=p.e.a*0.12;
 }
 
 window._deselect=function(){document.getElementById('panel').classList.remove('show');cam.tTarget.set(0,0,0);cam.tRadius=48;};
 
-// HUD
+// HUD 
 function hud(){
   const d=simDate();
   const ds=d.toUTCString().slice(5,22);
@@ -290,6 +384,19 @@ function animate(){
     pMesh[p.id].mesh.position.copy(pos);
     pMesh[p.id].mesh.rotation.y+=.002;
     placeLabel(pLabel[p.id],pos);
+    
+    if(MOONS[p.id]){
+      const dist=camera.position.distanceTo(pos);
+      const showMoons=dist<12;
+      MOONS[p.id].forEach(moon=>{
+        const mpos=moonPos(moon,pos,simDay);
+        const mmesh=mMesh[p.id][moon.name];
+        mmesh.position.copy(mpos);
+        mmesh.visible=showMoons;
+        const mlabel=mLabel[p.id][moon.name];
+        if(showMoons)placeLabel(mlabel,mpos);else mlabel.style.display='none';
+      });
+    }
   });
   
   applyCamera();
