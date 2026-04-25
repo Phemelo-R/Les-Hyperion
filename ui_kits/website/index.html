@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Les Hyperion — UI Kit</title>
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    // Light-default theme with system-preference auto + persistence.
+    (function() {
+      const saved = localStorage.getItem('lh-theme'); // 'light' | 'dark' | null
+      let initial;
+      if (saved === 'light' || saved === 'dark') {
+        initial = saved;
+      } else {
+        initial = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      document.documentElement.dataset.theme = initial;
+      // listen for OS-level changes only when user hasn't explicitly chosen
+      if (window.matchMedia) {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+          if (!localStorage.getItem('lh-theme')) {
+            document.documentElement.dataset.theme = e.matches ? 'dark' : 'light';
+            window.dispatchEvent(new Event('lh-theme-change'));
+          }
+        });
+      }
+    })();
+  </script>
+</head>
+<body>
+  <div class="topo-bg"></div>
+  <div class="scan-bg"></div>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <script src="coastlines.js"></script>
+  <script type="text/babel" src="Nav.jsx"></script>
+  <script type="text/babel" src="Hero.jsx"></script>
+  <script type="text/babel" src="Marquee.jsx"></script>
+  <script type="text/babel" src="ExpertiseGrid.jsx"></script>
+  <script type="text/babel" src="About.jsx"></script>
+  <script type="text/babel" src="NotebookCard.jsx"></script>
+  <script type="text/babel" src="NotebookModal.jsx"></script>
+  <script type="text/babel" src="ResearchCard.jsx"></script>
+  <script type="text/babel" src="Footer.jsx"></script>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    function App() {
+      const [page, setPage] = useState('home');
+      const [openNb, setOpenNb] = useState(null);
+      const [theme, setTheme] = useState(document.documentElement.dataset.theme || 'light');
+
+      useEffect(() => {
+        const sync = () => setTheme(document.documentElement.dataset.theme);
+        window.addEventListener('lh-theme-change', sync);
+        return () => window.removeEventListener('lh-theme-change', sync);
+      }, []);
+
+      const toggleTheme = () => {
+        const next = theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = next;
+        localStorage.setItem('lh-theme', next);
+        setTheme(next);
+      };
+
+      const goto = (p) => {
+        setPage(p);
+        window.scrollTo({top:0, behavior:'instant'});
+      };
+
+      return (
+        <>
+          <Nav active={page} onNav={goto} theme={theme} onToggleTheme={toggleTheme}/>
+          {page === 'home' && (
+            <>
+              <Hero onBrowse={() => goto('notebooks')} onContact={() => goto('contact')}/>
+              <Marquee/>
+              <ExpertiseGrid/>
+              <AboutSection/>
+            </>
+          )}
+          {page === 'notebooks' && (
+            <div style={{paddingTop:60}}>
+              <NotebookGrid onOpen={setOpenNb}/>
+            </div>
+          )}
+          {page === 'research' && (
+            <div style={{paddingTop:60}}>
+              <ResearchPage onOpenNb={setOpenNb}/>
+            </div>
+          )}
+          {page === 'contact' && (
+            <div style={{paddingTop:120, textAlign:'center', maxWidth:680, margin:'0 auto', padding:'120px 1.5rem 4rem'}}>
+              <div className="section-tag" style={{justifyContent:'center'}}>Contact</div>
+              <h2 className="section-title">Let's Collaborate</h2>
+              <p className="section-desc" style={{margin:'.9rem auto 2.2rem'}}>Interested in GIS consultancy, research collaboration, or spatial data science? I'd love to connect.</p>
+              <div style={{display:'flex', justifyContent:'center', gap:'.9rem', flexWrap:'wrap'}}>
+                <a className="btn btn-primary">✉ Email Me</a>
+                <a className="btn btn-ghost">⌥ GitHub</a>
+                <a className="btn btn-ghost">in LinkedIn</a>
+              </div>
+            </div>
+          )}
+          <Footer/>
+          <NotebookModal nb={openNb} onClose={() => setOpenNb(null)}/>
+        </>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+  </script>
+</body>
+</html>
