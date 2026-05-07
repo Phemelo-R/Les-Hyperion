@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notebooks — Les Hyperion</title>
+  <meta name="description" content="Jupyter notebooks on R, Python, spatial analysis, remote sensing, and ocean climatology." />
+
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/nav.css" />
+  <link rel="stylesheet" href="css/notebooks.css" />
+  <link rel="stylesheet" href="css/modal.css" />
+
+  <!-- highlight.js — syntax highlighting for notebook code cells -->
+  <!-- Light theme by default; swapped in modal.js when dark theme is active -->
+  <link rel="stylesheet" id="hljs-theme"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/r.min.js"></script>
+
+  <!-- marked.js — markdown parsing for notebook markdown cells -->
+  <script src="https://cdn.jsdelivr.net/npm/marked@9/marked.min.js"></script>
+
+  <!-- MathJax 3 — renders $...$ and $$...$$ LaTeX equations -->
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath:  [['$', '$']],
+      displayMath: [['$$', '$$']],
+      processEscapes: true,
+      tags: 'ams',
+    },
+    options: {
+      skipHtmlTags: ['script','noscript','style','textarea','pre','code'],
+    },
+    startup: { typeset: false },
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+  <script>
+    (function(){
+      const t = localStorage.getItem('lh-theme');
+      if (t) document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <style>
+    /* Keep highlight.js theme in sync with site theme */
+    :root[data-theme="dark"] #hljs-theme { }
+  </style>
+</head>
+<body>
+
+<div class="topo-bg" aria-hidden="true"></div>
+<div class="scan-bg"  aria-hidden="true"></div>
+
+<!-- ============ NAV ============ -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <a class="nav-brand" href="index.html">
+    <img class="nav-logo" src="assets/LesHyperion_logo.png" alt="Les Hyperion logo"
+         onerror="this.style.display='none';this.nextSibling.style.display='inline'" />
+    <span style="display:none">🗺</span>
+    Les Hyperion
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="notebooks.html" class="active">Notebooks</a></li>
+    <li><a href="research.html">Research</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+      <span class="theme-icon">🌙</span>
+      <span class="theme-label">Dark</span>
+    </button>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<nav class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
+  <a href="index.html">Home</a>
+  <a href="notebooks.html" class="active">Notebooks</a>
+  <a href="research.html">Research</a>
+  <a href="about.html">About</a>
+</nav>
+
+<!-- ============ MAIN ============ -->
+<div class="page-wrap">
+
+  <!-- Grid section (hidden when viewer is open) -->
+  <div id="notebooks-grid-section">
+
+    <!-- Page header -->
+    <header class="notebooks-header">
+      <div class="section-inner">
+        <div class="section-tag">Portfolio</div>
+        <h1 class="section-title">All Notebooks</h1>
+        <p class="section-desc">
+          All reproducible code notebooks on this site are listed here.
+          Each category has its own section, and notebooks are organised 
+          into series where applicable (e.g. R Fundamentals, Machine Learning). Series are 
+          numbered — start at <strong>Part 1</strong> and follow the sequence. 
+          Click any notebook to open it.
+        </p>
+      </div>
+    </header>
+
+    <!-- Filter + grid -->
+    <section>
+      <div class="section-inner">
+        <div class="filter-bar" id="filter-bar" role="group" aria-label="Filter by category">
+          <!-- Populated by notebooks.js -->
+        </div>
+        <div id="notebooks-list">
+          <!-- Populated by notebooks.js -->
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /notebooks-grid-section -->
+
+  <!-- Footer (only visible when grid is shown) -->
+  <footer class="footer" id="grid-footer">
+    <span class="footer-brand">Les Hyperion</span>
+    <span>© <span id="footer-year"></span> Phemelo Rutlokoane</span>
+    <div class="footer-links">
+      <a href="https://github.com/Phemelo-R" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+  </footer>
+
+</div><!-- /page-wrap -->
+
+<!-- ============ FULL-PAGE NOTEBOOK VIEWER ============ -->
+<div class="nb-viewer" id="nb-viewer" role="dialog" aria-modal="true" aria-label="Notebook viewer">
+
+  <!-- Top bar -->
+  <div class="vwr-bar">
+    <button class="vwr-back" id="vwr-back" aria-label="Back to notebooks">
+      ← Back
+    </button>
+
+    <div class="vwr-breadcrumb">
+      Notebooks /
+      <span id="vwr-breadcrumb-nb"></span>
+      <span style="margin-left:.5rem;color:var(--text-faint);font-size:.62rem" id="vwr-file-title"></span>
+    </div>
+
+    <div class="vwr-actions">
+      <button class="vwr-theme-btn" data-theme-toggle aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+        <span class="theme-label">Dark</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Scrollable content -->
+  <div class="vwr-body" id="vwr-body">
+    <!-- Populated by notebooks.js when a notebook is opened -->
+  </div>
+
+</div><!-- /nb-viewer -->
+
+<!-- Scripts -->
+<script src="js/theme.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/data.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+<script src="js/notebooks.js"></script>
+<script>
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+  // Back button
+  document.getElementById('vwr-back').addEventListener('click', () => {
+    history.back();
+  });
+
+  // Sync highlight.js theme with site theme
+  function syncHljsTheme() {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    document.getElementById('hljs-theme').href = isDark
+      ? 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css'
+      : 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css';
+  }
+
+  // Run on load
+  syncHljsTheme();
+
+  // Watch for theme changes
+  const observer = new MutationObserver(syncHljsTheme);
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+</script>
+</body>
+</html>

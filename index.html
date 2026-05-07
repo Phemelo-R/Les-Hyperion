@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Les Hyperion — Phemelo Rutlokoane</title>
+  <meta name="description" content="GIS, Remote Sensing & Spatial Ecology portfolio of Phemelo Rutlokoane." />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/nav.css" />
+  <link rel="stylesheet" href="css/home.css" />
+  <link rel="stylesheet" href="css/notebooks.css" />
+
+  <!-- D3 + TopoJSON (for globe) — loaded before home.js -->
+  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+
+  <!-- Apply saved theme before paint -->
+  <script>
+    (function(){
+      const t = localStorage.getItem('lh-theme');
+      if (t) document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+</head>
+<body>
+
+<!-- Background layers -->
+<div class="topo-bg" aria-hidden="true"></div>
+<div class="scan-bg" aria-hidden="true"></div>
+
+<!-- ============ NAV ============ -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <a class="nav-brand" href="index.html">
+    <img class="nav-logo" src="assets/LesHyperion_logo.png"
+         alt="Les Hyperion logo"
+         onerror="this.style.display='none';this.nextSibling.style.display='inline'" />
+    <span style="display:none">🗺</span>
+    Les Hyperion
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="notebooks.html">Notebooks</a></li>
+    <li><a href="research.html">Research</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+      <span class="theme-icon">🌙</span>
+      <span class="theme-label">Dark</span>
+    </button>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile drawer -->
+<nav class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
+  <a href="index.html" class="active">Home</a>
+  <a href="notebooks.html">Notebooks</a>
+  <a href="research.html">Research</a>
+  <a href="about.html">About</a>
+</nav>
+
+<!-- ============ MAIN ============ -->
+<div class="page-wrap">
+
+  <!-- Hero -->
+  <section class="hero" aria-labelledby="hero-heading">
+    <div class="hero-text">
+      <div class="hero-eyebrow">GIS · Remote Sensing · Spatial Ecology</div>
+      <h1 class="hero-title" id="hero-heading">
+        Mapping <span class="a1">Nature,</span><br>
+        Quantifying<br>
+        <span class="a2">Biodiversity.</span>
+      </h1>
+      <p class="hero-desc">
+        An online portfolio showcasing reproducible code notebooks, biodiversity research,
+        and educational content that for conservationists, ecologists, and geospatial practitioners.
+        The topics covered include Remote Sensing, GIS, Biostatistics, Quantitative Ecology,
+        Landscape Ecology, Machine Learning, and Oceanographic Analysis.
+      </p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="notebooks.html">Browse Notebooks</a>
+        <a class="btn btn-ghost"   href="research.html">View Research →</a>
+      </div>
+    </div>
+
+    <div class="globe-wrap" id="globe-wrap" aria-hidden="true"></div>
+  </section>
+
+  <!-- Marquee -->
+  <div class="marquee-wrap" aria-hidden="true">
+    <div class="marquee-track">
+      <!-- Two copies for seamless loop -->
+      <span class="marquee-item"><span class="marquee-dot"></span>R</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Python</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>QGIS</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Landsat</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>NDVI</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>MaxEnt</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>BioSCape</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>AVIRIS-NG</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>LiDAR</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Random Forest</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>heatwaveR</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Fynbos</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>tidyverse</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Sentinel-2</span>
+      <!-- Duplicate -->
+      <span class="marquee-item"><span class="marquee-dot"></span>R</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Python</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>QGIS</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Landsat</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>NDVI</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>MaxEnt</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>BioSCape</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>AVIRIS-NG</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>LiDAR</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Random Forest</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>heatwaveR</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Fynbos</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>tidyverse</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Sentinel-2</span>
+    </div>
+  </div>
+
+  <!-- Expertise -->
+  <section class="expertise" aria-labelledby="expertise-heading">
+    <div class="section-inner">
+      <div class="section-header fade-up">
+        <div class="section-tag">What I Do</div>
+        <h2 class="section-title" id="expertise-heading">Areas of Expertise</h2>
+        <p class="section-desc">I have done plenty of work in the following areas to a point where I am comfortable and experienced in them.</p>
+      </div>
+
+      <div class="expertise-grid">
+        <div class="exp-card fade-up" style="--c:var(--accent5)">
+          <span class="exp-icon">🛰</span>
+          <div class="exp-title">Remote Sensing</div>
+          <div class="exp-desc">Multispectral, hyperspectral, and LiDAR analysis. Landsat, Sentinel-2, and AVIRIS-NG workflows.</div>
+          <div class="exp-tags">
+            <span class="exp-tag">NDVI</span>
+            <span class="exp-tag">Hyperspectral</span>
+            <span class="exp-tag">LiDAR</span>
+          </div>
+        </div>
+
+        <div class="exp-card fade-up" style="--c:var(--accent2)">
+          <span class="exp-icon">🗺</span>
+          <div class="exp-title">GIS & Spatial Analysis</div>
+          <div class="exp-desc">Vector and raster operations, cartographic design, and spatial statistics in R and QGIS.</div>
+          <div class="exp-tags">
+            <span class="exp-tag">QGIS</span>
+            <span class="exp-tag">sf</span>
+            <span class="exp-tag">terra</span>
+          </div>
+        </div>
+
+        <div class="exp-card fade-up" style="--c:var(--accent3)">
+          <span class="exp-icon">🧬</span>
+          <div class="exp-title">Biodiversity Informatics</div>
+          <div class="exp-desc">Species distribution modelling, diversity metrics, and ecological survey design at landscape scale.</div>
+          <div class="exp-tags">
+            <span class="exp-tag">MaxEnt</span>
+            <span class="exp-tag">SDM</span>
+            <span class="exp-tag">GBIF</span>
+          </div>
+        </div>
+
+        <div class="exp-card fade-up" style="--c:var(--accent4)">
+          <span class="exp-icon">📊</span>
+          <div class="exp-title">Quantitative Methods</div>
+          <div class="exp-desc">Time-series analysis, multivariate statistics, and machine learning applied to ecological data.</div>
+          <div class="exp-tags">
+            <span class="exp-tag">tidyverse</span>
+            <span class="exp-tag">Random Forest</span>
+            <span class="exp-tag">Time Series</span>
+          </div>
+        </div>
+
+        <div class="exp-card fade-up" style="--c:var(--accent)">
+          <span class="exp-icon">🌊</span>
+          <div class="exp-title">Ocean Climatology</div>
+          <div class="exp-desc">SST time-series, marine heatwave detection, and oceanographic pattern analysis using NOAA datasets.</div>
+          <div class="exp-tags">
+            <span class="exp-tag">SST</span>
+            <span class="exp-tag">heatwaveR</span>
+            <span class="exp-tag">OISST</span>
+          </div>
+        </div>
+
+        <div class="exp-card fade-up" style="--c:var(--accent5)">
+          <span class="exp-icon">🔬</span>
+          <div class="exp-title">Field Research</div>
+          <div class="exp-desc">Ecological survey methods, biodiversity monitoring, plot-based vegetation sampling, and specimen collection.</div>
+          <div class="exp-tags">
+            <span class="exp-tag">Field Surveys</span>
+            <span class="exp-tag">Vegetation</span>
+            <span class="exp-tag">Monitoring</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Notebooks -->
+  <section class="featured-notebooks" aria-labelledby="featured-heading">
+    <div class="section-inner">
+      <div class="section-header fade-up">
+        <div class="section-tag">Portfolio</div>
+        <h2 class="section-title" id="featured-heading">Featured Notebooks</h2>
+        <p class="section-desc">Reproducible code notebooks covering spatial R, satellite imagery, biostatistics, and oceanographic analysis.</p>
+      </div>
+
+      <div class="featured-grid" id="featured-grid">
+        <!-- Populated by home.js -->
+      </div>
+
+      <div class="featured-more">
+        <a class="btn btn-ghost" href="notebooks.html">All Notebooks →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About snippet -->
+  <section class="about-home" aria-labelledby="about-home-heading">
+    <div class="section-inner">
+      <div class="about-home-inner">
+        <div class="about-photo-wrap fade-up">
+          <div class="about-photo-frame">
+            <img class="about-photo"
+                 src="assets/images/portrait.JPG"
+                 alt="Phemelo Rutlokoane"
+                 onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;font-size:4rem\'>🌿</div>'" />
+          </div>
+          <div class="about-photo-badge">👨‍🎓 B.Sc (Hons) Biodiversity & Conservation</div>
+        </div>
+
+        <div class="about-text fade-up">
+          <div class="section-tag">About</div>
+          <h2 class="section-title" id="about-home-heading">Phemelo Rutlokoane</h2>
+          <div class="about-role">B.Sc (Hons) Biodiversity and Conservation</div>
+          <p class="about-bio">
+            I am an Honours graduate in Biodiversity and Conservation at the University of the 
+            Western Cape with a focus on remote sensing and spatial ecology. I use reproducible R 
+            and Python workflows to turn satellite imagery and field data into ecological insight.
+          </p>
+          <div class="about-cta-row">
+            <a class="btn btn-primary" href="about.html">Read More</a>
+            <a class="btn btn-ghost"   href="research.html">Research →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span class="footer-brand">Les Hyperion</span>
+    <span>© <span id="footer-year"></span> Phemelo Rutlokoane</span>
+    <div class="footer-links">
+      <a href="https://github.com/Phemelo-R" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+  </footer>
+
+</div><!-- /page-wrap -->
+
+<!-- Scripts -->
+<script src="js/theme.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/data.js"></script>
+<script src="js/home.js"></script>
+<script>
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

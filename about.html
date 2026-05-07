@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Les Hyperion</title>
+  <meta name="description" content="About Phemelo Rutlokoane — GIS Analyst, Spatial Ecologist, and Researcher." />
+
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/nav.css" />
+  <link rel="stylesheet" href="css/about.css" />
+
+  <script>
+    (function(){
+      const t = localStorage.getItem('lh-theme');
+      if (t) document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+</head>
+<body>
+
+<div class="topo-bg" aria-hidden="true"></div>
+<div class="scan-bg"  aria-hidden="true"></div>
+
+<!-- ============ NAV ============ -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <a class="nav-brand" href="index.html">
+    <img class="nav-logo" src="assets/LesHyperion_logo.png" alt="Les Hyperion logo"
+         onerror="this.style.display='none';this.nextSibling.style.display='inline'" />
+    <span style="display:none">🗺</span>
+    Les Hyperion
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="notebooks.html">Notebooks</a></li>
+    <li><a href="research.html">Research</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+      <span class="theme-icon">🌙</span>
+      <span class="theme-label">Dark</span>
+    </button>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<nav class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
+  <a href="index.html">Home</a>
+  <a href="notebooks.html">Notebooks</a>
+  <a href="research.html">Research</a>
+  <a href="about.html" class="active">About</a>
+</nav>
+
+<!-- ============ MAIN ============ -->
+<div class="page-wrap">
+
+  <!-- ---- Intro / Bio ---- -->
+  <section class="about-intro">
+    <div class="about-intro-inner">
+
+      <!-- Portrait -->
+      <div class="about-portrait-wrap fade-up">
+        <div class="about-portrait">
+          <!--
+            Place a portrait photo at:  assets/images/portrait.jpg
+            If the file is absent the section shows a placeholder.
+          -->
+          <img src="assets/images/portrait.JPG"
+               alt="Phemelo Rutlokoane"
+               onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;font-size:5rem;background:var(--bg3)\'>🌿</div>'" />
+        </div>
+        <div class="about-portrait-caption">👨‍🎓 B.Sc (Hons) Biodiversity & Conservation</div>
+      </div>
+
+      <!-- Text -->
+      <div class="fade-up">
+        <div class="about-name">Phemelo<br>Rutlokoane</div>
+        <div class="about-degree">B.Sc (Hons) Biodiversity and Conservation</div>
+
+        <div class="about-body-text">
+          <p>
+            I am an Honours graduate in Biodiversity and Conservation at the University 
+            of the Western Cape with a focus on remote sensing and spatial ecology. 
+            My Honours research focused on monitoring <em>leucadendron argenteum</em> (Silvertree)
+            populations on Table Mountain using NASA BioSCape's AVIRIS-NG hyperspectral imagery
+            and LVIS LiDAR. I developed a probability map of Silver Tree presence across the reserve 
+            using machine learning models trained on field-validated presence records. 
+          </p>
+          <p>
+            My interests lie in using geospatial data and ecological modelling to understand and conserve 
+            biodiversity. I spend most of my time working with satellite imagery, building reproducible 
+            workflows that move from raw data to ecological inference. Most of my work is documented as 
+            Jupyter notebooks that others can follow and adapt using R and Python. I also have experience 
+            with GIS software like QGIS for spatial analysis and visualization. 
+          </p>
+        </div>
+
+        <!-- Quick meta chips -->
+        <div class="about-meta-row">
+          <span class="about-meta-chip"><span class="chip-icon">🎓</span> University of the Western Cape</span>
+          <span class="about-meta-chip"><span class="chip-icon">📍</span> Johannesburg, ZA</span>
+          <span class="about-meta-chip"><span class="chip-icon">🔬</span> GIS · Remote Sensing · Ecology</span>
+        </div>
+
+        <!-- Research interests -->
+        <div class="about-pills-section">
+          <div class="about-pills-label">Research Interests</div>
+          <div class="about-pills">
+            <span class="about-pill">Remote Sensing</span>
+            <span class="about-pill">Species Distribution Modelling</span>
+            <span class="about-pill">Ocean Climatology</span>
+            <span class="about-pill">Biodiversity Informatics</span>
+            <span class="about-pill">Landscape Ecology</span>
+            <span class="about-pill">Fynbos Ecology</span>
+          </div>
+        </div>
+
+        <!-- Tools -->
+        <div class="about-pills-section">
+          <div class="about-pills-label">Tools</div>
+          <div class="about-pills">
+            <span class="about-pill">R</span>
+            <span class="about-pill">Python</span>
+            <span class="about-pill">QGIS</span>
+          </div>
+        </div>
+
+        <div style="margin-top:1.6rem;display:flex;flex-wrap:wrap;gap:.7rem;">
+          <a class="btn btn-primary" href="notebooks.html">Browse Notebooks</a>
+          <a class="btn btn-ghost"   href="research.html">View Research →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ---- Field Work & Experiences ---- -->
+  <section class="about-fieldwork">
+    <div class="section-inner">
+
+      <div class="section-header fade-up">
+        <div class="section-tag">A Few Years of Work</div>
+        <h2 class="section-title">Field Work &amp; Experiences</h2>
+        <p class="section-desc">
+          Throughout my studies and research, I've had the opportunity to engage in various fieldwork 
+          and practical experiences that have enriched my understanding of ecology and conservation. 
+          Below is a selection of some of the most memorable projects and fieldwork I've been involved in, 
+          showcasing the diversity of hands-on experiences that have complemented my academic journey.
+        </p>
+      </div>
+
+      <!-- ================================================================
+           1. Honours Fieldwork — Table Mountain
+           Files: assets/images/fieldwork/fieldwork-1.jpg … fieldwork-4.jpg
+           ================================================================ -->
+      <div class="fw-section fade-up">
+        <div class="fw-header">
+          <div>
+            <div class="fw-title">Honours Research Fieldwork</div>
+            <div class="fw-desc">
+              Setting up LiDAR validation plots for my Honours research and ground-truthing satellite imagery 
+              for monitoring the distribution of the endemic Silver Tree on Table Mountain.
+            </div>
+          </div>
+          <span class="fw-year">2025</span>
+        </div>
+        <div class="fw-grid cols-4">
+          <div class="fw-img-wrap sq">
+            <img src="assets/images/fieldwork/fieldwork-1.JPG"
+                 alt="Phemelo next to a silver tree during fieldwork"
+                 loading="lazy" />
+            <div class="fw-img-caption">Setting up validation plots</div>
+          </div>
+          <div class="fw-img-wrap sq">
+            <img src="assets/images/fieldwork/fieldwork-2.HEIC"
+                 alt="Silver trees on the slope"
+                 loading="lazy" />
+            <div class="fw-img-caption">Taking field measurements</div>
+          </div>
+          <div class="fw-img-wrap sq">
+            <img src="assets/images/fieldwork/fieldwork-3.HEIC"
+                 alt="Supervisor on Table Mountain stairs"
+                 loading="lazy" />
+            <div class="fw-img-caption">Travelling to the site</div>
+          </div>
+          <div class="fw-img-wrap sq">
+            <img src="assets/images/fieldwork/fieldwork-4.HEIC"
+                 alt="Silver tree stand"
+                 loading="lazy" />
+            <div class="fw-img-caption">Silver tree stands — survey area</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================
+           2. Carbon Sink Volunteer Work — Berg River
+           Files: assets/images/berg-river/berg-river-1.jpg
+           ================================================================ -->
+      <div class="fw-section fade-up">
+        <div class="fw-header">
+          <div>
+            <div class="fw-title">Carbon Sink Volunteer Work</div>
+            <div class="fw-desc">
+              Doing field sampling for a project assessing carbon sinks to quantify
+              habitat health and track ecological restoration progress. I was collecting 
+              soil samples at the Berg River estuary to analyse for carbon content and other
+              properties.
+            </div>
+          </div>
+          <span class="fw-year">2025</span>
+        </div>
+        <div class="fw-grid cols-4">
+          <div class="fw-img-wrap sq">
+            <img src="assets/images/berg-river/berg-river-1.jpeg"
+                 alt="Group at the Berg River collecting samples"
+                 loading="lazy" />
+            <div class="fw-img-caption">Berg River — Carbon Sink Field Sampling</div>
+          </div>
+          <div class="fw-img-wrap sq">
+            <img src="assets/images/berg-river/berg-river-2.jpeg"
+                 alt="Group at the Berg River collecting samples"
+                 loading="lazy" />
+            <div class="fw-img-caption">Berg River — Carbon Sink Field Sampling</div>
+          </div>
+          <div class="fw-img-wrap sq">
+            <img src="assets/images/berg-river/berg-river-3.jpeg"
+                 alt="Group at the Berg River collecting samples"
+                 loading="lazy" />
+            <div class="fw-img-caption">Berg River — Carbon Sink Field Sampling</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================
+           3. Cape Flats Nature Reserve
+           Files: assets/images/cape-flats/cape-flats-1.jpg … -7.jpg
+           ================================================================ -->
+      <div class="fw-section fade-up">
+        <div class="fw-header">
+          <div>
+            <div class="fw-title">Cape Flats Nature Reserve</div>
+            <div class="fw-desc">
+              My volunteer work at the Cape Flats Nature Reserve involved a range of activities 
+              focused on habitat restoration and biodiversity monitoring. I participated in 
+              nursery maintenance, which included tasks such as weeding, watering, and preparing 
+              seedlings for planting. Additionally, I was involved in clearing invasive alien plants 
+              to help restore native vegetation and expanding firebreaks for a prepared burn. One of 
+              the most exciting aspects of my volunteer work was conducting biodiversity surveys where 
+              we set up mammal traps and invertebrate pitfall traps to monitor local fauna. One of the 
+              highlights was a night survey that revealed a variety of nocturnal creatures, including 
+              scorpions, a chameleon, and a large spider.
+            </div>
+          </div>
+          <span class="fw-year">2022 – 2024</span>
+        </div>
+        <div class="fw-grid cols-3">
+          <div class="fw-img-wrap wide">
+            <img src="assets/images/cape-flats/cape-flats-1.JPG"
+                 alt="Nursery maintenance at Cape Flats"
+                 loading="lazy" />
+            <div class="fw-img-caption">Nursery maintenance</div>
+          </div>
+          <div class="fw-img-wrap wide">
+            <img src="assets/images/cape-flats/cape-flats-2.HEIC"
+                 alt="Night survey group photo"
+                 loading="lazy" />
+            <div class="fw-img-caption">Cape Striped Fieldmouse — Sherman Trap Rodent Survey</div>
+          </div>
+          <div class="fw-img-wrap wide">
+            <img src="assets/images/cape-flats/cape-flats-3.HEIC"
+                 alt="Scorpion under UV light"
+                 loading="lazy" />
+            <div class="fw-img-caption">Cape Tick-tailed Scorpion — Biodiversity Survey</div>
+          </div>
+          <div class="fw-img-wrap sq">
+            <img src="assets/images/cape-flats/cape-flats-4.HEIC"
+                 alt="Chameleon found during survey"
+                 loading="lazy" />
+            <div class="fw-img-caption">Cape Dwarf Chameleon — Biodiversity Survey</div>
+          </div>
+          <div class="fw-img-wrap sq">
+            <img src="assets/images/cape-flats/cape-flats-5.HEIC"
+                 alt="Glowing scorpion"
+                 loading="lazy" />
+            <div class="fw-img-caption">Clicking Stream Frog — Night Biodiversity Survey</div>
+          </div>
+          <div class="fw-img-wrap sq">
+            <img src="assets/images/cape-flats/cape-flats-6.HEIC"
+                 alt="Large spider"
+                 loading="lazy" />
+            <div class="fw-img-caption">Cape Ticktail Scorpion — Under UV Light</div>
+          </div>
+          <div class="fw-img-wrap sq7">
+            <img src="assets/images/cape-flats/cape-flats-7.JPG"
+                 alt="Large spider"
+                 loading="lazy" />
+            <div class="fw-img-caption">Cape rainspider — Night Biodiversity Survey</div>
+          </div>
+          <div class="fw-img-wrap wide span2">
+            <img src="assets/images/cape-flats/cape-flats-8.JPG"
+                 alt="Striped mouse caught in Sherman trap"
+                 loading="lazy" />
+            <div class="fw-img-caption"> Group Photo — Night biodiversity survey</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================
+           4. Grootbos Night Survey
+           Files: assets/images/grootbos/grootbos-1.jpg
+           ================================================================ -->
+      <div class="fw-section fade-up">
+        <div class="fw-header">
+          <div>
+            <div class="fw-title">Grootbos Private Nature Reserve — Night Survey</div>
+            <div class="fw-desc">
+              A mini-biodiversity night survey we conducted at Grootbos Private Nature Reserve
+              as part of a funtime activity.
+            </div>
+          </div>
+          <span class="fw-year">2024</span>
+        </div>
+        <div class="fw-grid cols-2">
+          <div class="fw-img-wrap wide">
+            <img src="assets/images/grootbos/grootbos-1.JPG"
+                 alt="Night survey at Grootbos — orange jacket"
+                 loading="lazy" />
+            <div class="fw-img-caption">Night mini-biodiversity survey — Grootbos</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================
+           5. University Practicals
+           Files: assets/images/practicals/practicals-1.jpg … -4.jpg
+           ================================================================ -->
+      <div class="fw-section fade-up">
+        <div class="fw-header">
+          <div>
+            <div class="fw-title">University Practicals</div>
+            <div class="fw-desc">
+              These are the hands-on practicals in environmental sciences and ecology  I was involved 
+              in — involving a constant discharge pumping test at a borehole, an insect collection project, and a
+              DNA extraction practical.
+            </div>
+          </div>
+          <span class="fw-year">2022 – 2024</span>
+        </div>
+        <div class="fw-grid cols-2">
+          <div class="fw-img-wrap wide">
+            <img src="assets/images/practicals/practicals-1.HEIC"
+                 alt="Borehole pumping test practical"
+                 loading="lazy" />
+            <div class="fw-img-caption">Constant discharge pumping test — Environmental Sciences</div>
+          </div>
+          <div class="fw-img-wrap wide">
+            <img src="assets/images/practicals/practicals-2.heic"
+                 alt="Insect collection practical"
+                 loading="lazy" />
+            <div class="fw-img-caption">Insect collection — sweep netting</div>
+          </div>
+          <div class="fw-img-wrap wide">
+            <img src="assets/images/practicals/practicals-3.HEIC"
+                 alt="DNA extraction — holding capsule in glove"
+                 loading="lazy" />
+            <div class="fw-img-caption">DNA extraction practical</div>
+          </div>
+          <div class="fw-img-wrap wide">
+            <img src="assets/images/practicals/practicals-4.JPG"
+                 alt="DNA extraction — gel or reagent step"
+                 loading="lazy" />
+            <div class="fw-img-caption">DNA extraction — reagent step</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /section-inner -->
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span class="footer-brand">Les Hyperion</span>
+    <span>© <span id="footer-year"></span> Phemelo Rutlokoane</span>
+    <div class="footer-links">
+      <a href="https://github.com/Phemelo-R" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+  </footer>
+
+</div><!-- /page-wrap -->
+
+<!-- ============ LIGHTBOX ============ -->
+<div class="lightbox-overlay" id="lightbox-overlay" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button class="lightbox-close" id="lightbox-close" aria-label="Close image">✕</button>
+  <img class="lightbox-img" id="lightbox-img" alt="" />
+  <div class="lightbox-caption" id="lightbox-caption"></div>
+</div>
+
+<!-- Scripts -->
+<script src="js/theme.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/about.js"></script>
+<script>
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Research — Les Hyperion</title>
+  <meta name="description" content="Research projects in remote sensing, species distribution modelling, and ocean climatology." />
+
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/nav.css" />
+  <link rel="stylesheet" href="css/research.css" />
+  <link rel="stylesheet" href="css/modal.css" />
+
+  <script>
+    (function(){
+      const t = localStorage.getItem('lh-theme');
+      if (t) document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+</head>
+<body>
+
+<div class="topo-bg" aria-hidden="true"></div>
+<div class="scan-bg"  aria-hidden="true"></div>
+
+<!-- ============ NAV ============ -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <a class="nav-brand" href="index.html">
+    <img class="nav-logo" src="assets/LesHyperion_logo.png" alt="Les Hyperion logo"
+         onerror="this.style.display='none';this.nextSibling.style.display='inline'" />
+    <span style="display:none">🗺</span>
+    Les Hyperion
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="notebooks.html">Notebooks</a></li>
+    <li><a href="research.html" class="active">Research</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+      <span class="theme-icon">🌙</span>
+      <span class="theme-label">Dark</span>
+    </button>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<nav class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
+  <a href="index.html">Home</a>
+  <a href="notebooks.html">Notebooks</a>
+  <a href="research.html" class="active">Research</a>
+  <a href="about.html">About</a>
+</nav>
+
+<!-- ============ MAIN ============ -->
+<div class="page-wrap" id="research-list-section">
+
+  <!-- Page header -->
+  <header style="background:var(--bg2);border-bottom:1px solid var(--border);position:relative;z-index:1;">
+    <div class="section-inner" style="padding-top:clamp(3rem,6vh,5rem);padding-bottom:clamp(2rem,4vh,3rem);">
+      <div class="section-tag">Research</div>
+      <h1 class="section-title">Projects &amp; Write-ups</h1>
+      <p class="section-desc">
+        Research projects and studies I conducted throughout my career. Each project card has a write-up summarising 
+        the motivation, methods, and key findings, along with links to the code notebooks that produced the results.
+      </p>
+    </div>
+  </header>
+
+  <!-- Research list -->
+  <section>
+    <div class="section-inner">
+      <div class="research-list" id="research-list">
+        <!-- Populated by research.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span class="footer-brand">Les Hyperion</span>
+    <span>© <span id="footer-year"></span> Phemelo Rutlokoane</span>
+    <div class="footer-links">
+      <a href="https://github.com/Phemelo-R" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+  </footer>
+
+</div><!-- /page-wrap -->
+
+<!-- ============ FULL-PAGE RESEARCH VIEWER ============ -->
+<div class="nb-viewer" id="research-viewer" role="dialog" aria-modal="true" aria-label="Research paper viewer">
+  <div class="vwr-bar">
+    <button class="vwr-back" id="research-vwr-back" aria-label="Back to research">← Back</button>
+    <div class="vwr-breadcrumb">
+      Research / <span id="research-vwr-title"></span>
+    </div>
+    <div class="vwr-actions">
+      <button class="vwr-theme-btn" data-theme-toggle aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+        <span class="theme-label">Dark</span>
+      </button>
+    </div>
+  </div>
+  <div class="vwr-body" id="research-vwr-body"></div>
+</div>
+
+<!-- Scripts -->
+<script src="js/theme.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/data.js"></script>
+<script src="js/research.js"></script>
+<script>
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
+  document.getElementById('research-vwr-back').addEventListener('click', () => {
+  document.getElementById('research-viewer').classList.remove('open');
+  document.getElementById('research-list-section').style.display = '';
+  document.body.style.overflow = '';
+});
+</script>
+</body>
+</html>
