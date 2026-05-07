@@ -1,0 +1,91 @@
+/* ============================================================
+   Les Hyperion — Design Tokens
+   Light theme is default; dark overrides via [data-theme="dark"]
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Lora:ital,wght@0,400;1,400;1,600&display=swap');
+
+/* ---------- LIGHT THEME (DEFAULT) ---------- */
+:root {
+  /* Backgrounds */
+  --bg:      #f7f9fc;
+  --bg2:     #eef3f9;
+  --bg3:     #e1e9f3;
+  --border:  rgba(28,60,100,0.12);
+
+  /* Text */
+  --text:       #0f1c2e;
+  --text-muted: #4f6480;
+  --text-faint: #8aa0bd;
+
+  /* Brand accents */
+  --accent:  #1e6fd9;   /* blue  — primary / R Fundamentals */
+  --accent2: #1f8e5d;   /* green — GIS / Spatial */
+  --accent3: #d18514;   /* amber — Marine / Environmental */
+  --accent4: #8a35d4;   /* violet — Machine Learning */
+  --accent5: #c93060;   /* pink  — Research */
+
+  /* Cards */
+  --card-bg:     rgba(255,255,255,0.82);
+  --card-border: rgba(30,111,217,0.18);
+  --shadow:      0 8px 30px rgba(20,40,80,0.08);
+  --shadow-lg:   0 18px 48px rgba(20,40,80,0.14);
+  --shadow-glow: 0 8px 24px rgba(30,111,217,0.28);
+
+  /* Code / Notebook preview — responds to theme */
+  --code-bg:    #f0f4f8;
+  --code-bg2:   #e4ecf6;
+  --code-fg:    #0f1c2e;
+  --code-muted: #4f6480;
+  --code-green: #1f8e5d;
+  --code-blue:  #1e6fd9;
+  --code-num:   rgba(30,111,217,0.15);
+
+  /* Fonts */
+  --font-d: 'Syne', system-ui, sans-serif;
+  --font-b: 'Lora', Georgia, serif;
+  --font-m: 'DM Mono', ui-monospace, monospace;
+
+  /* Shape */
+  --radius:    16px;
+  --radius-sm: 8px;
+  --radius-pill: 999px;
+
+  /* Motion */
+  --ease:     cubic-bezier(0.4,0,0.2,1);
+  --dur-fast: .18s;
+  --dur:      .28s;
+  --dur-slow: .65s;
+}
+
+/* ---------- DARK THEME ---------- */
+:root[data-theme="dark"] {
+  --bg:      #0b0f14;
+  --bg2:     #111820;
+  --bg3:     #1a2535;
+  --border:  rgba(100,160,220,0.15);
+
+  --text:       #e8eef5;
+  --text-muted: #7a96b0;
+  --text-faint: #3d5168;
+
+  --accent:  #4a9eff;
+  --accent2: #38c98a;
+  --accent3: #f5a623;
+  --accent4: #c96aff;
+  --accent5: #ff6a88;
+
+  --card-bg:     rgba(22,32,48,0.75);
+  --card-border: rgba(74,158,255,0.12);
+  --shadow:      0 8px 40px rgba(0,0,0,0.50);
+  --shadow-lg:   0 20px 60px rgba(0,0,0,0.60);
+  --shadow-glow: 0 8px 24px rgba(74,158,255,0.35);
+
+  --code-bg:    #070d18;
+  --code-bg2:   #0e1a2e;
+  --code-fg:    #e8eef5;
+  --code-muted: #7a96b0;
+  --code-green: #38c98a;
+  --code-blue:  #4a9eff;
+  --code-num:   rgba(74,158,255,0.18);
+}
