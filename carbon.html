@@ -90,7 +90,8 @@
 
       <div class="cfig-empty" id="fig-empty">
         <div class="cfig-empty-i">📉</div>
-        <p>No travel has been logged yet.</p>
+        <p>No travel has been logged yet. Once legs are recorded below, this section will chart
+           emissions over time and show how they break down across the landscapes we work in.</p>
       </div>
 
       <div class="cfig-grid" id="fig-canvases" style="display:none;">
@@ -191,15 +192,17 @@
     <div class="section-inner">
       <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;margin-bottom:1rem;">
         <div>
-          <div class="section-tag">Your entries</div>
-          <h2 class="section-title" style="font-size:1.6rem;margin-bottom:.3rem;">Logged legs</h2>
+          <div class="section-tag">This device</div>
+          <h2 class="section-title" style="font-size:1.6rem;margin-bottom:.3rem;">Legs you have logged</h2>
           <div class="csummary" id="summary">No legs logged yet.</div>
         </div>
-        <div style="display:flex;gap:.7rem;align-items:center;flex-wrap:wrap;">
-          <span class="sync-pill" id="sync-status"><span class="sync-dot">○</span>Ready</span>
-          <button class="theme-toggle" id="export" style="border-color:var(--accent2);color:var(--accent2)">⬇ Export CSV</button>
-        </div>
+        <span class="sync-pill" id="sync-status"><span class="sync-dot">○</span>Ready</span>
       </div>
+
+      <p class="chint" style="margin-bottom:.9rem;">
+        Visible only in this browser. Once a leg is saved it is written to the organisation's
+        workbook; the figures above show pooled totals only and never name a traveller.
+      </p>
 
       <div class="ccard">
         <div class="ctbl-wrap">
