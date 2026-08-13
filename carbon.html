@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carbon — Les Hyperion</title>
+  <meta name="description" content="Transport carbon accounting for conservation operations. Reproducible ICAO-based calculations with a live emissions record." />
+
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/nav.css" />
+  <link rel="stylesheet" href="css/carbon/carbon.css" />
+
+  <script>
+    (function(){
+      const t = localStorage.getItem('lh-theme');
+      if (t) document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+</head>
+<body>
+
+<div class="topo-bg" aria-hidden="true"></div>
+
+<!-- ============ NAV ============ -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <a class="nav-brand" href="index.html">
+    <img class="nav-logo" src="assets/LesHyperion_logo.png" alt="Les Hyperion logo"
+         onerror="this.style.display='none';this.nextSibling.style.display='inline'" />
+    <span style="display:none">🗺</span>
+    Les Hyperion
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="notebooks.html">Notebooks</a></li>
+    <li><a href="research.html">Research</a></li>
+    <li><a href="carbon.html" class="active">Carbon</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+      <span class="theme-icon">🌙</span>
+      <span class="theme-label">Dark</span>
+    </button>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<nav class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
+  <a href="index.html">Home</a>
+  <a href="notebooks.html">Notebooks</a>
+  <a href="research.html">Research</a>
+  <a href="carbon.html" class="active">Carbon</a>
+  <a href="about.html">About</a>
+</nav>
+
+<div class="page-wrap">
+
+  <!-- ============ HEADER ============ -->
+  <header style="background:var(--bg2);border-bottom:1px solid var(--border);position:relative;z-index:1;">
+    <div class="section-inner" style="padding-top:clamp(3rem,6vh,5rem);padding-bottom:clamp(2rem,4vh,3rem);">
+      <div class="section-tag">Carbon Accounting</div>
+      <h1 class="section-title">Transport Carbon Tracker</h1>
+      <p class="section-desc">
+        Tool for operational emissions accounting. Every figure is derived from the
+        ICAO Carbon Emissions Calculator methodology and every step of the calculation is shown.
+      </p>
+    </div>
+  </header>
+
+  <!-- ============ FIGURES ============ -->
+  <section>
+    <div class="section-inner">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;margin-bottom:1.4rem;">
+        <div>
+          <div class="section-tag">Emissions Record</div>
+          <h2 class="section-title" style="font-size:1.6rem;">Where we stand</h2>
+        </div>
+        <span class="sync-pill" id="fig-source">Loading…</span>
+      </div>
+
+      <div class="cstats">
+        <div class="cstat" id="stat-total"><div class="cstat-v">0.00</div><div class="cstat-l">tCO₂ logged</div></div>
+        <div class="cstat" id="stat-legs"><div class="cstat-v">0</div><div class="cstat-l">legs recorded</div></div>
+        <div class="cstat" id="stat-avg"><div class="cstat-v">0.00</div><div class="cstat-l">tCO₂ monthly average</div></div>
+        <div class="cstat" id="stat-peak"><div class="cstat-v">0.00</div><div class="cstat-l">tCO₂ busiest month</div></div>
+      </div>
+
+      <div class="cfig-empty" id="fig-empty">
+        <div class="cfig-empty-i">📉</div>
+        <p>No travel has been logged yet.</p>
+      </div>
+
+      <div class="cfig-grid" id="fig-canvases" style="display:none;">
+        <div class="cfig">
+          <div class="cfig-head">
+            <div class="cfig-title">Figure 1 · Emissions over time</div>
+            <div class="cfig-sub">tCO₂ per month</div>
+          </div>
+          <div class="cfig-canvas"><canvas id="chart-monthly"></canvas></div>
+          <p class="cfig-cap">
+            Monthly emissions (bars, left axis) against the running cumulative total (line, right axis).
+            Each bar is the sum of all passenger-legs logged in that calendar month.
+          </p>
+        </div>
+
+        <div class="cfig">
+          <div class="cfig-head">
+            <div class="cfig-title">Figure 2 · By landscape</div>
+            <div class="cfig-sub">share of total</div>
+          </div>
+          <div class="cfig-canvas"><canvas id="chart-landscape"></canvas></div>
+          <p class="cfig-cap">
+            Distribution of logged emissions across the landscapes and programmes travel was
+            undertaken for.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CALCULATOR ============ -->
+  <section style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);position:relative;z-index:1;">
+    <div class="section-inner">
+      <div class="section-tag">Log a trip</div>
+      <h2 class="section-title" style="font-size:1.6rem;margin-bottom:1.4rem;">Calculator</h2>
+
+      <div class="cmode-bar" id="modebar"></div>
+
+      <div class="cgrid2">
+        <!-- form -->
+        <div class="ccard ccard-pad">
+          <div class="cseg" id="seg">
+            <button class="on" data-trip="dom">Domestic</button>
+            <button data-trip="intl">International</button>
+          </div>
+
+          <div class="crow">
+            <div class="cfield"><label>Date</label><input type="date" id="date"></div>
+            <div class="cfield"><label>Traveller</label><input type="text" id="name" placeholder="Full name"></div>
+          </div>
+
+          <div class="cfield"><label>Landscape / Programme</label><select id="landscape"></select></div>
+
+          <div class="crow">
+            <div class="cfield"><label>From</label><select id="from"></select></div>
+            <div class="cfield"><label>To</label><select id="to"></select></div>
+          </div>
+
+          <div class="cfield"><label>Operator</label><select id="operator"></select></div>
+
+          <div class="crow3">
+            <div class="cfield" style="grid-column:span 2"><label>Aircraft</label><select id="aircraft"></select></div>
+            <div class="cfield"><label>Passengers</label><input type="number" id="pax" min="1" max="20" value="1"></div>
+          </div>
+
+          <div id="warn" class="cwarn" style="display:none">⚠ Departure and arrival are the same — pick two different airports.</div>
+
+          <button class="cbtn" id="save">Save this leg</button>
+          <p class="chint">
+            One row per leg. A return trip is two entries — log the outbound and the return separately.
+            Only aircraft currently in service with the selected operator are listed.
+          </p>
+        </div>
+
+        <!-- calculation -->
+        <div class="ccard ccard-pad ccalc">
+          <h3>The calculation, step by step</h3>
+          <div id="steps"></div>
+          <div class="ccalc-total">
+            <div>
+              <div class="lb" id="totlb">This leg · 1 passenger</div>
+              <div class="big" id="tott">0.000<span> tCO₂</span></div>
+            </div>
+            <div class="cperpax">
+              <div class="lb">Per passenger</div>
+              <div id="totd" style="font-family:var(--font-m);color:var(--text)">0 kg</div>
+            </div>
+          </div>
+          <div id="flags"></div>
+          <p class="ccalc-note" id="cnote"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SESSION LOG ============ -->
+  <section>
+    <div class="section-inner">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;margin-bottom:1rem;">
+        <div>
+          <div class="section-tag">Your entries</div>
+          <h2 class="section-title" style="font-size:1.6rem;margin-bottom:.3rem;">Logged legs</h2>
+          <div class="csummary" id="summary">No legs logged yet.</div>
+        </div>
+        <div style="display:flex;gap:.7rem;align-items:center;flex-wrap:wrap;">
+          <span class="sync-pill" id="sync-status"><span class="sync-dot">○</span>Ready</span>
+          <button class="theme-toggle" id="export" style="border-color:var(--accent2);color:var(--accent2)">⬇ Export CSV</button>
+        </div>
+      </div>
+
+      <div class="ccard">
+        <div class="ctbl-wrap">
+          <table class="ctable">
+            <thead>
+              <tr>
+                <th>Date</th><th>Traveller</th><th>Route</th><th>Aircraft</th><th>Pax</th>
+                <th style="text-align:right">km</th>
+                <th style="text-align:right">Fuel kg</th>
+                <th style="text-align:right">tCO₂</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="logbody">
+              <tr><td colspan="9" class="cempty">Fill in the form above and save your first leg.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ METHOD ============ -->
+  <section style="background:var(--bg2);border-top:1px solid var(--border);position:relative;z-index:1;">
+    <div class="section-inner">
+      <div class="section-tag">Transparency</div>
+      <h2 class="section-title" style="font-size:1.6rem;margin-bottom:1.4rem;">Method &amp; sources</h2>
+
+      <div class="ccard ccard-pad">
+        <div class="ctbl-wrap">
+          <table class="ctable cmethod">
+            <thead><tr><th>Factor</th><th>Value</th><th>Unit</th><th>Source</th></tr></thead>
+            <tbody>
+              <tr><td>Jet fuel combustion</td><td class="val">3.16</td><td>kg CO₂/kg fuel</td><td class="src">ICAO ICEC Methodology v9, §3</td></tr>
+              <tr><td>Aircraft trip fuel</td><td class="val">interpolated</td><td>kg</td><td class="src">ICAO v9 Appendix C — linear between the two bracketing stage lengths</td></tr>
+              <tr><td>Detour correction</td><td class="val">+50 / +100 / +125</td><td>km</td><td class="src">ICAO v9 §4.2 — banded by GCD (&lt;550 / 550–5 500 / &gt;5 500 km)</td></tr>
+              <tr><td>Passenger load factor</td><td class="val">by route group</td><td>—</td><td class="src">ICAO v9 Appendix A — selected from the destination region</td></tr>
+              <tr><td>Passenger-to-cargo factor</td><td class="val">by route group</td><td>—</td><td class="src">ICAO v9 Appendix A — deducts the belly-freight share</td></tr>
+              <tr><td>Y-seats</td><td class="val">per type</td><td>seats</td><td class="src">Operator fleet records; typical all-economy configuration where not supplied</td></tr>
+              <tr><td>Nautical mile</td><td class="val">1.852</td><td>km/nm</td><td class="src">International standard</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="clegend">
+          This tool reports <b>CO₂ only</b>, not CO₂e. The 3.16 factor is combustion carbon dioxide;
+          the calculation excludes non-CO₂ high-altitude forcing (NOₓ, contrails, water vapour).
+          Trip fuel is read from the ICAO Appendix C table by linear interpolation between the
+          bracketing stage lengths, at great-circle distance plus the banded detour correction.
+          Aircraft selection is filtered to types currently in service.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <span class="footer-brand">Les Hyperion</span>
+    <span>© <span id="footer-year"></span> Phemelo Rutlokoane</span>
+    <div class="footer-links">
+      <a href="https://github.com/Phemelo-R" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+  </footer>
+
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/carbon/carbon-config.js"></script>
+<script src="js/carbon/carbon-flight-data.js"></script>
+<script src="js/carbon/carbon-flight.js"></script>
+<script src="js/carbon/carbon-log.js"></script>
+<script src="js/carbon/carbon-charts.js"></script>
+<script src="js/carbon/carbon-app.js"></script>
+<script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
