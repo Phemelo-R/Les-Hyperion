@@ -1,6 +1,5 @@
 /* ============================================================
-   Les Hyperion — Carbon Tracker
-   Uses tokens.css / base.css. Nothing is redefined here.
+   Les Hyperion — Carbon Tracker styles
    ============================================================ */
 
 /* ---- Mode selector ---- */
@@ -42,7 +41,7 @@
   padding: 1px 6px;
 }
 
-/* ---- Cards & layout ---- */
+/* Cards & layout */
 .ccard {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
@@ -55,7 +54,7 @@
 .cgrid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; }
 @media (max-width: 900px) { .cgrid2 { grid-template-columns: 1fr; } }
 
-/* ---- Form ---- */
+/* Form */
 .cfield { margin-bottom: .9rem; }
 .cfield label {
   display: block;
@@ -139,7 +138,7 @@
   margin-bottom: .8rem;
 }
 
-/* ---- Calculation steps ---- */
+/* Calculation steps */
 .ccalc h3 {
   font-family: var(--font-d);
   font-size: 1rem;
@@ -256,7 +255,7 @@
   margin-top: .9rem;
 }
 
-/* ---- Figures ---- */
+/* Figures */
 .cstats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -349,7 +348,7 @@
   line-height: 1.8;
 }
 
-/* ---- Sync status pill ---- */
+/* Sync status pill */
 .sync-pill {
   display: inline-flex;
   align-items: center;
@@ -368,7 +367,7 @@
 .sync-pill.fail    { color: var(--accent3); border-color: color-mix(in srgb, var(--accent3) 30%, transparent); }
 .sync-dot { font-size: .7rem; }
 
-/* ---- Tables ---- */
+/* Tables */
 .ctbl-wrap { overflow-x: auto; }
 .ctable {
   width: 100%;
@@ -420,7 +419,7 @@
 }
 .csummary strong { color: var(--accent2); }
 
-/* ---- Method table ---- */
+/* Method table */
 .cmethod .val { font-family: var(--font-m); color: var(--accent2); }
 .cmethod .src { font-size: .68rem; color: var(--text-faint); }
 
