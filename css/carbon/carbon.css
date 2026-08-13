@@ -2,7 +2,7 @@
    Les Hyperion — Carbon Tracker styles
    ============================================================ */
 
-/* ---- Mode selector ---- */
+/* Mode selector */
 .cmode-bar {
   display: flex;
   gap: .5rem;
@@ -364,7 +364,7 @@
 }
 .sync-pill.ok      { color: var(--accent2); border-color: color-mix(in srgb, var(--accent2) 30%, transparent); }
 .sync-pill.syncing { color: var(--accent);  border-color: color-mix(in srgb, var(--accent) 30%, transparent); }
-.sync-pill.fail    { color: var(--accent3); border-color: color-mix(in srgb, var(--accent3) 30%, transparent); }
+.sync-pill.fail    { color: var(--accent5); border-color: color-mix(in srgb, var(--accent5) 30%, transparent); }
 .sync-dot { font-size: .7rem; }
 
 /* Tables */
