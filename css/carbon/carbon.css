@@ -235,9 +235,9 @@
   font-family: var(--font-m);
   font-size: .67rem;
   line-height: 1.65;
-  color: var(--accent3);
-  background: color-mix(in srgb, var(--accent3) 7%, transparent);
-  border-left: 3px solid var(--accent3);
+  color: var(--accent5);
+  background: color-mix(in srgb, var(--accent5) 7%, transparent);
+  border-left: 3px solid var(--accent5);
   border-radius: 0 6px 6px 0;
   padding: .55rem .8rem;
   margin-top: .8rem;
