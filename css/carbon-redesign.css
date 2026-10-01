@@ -1,0 +1,1016 @@
+/* ---- Les Hyperion — Carbon Tracker styles ---- */
+
+/* -- Mode selector -- */
+.cmode-bar {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+.cmode {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-d);
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  padding: 0.5rem 1rem;
+  transition: all var(--dur-fast) var(--ease);
+}
+.cmode:hover:not(.soon) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.cmode.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.cmode.soon {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.cmode-i {
+  font-size: 1rem;
+}
+.cmode-soon {
+  font-family: var(--font-m);
+  font-size: 0.55rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--bg3);
+  border-radius: var(--radius-pill);
+  padding: 1px 6px;
+}
+
+/* -- Cards & layout -- */
+.ccard {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(8px);
+}
+.ccard-pad {
+  padding: 1.6rem;
+}
+
+.cgrid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.4rem;
+}
+@media (max-width: 900px) {
+  .cgrid2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* -- Form -- */
+.cfield {
+  margin-bottom: 0.9rem;
+}
+.cfield label {
+  display: block;
+  font-family: var(--font-m);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-bottom: 0.35rem;
+}
+.cfield input,
+.cfield select {
+  width: 100%;
+  font-family: var(--font-b);
+  font-size: 0.9rem;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.55rem 0.7rem;
+  transition: border-color var(--dur-fast);
+}
+.cfield input:focus,
+.cfield select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.crow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+.crow3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.8rem;
+}
+@media (max-width: 560px) {
+  .crow,
+  .crow3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cseg {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+.cseg button {
+  flex: 1;
+  font-family: var(--font-d);
+  font-weight: 600;
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.45rem;
+  transition: all var(--dur-fast);
+}
+.cseg button.on {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.cbtn {
+  width: 100%;
+  font-family: var(--font-d);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #fff;
+  background: var(--accent2);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.75rem;
+  margin-top: 0.4rem;
+  transition:
+    filter var(--dur-fast),
+    transform var(--dur-fast);
+}
+.cbtn:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.cbtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.cbtn.ok {
+  background: var(--accent);
+}
+
+.chint {
+  font-family: var(--font-m);
+  font-size: 0.66rem;
+  color: var(--text-faint);
+  margin-top: 0.7rem;
+  line-height: 1.6;
+}
+
+.cwarn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-m);
+  font-size: 0.72rem;
+  color: var(--accent5);
+  background: color-mix(in srgb, var(--accent5) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent5) 25%, transparent);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.7rem;
+  margin-bottom: 0.8rem;
+}
+
+/* -- Calculation steps -- */
+.ccalc h3 {
+  font-family: var(--font-d);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 1rem;
+}
+.cstep {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.cstep:last-of-type {
+  border-bottom: none;
+}
+.cstep-n {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-m);
+  font-size: 0.6rem;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  border-radius: 4px;
+  margin-top: 2px;
+}
+.cstep-body {
+  flex: 1;
+  min-width: 0;
+}
+.cstep-lb {
+  font-family: var(--font-d);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.cstep-ex {
+  font-family: var(--font-m);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  margin-top: 1px;
+  word-break: break-word;
+}
+.cstep-brk {
+  font-family: var(--font-m);
+  font-size: 0.61rem;
+  color: var(--text-faint);
+  margin-top: 3px;
+}
+.cstep-vl {
+  flex-shrink: 0;
+  font-family: var(--font-m);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--accent2);
+  text-align: right;
+  margin-top: 2px;
+}
+
+.ccalc-total {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1.2rem;
+  padding-top: 1rem;
+  border-top: 2px solid var(--accent2);
+}
+.ccalc-total .lb {
+  font-family: var(--font-m);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-bottom: 0.2rem;
+}
+.ccalc-total .big {
+  font-family: var(--font-d);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--accent2);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.ccalc-total .big span {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-left: 0.2rem;
+}
+.cperpax {
+  text-align: right;
+}
+
+.cflag {
+  display: flex;
+  gap: 0.5rem;
+  font-family: var(--font-m);
+  font-size: 0.67rem;
+  line-height: 1.65;
+  color: var(--accent5);
+  background: color-mix(in srgb, var(--accent5) 7%, transparent);
+  border-left: 3px solid var(--accent5);
+  border-radius: 0 6px 6px 0;
+  padding: 0.55rem 0.8rem;
+  margin-top: 0.8rem;
+}
+.cflag.stop {
+  color: var(--accent5);
+  background: color-mix(in srgb, var(--accent5) 7%, transparent);
+  border-left-color: var(--accent5);
+}
+.ccalc-note {
+  font-family: var(--font-m);
+  font-size: 0.66rem;
+  color: var(--text-faint);
+  line-height: 1.7;
+  margin-top: 0.9rem;
+}
+
+/* -- Figures -- */
+.cstats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.6rem;
+}
+@media (max-width: 780px) {
+  .cstats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.cstat {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.1rem;
+}
+.cstat-v {
+  font-family: var(--font-d);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+.cstat-l {
+  font-family: var(--font-m);
+  font-size: 0.62rem;
+  color: var(--text-faint);
+  letter-spacing: 0.05em;
+  margin-top: 0.25rem;
+}
+
+.cfig-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 1.4rem;
+}
+@media (max-width: 900px) {
+  .cfig-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cfig {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 1.4rem;
+  box-shadow: var(--shadow);
+}
+.cfig-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.cfig-title {
+  font-family: var(--font-d);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.cfig-sub {
+  font-family: var(--font-m);
+  font-size: 0.62rem;
+  color: var(--text-faint);
+}
+.cfig-canvas {
+  position: relative;
+  height: 300px;
+}
+.cfig-cap {
+  font-family: var(--font-m);
+  font-size: 0.64rem;
+  font-style: italic;
+  color: var(--text-faint);
+  line-height: 1.65;
+  margin-top: 0.9rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--border);
+}
+
+.cfig-empty {
+  text-align: center;
+  padding: 3.5rem 2rem;
+  background: var(--bg2);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+}
+.cfig-empty-i {
+  font-size: 2.2rem;
+  margin-bottom: 0.7rem;
+}
+.cfig-empty p {
+  font-family: var(--font-b);
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  max-width: 44ch;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+/* -- Sync status pill -- */
+.sync-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-m);
+  font-size: 0.64rem;
+  letter-spacing: 0.04em;
+  color: var(--text-faint);
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  padding: 0.3rem 0.8rem;
+}
+.sync-pill.ok {
+  color: var(--accent2);
+  border-color: color-mix(in srgb, var(--accent2) 30%, transparent);
+}
+.sync-pill.syncing {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 30%, transparent);
+}
+.sync-pill.fail {
+  color: var(--accent5);
+  border-color: color-mix(in srgb, var(--accent5) 30%, transparent);
+}
+.sync-dot {
+  font-size: 0.7rem;
+}
+
+/* -- Tables -- */
+.ctbl-wrap {
+  overflow-x: auto;
+}
+.ctable {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-m);
+  font-size: 0.74rem;
+}
+.ctable thead {
+  background: var(--bg3);
+}
+.ctable th {
+  font-family: var(--font-d);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--text);
+  text-align: left;
+  padding: 0.6rem 0.8rem;
+  border-bottom: 2px solid var(--accent);
+  white-space: nowrap;
+}
+.ctable td {
+  color: var(--text-muted);
+  padding: 0.55rem 0.8rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+.ctable tbody tr:last-child td {
+  border-bottom: none;
+}
+.ctable tbody tr:hover {
+  background: color-mix(in srgb, var(--accent) 4%, transparent);
+}
+.ctable .num {
+  text-align: right;
+}
+.ctable .co2 {
+  color: var(--accent2);
+  font-weight: 500;
+}
+.cempty {
+  text-align: center !important;
+  color: var(--text-faint) !important;
+  padding: 2rem !important;
+  font-style: italic;
+}
+.cdel {
+  background: none;
+  border: none;
+  cursor: pointer;
+  opacity: 0.45;
+  font-size: 0.85rem;
+  transition: opacity var(--dur-fast);
+}
+.cdel:hover {
+  opacity: 1;
+}
+
+.csummary {
+  font-family: var(--font-m);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+.csummary strong {
+  color: var(--accent2);
+}
+
+/* Method table */
+.cmethod .val {
+  font-family: var(--font-m);
+  color: var(--accent2);
+}
+.cmethod .src {
+  font-size: 0.68rem;
+  color: var(--text-faint);
+}
+
+.clegend {
+  font-family: var(--font-m);
+  font-size: 0.66rem;
+  color: var(--text-faint);
+  line-height: 1.75;
+  margin-top: 1rem;
+}
+.clegend b {
+  color: var(--text-muted);
+}
+/* -- Open statistics, restrained surfaces, readable controls. -- */
+.carbon-heading {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-end;
+  padding-block: 2.5rem 2rem;
+}
+.carbon-heading h1 {
+  font-size: clamp(2.8rem, 4.2vw, 4.2rem);
+}
+.carbon-heading p {
+  max-width: 750px;
+}
+.carbon-heading > .text-link {
+  flex: none;
+}
+.carbon-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0 0.5rem;
+}
+.sync-pill {
+  font-size: 0.75rem;
+  color: var(--muted);
+  background: none;
+  border: 0;
+}
+.cstats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  padding: 1rem 0 2rem;
+  border-bottom: 1px solid var(--line);
+}
+.cstat {
+  border: 0;
+  border-right: 1px solid var(--line);
+  padding: 0 1rem 0 0;
+  background: none;
+  border-radius: 0;
+}
+.cstat:last-child {
+  border: 0;
+}
+.cstat-v {
+  font: 500 2.7rem/1.25 var(--font-d);
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+.cstat-l {
+  font-size: 0.8125rem;
+  color: var(--muted);
+  margin-top: 0.45rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.carbon-calculator,
+.carbon-figures,
+.carbon-record {
+  padding-block: 2.5rem;
+  border-bottom: 1px solid var(--line);
+}
+.carbon-calculator .section-top,
+.carbon-figures .section-top,
+.carbon-record .section-top {
+  margin-bottom: 1.5rem;
+}
+.carbon-calculator h2,
+.carbon-figures h2,
+.carbon-record h2 {
+  font-size: 2.2rem;
+}
+.cmode-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 0;
+}
+.cmode {
+  padding: 0.5rem 0.6rem;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  background: none;
+  color: var(--muted);
+  font-size: 0.8125rem;
+}
+.cmode.active {
+  background: none;
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.cmode-soon {
+  font-size: 0.6875rem;
+}
+.cgrid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+.ccard {
+  min-width: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+}
+.ccard-pad {
+  padding: 1.7rem;
+  background: var(--surface);
+}
+.cseg {
+  display: flex;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: none;
+  border-radius: 0;
+}
+.cseg button {
+  background: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  color: var(--muted);
+  padding: 0.6rem 0;
+  font-size: 0.875rem;
+  border-radius: 0;
+}
+.cseg button.on {
+  color: var(--text);
+  border-color: var(--text);
+  background: none;
+}
+.crow,
+.crow3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.crow3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.cfield {
+  margin-bottom: 1.2rem;
+  min-width: 0;
+}
+.cfield label {
+  display: block;
+  font-size: 0.8125rem;
+  margin-bottom: 0.45rem;
+  color: var(--muted);
+  text-transform: none;
+  letter-spacing: 0;
+}
+.cfield input,
+.cfield select {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--text);
+  border-radius: 2px;
+  font-size: 0.9375rem;
+}
+.cbtn {
+  width: 100%;
+  min-height: 50px;
+  background: var(--text);
+  color: var(--paper);
+  border: 0;
+  border-radius: 2px;
+  margin-top: 0.4rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+.chint {
+  font-size: 0.75rem;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-top: 1rem;
+}
+.ccalc {
+  background: var(--ink);
+  color: var(--cream);
+  --text: #fbf7ef;
+  --muted: #b9c8c7;
+  --line: #3f5a63;
+  --text-muted: #b9c8c7;
+  --text-faint: #b9c8c7;
+  --border: #3f5a63;
+}
+.ccalc h3 {
+  font-size: 1.55rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+.cstep {
+  display: grid;
+  grid-template-columns: 20px 1fr auto;
+  gap: 0.7rem;
+  border-bottom: 1px solid var(--line);
+  padding: 0.85rem 0;
+}
+.cstep-n {
+  font-size: 0.75rem;
+  color: var(--gold);
+  background: none;
+  border: 0;
+  width: auto;
+  height: auto;
+}
+.cstep-lb {
+  font-size: 0.875rem;
+}
+.cstep-ex,
+.cstep-brk {
+  font-size: 0.75rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.cstep-vl {
+  font-size: 0.875rem;
+  color: var(--silver);
+}
+.ccalc-total {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-end;
+  padding: 1.5rem 0;
+  background: none;
+  border: 0;
+}
+.ccalc .lb {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+.ccalc .big {
+  font: 500 3rem/1.3 var(--font-d);
+  color: var(--cream);
+}
+.ccalc .big span {
+  font: 400 0.875rem var(--font-b);
+  color: var(--muted);
+}
+.cflag {
+  padding: 0.7rem 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  color: #d2c8ac;
+  background: none;
+  font-size: 0.75rem;
+  line-height: 1.7;
+}
+.ccalc-note {
+  font-size: 0.75rem;
+  line-height: 1.7;
+}
+.csummary {
+  font-size: 0.875rem;
+  margin-top: 0.6rem;
+}
+.ctbl-wrap {
+  overflow: auto;
+  max-width: 100%;
+  margin-top: 1.2rem;
+}
+.ctable {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 760px;
+  font-size: 0.8125rem;
+  text-align: left;
+}
+.ctable th {
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.8rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.ctable td {
+  padding: 1rem 0.8rem;
+}
+.cdel {
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background: none;
+  color: var(--text);
+  font-size: 1rem;
+}
+.cfig-empty {
+  border: 1px dashed var(--line);
+  text-align: center;
+  padding: 3rem 1.5rem;
+}
+.cfig-empty p {
+  font: 400 1.6rem var(--font-d);
+  margin-bottom: 0.7rem;
+}
+.cfig-empty span {
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+.cfig-grid {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 2rem;
+}
+.cfig {
+  min-width: 0;
+  border: 0;
+  background: none;
+  padding: 0;
+  border-radius: 0;
+}
+.cfig-title {
+  font-size: 1rem;
+  font-weight: 500;
+}
+.cfig-sub {
+  font-size: 0.75rem;
+}
+.cfig-canvas {
+  height: 300px;
+  position: relative;
+}
+.cfig-cap {
+  font-size: 0.75rem;
+  line-height: 1.7;
+}
+.carbon-method {
+  margin-top: 2rem;
+}
+.carbon-method > summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  gap: 2rem;
+  padding: 1rem 0;
+  list-style: none;
+}
+.carbon-method > summary::-webkit-details-marker {
+  display: none;
+}
+.carbon-method > summary > span > span {
+  display: block;
+}
+.method-title {
+  font: 400 2rem var(--font-d);
+  margin-top: 0.6rem;
+}
+.carbon-method[open] > summary > span:last-child {
+  transform: rotate(45deg);
+}
+.clegend {
+  font-size: 0.875rem;
+  color: var(--muted);
+  margin-top: 1.2rem;
+  line-height: 1.8;
+}
+.cmethod {
+  min-width: 750px;
+}
+@media (max-width: 1050px) {
+  .cgrid2 {
+    gap: 1.5rem;
+  }
+  .ccard-pad {
+    padding: 1.25rem;
+  }
+  .cmode-bar {
+    gap: 0.4rem;
+  }
+  .cstep {
+    grid-template-columns: 15px 1fr auto;
+    gap: 0.5rem;
+  }
+  .carbon-heading {
+    display: block;
+  }
+  .carbon-heading > .text-link {
+    margin-top: 1rem;
+  }
+}
+@media (max-width: 760px) {
+  .cgrid2 {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .cstats {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+  .cstat:nth-child(2) {
+    border: 0;
+  }
+  .cstat-v {
+    font-size: 2.3rem;
+  }
+  .carbon-calculator .section-top {
+    display: block;
+  }
+  .cmode-bar {
+    margin-top: 1rem;
+  }
+  .cfig-grid {
+    grid-template-columns: 1fr;
+  }
+  .sync-pill {
+    font-size: 0.6875rem;
+    max-width: 200px;
+    text-align: right;
+  }
+  .cfield input,
+  .cfield select {
+    font-size: 1rem;
+  }
+  .carbon-record .section-top {
+    display: block;
+  }
+  .carbon-record .sync-pill {
+    display: block;
+    margin-top: 0.8rem;
+    text-align: left;
+    max-width: none;
+  }
+  .cstep-ex {
+    overflow-wrap: anywhere;
+  }
+  .cstat-l {
+    font-size: 0.75rem;
+  }
+  .cmode {
+    font-size: 0.75rem;
+    padding: 0.4rem;
+  }
+  .cfig-canvas {
+    height: 280px;
+  }
+}
+@media (max-width: 380px) {
+  .crow,
+  .crow3 {
+    grid-template-columns: 1fr;
+  }
+  .crow3 .cfield {
+    grid-column: auto !important;
+  }
+}
+
+/* -- Use sans serif for controls and calculations. -- */
+.cmode,
+.cseg button,
+.cstep-lb,
+.cstep-vl,
+.ctable th,
+.cbtn {
+  font-family: var(--font-b);
+}
+.cfield input:focus-visible,
+.cfield select:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}

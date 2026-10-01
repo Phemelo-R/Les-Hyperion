@@ -1,15 +1,12 @@
-/* ============================================================
-   Les Hyperion — Site Data
-   Edit NOTEBOOKS and RESEARCH to add/update content.
-   ============================================================ */
+/* Les Hyperion — Site Data */
 
 const NOTEBOOK_BASE_PATH = './notebooks/';
 
-// ---- Category configuration ----
+// Category configuration
 const CATEGORIES = {
   'R Fundamentals': {
     color: 'var(--accent)',
-    blurb: 'Start here if you\'re new to R. Each part builds on the last.',
+    blurb: "Start here if you're new to R. Each part builds on the last.",
     order: 1,
   },
   'Spatial & Remote Sensing': {
@@ -29,10 +26,7 @@ const CATEGORIES = {
   },
 };
 
-// ---- Notebooks ----
-// To add a notebook:
-//   1. Drop the .ipynb file into the /notebooks/ folder in your repo.
-//   2. Add an entry below. The `file` field must match the filename (without .ipynb).
+// Notebooks (Add notebooks)
 const NOTEBOOKS = [
   // R Fundamentals
   {
@@ -151,7 +145,7 @@ const NOTEBOOKS = [
     part: null,
     noPreview: true,
     desc: 'Vertical distribution and life-stage composition of Euphausia lucens at inshore and offshore stations in St Helena Bay over a 48-hour MOCNESS survey.',
-    date: '2024-10-01',
+    date: '2025-03-20',
     category: 'Marine & Environmental',
     keywords: ['DVM', 'Euphausiids', 'St Helena Bay', 'MOCNESS'],
     lang: 'R',
@@ -194,21 +188,31 @@ const NOTEBOOKS = [
   },
 ];
 
-// ---- Research ----
+// Research
+// date controls newest-first ordering; use YYYY, YYYY-MM or YYYY-MM-DD.
+// Status: in-progress (writing), under-review, published, or complete (project).
+// year remains the original project year; date may describe a later manuscript milestone.
 // `notebooks` array = file names (without .ipynb) that link from research to the notebook viewer.
 // `content` is the full paper text shown in the modal.
 const RESEARCH = [
   {
     id: 'bioscape-sdm',
-    title: 'Monitoring Leucadendron argenteum populations: exploring opportunities offered by emerging technologies.',
+    date: '2026',
+    scene: 'field',
+    title:
+      'Monitoring Leucadendron argenteum populations: exploring opportunities offered by emerging technologies.',
     year: '2025',
     venue: 'Honours Research Project — University of the Western Cape',
-    authors: ['Phemelo Rutlokoane, Dr. Patrick O\'Farrell & Dr. Ryan Blanchard'],
-    status: 'in-progress',
-    desc: 'My Honours research investigated the accuracy of NASA\'s AVIRIS-NG Hyperspectral imagery and LVIS LiDAR in detecting and mapping Silvertree populations across Table Mountain National Park.',
+    authors: ["Phemelo Rutlokoane, Dr. Patrick O'Farrell & Dr. Ryan Blanchard"],
+    status: 'under-review',
+    desc: "My Honours research investigated the accuracy of NASA's AVIRIS-NG Hyperspectral imagery and LVIS LiDAR in detecting and mapping Silvertree populations across Table Mountain National Park.",
     tags: ['BioSCape', 'Hyperspectral', 'LiDAR', 'Silvertree', 'Fynbos'],
     color: 'var(--accent)',
-    notebooks: ['BioSCape_Spectral_Extraction', 'BioSCape_LiDAR_Analysis', 'BioSCape_Hyperspectral_Analysis'],
+    notebooks: [
+      'BioSCape_Spectral_Extraction',
+      'BioSCape_LiDAR_Analysis',
+      'BioSCape_Hyperspectral_Analysis',
+    ],
     content: `
       <h2>Abstract</h2>
       <p>blah-blah-blah... to be continued</p>
@@ -216,9 +220,11 @@ const RESEARCH = [
   },
   {
     id: 'mhw-benguela',
+    date: '2026',
+    scene: 'ocean',
     title: 'Marine Heatwave Dynamics in the Benguela Current System',
-    year: '2024',
-    venue: 'Quantitative Ecology Module — University of the Western Cape',
+    year: '2026',
+    venue: 'University of the Western Cape',
     authors: 'Phemelo Rutlokoane',
     status: 'complete',
     desc: 'An analysis of marine heatwave frequency, intensity, and duration trends in the Benguela Current upwelling system using 40 years of NOAA OISST data and the heatwaveR detection framework.',
@@ -232,13 +238,24 @@ const RESEARCH = [
   },
   {
     id: 'dvm-euphausia-lucens',
+    page: 'krill-research.html',
+    linkLabel: 'Read the research article',
+    date: '2025',
+    scene: 'marine',
     title: 'Diel Vertical Migration of Euphausia lucens in St Helena Bay, South Africa',
-    year: '2024',
+    year: '2025',
     venue: 'University of the Western Cape',
     authors: 'Phemelo Rutlokoane',
     status: 'complete',
-    desc: 'Diel vertical migration of Euphausia lucens was studied at inshore and offshore stations in St Helena Bay over 48 hours using a MOCNESS net sampled every 4 hours. Euphausiids were counted and categorised by life-history stage, and their vertical position summarised by weighted mean depth.',
-    tags: ['DVM', 'Euphausiids', 'St Helena Bay', 'MOCNESS', 'Zooplankton', 'Oceanography'],
+    desc: 'How krill life stages move through the water column: a 48-hour comparison of inshore and offshore stations in St Helena Bay.',
+    tags: [
+      'DVM',
+      'Euphausiids',
+      'St Helena Bay',
+      'MOCNESS',
+      'Zooplankton',
+      'Oceanography',
+    ],
     color: 'var(--accent3)',
     notebooks: ['Diel_vertical_migration_of_Euphausia_lucens'],
     content: `
@@ -248,51 +265,84 @@ const RESEARCH = [
   },
   {
     id: 'saldanha-biodiversity-protocol',
+    date: '2025',
+    scene: 'protocol',
     title: 'Biodiversity Monitoring Protocol for Saldanha Bay Municipality 2025–2030',
     year: '2025',
     venue: 'BCB736 — University of the Western Cape',
     authors: 'Phemelo Rutlokoane',
     status: 'complete',
     desc: 'A structured five-year biodiversity monitoring protocol for Saldanha Bay Municipality, designed to align with the Kunming-Montreal Global Biodiversity Framework and the SBM Spatial Development Framework 2025–2030. Covers 12 State-Pressure-Response indicators, indicator-specific data collection methods, reporting structures, and institutional governance.',
-    tags: ['Biodiversity Monitoring', 'Saldanha Bay', 'KMGBF', 'Fynbos', 'QGIS', 'Spatial Planning', 'SPR Framework'],
+    tags: [
+      'Biodiversity Monitoring',
+      'Saldanha Bay',
+      'KMGBF',
+      'Fynbos',
+      'QGIS',
+      'Spatial Planning',
+      'SPR Framework',
+    ],
     color: 'var(--accent4)',
     notebooks: [],
     page: 'protocol.html',
     content: null,
   },
+  {
+    id: 'science-pseudoscience',
+    date: 2025,
+    year: 2025,
+    scene: 'soap',
+    title: 'Evaluating Protex Deep Clean Bar Soap: Science or Pseudoscience?',
+    venue: 'University coursework · Written evaluation',
+    authors: 'Phemelo Rutlokoane',
+    status: 'complete',
+    desc: 'A literature-based evaluation of product claims, scientific evidence and the distinction between laboratory results and everyday use.',
+    tags: ['Scientific literacy', 'Evidence appraisal', 'Product claims'],
+    notebooks: [],
+    page: 'science-pseudoscience.html',
+    linkLabel: 'Read the essay',
+    content: null,
+  },
   // Add more research entries here following the same structure.
 ];
 
-/* ============================================================
-   Shared notebook card builder
-   Defined here so it is available on every page that loads data.js.
-   ============================================================ */
+/* Shared notebook card builder */
 function buildNbCard(nb, color) {
   const card = document.createElement('div');
   card.className = 'nb-card fade-up';
   card.style.setProperty('--cat-color', color);
 
-  const fmtDate = d => {
-    try { return new Date(d + 'T00:00:00').toLocaleDateString('en-GB', {day:'numeric',month:'short',year:'numeric'}); }
-    catch(e) { return d; }
+  const fmtDate = (d) => {
+    try {
+      return new Date(d + 'T00:00:00').toLocaleDateString('en-GB', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric',
+      });
+    } catch (e) {
+      return d;
+    }
   };
 
-  const codeLines = nb.lang === 'Python'
-    ? `<div class="nb-cell-head">In [1]:</div>
-       <div class="nb-code-line">import numpy as np</div>
-       <div class="nb-code-line">from sklearn.ensemble import RandomForestClassifier</div>
-       <div class="nb-out-line">RandomForestClassifier()</div>`
-    : `<div class="nb-cell-head">In [1]:</div>
-       <div class="nb-code-line">library(terra)</div>
-       <div class="nb-code-line">r &lt;- rast("scene.tif")</div>
-       <div class="nb-code-line">ndvi &lt;- (r$NIR - r$RED) / (r$NIR + r$RED)</div>
-       <div class="nb-out-line">class : SpatRaster</div>`;
+  const codeLines =
+    nb.lang === 'Python'
+      ? /* HTML */ `<div class="nb-cell-head">In [1]:</div>
+          <div class="nb-code-line">import numpy as np</div>
+          <div class="nb-code-line">
+            from sklearn.ensemble import RandomForestClassifier
+          </div>
+          <div class="nb-out-line">RandomForestClassifier()</div>`
+      : /* HTML */ `<div class="nb-cell-head">In [1]:</div>
+          <div class="nb-code-line">library(terra)</div>
+          <div class="nb-code-line">r &lt;- rast("scene.tif")</div>
+          <div class="nb-code-line">ndvi &lt;- (r$NIR - r$RED) / (r$NIR + r$RED)</div>
+          <div class="nb-out-line">class : SpatRaster</div>`;
 
   card.innerHTML = `
     <div class="nb-preview" data-nb-file="${nb.file}">
       <div class="nb-pattern">${nb.noPreview ? '' : codeLines}</div>
       <div class="nb-type-badge">${nb.lang}</div>
-      ${nb.part ? `<div class="nb-part-badge">PART ${nb.part}</div>` : ''}
+      ${nb.part ? /* HTML */ `<div class="nb-part-badge">PART ${nb.part}</div>` : ''}
     </div>
     <div class="nb-body">
       <div class="nb-meta">
@@ -302,7 +352,7 @@ function buildNbCard(nb, color) {
       <div class="nb-title">${nb.title}</div>
       <div class="nb-desc">${nb.desc}</div>
       <div class="nb-keywords">
-        ${nb.keywords.map(k => `<span class="kw">${k}</span>`).join('')}
+        ${nb.keywords.map((k) => /* HTML */ `<span class="kw">${k}</span>`).join('')}
       </div>
       <div class="nb-footer">
         <span class="nb-author">Phemelo R.</span>

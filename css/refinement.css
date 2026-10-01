@@ -1,0 +1,274 @@
+/* -- Background policy: transparent cutouts except underwater and wildlife habitats. -- */
+.silvi-introduction {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  align-items: center;
+  gap: 2.5rem;
+  padding-block: 2.5rem;
+  border-bottom: 1px solid var(--line);
+}
+.silvi-introduction .silvi-stage {
+  aspect-ratio: 1;
+}
+.silvi-introduction h2 {
+  font-size: 2.3rem;
+  margin: 0.5rem 0 0.8rem;
+}
+.silvi-introduction p:not(.eyebrow) {
+  max-width: 75ch;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.silvi-introduction p + p {
+  margin-top: 0.6rem;
+}
+.development-entry {
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 410px);
+  gap: 0.7rem 2.5rem;
+  align-items: start;
+  padding-block: 2rem;
+}
+.development-entry > div {
+  grid-column: 1;
+  grid-row: 1;
+}
+.development-entry > .work-status {
+  grid-column: 1;
+  grid-row: 2;
+}
+.development-entry > details {
+  grid-column: 1;
+  grid-row: 3;
+}
+.development-entry > .development-scene {
+  grid-column: 2;
+  grid-row: 1 / 4;
+  width: 100%;
+  margin: 0;
+  align-self: center;
+}
+.development-entry .silvi-stage {
+  aspect-ratio: 1.5;
+}
+.development-entry [data-silvi-scene='motorcycle'] .silvi-stage {
+  aspect-ratio: 1.3;
+}
+[data-habitat='wildlife-real'] .silvi-stage {
+  aspect-ratio: 1.5;
+  border-radius: 8px;
+}
+[data-habitat='wildlife-real'] .topic-character {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  transform-origin: center;
+  animation-duration: 16s;
+}
+[data-habitat='wildlife-real'] .topic-character img {
+  object-fit: cover;
+}
+.habitat-light {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+  background: #082e63;
+  mix-blend-mode: multiply;
+  opacity: 0;
+  transition: opacity 1s;
+}
+[data-habitat='wildlife-real'][data-night='true'] .habitat-light {
+  opacity: 0.64;
+}
+[data-habitat='wildlife-real'][data-night='true'] .topic-character {
+  filter: brightness(0.6) saturate(0.65);
+}
+[data-habitat='cutout'] .topic-character {
+  filter: none;
+}
+[data-silvi-scene='research-overview'] .silvi-stage {
+  aspect-ratio: 1;
+}
+[data-silvi-scene='bazaruto'] .topic-sky,
+[data-silvi-scene='mnemba'] .topic-sky {
+  background: radial-gradient(ellipse at 40% 0, #7dc7c2 0, #2a7f91 38%, #123e59 100%);
+}
+[data-silvi-scene='bazaruto'][data-night='true'] .topic-sky,
+[data-silvi-scene='mnemba'][data-night='true'] .topic-sky {
+  background: radial-gradient(ellipse at 45% 0, #285e77, #102638 80%);
+}
+[data-habitat='marine'] .reef-encounter {
+  width: 94%;
+  height: 88%;
+  aspect-ratio: auto;
+  left: 3%;
+  bottom: 6%;
+  animation: none;
+}
+.reef-encounter img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+[data-silvi-scene='bazaruto'] .reef-observer {
+  clip-path: inset(0 63.5% 0 0);
+  animation: reef-hover 6s ease-in-out infinite;
+}
+[data-silvi-scene='bazaruto'] .reef-animal {
+  clip-path: inset(0 0 0 36.5%);
+  animation: reef-drift 9s ease-in-out infinite;
+}
+[data-silvi-scene='mnemba'] .reef-observer {
+  clip-path: inset(0 0 0 65%);
+  animation: reef-hover 7s ease-in-out infinite reverse;
+}
+[data-silvi-scene='mnemba'] .reef-animal {
+  clip-path: inset(0 35% 0 0);
+  animation: reef-drift 11s ease-in-out infinite reverse;
+}
+@keyframes motorcycle-ride {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-0.3deg);
+  }
+  35% {
+    transform: translateY(-2px) rotate(0.4deg);
+  }
+  65% {
+    transform: translateY(1px) rotate(0);
+  }
+}
+@keyframes reef-hover {
+  0%,
+  100% {
+    transform: translateY(1%);
+  }
+  50% {
+    transform: translateY(-1.2%);
+  }
+}
+@keyframes reef-drift {
+  0%,
+  100% {
+    transform: translate(-0.5%, 0) rotate(-0.4deg);
+  }
+  50% {
+    transform: translate(0.8%, -1%) rotate(0.5deg);
+  }
+}
+@keyframes habitat-drift {
+  0%,
+  100% {
+    transform: scale(1.015) translateX(-0.2%);
+  }
+  50% {
+    transform: scale(1.035) translateX(0.2%);
+  }
+}
+.gallery-item > .portfolio-empty {
+  aspect-ratio: 4 / 3;
+}
+@media (max-width: 760px) {
+  .silvi-introduction {
+    grid-template-columns: 110px minmax(0, 1fr);
+    gap: 1.2rem;
+  }
+  .silvi-introduction h2 {
+    font-size: 1.9rem;
+  }
+  .silvi-introduction p:not(.eyebrow) {
+    font-size: 0.86rem;
+  }
+  .development-entry {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+  .development-entry > .development-scene {
+    grid-column: 1;
+    grid-row: 3;
+    max-width: 480px;
+    justify-self: center;
+  }
+  .development-entry > details {
+    grid-column: 1;
+    grid-row: 4;
+  }
+}
+@media (max-width: 450px) {
+  .silvi-introduction {
+    grid-template-columns: 1fr;
+  }
+  .silvi-introduction .silvi-scene {
+    width: 130px;
+  }
+}
+/* -- Painted marine habitats sit behind independently animated subjects. -- */
+.marine-background {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+  background: #103b50;
+}
+.marine-background img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: underwater-current 22s ease-in-out infinite;
+  transition: filter 1s ease;
+}
+.marine-background::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #06152d99, #07334966 45%, #020e2699);
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+[data-theme='dark'] .marine-background img {
+  filter: brightness(0.52) saturate(0.75) hue-rotate(8deg);
+}
+[data-theme='dark'] .marine-background::after {
+  opacity: 1;
+}
+.silvi-stage:has(.marine-background) {
+  border-radius: 8px;
+}
+.silvi-stage > .marine-background + img {
+  position: relative;
+  z-index: 1;
+}
+[data-habitat='marine'] .topic-rays {
+  opacity: 0.55;
+  mix-blend-mode: screen;
+}
+[data-habitat='marine'][data-night='true'] .topic-rays {
+  opacity: 0.1;
+}
+@keyframes underwater-current {
+  0%,
+  100% {
+    transform: scale(1.025) translateX(-0.25%);
+  }
+  50% {
+    transform: scale(1.055) translateX(0.25%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .silvi-scene *,
+  .silvi-scene *::before,
+  .silvi-scene *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+@media print {
+  .silvi-introduction {
+    display: none;
+  }
+}

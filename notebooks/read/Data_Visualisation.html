@@ -1,0 +1,1807 @@
+<!doctype html>
+<html lang="en-GB" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Data Visualisation in R — Les Hyperion</title>
+    <meta
+      name="description"
+      content="Base R plots to publication-quality facetted ggplots — the complete visualisation toolkit."
+    />
+    <meta name="theme-color" content="#0f2d3a" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../../assets/brand/favicon-32.png"
+    />
+    <link rel="icon" sizes="192x192" href="../../assets/brand/favicon-192.png" />
+    <link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png" />
+    <script src="../../js/theme-init.js"></script>
+    <link rel="stylesheet" href="../../css/site.css" />
+    <link rel="stylesheet" href="../../css/silvi.css" />
+    <link rel="stylesheet" href="../../css/revision.css" />
+    <link rel="stylesheet" href="../../css/refinement.css" />
+    <link rel="stylesheet" href="../../css/reader.css" />
+  </head>
+  <body class="reader-page">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../../index.html" aria-label="Les Hyperion — home"
+          ><img
+            class="brand-face"
+            src="../../assets/brand/silvi-face.png"
+            alt=""
+            width="55"
+            height="59"
+          /><span class="brand-name" aria-hidden="true"
+            >LES HYPERI<svg class="compass-o" viewBox="0 0 36 46" aria-hidden="true">
+              <circle
+                cx="18"
+                cy="23"
+                r="14.5"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              />
+              <path
+                d="m18 1 4 17 14 5-14 4-4 18-4-18L0 23l14-5Z"
+                fill="currentColor"
+              /></svg
+            >N</span
+          ></a
+        >
+        <nav class="desktop-nav" aria-label="Main navigation">
+          <a href="../../index.html">Home</a><a href="../../research.html">Research</a
+          ><a href="../../notebooks.html" aria-current="page">Notebooks</a
+          ><a href="../../carbon.html">Carbon</a><a href="../../about.html">About</a
+          ><a href="../../cv.html">CV</a>
+        </nav>
+        <div class="header-actions">
+          <button
+            class="icon-button theme-toggle"
+            data-theme-toggle
+            aria-label="Switch colour theme"
+          >
+            <svg
+              class="moon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path
+                d="M20.6 13.7A8.8 8.8 0 0 1 10.3 3.4a8.8 8.8 0 1 0 10.3 10.3Z"
+              /></svg
+            ><svg
+              class="sun"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path
+                d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"
+              />
+            </svg></button
+          ><button
+            class="icon-button menu-toggle"
+            aria-label="Open navigation"
+            aria-expanded="false"
+            aria-controls="mobile-nav"
+          >
+            <svg
+              class=""
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" hidden>
+        <a href="../../index.html">Home</a><a href="../../research.html">Research</a
+        ><a href="../../notebooks.html" aria-current="page">Notebooks</a
+        ><a href="../../carbon.html">Carbon</a><a href="../../about.html">About</a
+        ><a href="../../cv.html">CV</a>
+      </nav>
+    </header>
+    <main id="main">
+      <div class="reader-bar">
+        <div class="reader-bar-inner">
+          <a href="../../notebooks.html"
+            ><svg
+              class=""
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M20 12H5m6-6-6 6 6 6" />
+            </svg>
+            Notebooks</a
+          ><span class="reader-crumb">R Fundamentals / Part 3</span
+          ><a href="../Data_Visualisation.ipynb" download
+            ><svg
+              class=""
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5" />
+            </svg>
+            Download .ipynb</a
+          >
+        </div>
+      </div>
+      <div class="reader-layout">
+        <aside class="reader-sidebar">
+          <figure
+            class="silvi-scene reader-silvi"
+            data-silvi-scene="notebook-Data_Visualisation"
+          >
+            <div class="silvi-stage">
+              <img
+                src="../../assets/brand/unique-charts.png"
+                alt="Exploring Data Visualisation in R with Silvi"
+                width="480"
+                height="250"
+                loading="lazy"
+              />
+            </div>
+          </figure>
+          <details class="reader-contents" open>
+            <summary>In this notebook</summary>
+            <nav aria-label="Notebook contents">
+              <a href="#section-0-0">Data Visualisation in R</a
+              ><a href="#section-0-2">Introduction</a><a href="#section-1-3">Setup</a
+              ><a href="#section-3-4">Base R Graphics</a
+              ><a href="#section-15-11">ggplot2 — A Grammar of Graphics</a
+              ><a href="#section-16-12">Building a Plot — One Layer at a Time</a
+              ><a href="#section-26-14">Common Geometry Types</a
+              ><a href="#section-32-15">Faceting — Small Multiples</a
+              ><a href="#section-35-16">Scales</a
+              ><a href="#section-38-17">Themes — Fine-Tuning Appearance</a
+              ><a href="#section-43-18">Annotations and Labels</a
+              ><a href="#section-46-19">Combining Plots with patchwork</a
+              ><a href="#section-48-20">Saving Figures</a
+              ><a href="#section-50-21">Raincloud Plots — Advanced Visualisation</a
+              ><a href="#section-52-22">Summary</a
+              ><a href="#section-52-23">References</a>
+            </nav>
+          </details>
+          <div class="reader-tools">
+            <button id="toggle-outputs" aria-pressed="false">Collapse outputs</button
+            ><button class="print-button">Print notebook</button>
+          </div>
+          <p>Original code and saved outputs.<br />R · 53 cells</p>
+        </aside>
+        <article class="notebook-document">
+          <div class="reader-intro">
+            <p class="eyebrow">R Fundamentals · 2025-08-13</p>
+          </div>
+          <section class="markdown-cell">
+            <h1 id="section-0-0">Data Visualisation in R</h1>
+            <h3 id="section-0-1">
+              <em>From Base Graphics to Publication-Quality ggplot2 Figures</em>
+            </h3>
+            <hr />
+            <blockquote>
+              <p>
+                <em
+                  >&quot;The simple graph has brought more information to the data
+                  analyst&#39;s mind than any other device.&quot;</em
+                >
+                — John W. Tukey (1977), <em>Exploratory Data Analysis</em>
+              </p>
+            </blockquote>
+            <hr />
+            <h2 id="section-0-2">Introduction</h2>
+            <p>
+              Data visualisation is not decoration — it is a
+              <strong>primary mode of scientific inference</strong>. Well-constructed
+              figures reveal distributional properties, relationships, outliers, and
+              spatial patterns that summary statistics alone cannot convey (Anscombe,
+              1973; Tufte, 1983).
+            </p>
+            <p>
+              R is widely regarded as producing the finest statistical graphics of any
+              programming environment. In this page, we explore two complementary
+              approaches:
+            </p>
+            <ol>
+              <li>
+                <strong>Base R graphics</strong> (<code>graphics</code> package):
+                powerful, built-in, requiring no extra packages.
+              </li>
+              <li>
+                <strong><code>ggplot2</code></strong
+                >: a principled, layered system based on Leland Wilkinson&#39;s
+                <em>Grammar of Graphics</em> (2005), now the dominant tool for
+                publication-quality figures in ecology and the biological sciences.
+              </li>
+            </ol>
+            <p>
+              We will use the <strong>Palmer Penguins</strong> dataset throughout — the
+              same dataset used in Part 1 and 2 — to maintain consistency and biological
+              interpretability.
+            </p>
+            <p><strong>References:</strong></p>
+            <ul>
+              <li>
+                Anscombe, F.J. (1973). Graphs in statistical analysis.
+                <em>The American Statistician</em>, 27(1), 17–21.
+              </li>
+              <li>
+                Tufte, E.R. (1983).
+                <em>The Visual Display of Quantitative Information</em>. Graphics Press.
+              </li>
+              <li>
+                Wickham, H. (2010). A layered grammar of graphics.
+                <em>Journal of Computational and Graphical Statistics</em>, 19(1), 3–28.
+              </li>
+              <li>
+                Wilkinson, L. (2005). <em>The Grammar of Graphics</em> (2nd ed.).
+                Springer.
+              </li>
+            </ul>
+            <hr />
+          </section>
+          <section class="markdown-cell">
+            <h2 id="section-1-3">Setup</h2>
+            <p>
+              We begin every visualisation session by loading our packages and
+              configuring the display for Jupyter notebooks (Skip
+              <code>options()</code> chunk if you use RStudio or Base R).
+            </p>
+          </section>
+          <section class="code-cell" id="cell-2">
+            <div class="code-toolbar">
+              <span>R · Cell 1 · In [1]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code>suppressPackageStartupMessages({
+    library(tidyverse)
+    library(palmerpenguins)
+})
+
+# Configure plot output size for Jupyter / RMarkdown (Skip if using RStudio or Base R)
+options(
+  repr.plot.width  = 9,
+  repr.plot.height = 6,
+  repr.plot.res    = 180
+)
+
+# Load and prepare our consistent dataset
+data(&quot;penguins&quot;)
+penguins_complete &lt;- penguins |&gt; drop_na()
+
+cat(&quot;Dataset: Palmer Penguins\n&quot;)
+cat(&quot;Rows:&quot;, nrow(penguins_complete), &quot;| Columns:&quot;, ncol(penguins_complete), &quot;\n&quot;)
+cat(&quot;Species:&quot;, paste(unique(penguins_complete$species), collapse = &quot;, &quot;), &quot;\n&quot;)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">Dataset: Palmer Penguins
+Rows: 333 | Columns: 8 
+Species: Adelie, Gentoo, Chinstrap 
+</pre>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <hr />
+            <h2 id="section-3-4">Base R Graphics</h2>
+            <p>
+              The <code>graphics</code> package is loaded automatically with R — no
+              <code>library()</code> call needed. Base R graphics are
+              <strong>imperative</strong>: you build a plot by issuing commands that add
+              to the current graphics device. Each new function call either starts a new
+              plot or adds elements to the existing one.
+            </p>
+            <p>
+              Base R is ideal for quick exploratory plots and is sufficient for many
+              analytical purposes. Understanding it also highlights why
+              <code>ggplot2</code> was designed the way it was.
+            </p>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-4-5">1. Histograms</h3>
+            <p>
+              Histograms display the distribution of a single continuous variable. Plot
+              histograms using <code>hist()</code>.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-5">
+            <div class="code-toolbar">
+              <span>R · Cell 2 · In [2]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># A basic histogram of flipper length
+hist(penguins_complete$flipper_length_mm,
+     main  = &quot;Distribution of Flipper Length — Palmer Penguins&quot;,
+     xlab  = &quot;Flipper Length (mm)&quot;,
+     ylab  = &quot;Frequency&quot;,
+     col   = &quot;steelblue&quot;,
+     border= &quot;white&quot;,
+     breaks= 25)   # approximate number of bins</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/1368fbad0552e1d50e9c.png"
+                    alt="Original figure output from code cell 2"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-6-6">2. Scatter Plots</h3>
+            <p>Scatter plots reveal relationships between two continuous variables.</p>
+          </section>
+          <section class="code-cell" id="cell-7">
+            <div class="code-toolbar">
+              <span>R · Cell 3 · In [3]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Define species-specific colours (a standard palette in penguin research)
+species_cols &lt;- c(&quot;Adelie&quot; = &quot;darkorange&quot;, &quot;Chinstrap&quot; = &quot;purple&quot;, &quot;Gentoo&quot; = &quot;cyan4&quot;)
+
+# Basic scatter plot
+plot(x    = penguins_complete$bill_length_mm,
+     y    = penguins_complete$bill_depth_mm,
+     col  = species_cols[penguins_complete$species],
+     pch  = 19,              # filled circle
+     xlab = &quot;Bill Length (mm)&quot;,
+     ylab = &quot;Bill Depth (mm)&quot;,
+     main = &quot;Bill Dimensions by Species — Palmer Penguins&quot;)
+
+# Add a legend — this must be called AFTER plot()
+legend(&quot;topright&quot;,
+       legend = names(species_cols),
+       col    = species_cols,
+       pch    = 19,
+       title  = &quot;Species&quot;,
+       bty    = &quot;n&quot;)   # no box around the legend</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/bb0530ffaf7bf99a4ed0.png"
+                    alt="Original figure output from code cell 3"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-8-7">3. Box Plots</h3>
+            <p>
+              Box plots (Tukey, 1977) display the five-number summary (minimum, Q1,
+              median, Q3, maximum) and are particularly effective for comparing
+              distributions across groups. Plot boxblots using <code>boxplot()</code>.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-9">
+            <div class="code-toolbar">
+              <span>R · Cell 4 · In [4]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Box plots — formula interface: response ~ group
+boxplot(body_mass_g ~ species,
+        data   = penguins_complete,
+        col    = species_cols,
+        xlab   = &quot;Species&quot;,
+        ylab   = &quot;Body Mass (g)&quot;,
+        main   = &quot;Body Mass Distribution by Species&quot;,
+        notch  = TRUE,   # notched boxes indicate 95% CI around the median
+        outline= FALSE)  # suppress outlier points (cleaner for teaching)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/f91c21c517121a840082.png"
+                    alt="Original figure output from code cell 4"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-10-8">4. Bar Plots</h3>
+            <p>
+              Bar plots summarise a categorical relationship. In base R,
+              <code>barplot()</code> expects a table or matrix, not raw data.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-11">
+            <div class="code-toolbar">
+              <span>R · Cell 5 · In [5]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Count penguins by species and island
+count_table &lt;- table(penguins_complete$species, penguins_complete$island)
+
+# Grouped bar plot
+barplot(count_table,
+        beside  = TRUE,
+        col     = species_cols,
+        xlab    = &quot;Island&quot;,
+        ylab    = &quot;Count&quot;,
+        main    = &quot;Penguin Counts by Island and Species&quot;,
+        legend  = rownames(count_table),
+        args.legend = list(x = &quot;topleft&quot;, bty = &quot;n&quot;))</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/e7df93e9ae870bf7cd2c.png"
+                    alt="Original figure output from code cell 5"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-12-9">5. Density Plots</h3>
+          </section>
+          <section class="code-cell" id="cell-13">
+            <div class="code-toolbar">
+              <span>R · Cell 6 · In [6]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Overlapping density curves — one per species
+adelie    &lt;- penguins_complete$flipper_length_mm[penguins_complete$species == &quot;Adelie&quot;]
+chinstrap &lt;- penguins_complete$flipper_length_mm[penguins_complete$species == &quot;Chinstrap&quot;]
+gentoo    &lt;- penguins_complete$flipper_length_mm[penguins_complete$species == &quot;Gentoo&quot;]
+
+plot(density(gentoo), col = species_cols[&quot;Gentoo&quot;], lwd = 2,
+     xlim = c(170, 240), ylim = c(0, 0.12),
+     main = &quot;Flipper Length Density by Species&quot;,
+     xlab = &quot;Flipper Length (mm)&quot;, ylab = &quot;Density&quot;)
+
+lines(density(adelie),    col = species_cols[&quot;Adelie&quot;],    lwd = 2)
+lines(density(chinstrap), col = species_cols[&quot;Chinstrap&quot;], lwd = 2)
+
+legend(&quot;topleft&quot;, legend = names(species_cols),
+       col = species_cols, lwd = 2, bty = &quot;n&quot;)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/4ef2e28053a6e4ae5f7d.png"
+                    alt="Original figure output from code cell 6"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-14-10">6. Limitations of Base R Graphics</h3>
+            <p>
+              Base R graphics are effective, but they have significant limitations for
+              complex, publication-quality figures:
+            </p>
+            <ul>
+              <li>
+                Adding a legend requires a separate <code>legend()</code> call with
+                manually specified parameters.
+              </li>
+              <li>
+                Colour mapping (linking colours to data values) must be done manually.
+              </li>
+              <li>
+                Multi-panel figures require <code>par(mfrow = ...)</code> and careful
+                margin management.
+              </li>
+              <li>Consistent styling across a document requires repetitive code.</li>
+              <li>
+                There is no principled grammar — plots are built procedurally, not
+                declaratively.
+              </li>
+            </ul>
+            <p>
+              <code>ggplot2</code> was designed to address all of these limitations.
+            </p>
+            <hr />
+          </section>
+          <section class="markdown-cell">
+            <img src="../media/4f32f62c70899d2c31d4.png" align="right" width="130" />
+
+            <h2 id="section-15-11"><code>ggplot2</code> — A Grammar of Graphics</h2>
+            <p>
+              <code>ggplot2</code> (Wickham, 2010, 2016) implements Wilkinson&#39;s
+              (2005) <em>Grammar of Graphics</em> — a principled framework that
+              decomposes every plot into the following components:
+            </p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Component</th>
+                  <th>Description</th>
+                  <th>ggplot2 function</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Data</strong></td>
+                  <td>The dataset being visualised</td>
+                  <td><code>ggplot(data = ...)</code></td>
+                </tr>
+                <tr>
+                  <td><strong>Aesthetics</strong></td>
+                  <td>Mappings from data to visual properties</td>
+                  <td><code>aes(x, y, colour, fill, size, ...)</code></td>
+                </tr>
+                <tr>
+                  <td><strong>Geometries</strong></td>
+                  <td>The geometric objects that represent data</td>
+                  <td><code>geom_*()</code></td>
+                </tr>
+                <tr>
+                  <td><strong>Scales</strong></td>
+                  <td>How data values map to aesthetic values</td>
+                  <td><code>scale_*()</code></td>
+                </tr>
+                <tr>
+                  <td><strong>Facets</strong></td>
+                  <td>Splitting the plot into subplots</td>
+                  <td><code>facet_wrap()</code>, <code>facet_grid()</code></td>
+                </tr>
+                <tr>
+                  <td><strong>Statistics</strong></td>
+                  <td>Statistical transformations of the data</td>
+                  <td><code>stat_*()</code></td>
+                </tr>
+                <tr>
+                  <td><strong>Coordinates</strong></td>
+                  <td>The coordinate system</td>
+                  <td><code>coord_*()</code></td>
+                </tr>
+                <tr>
+                  <td><strong>Theme</strong></td>
+                  <td>Non-data visual elements</td>
+                  <td><code>theme()</code></td>
+                </tr>
+              </tbody>
+            </table>
+            <p>Three rules govern every <code>ggplot2</code> plot:</p>
+            <ol>
+              <li>
+                <strong>Plots are built by accumulation</strong>: start with a base and
+                add layers.
+              </li>
+              <li>
+                <strong>Aesthetics are data-driven or constant — never both</strong>: if
+                it varies with data, it belongs inside <code>aes()</code>; if it is
+                fixed, it belongs outside.
+              </li>
+              <li>
+                <strong>Grouping is identity</strong>: it tells
+                <code>ggplot2</code> which observations belong together across layers.
+              </li>
+            </ol>
+            <p><strong>References:</strong></p>
+            <ul>
+              <li>
+                Wickham, H. (2016).
+                <em>ggplot2: Elegant Graphics for Data Analysis</em> (2nd ed.).
+                Springer.
+                <a href="https://ggplot2-book.org">https://ggplot2-book.org</a>
+              </li>
+              <li>
+                Wilkinson, L. (2005). <em>The Grammar of Graphics</em> (2nd ed.).
+                Springer.
+              </li>
+            </ul>
+          </section>
+          <section class="markdown-cell">
+            <hr />
+            <h2 id="section-16-12">Building a Plot — One Layer at a Time</h2>
+            <p>
+              The most important pedagogical principle in learning
+              <code>ggplot2</code> is that every layer you add incrementally improves
+              the figure. A figure is never finished in one call — it is refined through
+              successive additions.
+            </p>
+            <p>
+              Let us build a complete figure from scratch, adding exactly
+              <strong>one element per step</strong>.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-17">
+            <div class="code-toolbar">
+              <span>R · Cell 7 · In [7]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Step 1: An empty canvas
+# ggplot() initialises the plot — it defines the data and global aesthetics
+# but produces nothing visible yet.
+
+ggplot(data    = penguins_complete,
+       mapping = aes(x = bill_length_mm,
+                     y = bill_depth_mm))</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/07a8d662676bd014fce1.png"
+                    alt="Original figure output from code cell 7"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-18">
+            <div class="code-toolbar">
+              <span>R · Cell 8 · In [8]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Step 2: Add a geometry (+ geom_point)
+# geom_point() adds a scatter plot layer
+# Note: all layers are connected with the + operator
+
+ggplot(data    = penguins_complete,
+       mapping = aes(x = bill_length_mm,
+                     y = bill_depth_mm)) +
+  geom_point()</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/dffaeb89f0443f5c457f.png"
+                    alt="Original figure output from code cell 8"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-19">
+            <div class="code-toolbar">
+              <span>R · Cell 9 · In [9]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Step 3: Map colour to species (+ colour = species inside aes)
+# Moving colour INTO aes() links it to data — ggplot2 assigns colours automatically
+# and creates a legend without any additional code
+
+ggplot(data    = penguins_complete,
+       mapping = aes(x      = bill_length_mm,
+                     y      = bill_depth_mm,
+                     colour = species)) +
+  geom_point()</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/56d4a9bfeb3d96715bfd.png"
+                    alt="Original figure output from code cell 9"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-20">
+            <div class="code-toolbar">
+              <span>R · Cell 10 · In [10]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Step 4: Add axis labels and a title (+ labs)
+# labs() modifies all text labels — axes, legend, title, subtitle, caption
+
+ggplot(data    = penguins_complete,
+       mapping = aes(x      = bill_length_mm,
+                     y      = bill_depth_mm,
+                     colour = species)) +
+  geom_point() +
+  labs(x      = &quot;Bill Length (mm)&quot;,
+       y      = &quot;Bill Depth (mm)&quot;,
+       colour = &quot;Species&quot;,
+       title  = &quot;Bill Dimensions of Palmer Penguins&quot;)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/f2f790c505e25a59065f.png"
+                    alt="Original figure output from code cell 10"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-21">
+            <div class="code-toolbar">
+              <span>R · Cell 11 · In [11]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Step 5: Apply a clean theme (+ theme_classic)
+# theme_classic() removes the grey background and uses a clean axis-line style
+# Other options: theme_bw(), theme_minimal(), theme_light()
+
+ggplot(data    = penguins_complete,
+       mapping = aes(x      = bill_length_mm,
+                     y      = bill_depth_mm,
+                     colour = species)) +
+  geom_point() +
+  labs(x      = &quot;Bill Length (mm)&quot;,
+       y      = &quot;Bill Depth (mm)&quot;,
+       colour = &quot;Species&quot;,
+       title  = &quot;Bill Dimensions of Palmer Penguins&quot;) +
+  theme_classic()</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/321c35fc6c366c7c156a.png"
+                    alt="Original figure output from code cell 11"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-22">
+            <div class="code-toolbar">
+              <span>R · Cell 12 · In [12]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Step 6: Use ecologically meaningful colours (+ scale_colour_manual)
+# Replace the default palette with the published penguin colour scheme
+
+ggplot(data    = penguins_complete,
+       mapping = aes(x      = bill_length_mm,
+                     y      = bill_depth_mm,
+                     colour = species)) +
+  geom_point() +
+  scale_colour_manual(values = c(&quot;darkorange&quot;, &quot;purple&quot;, &quot;cyan4&quot;)) +
+  labs(x      = &quot;Bill Length (mm)&quot;,
+       y      = &quot;Bill Depth (mm)&quot;,
+       colour = &quot;Species&quot;,
+       title  = &quot;Bill Dimensions of Palmer Penguins&quot;) +
+  theme_classic()</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/21280e91f69d4ddf368b.png"
+                    alt="Original figure output from code cell 12"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-23">
+            <div class="code-toolbar">
+              <span>R · Cell 13 · In [13]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Step 7: Add shape mapping for accessibility (+ shape = species inside aes)
+# Using both colour and shape improves legibility in greyscale printing
+# and for readers with colour vision deficiency
+
+ggplot(data    = penguins_complete,
+       mapping = aes(x      = bill_length_mm,
+                     y      = bill_depth_mm,
+                     colour = species,
+                     shape  = species)) +
+  geom_point(size = 2, alpha = 0.8) +
+  scale_colour_manual(values = c(&quot;darkorange&quot;, &quot;purple&quot;, &quot;cyan4&quot;)) +
+  labs(x      = &quot;Bill Length (mm)&quot;,
+       y      = &quot;Bill Depth (mm)&quot;,
+       colour = &quot;Species&quot;,
+       shape  = &quot;Species&quot;,
+       title  = &quot;Bill Dimensions of Palmer Penguins&quot;,
+       subtitle = &quot;Bill length and depth (mm) for Adelie, Chinstrap, and Gentoo penguins&quot;,
+       caption = &quot;Data: Gorman et al. (2014); Horst, Hill &amp; Gorman (2020)&quot;) +
+  theme_classic()</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/7daed068e6e738252535.png"
+                    alt="Original figure output from code cell 13"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-24">
+            <div class="code-toolbar">
+              <span>R · Cell 14 · In [14]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Step 8: Add a linear trend line per species (+ geom_smooth)
+# geom_smooth inherits the colour and shape aesthetics from ggplot()
+
+ggplot(data    = penguins_complete,
+       mapping = aes(x      = bill_length_mm,
+                     y      = bill_depth_mm,
+                     colour = species,
+                     shape  = species)) +
+  geom_point(size = 2, alpha = 0.8) +
+  geom_smooth(method = &quot;lm&quot;, se = TRUE, alpha = 0.2) +
+  scale_colour_manual(values = c(&quot;darkorange&quot;, &quot;purple&quot;, &quot;cyan4&quot;)) +
+  labs(x      = &quot;Bill Length (mm)&quot;,
+       y      = &quot;Bill Depth (mm)&quot;,
+       colour = &quot;Species&quot;,
+       shape  = &quot;Species&quot;,
+       title  = &quot;Bill Dimensions of Palmer Penguins&quot;,
+       subtitle = &quot;Linear fits with 95% confidence intervals&quot;,
+       caption = &quot;Data: Gorman et al. (2014); Horst, Hill &amp; Gorman (2020)&quot;) +
+  theme_classic()</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">`geom_smooth()` using formula = &#39;y ~ x&#39;
+</pre>
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/5853887f62ef0ae8ce2f.png"
+                    alt="Original figure output from code cell 14"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-25-13">What we have shown</h3>
+            <p>Each <code>+</code> line added exactly <strong>one feature</strong>:</p>
+            <ol>
+              <li><code>ggplot()</code> — canvas</li>
+              <li><code>geom_point()</code> — data points</li>
+              <li>
+                <code>colour = species</code> inside <code>aes()</code> — colour mapping
+              </li>
+              <li><code>labs()</code> — axis and title labels</li>
+              <li><code>theme_classic()</code> — clean styling</li>
+              <li><code>scale_colour_manual()</code> — custom colours</li>
+              <li><code>shape = species</code> + <code>alpha</code> — shape mapping</li>
+              <li><code>geom_smooth()</code> — trend lines</li>
+            </ol>
+            <p>
+              This is the grammar of graphics in action:
+              <strong>layers stack to compose complex figures from simple parts</strong
+              >.
+            </p>
+            <hr />
+          </section>
+          <section class="markdown-cell">
+            <h2 id="section-26-14">Common Geometry Types</h2>
+            <p>
+              <code>ggplot2</code> provides over 40 <code>geom_*</code> functions. Here
+              are the most common in ecological research.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-27">
+            <div class="code-toolbar">
+              <span>R · Cell 15 · In [15]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Histogram
+ggplot(penguins_complete, aes(x = flipper_length_mm, fill = species)) +
+  geom_histogram(bins = 30, alpha = 0.7, position = &quot;identity&quot;) +
+  scale_fill_manual(values = c(&quot;darkorange&quot;, &quot;purple&quot;, &quot;cyan4&quot;)) +
+  labs(x = &quot;Flipper Length (mm)&quot;, y = &quot;Count&quot;, fill = &quot;Species&quot;,
+       title = &quot;Distribution of Flipper Length&quot;) +
+  theme_classic()</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/7f016569a7c8b311980c.png"
+                    alt="Original figure output from code cell 15"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-28">
+            <div class="code-toolbar">
+              <span>R · Cell 16 · In [16]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Density plot
+ggplot(penguins_complete, aes(x = flipper_length_mm, fill = species)) +
+  geom_density(alpha = 0.5) +
+  scale_fill_manual(values = c(&quot;darkorange&quot;, &quot;purple&quot;, &quot;cyan4&quot;)) +
+  labs(x = &quot;Flipper Length (mm)&quot;, y = &quot;Density&quot;, fill = &quot;Species&quot;,
+       title = &quot;Density of Flipper Length by Species&quot;) +
+  theme_classic()</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/59efe12b0ca5ee771fb7.png"
+                    alt="Original figure output from code cell 16"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-29">
+            <div class="code-toolbar">
+              <span>R · Cell 17 · In [17]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Box plot
+ggplot(penguins_complete, aes(x = species, y = body_mass_g, fill = species)) +
+  geom_boxplot(alpha = 0.7, outlier.shape = 21, outlier.size = 2) +
+  scale_fill_manual(values = c(&quot;darkorange&quot;, &quot;purple&quot;, &quot;cyan4&quot;)) +
+  labs(x = &quot;Species&quot;, y = &quot;Body Mass (g)&quot;, fill = &quot;Species&quot;,
+       title = &quot;Body Mass by Species&quot;) +
+  theme_classic() +
+  theme(legend.position = &quot;none&quot;)   # legend redundant when x = group</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/48e7497a3838f8f45382.png"
+                    alt="Original figure output from code cell 17"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-30">
+            <div class="code-toolbar">
+              <span>R · Cell 18 · In [18]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Violin plot — shows the full distribution shape
+ggplot(penguins_complete, aes(x = species, y = body_mass_g, fill = species)) +
+  geom_violin(alpha = 0.7, trim = FALSE) +
+  geom_boxplot(width = 0.08, fill = &quot;white&quot;, alpha = 0.8) +  # embedded boxplot
+  scale_fill_manual(values = c(&quot;darkorange&quot;, &quot;purple&quot;, &quot;cyan4&quot;)) +
+  labs(x = &quot;Species&quot;, y = &quot;Body Mass (g)&quot;, fill = &quot;Species&quot;,
+       title = &quot;Body Mass Distribution (Violin + Boxplot)&quot;) +
+  theme_classic() +
+  theme(legend.position = &quot;none&quot;)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/d555634a198667749bda.png"
+                    alt="Original figure output from code cell 18"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-31">
+            <div class="code-toolbar">
+              <span>R · Cell 19 · In [19]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Bar chart — summarised counts with geom_bar
+ggplot(penguins_complete, aes(x = island, fill = species)) +
+  geom_bar(position = &quot;dodge&quot;) +
+  scale_fill_manual(values = c(&quot;darkorange&quot;, &quot;purple&quot;, &quot;cyan4&quot;)) +
+  labs(x = &quot;Island&quot;, y = &quot;Count&quot;, fill = &quot;Species&quot;,
+       title = &quot;Penguin Abundance by Island and Species&quot;) +
+  theme_classic()</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/21051b2ccf15a28668a5.png"
+                    alt="Original figure output from code cell 19"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <hr />
+            <h2 id="section-32-15">Faceting — Small Multiples</h2>
+            <p>
+              <strong>Faceting</strong> splits a plot into a grid of sub-plots, one per
+              level of a variable. It is one of the most powerful tools in ggplot2 for
+              revealing structure in ecological data.
+            </p>
+            <blockquote>
+              <p>
+                <em
+                  >&quot;Comparisons within small multiples are better than comparisons
+                  between separate charts.&quot;</em
+                >
+                — Tufte (1983)
+              </p>
+            </blockquote>
+          </section>
+          <section class="code-cell" id="cell-33">
+            <div class="code-toolbar">
+              <span>R · Cell 20 · In [20]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># facet_wrap() — wraps panels into a grid automatically
+ggplot(penguins_complete, aes(x = bill_length_mm, y = body_mass_g,
+                              colour = sex)) +
+  geom_point(size = 2, alpha = 0.8) +
+  facet_wrap(~ species, nrow = 1) +
+  scale_colour_manual(values = c(&quot;female&quot; = &quot;coral&quot;, &quot;male&quot; = &quot;steelblue&quot;)) +
+  labs(x = &quot;Bill Length (mm)&quot;, y = &quot;Body Mass (g)&quot;,
+       colour = &quot;Sex&quot;,
+       title  = &quot;Bill Length vs Body Mass by Species and Sex&quot;) +
+  theme_classic() +
+  theme(strip.background = element_rect(fill = &quot;grey90&quot;),
+        strip.text       = element_text(face = &quot;bold&quot;))</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/555cac28dbbf866a89bf.png"
+                    alt="Original figure output from code cell 20"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-34">
+            <div class="code-toolbar">
+              <span>R · Cell 21 · In [21]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># facet_grid() — rows AND columns of grouping
+ggplot(penguins_complete, aes(x = flipper_length_mm, fill = species)) +
+  geom_density(alpha = 0.6) +
+  facet_grid(sex ~ species) +
+  scale_fill_manual(values = c(&quot;darkorange&quot;, &quot;purple&quot;, &quot;cyan4&quot;)) +
+  labs(x = &quot;Flipper Length (mm)&quot;, y = &quot;Density&quot;,
+       title = &quot;Flipper Length Density — Faceted by Species × Sex&quot;) +
+  theme_minimal() +
+  theme(legend.position = &quot;none&quot;,
+        strip.text      = element_text(face = &quot;bold&quot;))</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/dee6b01c3627ddd54c55.png"
+                    alt="Original figure output from code cell 21"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <hr />
+            <h2 id="section-35-16">Scales</h2>
+            <p>
+              <strong>Scales</strong> control the mapping between data values and visual
+              properties. Every aesthetic has a corresponding
+              <code>scale_*()</code> function.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-36">
+            <div class="code-toolbar">
+              <span>R · Cell 22 · In [22]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Colour scales — viridis is perceptually uniform and colourblind-safe
+# install.packages(&quot;viridis&quot;)
+library(viridis)
+
+ggplot(penguins_complete, aes(x = bill_length_mm, y = bill_depth_mm,
+                              colour = body_mass_g)) +
+  geom_point(size = 3, alpha = 0.8) +
+  scale_colour_viridis_c(option = &quot;plasma&quot;, name = &quot;Body Mass (g)&quot;) +
+  labs(x = &quot;Bill Length (mm)&quot;, y = &quot;Bill Depth (mm)&quot;,
+       title  = &quot;Bill Dimensions Coloured by Body Mass&quot;,
+       subtitle = &quot;Viridis colour scale — perceptually uniform, colourblind-safe&quot;) +
+  theme_classic()</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">Loading required package: viridisLite
+
+</pre>
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/c1174ed49cc9771cdd58.png"
+                    alt="Original figure output from code cell 22"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-37">
+            <div class="code-toolbar">
+              <span>R · Cell 23 · In [23]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Axis scales — log transform, breaks, limits
+ggplot(penguins_complete, aes(x = bill_length_mm, y = body_mass_g,
+                              colour = species, shape = species)) +
+  geom_point(size = 2, alpha = 0.8) +
+  scale_y_log10(labels = scales::comma) +   # log10 y-axis
+  scale_x_continuous(breaks = seq(30, 60, by = 5)) +
+  scale_colour_manual(values = c(&quot;darkorange&quot;, &quot;purple&quot;, &quot;cyan4&quot;)) +
+  labs(x = &quot;Bill Length (mm)&quot;, y = &quot;Body Mass (g, log scale)&quot;,
+       colour = &quot;Species&quot;, shape = &quot;Species&quot;,
+       title = &quot;Bill Length vs Body Mass (log-transformed y-axis)&quot;) +
+  theme_classic()</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/e331256fa2c5723380e0.png"
+                    alt="Original figure output from code cell 23"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <hr />
+            <h2 id="section-38-17">Themes — Fine-Tuning Appearance</h2>
+            <p>
+              <code>theme()</code> controls every non-data visual element: text size,
+              font, axis lines, grid, margins, and more. <code>ggplot2</code> includes
+              several preset themes; you can also build a custom theme.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-39">
+            <div class="code-toolbar">
+              <span>R · Cell 24 · In [24]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Comparing preset themes on the same plot
+base_plot &lt;- ggplot(penguins_complete,
+                    aes(x = flipper_length_mm, y = body_mass_g,
+                        colour = species)) +
+  geom_point(size = 2, alpha = 0.8) +
+  scale_colour_manual(values = c(&quot;darkorange&quot;, &quot;purple&quot;, &quot;cyan4&quot;)) +
+  labs(x = &quot;Flipper Length (mm)&quot;, y = &quot;Body Mass (g)&quot;,
+       colour = &quot;Species&quot;)
+
+base_plot + theme_classic()  + labs(title = &quot;theme_classic()&quot;)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/30b26236a30f61b24cea.png"
+                    alt="Original figure output from code cell 24"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-40">
+            <div class="code-toolbar">
+              <span>R · Cell 25 · In [25]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code>base_plot + theme_bw()       + labs(title = &quot;theme_bw()&quot;)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/0a1a0d04bee8ebb2fb0e.png"
+                    alt="Original figure output from code cell 25"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-41">
+            <div class="code-toolbar">
+              <span>R · Cell 26 · In [26]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code>base_plot + theme_minimal()  + labs(title = &quot;theme_minimal()&quot;)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/f80da0190dca1139d587.png"
+                    alt="Original figure output from code cell 26"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-42">
+            <div class="code-toolbar">
+              <span>R · Cell 27 · In [27]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Custom theme modifications with theme()
+ggplot(penguins_complete,
+       aes(x = species, y = body_mass_g, fill = species)) +
+  geom_boxplot(alpha = 0.8) +
+  scale_fill_manual(values = c(&quot;darkorange&quot;, &quot;purple&quot;, &quot;cyan4&quot;)) +
+  labs(x = NULL, y = &quot;Body Mass (g)&quot;,
+       title    = &quot;Body Mass by Species&quot;,
+       subtitle = &quot;Palmer Penguins LTER dataset&quot;,
+       caption  = &quot;Gorman et al. (2014)&quot;) +
+  theme_classic() +
+  theme(
+    # Title formatting
+    plot.title     = element_text(size = 14, face = &quot;bold&quot;, hjust = 0.5),
+    plot.subtitle  = element_text(size = 10, colour = &quot;grey50&quot;, hjust = 0.5),
+    plot.caption   = element_text(size = 8,  colour = &quot;grey60&quot;),
+
+    # Axis text
+    axis.title.y   = element_text(size = 11, face = &quot;bold&quot;),
+    axis.text      = element_text(size = 10),
+
+    # Legend
+    legend.position = &quot;none&quot;,    # remove redundant legend
+
+    # Background
+    plot.background  = element_rect(fill = &quot;white&quot;, colour = NA),
+    panel.background = element_rect(fill = &quot;grey98&quot;, colour = NA)
+  )</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/cbb6617e9ecbf9f45420.png"
+                    alt="Original figure output from code cell 27"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <hr />
+            <h2 id="section-43-18">Annotations and Labels</h2>
+            <p>
+              Effective scientific figures label key features directly, reducing the
+              cognitive load of consulting a legend.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-44">
+            <div class="code-toolbar">
+              <span>R · Cell 28 · In [28]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code>library(ggrepel)   # install.packages(&quot;ggrepel&quot;) — non-overlapping text labels
+
+# Compute species centroids for labelling
+species_centroids &lt;- penguins_complete |&gt;
+  group_by(species) |&gt;
+  summarise(
+    bill_length_mm = mean(bill_length_mm),
+    bill_depth_mm  = mean(bill_depth_mm)
+  )
+
+ggplot(penguins_complete,
+       aes(x = bill_length_mm, y = bill_depth_mm, colour = species)) +
+  geom_point(size = 2, alpha = 0.5) +
+  geom_label_repel(
+    data    = species_centroids,
+    aes(label = species),
+    size    = 4,
+    fontface= &quot;bold&quot;,
+    box.padding = 1,
+    show.legend = FALSE
+  ) +
+  scale_colour_manual(values = c(&quot;darkorange&quot;, &quot;purple&quot;, &quot;cyan4&quot;)) +
+  labs(x = &quot;Bill Length (mm)&quot;, y = &quot;Bill Depth (mm)&quot;,
+       title = &quot;Bill Dimensions — Species Labelled at Centroids&quot;) +
+  theme_classic() +
+  theme(legend.position = &quot;none&quot;)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/fce419dd75e30da6ced2.png"
+                    alt="Original figure output from code cell 28"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-45">
+            <div class="code-toolbar">
+              <span>R · Cell 29 · In [29]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Annotate with geom_text — note the Simpson&#39;s Paradox!
+# The overall trend is negative, but within species it is positive
+ggplot(penguins_complete,
+       aes(x = bill_length_mm, y = bill_depth_mm)) +
+  geom_point(aes(colour = species), size = 2, alpha = 0.6) +
+  geom_smooth(method = &quot;lm&quot;, colour = &quot;black&quot;, linetype = &quot;dashed&quot;,
+              se = FALSE) +     # overall trend (misleading without grouping)
+  geom_smooth(aes(colour = species), method = &quot;lm&quot;,
+              se = FALSE) +     # within-species trends
+  scale_colour_manual(values = c(&quot;darkorange&quot;, &quot;purple&quot;, &quot;cyan4&quot;)) +
+  annotate(&quot;text&quot;, x = 35, y = 21.5,
+           label = &quot;Overall trend →\n(Simpson&#39;s Paradox)&quot;,
+           colour = &quot;black&quot;, size = 3.5, hjust = 0) +
+  labs(x = &quot;Bill Length (mm)&quot;, y = &quot;Bill Depth (mm)&quot;,
+       colour = &quot;Species&quot;,
+       title = &quot;Simpson&#39;s Paradox in Penguin Bill Dimensions&quot;,
+       subtitle = &quot;The negative overall trend reverses within each species&quot;) +
+  theme_classic()</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">`geom_smooth()` using formula = &#39;y ~ x&#39;
+`geom_smooth()` using formula = &#39;y ~ x&#39;
+</pre>
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/22d640ca5127bec18d2d.png"
+                    alt="Original figure output from code cell 29"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <hr />
+            <h2 id="section-46-19">Combining Plots with <code>patchwork</code></h2>
+            <p>
+              <code>patchwork</code> (Pedersen, 2024) provides an elegant syntax for
+              arranging multiple <code>ggplot2</code> objects into a single figure —
+              essential for multi-panel publication figures.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-47">
+            <div class="code-toolbar">
+              <span>R · Cell 30 · In [30]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># install.packages(&quot;patchwork&quot;)
+library(patchwork)
+
+# Create component plots
+p1 &lt;- ggplot(penguins_complete, aes(x = species, y = body_mass_g, fill = species)) +
+  geom_boxplot(alpha = 0.8) +
+  scale_fill_manual(values = c(&quot;darkorange&quot;, &quot;purple&quot;, &quot;cyan4&quot;)) +
+  labs(x = NULL, y = &quot;Body Mass (g)&quot;, title = &quot;A. Body mass by species&quot;) +
+  theme_classic() + theme(legend.position = &quot;none&quot;)
+
+p2 &lt;- ggplot(penguins_complete, aes(x = flipper_length_mm, y = body_mass_g,
+                                     colour = species)) +
+  geom_point(size = 2, alpha = 0.7) +
+  geom_smooth(method = &quot;lm&quot;, se = FALSE) +
+  scale_colour_manual(values = c(&quot;darkorange&quot;, &quot;purple&quot;, &quot;cyan4&quot;)) +
+  labs(x = &quot;Flipper Length (mm)&quot;, y = &quot;Body Mass (g)&quot;,
+       colour = &quot;Species&quot;, title = &quot;B. Flipper length vs body mass&quot;) +
+  theme_classic()
+
+p3 &lt;- ggplot(penguins_complete, aes(x = bill_length_mm, fill = species)) +
+  geom_density(alpha = 0.6) +
+  scale_fill_manual(values = c(&quot;darkorange&quot;, &quot;purple&quot;, &quot;cyan4&quot;)) +
+  labs(x = &quot;Bill Length (mm)&quot;, y = &quot;Density&quot;,
+       fill = &quot;Species&quot;, title = &quot;C. Bill length distribution&quot;) +
+  theme_classic()
+
+# Arrange: p1 top-left, p2 top-right, p3 full width below
+(p1 | p2) / p3 +
+  plot_annotation(
+    title    = &quot;Morphological Variation in Palmer Archipelago Penguins&quot;,
+    subtitle = &quot;Three species sampled 2007–2009 (n = 333)&quot;,
+    caption  = &quot;Data: Gorman et al. (2014); Horst, Hill &amp; Gorman (2020)&quot;,
+    theme    = theme(plot.title = element_text(size = 14, face = &quot;bold&quot;))
+  )</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">`geom_smooth()` using formula = &#39;y ~ x&#39;
+</pre>
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/1f581155dc7dd0f9c0bf.png"
+                    alt="Original figure output from code cell 30"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <hr />
+            <h2 id="section-48-20">Saving Figures</h2>
+            <p>
+              <code>ggsave()</code> saves the most recently rendered
+              <code>ggplot2</code> figure (or a named plot object) to disk.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-49">
+            <div class="code-toolbar">
+              <span>R · Cell 31</span><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Best practice: save as an object first, then export
+final_figure &lt;- ggplot(penguins_complete,
+       aes(x = bill_length_mm, y = bill_depth_mm,
+           colour = species, shape = species)) +
+  geom_point(size = 2.5, alpha = 0.8) +
+  geom_smooth(method = &quot;lm&quot;, se = TRUE, alpha = 0.15) +
+  scale_colour_manual(values = c(&quot;darkorange&quot;, &quot;purple&quot;, &quot;cyan4&quot;)) +
+  scale_shape_manual(values  = c(16, 17, 15)) +
+  labs(x       = &quot;Bill Length (mm)&quot;,
+       y       = &quot;Bill Depth (mm)&quot;,
+       colour  = &quot;Species&quot;,
+       shape   = &quot;Species&quot;,
+       title   = &quot;Bill Dimensions of Palmer Penguins&quot;,
+       subtitle= &quot;Linear fits with 95% confidence intervals&quot;,
+       caption = &quot;Data: Gorman et al. (2014); Horst, Hill &amp; Gorman (2020)&quot;) +
+  theme_classic() +
+  theme(plot.title = element_text(face = &quot;bold&quot;),
+        legend.position = c(0.15, 0.80),
+        legend.background = element_rect(fill = &quot;white&quot;, colour = &quot;grey80&quot;))
+
+# Save — PNG for sharing/web, PDF or SVG for publication (vector formats)
+# ggsave(&quot;outputs/penguin_bill_dimensions.png&quot;,
+#         final_figure, width = 9, height = 6, dpi = 300)
+
+# ggsave(&quot;outputs/penguin_bill_dimensions.pdf&quot;,
+#         final_figure, width = 9, height = 6)
+
+print(final_figure)</code></pre>
+          </section>
+          <section class="markdown-cell">
+            <hr />
+            <h2 id="section-50-21">Raincloud Plots — Advanced Visualisation</h2>
+            <p>
+              A <strong>raincloud plot</strong> combines three views into one figure:
+              the raw data points (the &quot;rain&quot;), a distribution estimate (the
+              &quot;cloud&quot;), and a summary boxplot. Proposed by Allen et al. (2019)
+              as a best-practice alternative to bar charts for showing full
+              distributional data.
+            </p>
+            <p>
+              We use <code>ggdist</code> (Kay, 2024) for the distribution components.
+            </p>
+            <p>
+              <strong>Reference:</strong> Allen, M., Poggiali, D., Whitaker, K.,
+              Marshall, T.R. &amp; Kievit, R.A. (2019). Raincloud plots: a
+              multi-platform tool for robust data visualization.
+              <em>Wellcome Open Research</em>, 4, 63.
+              <a href="https://doi.org/10.12688/wellcomeopenres.15191.1"
+                >https://doi.org/10.12688/wellcomeopenres.15191.1</a
+              >
+            </p>
+          </section>
+          <section class="code-cell" id="cell-51">
+            <div class="code-toolbar">
+              <span>R · Cell 32 · In [31]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># install.packages(&quot;ggdist&quot;)
+library(ggdist)
+
+ggplot(penguins_complete,
+       aes(x = species, y = body_mass_g, fill = species, colour = species)) +
+
+  # 1. The &quot;cloud&quot;: half-eye (density curve)
+  stat_halfeye(
+    adjust         = 0.6,
+    width          = 0.4,
+    justification  = -0.25,
+    .width         = 0,
+    point_colour   = NA
+  ) +
+
+  # 2. The boxplot (compact summary)
+  geom_boxplot(
+    width         = 0.1,
+    outlier.shape = NA,
+    fill          = &quot;white&quot;,
+    alpha         = 0.8,
+    colour        = &quot;grey30&quot;
+  ) +
+
+  # 3. The &quot;rain&quot;: jittered raw data
+  geom_point(
+    position = position_jitter(seed = 42, width = 0.08),
+    size     = 1.5,
+    alpha    = 0.4
+  ) +
+
+  # Flip for readability
+  coord_flip() +
+
+  scale_fill_manual(values   = c(&quot;darkorange&quot;, &quot;purple&quot;, &quot;cyan4&quot;)) +
+  scale_colour_manual(values = c(&quot;darkorange&quot;, &quot;purple&quot;, &quot;cyan4&quot;)) +
+
+  labs(x = NULL, y = &quot;Body Mass (g)&quot;,
+       title    = &quot;Body Mass Distribution — Palmer Penguins&quot;,
+       subtitle = &quot;Raincloud plot: raw data + boxplot + density estimate&quot;,
+       caption  = &quot;Allen et al. (2019) | Data: Gorman et al. (2014)&quot;) +
+
+  theme_classic() +
+  theme(legend.position = &quot;none&quot;,
+        axis.text.y     = element_text(size = 12, face = &quot;bold&quot;))</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/1580a433236c243da11a.png"
+                    alt="Original figure output from code cell 32"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <hr />
+            <h2 id="section-52-22">Summary</h2>
+            <p>In this page, you have learned:</p>
+            <ul>
+              <li>
+                How <strong>base R graphics</strong> (<code>graphics</code> package)
+                work for quick exploratory plots — histograms, scatter plots, box plots,
+                bar plots, and density curves.
+              </li>
+              <li>
+                Why <code>ggplot2</code> improves on base R through a principled
+                <strong>grammar of graphics</strong>.
+              </li>
+              <li>
+                How to <strong>build a ggplot2 figure layer by layer</strong>,
+                demonstrating that every added line contributes exactly one visual
+                feature.
+              </li>
+              <li>
+                How to use the most common
+                <strong>geometries</strong> (<code>geom_point</code>,
+                <code>geom_line</code>, <code>geom_histogram</code>,
+                <code>geom_density</code>, <code>geom_boxplot</code>,
+                <code>geom_violin</code>, <code>geom_bar</code>,
+                <code>geom_smooth</code>).
+              </li>
+              <li>
+                How to use <strong>faceting</strong> (<code>facet_wrap</code>,
+                <code>facet_grid</code>) to create small-multiple figures.
+              </li>
+              <li>
+                How to control <strong>scales</strong>, <strong>themes</strong>, and
+                <strong>annotations</strong>.
+              </li>
+              <li>
+                How to combine multiple plots with
+                <strong><code>patchwork</code></strong
+                >.
+              </li>
+              <li>
+                How to save figures with <strong><code>ggsave()</code></strong
+                >.
+              </li>
+              <li>
+                How to construct <strong>raincloud plots</strong> with
+                <code>ggdist</code>.
+              </li>
+            </ul>
+            <hr />
+            <h2 id="section-52-23">References</h2>
+            <ul>
+              <li>
+                Allen, M. et al. (2019). Raincloud plots.
+                <em>Wellcome Open Research</em>, 4, 63.
+              </li>
+              <li>
+                Gorman, K.B., Williams, T.D. &amp; Fraser, W.R. (2014).
+                <em>PLOS ONE</em>, 9(3), e90081.
+              </li>
+              <li>
+                Horst, A.M., Hill, A.P. &amp; Gorman, K.B. (2020).
+                <em>palmerpenguins</em>.
+                <a href="https://doi.org/10.5281/zenodo.3960218"
+                  >https://doi.org/10.5281/zenodo.3960218</a
+                >
+              </li>
+              <li>
+                Kay, M. (2024).
+                <em>ggdist: Visualizations of Distributions and Uncertainty</em>.
+                <a href="https://mjskay.github.io/ggdist/"
+                  >https://mjskay.github.io/ggdist/</a
+                >
+              </li>
+              <li>
+                Pedersen, T.L. (2024). <em>patchwork: The Composer of Plots</em>.
+                <a href="https://patchwork.data-imaginist.com"
+                  >https://patchwork.data-imaginist.com</a
+                >
+              </li>
+              <li>
+                Tufte, E.R. (1983).
+                <em>The Visual Display of Quantitative Information</em>. Graphics Press.
+              </li>
+              <li>
+                Tukey, J.W. (1977). <em>Exploratory Data Analysis</em>. Addison-Wesley.
+              </li>
+              <li>
+                Wickham, H. (2010). A layered grammar of graphics.
+                <em>Journal of Computational and Graphical Statistics</em>, 19(1), 3–28.
+              </li>
+              <li>
+                Wickham, H. (2016).
+                <em>ggplot2: Elegant Graphics for Data Analysis</em> (2nd ed.).
+                Springer.
+              </li>
+              <li>
+                Wilkinson, L. (2005). <em>The Grammar of Graphics</em> (2nd ed.).
+                Springer.
+              </li>
+            </ul>
+          </section>
+          <div class="reader-end">
+            <p>You’ve reached the end of this notebook.</p>
+            <a class="text-link" href="../../notebooks.html"
+              >Return to all notebooks
+              <svg
+                class=""
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M4 12h15m-6-6 6 6-6 6" /></svg
+            ></a>
+          </div>
+        </article>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-main">
+          <a class="brand" href="../../index.html" aria-label="Les Hyperion — home"
+            ><img
+              class="brand-face"
+              src="../../assets/brand/silvi-face.png"
+              alt=""
+              width="55"
+              height="59"
+            /><span class="brand-name" aria-hidden="true"
+              >LES HYPERI<svg class="compass-o" viewBox="0 0 36 46" aria-hidden="true">
+                <circle
+                  cx="18"
+                  cy="23"
+                  r="14.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <path
+                  d="m18 1 4 17 14 5-14 4-4 18-4-18L0 23l14-5Z"
+                  fill="currentColor"
+                /></svg
+              >N</span
+            ></a
+          >
+          <p class="footer-thought">Understanding nature.<br />Sharing the evidence.</p>
+          <nav class="footer-links" aria-label="Footer">
+            <a href="../../about.html">About Phemelo</a><a href="../../cv.html">CV</a
+            ><a
+              href="https://github.com/Phemelo-R"
+              target="_blank"
+              rel="noopener noreferrer"
+              >GitHub ↗</a
+            ><a href="#main">Back to top ↑</a>
+          </nav>
+        </div>
+        <div class="footer-bottom">
+          <span>© 2026 Phemelo Rutlokoane</span><span>Nature × Data × People</span
+          ><span>Johannesburg, South Africa</span>
+        </div>
+      </div>
+    </footer>
+    <div class="toast" id="toast" role="status" hidden></div>
+    <script src="../../js/site.js"></script>
+    <script src="../../js/silvi.js"></script>
+    <script src="../../js/math-config.js"></script>
+    <script src="../../assets/vendor/mathjax/tex-chtml.js"></script>
+    <script src="../../js/reader.js"></script>
+  </body>
+</html>

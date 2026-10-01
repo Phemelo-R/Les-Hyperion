@@ -1,0 +1,4462 @@
+<!doctype html>
+<html lang="en-GB" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Data Manipulation in R — Les Hyperion</title>
+    <meta
+      name="description"
+      content="From data creation to wrangling: tidyverse pipelines, wide/long pivots and the Palmer Penguins dataset."
+    />
+    <meta name="theme-color" content="#0f2d3a" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../../assets/brand/favicon-32.png"
+    />
+    <link rel="icon" sizes="192x192" href="../../assets/brand/favicon-192.png" />
+    <link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png" />
+    <script src="../../js/theme-init.js"></script>
+    <link rel="stylesheet" href="../../css/site.css" />
+    <link rel="stylesheet" href="../../css/silvi.css" />
+    <link rel="stylesheet" href="../../css/revision.css" />
+    <link rel="stylesheet" href="../../css/refinement.css" />
+    <link rel="stylesheet" href="../../css/reader.css" />
+  </head>
+  <body class="reader-page">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../../index.html" aria-label="Les Hyperion — home"
+          ><img
+            class="brand-face"
+            src="../../assets/brand/silvi-face.png"
+            alt=""
+            width="55"
+            height="59"
+          /><span class="brand-name" aria-hidden="true"
+            >LES HYPERI<svg class="compass-o" viewBox="0 0 36 46" aria-hidden="true">
+              <circle
+                cx="18"
+                cy="23"
+                r="14.5"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              />
+              <path
+                d="m18 1 4 17 14 5-14 4-4 18-4-18L0 23l14-5Z"
+                fill="currentColor"
+              /></svg
+            >N</span
+          ></a
+        >
+        <nav class="desktop-nav" aria-label="Main navigation">
+          <a href="../../index.html">Home</a><a href="../../research.html">Research</a
+          ><a href="../../notebooks.html" aria-current="page">Notebooks</a
+          ><a href="../../carbon.html">Carbon</a><a href="../../about.html">About</a
+          ><a href="../../cv.html">CV</a>
+        </nav>
+        <div class="header-actions">
+          <button
+            class="icon-button theme-toggle"
+            data-theme-toggle
+            aria-label="Switch colour theme"
+          >
+            <svg
+              class="moon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path
+                d="M20.6 13.7A8.8 8.8 0 0 1 10.3 3.4a8.8 8.8 0 1 0 10.3 10.3Z"
+              /></svg
+            ><svg
+              class="sun"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path
+                d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"
+              />
+            </svg></button
+          ><button
+            class="icon-button menu-toggle"
+            aria-label="Open navigation"
+            aria-expanded="false"
+            aria-controls="mobile-nav"
+          >
+            <svg
+              class=""
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" hidden>
+        <a href="../../index.html">Home</a><a href="../../research.html">Research</a
+        ><a href="../../notebooks.html" aria-current="page">Notebooks</a
+        ><a href="../../carbon.html">Carbon</a><a href="../../about.html">About</a
+        ><a href="../../cv.html">CV</a>
+      </nav>
+    </header>
+    <main id="main">
+      <div class="reader-bar">
+        <div class="reader-bar-inner">
+          <a href="../../notebooks.html"
+            ><svg
+              class=""
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M20 12H5m6-6-6 6 6 6" />
+            </svg>
+            Notebooks</a
+          ><span class="reader-crumb">R Fundamentals / Part 2</span
+          ><a href="../Data_Manipulation.ipynb" download
+            ><svg
+              class=""
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5" />
+            </svg>
+            Download .ipynb</a
+          >
+        </div>
+      </div>
+      <div class="reader-layout">
+        <aside class="reader-sidebar">
+          <figure
+            class="silvi-scene reader-silvi"
+            data-silvi-scene="notebook-Data_Manipulation"
+          >
+            <div class="silvi-stage">
+              <img
+                src="../../assets/brand/unique-tidy.png"
+                alt="Exploring Data Manipulation in R with Silvi"
+                width="480"
+                height="250"
+                loading="lazy"
+              />
+            </div>
+          </figure>
+          <details class="reader-contents" open>
+            <summary>In this notebook</summary>
+            <nav aria-label="Notebook contents">
+              <a href="#section-0-0">Data Manipulation in R</a
+              ><a href="#section-0-2">Introduction</a
+              ><a href="#section-1-3">The Tidyverse</a
+              ><a href="#section-3-4">Tidy Data</a
+              ><a href="#section-7-5">The Pipe Operator</a
+              ><a href="#section-10-6">readr — Reading and Writing Data</a
+              ><a href="#section-14-8">dplyr — Data Manipulation</a
+              ><a href="#section-43-15">tidyr — Data Reshaping</a
+              ><a href="#section-54-19">stringr — String Manipulation</a
+              ><a href="#section-61-20">forcats — Factor Manipulation</a
+              ><a href="#section-67-21">lubridate — Date and Time Manipulation</a
+              ><a href="#section-72-22">purrr — Functional Programming</a
+              ><a href="#section-76-23">Putting It All Together — A Complete Workflow</a
+              ><a href="#section-78-24">Summary</a
+              ><a href="#section-78-25">References</a>
+            </nav>
+          </details>
+          <div class="reader-tools">
+            <button id="toggle-outputs" aria-pressed="false">Collapse outputs</button
+            ><button class="print-button">Print notebook</button>
+          </div>
+          <p>Original code and saved outputs.<br />R · 79 cells</p>
+        </aside>
+        <article class="notebook-document">
+          <div class="reader-intro">
+            <p class="eyebrow">R Fundamentals · 2025-08-13</p>
+          </div>
+          <section class="markdown-cell">
+            <h1 id="section-0-0">Data Manipulation in R</h1>
+            <h3 id="section-0-1">
+              <em>Tidyverse Tools for Ecological Data Wrangling</em>
+            </h3>
+            <hr />
+            <blockquote>
+              <p>
+                <em
+                  >&quot;Happy families are all alike; every unhappy family is unhappy
+                  in its own way.&quot;</em
+                >
+                — Leo Tolstoy, <em>Anna Karenina</em> (1878)
+              </p>
+              <p>
+                <em
+                  >&quot;Tidy datasets are all alike, but every messy dataset is messy
+                  in its own way.&quot;</em
+                >
+                — Hadley Wickham (2014)
+              </p>
+            </blockquote>
+            <hr />
+            <h2 id="section-0-2">Introduction</h2>
+            <p>
+              In Part 1, we laid the foundations of R — objects, data types, structures,
+              and packages — working entirely in <strong>base R</strong>. In this
+              section, we move to the <strong>Tidyverse</strong>: a curated collection
+              of R packages that share a common design philosophy, grammar, and data
+              structure, making data manipulation more intuitive, readable, and
+              reproducible.
+            </p>
+            <p>
+              Throughout this page, we will work exclusively with the
+              <strong>Palmer Penguins</strong> dataset (<code>palmerpenguins</code>;
+              Horst, Hill &amp; Gorman, 2020) — a real ecological dataset from the
+              Palmer Long-Term Ecological Research (LTER) site in Antarctica.
+            </p>
+            <p>
+              <img
+                src="../media/09b8d656b7e432aff84e.png"
+                alt="Penguins Image by Allison Horst"
+              />
+            </p>
+            <p><strong>References:</strong></p>
+            <ul>
+              <li>
+                Wickham, H. (2014). Tidy data. <em>Journal of Statistical Software</em>,
+                59(10), 1–23.
+                <a href="https://doi.org/10.18637/jss.v059.i10"
+                  >https://doi.org/10.18637/jss.v059.i10</a
+                >
+              </li>
+              <li>
+                Horst, A.M., Hill, A.P. &amp; Gorman, K.B. (2020).
+                <em>palmerpenguins</em>.
+                <a href="https://doi.org/10.5281/zenodo.3960218"
+                  >https://doi.org/10.5281/zenodo.3960218</a
+                >
+              </li>
+              <li>
+                Wickham, H. et al. (2019). Welcome to the tidyverse.
+                <em>Journal of Open Source Software</em>, 4(43), 1686.
+                <a href="https://doi.org/10.21105/joss.01686"
+                  >https://doi.org/10.21105/joss.01686</a
+                >
+              </li>
+            </ul>
+            <hr />
+          </section>
+          <section class="markdown-cell">
+            <h2 id="section-1-3">The Tidyverse</h2>
+            <p>
+              The <strong>Tidyverse</strong> is an opinionated collection of R packages
+              created by <strong>Hadley Wickham</strong> (now at Posit, formerly
+              RStudio) and maintained by a growing team of contributors. Installing
+              <code>tidyverse</code> installs eight core packages at once:
+            </p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Package</th>
+                  <th>Primary function</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>readr</code></td>
+                  <td>Fast and consistent data import/export</td>
+                </tr>
+                <tr>
+                  <td><code>dplyr</code></td>
+                  <td>Data manipulation (filter, select, mutate, summarise)</td>
+                </tr>
+                <tr>
+                  <td><code>tidyr</code></td>
+                  <td>Data reshaping (pivoting, nesting, separating)</td>
+                </tr>
+                <tr>
+                  <td><code>stringr</code></td>
+                  <td>String (text) manipulation</td>
+                </tr>
+                <tr>
+                  <td><code>forcats</code></td>
+                  <td>Factor manipulation</td>
+                </tr>
+                <tr>
+                  <td><code>lubridate</code></td>
+                  <td>Date and time manipulation</td>
+                </tr>
+                <tr>
+                  <td><code>purrr</code></td>
+                  <td>Functional programming (iteration without loops)</td>
+                </tr>
+                <tr>
+                  <td><code>ggplot2</code></td>
+                  <td>Data visualisation <em>(covered in Notebook 3)</em></td>
+                </tr>
+              </tbody>
+            </table>
+            <p>All tidyverse functions share:</p>
+            <ol>
+              <li>
+                <strong>Consistent syntax</strong>: the first argument is always the
+                data.
+              </li>
+              <li>
+                <strong>Tidy data expectations</strong>: rows are observations, columns
+                are variables.
+              </li>
+              <li>
+                <strong>Pipe compatibility</strong>: designed to be chained with the
+                pipe operator.
+              </li>
+            </ol>
+            <p>
+              <strong>Reference:</strong>
+              <a href="https://tidyverse.org">https://tidyverse.org</a>
+            </p>
+          </section>
+          <section class="code-cell" id="cell-2">
+            <div class="code-toolbar">
+              <span>R · Cell 1 · In [1]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Install once (comment out after first run)
+# install.packages(&quot;tidyverse&quot;)
+# install.packages(&quot;palmerpenguins&quot;)
+
+# Load for every session
+library(tidyverse)
+library(palmerpenguins)
+
+# Confirm which packages are loaded
+tidyverse_packages()</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">── Attaching core tidyverse packages ─────────────────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.0     ✔ readr     2.1.6
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.2     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.1     
+── Conflicts ───────────────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors
+
+Attaching package: ‘palmerpenguins’
+
+
+The following objects are masked from ‘package:datasets’:
+
+    penguins, penguins_raw
+
+
+</pre>
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>'broom'</li>
+                    <li>'conflicted'</li>
+                    <li>'cli'</li>
+                    <li>'dbplyr'</li>
+                    <li>'dplyr'</li>
+                    <li>'dtplyr'</li>
+                    <li>'forcats'</li>
+                    <li>'ggplot2'</li>
+                    <li>'googledrive'</li>
+                    <li>'googlesheets4'</li>
+                    <li>'haven'</li>
+                    <li>'hms'</li>
+                    <li>'httr'</li>
+                    <li>'jsonlite'</li>
+                    <li>'lubridate'</li>
+                    <li>'magrittr'</li>
+                    <li>'modelr'</li>
+                    <li>'pillar'</li>
+                    <li>'purrr'</li>
+                    <li>'ragg'</li>
+                    <li>'readr'</li>
+                    <li>'readxl'</li>
+                    <li>'reprex'</li>
+                    <li>'rlang'</li>
+                    <li>'rstudioapi'</li>
+                    <li>'rvest'</li>
+                    <li>'stringr'</li>
+                    <li>'tibble'</li>
+                    <li>'tidyr'</li>
+                    <li>'xml2'</li>
+                    <li>'tidyverse'</li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <hr />
+            <h2 id="section-3-4">Tidy Data</h2>
+            <p>
+              <strong>Tidy data</strong> is a standardised way of organising tabular
+              data that makes downstream analysis straightforward (Wickham, 2014). A
+              dataset is tidy when:
+            </p>
+            <ol>
+              <li>
+                <strong>Every column is a variable</strong> — a single attribute of the
+                observations.
+              </li>
+              <li><strong>Every row is an observation</strong> — a single record.</li>
+              <li>
+                <strong>Every cell contains a single value</strong> — no multiple values
+                crammed into one cell.
+              </li>
+            </ol>
+            <p>
+              The <code>penguins</code> dataset is already tidy — we can verify this
+              immediately:
+            </p>
+          </section>
+          <section class="code-cell" id="cell-4">
+            <div class="code-toolbar">
+              <span>R · Cell 2 · In [2]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code>data(&quot;penguins&quot;)
+
+# The dataset: 344 penguin measurements from 3 species across 3 Antarctic islands
+glimpse(penguins)   # A tidyverse alternative to str() — more readable</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">Rows: 344
+Columns: 8
+$ species           &lt;fct&gt; Adelie, Adelie, Adelie, Adelie, Adelie, Adelie, Adel…
+$ island            &lt;fct&gt; Torgersen, Torgersen, Torgersen, Torgersen, Torgerse…
+$ bill_length_mm    &lt;dbl&gt; 39.1, 39.5, 40.3, NA, 36.7, 39.3, 38.9, 39.2, 34.1, …
+$ bill_depth_mm     &lt;dbl&gt; 18.7, 17.4, 18.0, NA, 19.3, 20.6, 17.8, 19.6, 18.1, …
+$ flipper_length_mm &lt;int&gt; 181, 186, 195, NA, 193, 190, 181, 195, 193, 190, 186…
+$ body_mass_g       &lt;int&gt; 3750, 3800, 3250, NA, 3450, 3650, 3625, 4675, 3475, …
+$ sex               &lt;fct&gt; male, female, female, NA, female, male, female, male…
+$ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007…
+</pre>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-5">
+            <div class="code-toolbar">
+              <span>R · Cell 3 · In [3]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Each row = one penguin measurement event
+# Each column = one variable
+# No multiple values per cell
+
+# The raw data (less tidy, more metadata-rich)
+glimpse(penguins_raw)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">Rows: 344
+Columns: 17
+$ studyName             &lt;chr&gt; &quot;PAL0708&quot;, &quot;PAL0708&quot;, &quot;PAL0708&quot;, &quot;PAL0708&quot;, &quot;PAL…
+$ `Sample Number`       &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 1…
+$ Species               &lt;chr&gt; &quot;Adelie Penguin (Pygoscelis adeliae)&quot;, &quot;Adelie P…
+$ Region                &lt;chr&gt; &quot;Anvers&quot;, &quot;Anvers&quot;, &quot;Anvers&quot;, &quot;Anvers&quot;, &quot;Anvers&quot;…
+$ Island                &lt;chr&gt; &quot;Torgersen&quot;, &quot;Torgersen&quot;, &quot;Torgersen&quot;, &quot;Torgerse…
+$ Stage                 &lt;chr&gt; &quot;Adult, 1 Egg Stage&quot;, &quot;Adult, 1 Egg Stage&quot;, &quot;Adu…
+$ `Individual ID`       &lt;chr&gt; &quot;N1A1&quot;, &quot;N1A2&quot;, &quot;N2A1&quot;, &quot;N2A2&quot;, &quot;N3A1&quot;, &quot;N3A2&quot;, …
+$ `Clutch Completion`   &lt;chr&gt; &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;Yes&quot;, &quot;No&quot;, …
+$ `Date Egg`            &lt;date&gt; 2007-11-11, 2007-11-11, 2007-11-16, 2007-11-16,…
+$ `Culmen Length (mm)`  &lt;dbl&gt; 39.1, 39.5, 40.3, NA, 36.7, 39.3, 38.9, 39.2, 34…
+$ `Culmen Depth (mm)`   &lt;dbl&gt; 18.7, 17.4, 18.0, NA, 19.3, 20.6, 17.8, 19.6, 18…
+$ `Flipper Length (mm)` &lt;dbl&gt; 181, 186, 195, NA, 193, 190, 181, 195, 193, 190,…
+$ `Body Mass (g)`       &lt;dbl&gt; 3750, 3800, 3250, NA, 3450, 3650, 3625, 4675, 34…
+$ Sex                   &lt;chr&gt; &quot;MALE&quot;, &quot;FEMALE&quot;, &quot;FEMALE&quot;, NA, &quot;FEMALE&quot;, &quot;MALE&quot;…
+$ `Delta 15 N (o/oo)`   &lt;dbl&gt; NA, 8.94956, 8.36821, NA, 8.76651, 8.66496, 9.18…
+$ `Delta 13 C (o/oo)`   &lt;dbl&gt; NA, -24.69454, -25.33302, NA, -25.32426, -25.298…
+$ Comments              &lt;chr&gt; &quot;Not enough blood for isotopes.&quot;, NA, NA, &quot;Adult…
+</pre>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-6">
+            <div class="code-toolbar">
+              <span>R · Cell 4 · In [4]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code>summary(penguins_raw)   # Note the messy column names</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">  studyName         Sample Number      Species             Region         
+ Length:344         Min.   :  1.00   Length:344         Length:344        
+ Class :character   1st Qu.: 29.00   Class :character   Class :character  
+ Mode  :character   Median : 58.00   Mode  :character   Mode  :character  
+                    Mean   : 63.15                                        
+                    3rd Qu.: 95.25                                        
+                    Max.   :152.00                                        
+                                                                          
+    Island             Stage           Individual ID      Clutch Completion 
+ Length:344         Length:344         Length:344         Length:344        
+ Class :character   Class :character   Class :character   Class :character  
+ Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+                                                                            
+                                                                            
+                                                                            
+                                                                            
+    Date Egg          Culmen Length (mm) Culmen Depth (mm) Flipper Length (mm)
+ Min.   :2007-11-09   Min.   :32.10      Min.   :13.10     Min.   :172.0      
+ 1st Qu.:2007-11-28   1st Qu.:39.23      1st Qu.:15.60     1st Qu.:190.0      
+ Median :2008-11-09   Median :44.45      Median :17.30     Median :197.0      
+ Mean   :2008-11-27   Mean   :43.92      Mean   :17.15     Mean   :200.9      
+ 3rd Qu.:2009-11-16   3rd Qu.:48.50      3rd Qu.:18.70     3rd Qu.:213.0      
+ Max.   :2009-12-01   Max.   :59.60      Max.   :21.50     Max.   :231.0      
+                      NA&#39;s   :2          NA&#39;s   :2         NA&#39;s   :2          
+ Body Mass (g)      Sex            Delta 15 N (o/oo) Delta 13 C (o/oo)
+ Min.   :2700   Length:344         Min.   : 7.632    Min.   :-27.02   
+ 1st Qu.:3550   Class :character   1st Qu.: 8.300    1st Qu.:-26.32   
+ Median :4050   Mode  :character   Median : 8.652    Median :-25.83   
+ Mean   :4202                      Mean   : 8.733    Mean   :-25.69   
+ 3rd Qu.:4750                      3rd Qu.: 9.172    3rd Qu.:-25.06   
+ Max.   :6300                      Max.   :10.025    Max.   :-23.79   
+ NA&#39;s   :2                         NA&#39;s   :14        NA&#39;s   :13       
+   Comments        
+ Length:344        
+ Class :character  
+ Mode  :character  
+                   
+                   
+                   
+                   </pre>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <hr />
+            <h2 id="section-7-5">The Pipe Operator</h2>
+            <p>
+              The <strong>pipe operator</strong> passes the output of one function
+              directly as the first argument of the next, enabling a readable,
+              left-to-right chain of operations. Two pipes are in common use:
+            </p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Pipe</th>
+                  <th>Source</th>
+                  <th>Shortcut</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>%&gt;%</code></td>
+                  <td><code>magrittr</code> package (loaded with tidyverse)</td>
+                  <td><code>Ctrl+Shift+M</code> / <code>Cmd+Shift+M</code></td>
+                </tr>
+                <tr>
+                  <td><code>|&gt;</code></td>
+                  <td>Native R (≥ 4.1)</td>
+                  <td>Same shortcut (configurable)</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>Read the pipe as <strong>&quot;and then&quot;</strong>:</p>
+          </section>
+          <section class="code-cell" id="cell-8">
+            <div class="code-toolbar">
+              <span>R · Cell 5 · In [5]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Without a pipe: nested, inside-out, hard to read
+result_nested &lt;- summary(na.omit(subset(penguins, species == &quot;Adelie&quot;)))
+
+# With the pipe: sequential, left-to-right, readable
+result_piped &lt;- penguins |&gt;
+  subset(species == &quot;Adelie&quot;) |&gt;
+  na.omit() |&gt;
+  summary()
+
+# Both produce identical output
+all.equal(result_nested, result_piped)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content"><div class="notebook-table">TRUE</div></div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-9">
+            <div class="code-toolbar">
+              <span>R · Cell 6 · In [6]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># The pipe really shines in multi-step workflows
+# Here: filter to Gentoo penguins on Biscoe Island, keep only numeric columns,
+# compute the mean of each
+penguins |&gt;
+  filter(species == &quot;Gentoo&quot;, island == &quot;Biscoe&quot;) |&gt;
+  select(where(is.numeric)) |&gt;
+  summarise(across(everything(), mean, na.rm = TRUE))</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">Warning message:
+“There was 1 warning in `summarise()`.
+ℹ In argument: `across(everything(), mean, na.rm = TRUE)`.
+Caused by warning:
+! The `...` argument of `across()` is deprecated as of dplyr 1.1.0.
+Supply arguments directly to `.fns` through an anonymous function instead.
+
+  # Previously
+  across(a:b, mean, na.rm = TRUE)
+
+  # Now
+  across(a:b, \(x) mean(x, na.rm = TRUE))”
+</pre>
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A tibble: 1 × 5
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">bill_length_mm</th>
+                        <th scope="col">bill_depth_mm</th>
+                        <th scope="col">flipper_length_mm</th>
+                        <th scope="col">body_mass_g</th>
+                        <th scope="col">year</th>
+                      </tr>
+                      <tr>
+                        <th scope="col">&lt;dbl&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>47.50488</td>
+                        <td>14.98211</td>
+                        <td>217.187</td>
+                        <td>5076.016</td>
+                        <td>2008.081</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <hr />
+            <h2 id="section-10-6"><code>readr</code> — Reading and Writing Data</h2>
+            <img src="../media/55c089683ce5aa885dce.png" align="right" width="130" />
+
+            <p>
+              <code>readr</code> provides fast, consistent functions for importing and
+              exporting rectangular data. It is the tidyverse replacement for base
+              R&#39;s <code>read.csv()</code>.
+            </p>
+            <h3 id="section-10-7">Key advantages over base R</h3>
+            <ul>
+              <li>Automatically guesses column types (but allows manual override)</li>
+              <li>
+                Never converts strings to factors by default (unlike
+                <code>read.csv</code>)
+              </li>
+              <li>
+                Produces a tibble (a modern data frame) rather than a base data frame
+              </li>
+              <li>Clearly reports any parsing problems</li>
+            </ul>
+          </section>
+          <section class="code-cell" id="cell-11">
+            <div class="code-toolbar">
+              <span>R · Cell 7 · In [7]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Reading CSV files
+# data &lt;- read_csv(&quot;data/penguins.csv&quot;)   # Relative path (preferred in projects)
+
+# write the clean penguins data to illustrate
+penguins_clean &lt;- penguins |&gt; drop_na()
+write_csv(penguins_clean, &quot;/tmp/penguins_clean.csv&quot;)
+
+# Read it back
+penguins_reimported &lt;- read_csv(&quot;/tmp/penguins_clean.csv&quot;)
+
+# Verify
+glimpse(penguins_reimported)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">Rows: 333 Columns: 8
+── Column specification ───────────────────────────────────────────────────────────────────
+Delimiter: &quot;,&quot;
+chr (3): species, island, sex
+dbl (5): bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g, year
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+</pre>
+                <!-- prettier-ignore -->
+                <pre class="output-text">Rows: 333
+Columns: 8
+$ species           &lt;chr&gt; &quot;Adelie&quot;, &quot;Adelie&quot;, &quot;Adelie&quot;, &quot;Adelie&quot;, &quot;Adelie&quot;, &quot;A…
+$ island            &lt;chr&gt; &quot;Torgersen&quot;, &quot;Torgersen&quot;, &quot;Torgersen&quot;, &quot;Torgersen&quot;, …
+$ bill_length_mm    &lt;dbl&gt; 39.1, 39.5, 40.3, 36.7, 39.3, 38.9, 39.2, 41.1, 38.6…
+$ bill_depth_mm     &lt;dbl&gt; 18.7, 17.4, 18.0, 19.3, 20.6, 17.8, 19.6, 17.6, 21.2…
+$ flipper_length_mm &lt;dbl&gt; 181, 186, 195, 193, 190, 181, 195, 182, 191, 198, 18…
+$ body_mass_g       &lt;dbl&gt; 3750, 3800, 3250, 3450, 3650, 3625, 4675, 3200, 3800…
+$ sex               &lt;chr&gt; &quot;male&quot;, &quot;female&quot;, &quot;female&quot;, &quot;female&quot;, &quot;male&quot;, &quot;femal…
+$ year              &lt;dbl&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007…
+</pre>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-12">
+            <div class="code-toolbar">
+              <span>R · Cell 8 · In [8]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Specifying column types explicitly — important for reproducibility
+penguins_typed &lt;- read_csv(
+  &quot;/tmp/penguins_clean.csv&quot;,
+  col_types = cols(
+    species        = col_factor(),
+    island         = col_factor(),
+    bill_length_mm = col_double(),
+    sex            = col_factor(),
+    year           = col_integer()
+  )
+)
+
+glimpse(penguins_typed)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">Rows: 333
+Columns: 8
+$ species           &lt;fct&gt; Adelie, Adelie, Adelie, Adelie, Adelie, Adelie, Adel…
+$ island            &lt;fct&gt; Torgersen, Torgersen, Torgersen, Torgersen, Torgerse…
+$ bill_length_mm    &lt;dbl&gt; 39.1, 39.5, 40.3, 36.7, 39.3, 38.9, 39.2, 41.1, 38.6…
+$ bill_depth_mm     &lt;dbl&gt; 18.7, 17.4, 18.0, 19.3, 20.6, 17.8, 19.6, 17.6, 21.2…
+$ flipper_length_mm &lt;dbl&gt; 181, 186, 195, 193, 190, 181, 195, 182, 191, 198, 18…
+$ body_mass_g       &lt;dbl&gt; 3750, 3800, 3250, 3450, 3650, 3625, 4675, 3200, 3800…
+$ sex               &lt;fct&gt; male, female, female, female, male, female, male, fe…
+$ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007…
+</pre>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-13">
+            <div class="code-toolbar">
+              <span>R · Cell 9</span><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Other read_* functions
+# read_tsv()     — tab-separated values
+# read_delim()   — any delimiter
+# read_excel()   — Excel files (from readxl, a tidyverse adjacent package)
+
+# Writing functions
+# write_csv(df, &quot;path/file.csv&quot;)        # CSV
+# write_tsv(df, &quot;path/file.tsv&quot;)        # TSV
+# write_rds(df, &quot;path/file.rds&quot;)        # R&#39;s native binary format (fast, compact)</code></pre>
+          </section>
+          <section class="markdown-cell">
+            <hr />
+            <h2 id="section-14-8"><code>dplyr</code> — Data Manipulation</h2>
+            <img src="../media/2bc5bcd6d36c2c264711.png" align="right" width="130" />
+
+            <p>
+              <code>dplyr</code> is the core data manipulation package of the tidyverse.
+              It provides six <strong>primary verbs</strong> that cover the vast
+              majority of data manipulation needs (Wickham et al., 2023):
+            </p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Verb</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>filter()</code></td>
+                  <td>Subset <strong>rows</strong> by a logical condition</td>
+                </tr>
+                <tr>
+                  <td><code>select()</code></td>
+                  <td>Subset <strong>columns</strong> by name or position</td>
+                </tr>
+                <tr>
+                  <td><code>mutate()</code></td>
+                  <td>Add or modify <strong>columns</strong></td>
+                </tr>
+                <tr>
+                  <td><code>summarise()</code></td>
+                  <td>Collapse rows to <strong>summary statistics</strong></td>
+                </tr>
+                <tr>
+                  <td><code>arrange()</code></td>
+                  <td><strong>Sort</strong> rows</td>
+                </tr>
+                <tr>
+                  <td><code>rename()</code></td>
+                  <td><strong>Rename</strong> columns</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>
+              These verbs are almost always combined with <code>group_by()</code>, which
+              applies any operation separately within groups.
+            </p>
+            <p>
+              <strong>Reference:</strong> Wickham, H., François, R., Henry, L., Müller,
+              K. &amp; Vaughan, D. (2023).
+              <em>dplyr: A Grammar of Data Manipulation</em>.
+              <a href="https://dplyr.tidyverse.org">https://dplyr.tidyverse.org</a>
+            </p>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-15-9">1. <code>filter()</code> — Row subsetting</h3>
+            <p>
+              <code>filter()</code> retains rows that satisfy one or more logical
+              conditions. The double-equals <code>==</code> tests equality; a single
+              <code>=</code> inside filter would cause an error.
+            </p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Operator</th>
+                  <th>Meaning</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>==</code></td>
+                  <td>Equal to</td>
+                </tr>
+                <tr>
+                  <td><code>!=</code></td>
+                  <td>Not equal to</td>
+                </tr>
+                <tr>
+                  <td><code>&gt;</code>, <code>&lt;</code></td>
+                  <td>Greater/less than</td>
+                </tr>
+                <tr>
+                  <td><code>&gt;=</code>, <code>&lt;=</code></td>
+                  <td>Greater/less than or equal to</td>
+                </tr>
+                <tr>
+                  <td><code>&amp;</code></td>
+                  <td>AND (both conditions must be true)</td>
+                </tr>
+                <tr>
+                  <td><code>|</code></td>
+                  <td>OR (at least one condition must be true)</td>
+                </tr>
+                <tr>
+                  <td><code>%in%</code></td>
+                  <td>Value is in a vector</td>
+                </tr>
+                <tr>
+                  <td><code>!</code></td>
+                  <td>NOT (negation)</td>
+                </tr>
+                <tr>
+                  <td><code>is.na()</code></td>
+                  <td>Is missing</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+          <section class="code-cell" id="cell-16">
+            <div class="code-toolbar">
+              <span>R · Cell 10 · In [9]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Filter to female penguins only
+female_penguins &lt;- penguins |&gt;
+  filter(sex == &quot;female&quot;)
+
+nrow(female_penguins)   # 165 females</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content"><div class="notebook-table">165</div></div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-17">
+            <div class="code-toolbar">
+              <span>R · Cell 11 · In [10]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Multiple conditions with &amp; (AND)
+heavy_female_penguins &lt;- penguins |&gt;
+  filter(sex == &quot;female&quot; &amp; body_mass_g &gt;= 4500)
+
+heavy_female_penguins</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A tibble: 43 × 8
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">species</th>
+                        <th scope="col">island</th>
+                        <th scope="col">bill_length_mm</th>
+                        <th scope="col">bill_depth_mm</th>
+                        <th scope="col">flipper_length_mm</th>
+                        <th scope="col">body_mass_g</th>
+                        <th scope="col">sex</th>
+                        <th scope="col">year</th>
+                      </tr>
+                      <tr>
+                        <th scope="col">&lt;fct&gt;</th>
+                        <th scope="col">&lt;fct&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                        <th scope="col">&lt;int&gt;</th>
+                        <th scope="col">&lt;int&gt;</th>
+                        <th scope="col">&lt;fct&gt;</th>
+                        <th scope="col">&lt;int&gt;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>46.1</td>
+                        <td>13.2</td>
+                        <td>211</td>
+                        <td>4500</td>
+                        <td>female</td>
+                        <td>2007</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>46.5</td>
+                        <td>13.5</td>
+                        <td>210</td>
+                        <td>4550</td>
+                        <td>female</td>
+                        <td>2007</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>45.4</td>
+                        <td>14.6</td>
+                        <td>211</td>
+                        <td>4800</td>
+                        <td>female</td>
+                        <td>2007</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>40.9</td>
+                        <td>13.7</td>
+                        <td>214</td>
+                        <td>4650</td>
+                        <td>female</td>
+                        <td>2007</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>45.5</td>
+                        <td>13.7</td>
+                        <td>214</td>
+                        <td>4650</td>
+                        <td>female</td>
+                        <td>2007</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>46.2</td>
+                        <td>14.5</td>
+                        <td>209</td>
+                        <td>4800</td>
+                        <td>female</td>
+                        <td>2007</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>45.1</td>
+                        <td>14.5</td>
+                        <td>215</td>
+                        <td>5000</td>
+                        <td>female</td>
+                        <td>2007</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>42.9</td>
+                        <td>13.1</td>
+                        <td>215</td>
+                        <td>5000</td>
+                        <td>female</td>
+                        <td>2007</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>48.2</td>
+                        <td>14.3</td>
+                        <td>210</td>
+                        <td>4600</td>
+                        <td>female</td>
+                        <td>2007</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>42.8</td>
+                        <td>14.2</td>
+                        <td>209</td>
+                        <td>4700</td>
+                        <td>female</td>
+                        <td>2007</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>45.1</td>
+                        <td>14.5</td>
+                        <td>207</td>
+                        <td>5050</td>
+                        <td>female</td>
+                        <td>2007</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>49.1</td>
+                        <td>14.8</td>
+                        <td>220</td>
+                        <td>5150</td>
+                        <td>female</td>
+                        <td>2008</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>42.6</td>
+                        <td>13.7</td>
+                        <td>213</td>
+                        <td>4950</td>
+                        <td>female</td>
+                        <td>2008</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>43.6</td>
+                        <td>13.9</td>
+                        <td>217</td>
+                        <td>4900</td>
+                        <td>female</td>
+                        <td>2008</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>44.9</td>
+                        <td>13.3</td>
+                        <td>213</td>
+                        <td>5100</td>
+                        <td>female</td>
+                        <td>2008</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>46.6</td>
+                        <td>14.2</td>
+                        <td>210</td>
+                        <td>4850</td>
+                        <td>female</td>
+                        <td>2008</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>46.5</td>
+                        <td>14.4</td>
+                        <td>217</td>
+                        <td>4900</td>
+                        <td>female</td>
+                        <td>2008</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>45.8</td>
+                        <td>14.2</td>
+                        <td>219</td>
+                        <td>4700</td>
+                        <td>female</td>
+                        <td>2008</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>43.5</td>
+                        <td>14.2</td>
+                        <td>220</td>
+                        <td>4700</td>
+                        <td>female</td>
+                        <td>2008</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>47.7</td>
+                        <td>15.0</td>
+                        <td>216</td>
+                        <td>4750</td>
+                        <td>female</td>
+                        <td>2008</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>46.5</td>
+                        <td>14.8</td>
+                        <td>217</td>
+                        <td>5200</td>
+                        <td>female</td>
+                        <td>2008</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>46.4</td>
+                        <td>15.0</td>
+                        <td>216</td>
+                        <td>4700</td>
+                        <td>female</td>
+                        <td>2008</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>47.5</td>
+                        <td>14.2</td>
+                        <td>209</td>
+                        <td>4600</td>
+                        <td>female</td>
+                        <td>2008</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>45.2</td>
+                        <td>13.8</td>
+                        <td>215</td>
+                        <td>4750</td>
+                        <td>female</td>
+                        <td>2008</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>49.1</td>
+                        <td>14.5</td>
+                        <td>212</td>
+                        <td>4625</td>
+                        <td>female</td>
+                        <td>2009</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>47.4</td>
+                        <td>14.6</td>
+                        <td>212</td>
+                        <td>4725</td>
+                        <td>female</td>
+                        <td>2009</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>44.9</td>
+                        <td>13.8</td>
+                        <td>212</td>
+                        <td>4750</td>
+                        <td>female</td>
+                        <td>2009</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>43.4</td>
+                        <td>14.4</td>
+                        <td>218</td>
+                        <td>4600</td>
+                        <td>female</td>
+                        <td>2009</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>47.5</td>
+                        <td>14.0</td>
+                        <td>212</td>
+                        <td>4875</td>
+                        <td>female</td>
+                        <td>2009</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>47.5</td>
+                        <td>15.0</td>
+                        <td>218</td>
+                        <td>4950</td>
+                        <td>female</td>
+                        <td>2009</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>45.5</td>
+                        <td>14.5</td>
+                        <td>212</td>
+                        <td>4750</td>
+                        <td>female</td>
+                        <td>2009</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>44.5</td>
+                        <td>14.7</td>
+                        <td>214</td>
+                        <td>4850</td>
+                        <td>female</td>
+                        <td>2009</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>46.9</td>
+                        <td>14.6</td>
+                        <td>222</td>
+                        <td>4875</td>
+                        <td>female</td>
+                        <td>2009</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>48.4</td>
+                        <td>14.4</td>
+                        <td>203</td>
+                        <td>4625</td>
+                        <td>female</td>
+                        <td>2009</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>48.5</td>
+                        <td>15.0</td>
+                        <td>219</td>
+                        <td>4850</td>
+                        <td>female</td>
+                        <td>2009</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>47.2</td>
+                        <td>15.5</td>
+                        <td>215</td>
+                        <td>4975</td>
+                        <td>female</td>
+                        <td>2009</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>41.7</td>
+                        <td>14.7</td>
+                        <td>210</td>
+                        <td>4700</td>
+                        <td>female</td>
+                        <td>2009</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>43.3</td>
+                        <td>14.0</td>
+                        <td>208</td>
+                        <td>4575</td>
+                        <td>female</td>
+                        <td>2009</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>50.5</td>
+                        <td>15.2</td>
+                        <td>216</td>
+                        <td>5000</td>
+                        <td>female</td>
+                        <td>2009</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>43.5</td>
+                        <td>15.2</td>
+                        <td>213</td>
+                        <td>4650</td>
+                        <td>female</td>
+                        <td>2009</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>47.2</td>
+                        <td>13.7</td>
+                        <td>214</td>
+                        <td>4925</td>
+                        <td>female</td>
+                        <td>2009</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>46.8</td>
+                        <td>14.3</td>
+                        <td>215</td>
+                        <td>4850</td>
+                        <td>female</td>
+                        <td>2009</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>45.2</td>
+                        <td>14.8</td>
+                        <td>212</td>
+                        <td>5200</td>
+                        <td>female</td>
+                        <td>2009</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-18">
+            <div class="code-toolbar">
+              <span>R · Cell 12 · In [11]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Filter to multiple species using %in%
+adelie_chinstrap &lt;- penguins |&gt;
+  filter(species %in% c(&quot;Adelie&quot;, &quot;Chinstrap&quot;))
+
+table(adelie_chinstrap$species)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">
+   Adelie Chinstrap    Gentoo 
+      152        68         0 </pre>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-19">
+            <div class="code-toolbar">
+              <span>R · Cell 13 · In [12]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Remove rows where flipper_length_mm is NA
+# is.na() returns TRUE for missing values; ! negates it
+penguins_no_na_flipper &lt;- penguins |&gt;
+  filter(!is.na(flipper_length_mm))
+
+nrow(penguins) - nrow(penguins_no_na_flipper)  # How many rows removed?</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content"><div class="notebook-table">2</div></div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-20">
+            <div class="code-toolbar">
+              <span>R · Cell 14 · In [13]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Remove ALL rows containing any NA — use drop_na() from tidyr
+penguins_complete &lt;- penguins |&gt;
+  drop_na()
+
+nrow(penguins_complete)   # 333 complete cases</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content"><div class="notebook-table">333</div></div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-21-10">2. <code>select()</code> — Column subsetting</h3>
+            <p>
+              <code>select()</code> chooses columns by name, position, or helper
+              functions.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-22">
+            <div class="code-toolbar">
+              <span>R · Cell 15 · In [14]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Select by name
+morphology &lt;- penguins |&gt;
+  select(species, island, bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g)
+
+names(morphology)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>'species'</li>
+                    <li>'island'</li>
+                    <li>'bill_length_mm'</li>
+                    <li>'bill_depth_mm'</li>
+                    <li>'flipper_length_mm'</li>
+                    <li>'body_mass_g'</li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-23">
+            <div class="code-toolbar">
+              <span>R · Cell 16 · In [15]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Deselect columns using -
+no_year_sex &lt;- penguins |&gt;
+  select(-year, -sex)
+
+names(no_year_sex)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>'species'</li>
+                    <li>'island'</li>
+                    <li>'bill_length_mm'</li>
+                    <li>'bill_depth_mm'</li>
+                    <li>'flipper_length_mm'</li>
+                    <li>'body_mass_g'</li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-24">
+            <div class="code-toolbar">
+              <span>R · Cell 17 · In [16]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Select by pattern — helper functions
+# starts_with(), ends_with(), contains(), matches(), where()
+
+# All columns ending in &quot;_mm&quot;
+mm_columns &lt;- penguins |&gt;
+  select(species, ends_with(&quot;_mm&quot;))
+
+names(mm_columns)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>'species'</li>
+                    <li>'bill_length_mm'</li>
+                    <li>'bill_depth_mm'</li>
+                    <li>'flipper_length_mm'</li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-25">
+            <div class="code-toolbar">
+              <span>R · Cell 18 · In [17]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Select only numeric columns (useful for computing correlations)
+numeric_only &lt;- penguins |&gt;
+  select(species, where(is.numeric))
+
+names(numeric_only)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>'species'</li>
+                    <li>'bill_length_mm'</li>
+                    <li>'bill_depth_mm'</li>
+                    <li>'flipper_length_mm'</li>
+                    <li>'body_mass_g'</li>
+                    <li>'year'</li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-26">
+            <div class="code-toolbar">
+              <span>R · Cell 19 · In [18]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Reorder columns: bring species and island to the front
+penguins_reordered &lt;- penguins |&gt;
+  select(species, island, everything())
+
+names(penguins_reordered)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>'species'</li>
+                    <li>'island'</li>
+                    <li>'bill_length_mm'</li>
+                    <li>'bill_depth_mm'</li>
+                    <li>'flipper_length_mm'</li>
+                    <li>'body_mass_g'</li>
+                    <li>'sex'</li>
+                    <li>'year'</li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-27-11">
+              3. <code>mutate()</code> — Adding and transforming columns
+            </h3>
+            <p>
+              <code>mutate()</code> adds new columns or modifies existing ones. It
+              operates <strong>row-wise</strong> — each new value is computed from the
+              values in that row.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-28">
+            <div class="code-toolbar">
+              <span>R · Cell 20 · In [19]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Convert body mass from grams to kilograms
+penguins_kg &lt;- penguins |&gt;
+  mutate(body_mass_kg = body_mass_g / 1000)
+
+penguins_kg |&gt; select(species, body_mass_g, body_mass_kg) |&gt; head()</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A tibble: 6 × 3
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">species</th>
+                        <th scope="col">body_mass_g</th>
+                        <th scope="col">body_mass_kg</th>
+                      </tr>
+                      <tr>
+                        <th scope="col">&lt;fct&gt;</th>
+                        <th scope="col">&lt;int&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>3750</td>
+                        <td>3.75</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>3800</td>
+                        <td>3.80</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>3250</td>
+                        <td>3.25</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>NA</td>
+                        <td>NA</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>3450</td>
+                        <td>3.45</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>3650</td>
+                        <td>3.65</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-29">
+            <div class="code-toolbar">
+              <span>R · Cell 21 · In [20]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Compute bill ratio — a morphological index used in species discrimination
+# (Gorman et al., 2014)
+penguins_ratio &lt;- penguins |&gt;
+  mutate(bill_ratio = bill_length_mm / bill_depth_mm) |&gt;
+  select(species, bill_length_mm, bill_depth_mm, bill_ratio)
+
+# Gentoo penguins have notably different bill ratios
+penguins_ratio |&gt;
+  group_by(species) |&gt;
+  summarise(mean_bill_ratio = mean(bill_ratio, na.rm = TRUE))</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A tibble: 3 × 2
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">species</th>
+                        <th scope="col">mean_bill_ratio</th>
+                      </tr>
+                      <tr>
+                        <th scope="col">&lt;fct&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>2.119726</td>
+                      </tr>
+                      <tr>
+                        <td>Chinstrap</td>
+                        <td>2.653756</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>3.175592</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-30">
+            <div class="code-toolbar">
+              <span>R · Cell 22 · In [21]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Conditional mutation with if_else()
+# Syntax: if_else(condition, value_if_TRUE, value_if_FALSE)
+penguins_size &lt;- penguins |&gt;
+  mutate(size_class = if_else(body_mass_g &gt;= 4500,
+                              &quot;large&quot;,
+                              &quot;small&quot;))
+
+table(penguins_size$size_class, penguins_size$species, useNA = &quot;ifany&quot;)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">       
+        Adelie Chinstrap Gentoo
+  large      8         3    107
+  small    143        65     16
+  &lt;NA&gt;       1         0      1</pre>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-31">
+            <div class="code-toolbar">
+              <span>R · Cell 23 · In [22]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Multiple conditions with case_when()
+# Each condition is tested in order; the first TRUE wins
+penguins_category &lt;- penguins |&gt;
+  mutate(mass_category = case_when(
+    body_mass_g &lt; 3500               ~ &quot;light&quot;,
+    body_mass_g &gt;= 3500 &amp; body_mass_g &lt; 4500 ~ &quot;medium&quot;,
+    body_mass_g &gt;= 4500              ~ &quot;heavy&quot;,
+    TRUE                             ~ &quot;unknown&quot;   # catch-all for NAs
+  ))
+
+table(penguins_category$mass_category, penguins_category$species)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">         
+          Adelie Chinstrap Gentoo
+  heavy        8         3    107
+  light       54        17      0
+  medium      89        48     16
+  unknown      1         0      1</pre>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-32">
+            <div class="code-toolbar">
+              <span>R · Cell 24 · In [23]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Paste columns together — useful for generating labels
+penguins_labelled &lt;- penguins |&gt;
+  drop_na(sex) |&gt;
+  mutate(individual_label = paste(species, sex, sep = &quot;_&quot;))
+
+head(penguins_labelled$individual_label)
+unique(penguins_labelled$individual_label)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>'Adelie_male'</li>
+                    <li>'Adelie_female'</li>
+                    <li>'Adelie_female'</li>
+                    <li>'Adelie_female'</li>
+                    <li>'Adelie_male'</li>
+                    <li>'Adelie_female'</li>
+                  </ol>
+                </div>
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>'Adelie_male'</li>
+                    <li>'Adelie_female'</li>
+                    <li>'Gentoo_female'</li>
+                    <li>'Gentoo_male'</li>
+                    <li>'Chinstrap_female'</li>
+                    <li>'Chinstrap_male'</li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-33-12">
+              4. <code>summarise()</code> and <code>group_by()</code> — Summary
+              statistics
+            </h3>
+            <p>
+              <code>summarise()</code> collapses a data frame (or groups within it) to a
+              single row per group. Almost always used in combination with
+              <code>group_by()</code>.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-34">
+            <div class="code-toolbar">
+              <span>R · Cell 25 · In [24]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Mean body mass by species
+penguins |&gt;
+  drop_na(body_mass_g) |&gt;
+  group_by(species) |&gt;
+  summarise(
+    n           = n(),
+    mean_mass_g = mean(body_mass_g),
+    sd_mass_g   = sd(body_mass_g),
+    se_mass_g   = sd(body_mass_g) / sqrt(n())
+  )</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A tibble: 3 × 5
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">species</th>
+                        <th scope="col">n</th>
+                        <th scope="col">mean_mass_g</th>
+                        <th scope="col">sd_mass_g</th>
+                        <th scope="col">se_mass_g</th>
+                      </tr>
+                      <tr>
+                        <th scope="col">&lt;fct&gt;</th>
+                        <th scope="col">&lt;int&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>151</td>
+                        <td>3700.662</td>
+                        <td>458.5661</td>
+                        <td>37.31758</td>
+                      </tr>
+                      <tr>
+                        <td>Chinstrap</td>
+                        <td>68</td>
+                        <td>3733.088</td>
+                        <td>384.3351</td>
+                        <td>46.60747</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>123</td>
+                        <td>5076.016</td>
+                        <td>504.1162</td>
+                        <td>45.45463</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-35">
+            <div class="code-toolbar">
+              <span>R · Cell 26 · In [25]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Multiple grouping variables — note how the group combinations multiply
+penguins |&gt;
+  drop_na() |&gt;
+  group_by(species, island, sex) |&gt;
+  summarise(
+    n               = n(),
+    mean_flipper_mm = mean(flipper_length_mm),
+    .groups = &quot;drop&quot;   # drops grouping after summarise — good practice
+  )</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A tibble: 10 × 5
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">species</th>
+                        <th scope="col">island</th>
+                        <th scope="col">sex</th>
+                        <th scope="col">n</th>
+                        <th scope="col">mean_flipper_mm</th>
+                      </tr>
+                      <tr>
+                        <th scope="col">&lt;fct&gt;</th>
+                        <th scope="col">&lt;fct&gt;</th>
+                        <th scope="col">&lt;fct&gt;</th>
+                        <th scope="col">&lt;int&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>Biscoe</td>
+                        <td>female</td>
+                        <td>22</td>
+                        <td>187.1818</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>Biscoe</td>
+                        <td>male</td>
+                        <td>22</td>
+                        <td>190.4091</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>Dream</td>
+                        <td>female</td>
+                        <td>27</td>
+                        <td>187.8519</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>Dream</td>
+                        <td>male</td>
+                        <td>28</td>
+                        <td>191.9286</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>Torgersen</td>
+                        <td>female</td>
+                        <td>24</td>
+                        <td>188.2917</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>Torgersen</td>
+                        <td>male</td>
+                        <td>23</td>
+                        <td>194.9130</td>
+                      </tr>
+                      <tr>
+                        <td>Chinstrap</td>
+                        <td>Dream</td>
+                        <td>female</td>
+                        <td>34</td>
+                        <td>191.7353</td>
+                      </tr>
+                      <tr>
+                        <td>Chinstrap</td>
+                        <td>Dream</td>
+                        <td>male</td>
+                        <td>34</td>
+                        <td>199.9118</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>female</td>
+                        <td>58</td>
+                        <td>212.7069</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>male</td>
+                        <td>61</td>
+                        <td>221.5410</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-36">
+            <div class="code-toolbar">
+              <span>R · Cell 27 · In [26]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Counting is so common dplyr has a shortcut: count()
+penguins |&gt;
+  count(species, island, sort = TRUE)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A tibble: 5 × 3
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">species</th>
+                        <th scope="col">island</th>
+                        <th scope="col">n</th>
+                      </tr>
+                      <tr>
+                        <th scope="col">&lt;fct&gt;</th>
+                        <th scope="col">&lt;fct&gt;</th>
+                        <th scope="col">&lt;int&gt;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>124</td>
+                      </tr>
+                      <tr>
+                        <td>Chinstrap</td>
+                        <td>Dream</td>
+                        <td>68</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>Dream</td>
+                        <td>56</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>Torgersen</td>
+                        <td>52</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>Biscoe</td>
+                        <td>44</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-37-13">
+              5. <code>arrange()</code> and <code>rename()</code>
+            </h3>
+          </section>
+          <section class="code-cell" id="cell-38">
+            <div class="code-toolbar">
+              <span>R · Cell 28 · In [27]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Sort rows — ascending by default
+penguins |&gt;
+  drop_na(body_mass_g) |&gt;
+  arrange(body_mass_g) |&gt;
+  select(species, island, body_mass_g) |&gt;
+  head(5)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A tibble: 5 × 3
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">species</th>
+                        <th scope="col">island</th>
+                        <th scope="col">body_mass_g</th>
+                      </tr>
+                      <tr>
+                        <th scope="col">&lt;fct&gt;</th>
+                        <th scope="col">&lt;fct&gt;</th>
+                        <th scope="col">&lt;int&gt;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Chinstrap</td>
+                        <td>Dream</td>
+                        <td>2700</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>Biscoe</td>
+                        <td>2850</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>Biscoe</td>
+                        <td>2850</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>Biscoe</td>
+                        <td>2900</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>Dream</td>
+                        <td>2900</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-39">
+            <div class="code-toolbar">
+              <span>R · Cell 29 · In [28]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Sort descending — heaviest penguins first
+penguins |&gt;
+  drop_na(body_mass_g) |&gt;
+  arrange(desc(body_mass_g)) |&gt;
+  select(species, island, body_mass_g) |&gt;
+  head(5)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A tibble: 5 × 3
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">species</th>
+                        <th scope="col">island</th>
+                        <th scope="col">body_mass_g</th>
+                      </tr>
+                      <tr>
+                        <th scope="col">&lt;fct&gt;</th>
+                        <th scope="col">&lt;fct&gt;</th>
+                        <th scope="col">&lt;int&gt;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>6300</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>6050</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>6000</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>6000</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>5950</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-40">
+            <div class="code-toolbar">
+              <span>R · Cell 30 · In [29]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Rename columns — new_name = old_name
+penguins_renamed &lt;- penguins |&gt;
+  rename(
+    bill_length   = bill_length_mm,
+    bill_depth    = bill_depth_mm,
+    flipper_len   = flipper_length_mm,
+    body_mass     = body_mass_g
+  )
+
+names(penguins_renamed)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>'species'</li>
+                    <li>'island'</li>
+                    <li>'bill_length'</li>
+                    <li>'bill_depth'</li>
+                    <li>'flipper_len'</li>
+                    <li>'body_mass'</li>
+                    <li>'sex'</li>
+                    <li>'year'</li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-41-14">6. Joins — combining data frames</h3>
+            <p>
+              Real ecological studies often generate multiple related tables (e.g.,
+              species measurements, site metadata, climate data).
+              <code>dplyr</code> join functions combine them by matching on shared
+              columns.
+            </p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Function</th>
+                  <th>Keeps rows from...</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>left_join()</code></td>
+                  <td>all of x, matching from y</td>
+                </tr>
+                <tr>
+                  <td><code>right_join()</code></td>
+                  <td>all of y, matching from x</td>
+                </tr>
+                <tr>
+                  <td><code>inner_join()</code></td>
+                  <td>rows present in both x and y</td>
+                </tr>
+                <tr>
+                  <td><code>full_join()</code></td>
+                  <td>all rows from both</td>
+                </tr>
+                <tr>
+                  <td><code>anti_join()</code></td>
+                  <td>rows in x with no match in y</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+          <section class="code-cell" id="cell-42">
+            <div class="code-toolbar">
+              <span>R · Cell 31 · In [30]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Simulate a site metadata table — island locations (approximate centroids)
+island_metadata &lt;- data.frame(
+  island    = c(&quot;Biscoe&quot;, &quot;Dream&quot;, &quot;Torgersen&quot;),
+  latitude  = c(-65.43, -64.73, -64.77),
+  longitude = c(-65.50, -64.23, -64.08),
+  area_km2  = c(unknown &lt;- NA, 3.0, 0.8)   # Biscoe is much larger
+)
+island_metadata$area_km2 &lt;- c(NA, 3.0, 0.8)
+
+# Join penguin data with island metadata
+penguins_geo &lt;- penguins |&gt;
+  left_join(island_metadata, by = &quot;island&quot;)
+
+# All penguin rows retained; island metadata added where available
+select(penguins_geo, species, island, latitude, longitude) |&gt;
+  distinct() |&gt;
+  arrange(island)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A tibble: 5 × 4
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">species</th>
+                        <th scope="col">island</th>
+                        <th scope="col">latitude</th>
+                        <th scope="col">longitude</th>
+                      </tr>
+                      <tr>
+                        <th scope="col">&lt;fct&gt;</th>
+                        <th scope="col">&lt;chr&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>Biscoe</td>
+                        <td>-65.43</td>
+                        <td>-65.50</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>-65.43</td>
+                        <td>-65.50</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>Dream</td>
+                        <td>-64.73</td>
+                        <td>-64.23</td>
+                      </tr>
+                      <tr>
+                        <td>Chinstrap</td>
+                        <td>Dream</td>
+                        <td>-64.73</td>
+                        <td>-64.23</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>Torgersen</td>
+                        <td>-64.77</td>
+                        <td>-64.08</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <hr />
+            <h2 id="section-43-15"><code>tidyr</code> — Data Reshaping</h2>
+            <img src="../media/c6800c94af722603d1d6.png" align="right" width="130" />
+
+            <p>
+              <code>tidyr</code> provides tools for transforming data between
+              <strong>wide</strong> and <strong>long</strong> formats, and for
+              separating or uniting columns.
+            </p>
+            <p>
+              <strong>Reference:</strong> Wickham, H. &amp; Vaughan, D. (2023).
+              <em>tidyr: Tidy Messy Data</em>.
+              <a href="https://tidyr.tidyverse.org">https://tidyr.tidyverse.org</a>
+            </p>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-44-16">
+              1. <code>pivot_longer()</code> and <code>pivot_wider()</code>
+            </h3>
+            <p>
+              Ecological community data is often <strong>wide</strong> — one column per
+              species, one row per site. Most analyses (and all tidyverse
+              visualisations) require <strong>long</strong> format — one row per
+              observation.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-45">
+            <div class="code-toolbar">
+              <span>R · Cell 32 · In [31]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Create a wide summary: mean body mass by species and year
+wide_summary &lt;- penguins |&gt;
+  drop_na(body_mass_g) |&gt;
+  group_by(species, year) |&gt;
+  summarise(mean_mass_g = mean(body_mass_g), .groups = &quot;drop&quot;) |&gt;
+  pivot_wider(
+    names_from  = year,
+    values_from = mean_mass_g
+  )
+
+wide_summary</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A tibble: 3 × 4
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">species</th>
+                        <th scope="col">2007</th>
+                        <th scope="col">2008</th>
+                        <th scope="col">2009</th>
+                      </tr>
+                      <tr>
+                        <th scope="col">&lt;fct&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>3696.429</td>
+                        <td>3742.000</td>
+                        <td>3664.904</td>
+                      </tr>
+                      <tr>
+                        <td>Chinstrap</td>
+                        <td>3694.231</td>
+                        <td>3800.000</td>
+                        <td>3725.000</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>5070.588</td>
+                        <td>5019.565</td>
+                        <td>5140.698</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-46">
+            <div class="code-toolbar">
+              <span>R · Cell 33 · In [32]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Convert back to long format
+long_summary &lt;- wide_summary |&gt;
+  pivot_longer(
+    cols      = -species,           # pivot all columns except &#39;species&#39;
+    names_to  = &quot;year&quot;,
+    values_to = &quot;mean_mass_g&quot;
+  )
+
+long_summary</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A tibble: 9 × 3
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">species</th>
+                        <th scope="col">year</th>
+                        <th scope="col">mean_mass_g</th>
+                      </tr>
+                      <tr>
+                        <th scope="col">&lt;fct&gt;</th>
+                        <th scope="col">&lt;chr&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>2007</td>
+                        <td>3696.429</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>2008</td>
+                        <td>3742.000</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>2009</td>
+                        <td>3664.904</td>
+                      </tr>
+                      <tr>
+                        <td>Chinstrap</td>
+                        <td>2007</td>
+                        <td>3694.231</td>
+                      </tr>
+                      <tr>
+                        <td>Chinstrap</td>
+                        <td>2008</td>
+                        <td>3800.000</td>
+                      </tr>
+                      <tr>
+                        <td>Chinstrap</td>
+                        <td>2009</td>
+                        <td>3725.000</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>2007</td>
+                        <td>5070.588</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>2008</td>
+                        <td>5019.565</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>2009</td>
+                        <td>5140.698</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-47">
+            <div class="code-toolbar">
+              <span>R · Cell 34 · In [33]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Community ecology example: species-by-site abundance matrix
+# First create a count table
+species_counts &lt;- penguins |&gt;
+  count(island, species) |&gt;
+  pivot_wider(
+    names_from   = species,
+    values_from  = n,
+    values_fill  = 0    # replace NA with 0 — no detection = zero count
+  )
+
+species_counts</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A tibble: 3 × 4
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">island</th>
+                        <th scope="col">Adelie</th>
+                        <th scope="col">Gentoo</th>
+                        <th scope="col">Chinstrap</th>
+                      </tr>
+                      <tr>
+                        <th scope="col">&lt;fct&gt;</th>
+                        <th scope="col">&lt;int&gt;</th>
+                        <th scope="col">&lt;int&gt;</th>
+                        <th scope="col">&lt;int&gt;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Biscoe</td>
+                        <td>44</td>
+                        <td>124</td>
+                        <td>0</td>
+                      </tr>
+                      <tr>
+                        <td>Dream</td>
+                        <td>56</td>
+                        <td>0</td>
+                        <td>68</td>
+                      </tr>
+                      <tr>
+                        <td>Torgersen</td>
+                        <td>52</td>
+                        <td>0</td>
+                        <td>0</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-48-17">
+              2. <code>separate()</code> and <code>unite()</code>
+            </h3>
+            <p>
+              <code>separate()</code> splits one column into multiple;
+              <code>unite()</code> combines multiple columns into one.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-49">
+            <div class="code-toolbar">
+              <span>R · Cell 35 · In [34]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Use penguins_raw — it has a combined &#39;Species&#39; column worth splitting
+# &quot;Adelie Penguin (Pygoscelis adeliae)&quot;
+
+penguins_split &lt;- penguins_raw |&gt;
+  select(Species, Island, `Body Mass (g)`) |&gt;
+  # Split the Species column at the first space to extract common name
+  separate(col   = Species,
+           into  = c(&quot;common_name&quot;, &quot;rest&quot;),
+           sep   = &quot; Penguin&quot;,
+           extra = &quot;drop&quot;) |&gt;
+  rename(island    = Island,
+         body_mass = `Body Mass (g)`)
+
+head(penguins_split)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">Warning message:
+“Expected 2 pieces. Missing pieces filled with `NA` in 192 rows [153, 154, 155, 156, 157,
+158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, ...].”
+</pre>
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A tibble: 6 × 4
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">common_name</th>
+                        <th scope="col">rest</th>
+                        <th scope="col">island</th>
+                        <th scope="col">body_mass</th>
+                      </tr>
+                      <tr>
+                        <th scope="col">&lt;chr&gt;</th>
+                        <th scope="col">&lt;chr&gt;</th>
+                        <th scope="col">&lt;chr&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>(Pygoscelis adeliae)</td>
+                        <td>Torgersen</td>
+                        <td>3750</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>(Pygoscelis adeliae)</td>
+                        <td>Torgersen</td>
+                        <td>3800</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>(Pygoscelis adeliae)</td>
+                        <td>Torgersen</td>
+                        <td>3250</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>(Pygoscelis adeliae)</td>
+                        <td>Torgersen</td>
+                        <td>NA</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>(Pygoscelis adeliae)</td>
+                        <td>Torgersen</td>
+                        <td>3450</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>(Pygoscelis adeliae)</td>
+                        <td>Torgersen</td>
+                        <td>3650</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-50">
+            <div class="code-toolbar">
+              <span>R · Cell 36 · In [35]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># unite() — combine year and species into one label column
+penguins |&gt;
+  drop_na(sex) |&gt;
+  select(species, sex, year, body_mass_g) |&gt;
+  unite(col    = &quot;survey_label&quot;,
+        species, sex, year,
+        sep    = &quot;_&quot;) |&gt;
+  head(10)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A tibble: 10 × 2
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">survey_label</th>
+                        <th scope="col">body_mass_g</th>
+                      </tr>
+                      <tr>
+                        <th scope="col">&lt;chr&gt;</th>
+                        <th scope="col">&lt;int&gt;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Adelie_male_2007</td>
+                        <td>3750</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie_female_2007</td>
+                        <td>3800</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie_female_2007</td>
+                        <td>3250</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie_female_2007</td>
+                        <td>3450</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie_male_2007</td>
+                        <td>3650</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie_female_2007</td>
+                        <td>3625</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie_male_2007</td>
+                        <td>4675</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie_female_2007</td>
+                        <td>3200</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie_male_2007</td>
+                        <td>3800</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie_male_2007</td>
+                        <td>4400</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-51-18">
+              3. <code>fill()</code> and <code>replace_na()</code>
+            </h3>
+          </section>
+          <section class="code-cell" id="cell-52">
+            <div class="code-toolbar">
+              <span>R · Cell 37 · In [36]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Simulate a dataset with missing site metadata (common in field data)
+site_data &lt;- tibble(
+  survey_id = 1:8,
+  island    = c(&quot;Biscoe&quot;, NA, NA, &quot;Dream&quot;, NA, &quot;Torgersen&quot;, NA, NA),
+  count     = c(12, 15, 8, 10, 6, 3, 4, 9)
+)
+
+site_data
+
+# fill() carries the last non-NA value downward (or upward)
+site_data |&gt;
+  fill(island, .direction = &quot;down&quot;)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A tibble: 8 × 3
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">survey_id</th>
+                        <th scope="col">island</th>
+                        <th scope="col">count</th>
+                      </tr>
+                      <tr>
+                        <th scope="col">&lt;int&gt;</th>
+                        <th scope="col">&lt;chr&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>1</td>
+                        <td>Biscoe</td>
+                        <td>12</td>
+                      </tr>
+                      <tr>
+                        <td>2</td>
+                        <td>NA</td>
+                        <td>15</td>
+                      </tr>
+                      <tr>
+                        <td>3</td>
+                        <td>NA</td>
+                        <td>8</td>
+                      </tr>
+                      <tr>
+                        <td>4</td>
+                        <td>Dream</td>
+                        <td>10</td>
+                      </tr>
+                      <tr>
+                        <td>5</td>
+                        <td>NA</td>
+                        <td>6</td>
+                      </tr>
+                      <tr>
+                        <td>6</td>
+                        <td>Torgersen</td>
+                        <td>3</td>
+                      </tr>
+                      <tr>
+                        <td>7</td>
+                        <td>NA</td>
+                        <td>4</td>
+                      </tr>
+                      <tr>
+                        <td>8</td>
+                        <td>NA</td>
+                        <td>9</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A tibble: 8 × 3
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">survey_id</th>
+                        <th scope="col">island</th>
+                        <th scope="col">count</th>
+                      </tr>
+                      <tr>
+                        <th scope="col">&lt;int&gt;</th>
+                        <th scope="col">&lt;chr&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>1</td>
+                        <td>Biscoe</td>
+                        <td>12</td>
+                      </tr>
+                      <tr>
+                        <td>2</td>
+                        <td>Biscoe</td>
+                        <td>15</td>
+                      </tr>
+                      <tr>
+                        <td>3</td>
+                        <td>Biscoe</td>
+                        <td>8</td>
+                      </tr>
+                      <tr>
+                        <td>4</td>
+                        <td>Dream</td>
+                        <td>10</td>
+                      </tr>
+                      <tr>
+                        <td>5</td>
+                        <td>Dream</td>
+                        <td>6</td>
+                      </tr>
+                      <tr>
+                        <td>6</td>
+                        <td>Torgersen</td>
+                        <td>3</td>
+                      </tr>
+                      <tr>
+                        <td>7</td>
+                        <td>Torgersen</td>
+                        <td>4</td>
+                      </tr>
+                      <tr>
+                        <td>8</td>
+                        <td>Torgersen</td>
+                        <td>9</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-53">
+            <div class="code-toolbar">
+              <span>R · Cell 38 · In [38]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># replace_na() — substitute a specific value for NAs
+penguins |&gt;
+  mutate(sex = as.character(sex)) |&gt;
+  mutate(sex = replace_na(sex, &quot;unknown&quot;)) |&gt;
+  count(sex)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A tibble: 3 × 2
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">sex</th>
+                        <th scope="col">n</th>
+                      </tr>
+                      <tr>
+                        <th scope="col">&lt;chr&gt;</th>
+                        <th scope="col">&lt;int&gt;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>female</td>
+                        <td>165</td>
+                      </tr>
+                      <tr>
+                        <td>male</td>
+                        <td>168</td>
+                      </tr>
+                      <tr>
+                        <td>unknown</td>
+                        <td>11</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <hr />
+            <h2 id="section-54-19"><code>stringr</code> — String Manipulation</h2>
+            <img src="../media/a346af8c681cef57e315.png" align="right" width="130" />
+
+            <p>
+              <code>stringr</code> provides consistent, readable functions for working
+              with character strings. All functions begin with <code>str_</code> for
+              easy discovery. Useful for cleaning species names, site codes, or any text
+              data.
+            </p>
+            <p>
+              <strong>Reference:</strong> Wickham, H. (2023).
+              <em>stringr: Simple, Consistent Wrappers for Common String Operations</em
+              >.
+              <a href="https://stringr.tidyverse.org">https://stringr.tidyverse.org</a>
+            </p>
+          </section>
+          <section class="code-cell" id="cell-55">
+            <div class="code-toolbar">
+              <span>R · Cell 39 · In [39]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Working with species names in the penguins dataset
+species_vec &lt;- unique(as.character(penguins$species))
+species_vec</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>'Adelie'</li>
+                    <li>'Gentoo'</li>
+                    <li>'Chinstrap'</li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-56">
+            <div class="code-toolbar">
+              <span>R · Cell 40 · In [40]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Case conversion — critical for matching strings reliably
+str_to_lower(species_vec)    # all lowercase
+str_to_upper(species_vec)    # ALL UPPERCASE
+str_to_title(species_vec)    # Title Case</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>'adelie'</li>
+                    <li>'gentoo'</li>
+                    <li>'chinstrap'</li>
+                  </ol>
+                </div>
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>'ADELIE'</li>
+                    <li>'GENTOO'</li>
+                    <li>'CHINSTRAP'</li>
+                  </ol>
+                </div>
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>'Adelie'</li>
+                    <li>'Gentoo'</li>
+                    <li>'Chinstrap'</li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-57">
+            <div class="code-toolbar">
+              <span>R · Cell 41 · In [41]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Detecting patterns — returns TRUE/FALSE
+str_detect(species_vec, &quot;Gentoo&quot;)       # Which names contain &quot;Gentoo&quot;?
+str_detect(species_vec, &quot;^A&quot;)          # Which start with &quot;A&quot;? (regex)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>FALSE</li>
+                    <li>TRUE</li>
+                    <li>FALSE</li>
+                  </ol>
+                </div>
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>TRUE</li>
+                    <li>FALSE</li>
+                    <li>FALSE</li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-58">
+            <div class="code-toolbar">
+              <span>R · Cell 42 · In [42]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Replacing substrings
+str_replace(species_vec, &quot;Penguin&quot;, &quot;spp.&quot;)   # Replace first match
+str_replace_all(&quot;Adelie_Penguin_female&quot;, &quot;_&quot;, &quot; &quot;)  # Replace all underscores</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>'Adelie'</li>
+                    <li>'Gentoo'</li>
+                    <li>'Chinstrap'</li>
+                  </ol>
+                </div>
+                <div class="notebook-table">'Adelie Penguin female'</div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-59">
+            <div class="code-toolbar">
+              <span>R · Cell 43 · In [43]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Extracting substrings
+str_sub(species_vec, 1, 3)   # First 3 characters of each string
+
+# Length of strings
+str_length(species_vec)
+
+# Padding and trimming (useful for site codes)
+str_pad(&quot;7&quot;, width = 3, side = &quot;left&quot;, pad = &quot;0&quot;)   # &quot;007&quot;
+str_trim(&quot;  Adelie  &quot;)                               # Remove whitespace</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>'Ade'</li>
+                    <li>'Gen'</li>
+                    <li>'Chi'</li>
+                  </ol>
+                </div>
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>6</li>
+                    <li>6</li>
+                    <li>9</li>
+                  </ol>
+                </div>
+                <div class="notebook-table">'007'</div>
+                <div class="notebook-table">'Adelie'</div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-60">
+            <div class="code-toolbar">
+              <span>R · Cell 44 · In [44]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Practical example: clean the raw species names from penguins_raw
+penguins_raw |&gt;
+  select(Species) |&gt;
+  mutate(
+    species_clean = Species |&gt;
+      str_remove(&quot; Penguin.*&quot;) |&gt;   # Remove &quot; Penguin&quot; and everything after
+      str_trim()
+  ) |&gt;
+  distinct()</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A tibble: 3 × 2
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">Species</th>
+                        <th scope="col">species_clean</th>
+                      </tr>
+                      <tr>
+                        <th scope="col">&lt;chr&gt;</th>
+                        <th scope="col">&lt;chr&gt;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Adelie Penguin (Pygoscelis adeliae)</td>
+                        <td>Adelie</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo penguin (Pygoscelis papua)</td>
+                        <td>Gentoo penguin (Pygoscelis papua)</td>
+                      </tr>
+                      <tr>
+                        <td>Chinstrap penguin (Pygoscelis antarctica)</td>
+                        <td>Chinstrap penguin (Pygoscelis antarctica)</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <hr />
+            <h2 id="section-61-20"><code>forcats</code> — Factor Manipulation</h2>
+            <img src="../media/5289d3bdf04fca4752c9.png" align="right" width="130" />
+
+            <p>
+              Factors are how R represents categorical variables.
+              <code>forcats</code> provides tools for reordering, recoding, and
+              collapsing factor levels — essential for producing meaningful plots and
+              tables.
+            </p>
+            <p>
+              <strong>Reference:</strong> Wickham, H. (2023).
+              <em>forcats: Tools for Working with Categorical Variables (Factors)</em>.
+              <a href="https://forcats.tidyverse.org">https://forcats.tidyverse.org</a>
+            </p>
+          </section>
+          <section class="code-cell" id="cell-62">
+            <div class="code-toolbar">
+              <span>R · Cell 45 · In [45]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Examine factor levels in the penguins dataset
+levels(penguins$species)    # Default: alphabetical
+levels(penguins$island)
+levels(penguins$sex)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>'Adelie'</li>
+                    <li>'Chinstrap'</li>
+                    <li>'Gentoo'</li>
+                  </ol>
+                </div>
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>'Biscoe'</li>
+                    <li>'Dream'</li>
+                    <li>'Torgersen'</li>
+                  </ol>
+                </div>
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>'female'</li>
+                    <li>'male'</li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-63">
+            <div class="code-toolbar">
+              <span>R · Cell 46 · In [46]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># fct_reorder() — reorder levels by another variable
+# Essential for meaningful bar charts and box plots
+penguins |&gt;
+  drop_na(body_mass_g) |&gt;
+  mutate(species_ordered = fct_reorder(species, body_mass_g, .fun = mean)) |&gt;
+  group_by(species_ordered) |&gt;
+  summarise(mean_mass = mean(body_mass_g))</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A tibble: 3 × 2
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">species_ordered</th>
+                        <th scope="col">mean_mass</th>
+                      </tr>
+                      <tr>
+                        <th scope="col">&lt;fct&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>3700.662</td>
+                      </tr>
+                      <tr>
+                        <td>Chinstrap</td>
+                        <td>3733.088</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>5076.016</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-64">
+            <div class="code-toolbar">
+              <span>R · Cell 47 · In [47]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># fct_relevel() — manually set the level order
+penguins_relevelled &lt;- penguins |&gt;
+  mutate(species = fct_relevel(species, &quot;Gentoo&quot;, &quot;Chinstrap&quot;, &quot;Adelie&quot;))
+
+levels(penguins_relevelled$species)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>'Gentoo'</li>
+                    <li>'Chinstrap'</li>
+                    <li>'Adelie'</li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-65">
+            <div class="code-toolbar">
+              <span>R · Cell 48 · In [48]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># fct_recode() — rename factor levels
+penguins_recoded &lt;- penguins |&gt;
+  mutate(species = fct_recode(species,
+    &quot;Pygoscelis adeliae&quot;   = &quot;Adelie&quot;,
+    &quot;Pygoscelis antarctica&quot;= &quot;Chinstrap&quot;,
+    &quot;Pygoscelis papua&quot;     = &quot;Gentoo&quot;
+  ))
+
+levels(penguins_recoded$species)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>'Pygoscelis adeliae'</li>
+                    <li>'Pygoscelis antarctica'</li>
+                    <li>'Pygoscelis papua'</li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-66">
+            <div class="code-toolbar">
+              <span>R · Cell 49 · In [49]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># fct_lump_n() — collapse rare levels into &quot;Other&quot;
+# Useful when you have many categories with few observations
+penguins |&gt;
+  mutate(island_lumped = fct_lump_n(island, n = 2)) |&gt;
+  count(island_lumped)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A tibble: 3 × 2
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">island_lumped</th>
+                        <th scope="col">n</th>
+                      </tr>
+                      <tr>
+                        <th scope="col">&lt;fct&gt;</th>
+                        <th scope="col">&lt;int&gt;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Biscoe</td>
+                        <td>168</td>
+                      </tr>
+                      <tr>
+                        <td>Dream</td>
+                        <td>124</td>
+                      </tr>
+                      <tr>
+                        <td>Other</td>
+                        <td>52</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <hr />
+            <h2 id="section-67-21">
+              <code>lubridate</code> — Date and Time Manipulation
+            </h2>
+            <img src="../media/25aeb4743bb6a14bdfef.png" align="right" width="130" />
+
+            <p>
+              Ecological monitoring data almost always has temporal components: survey
+              dates, seasons, phenological events. <code>lubridate</code> makes
+              date-time objects easy to create, parse, and manipulate.
+            </p>
+            <p>
+              <strong>Reference:</strong> Grolemund, G. &amp; Wickham, H. (2011). Dates
+              and times made easy with lubridate.
+              <em>Journal of Statistical Software</em>, 40(3).
+              <a href="https://doi.org/10.18637/jss.v040.i03"
+                >https://doi.org/10.18637/jss.v040.i03</a
+              >
+            </p>
+          </section>
+          <section class="code-cell" id="cell-68">
+            <div class="code-toolbar">
+              <span>R · Cell 50 · In [50]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code>library(lubridate)
+
+# The penguins dataset has a year column — let&#39;s build full dates
+# (hypothetically: assume all surveys were on 1 January each year)
+penguins_dated &lt;- penguins |&gt;
+  mutate(
+    survey_date  = make_date(year = year, month = 1, day = 1),
+    survey_month = month(survey_date, label = TRUE),
+    survey_year  = year(survey_date)
+  ) |&gt;
+  select(species, survey_date, survey_month, survey_year, body_mass_g)
+
+head(penguins_dated)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A tibble: 6 × 5
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">species</th>
+                        <th scope="col">survey_date</th>
+                        <th scope="col">survey_month</th>
+                        <th scope="col">survey_year</th>
+                        <th scope="col">body_mass_g</th>
+                      </tr>
+                      <tr>
+                        <th scope="col">&lt;fct&gt;</th>
+                        <th scope="col">&lt;date&gt;</th>
+                        <th scope="col">&lt;ord&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                        <th scope="col">&lt;int&gt;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>2007-01-01</td>
+                        <td>Jan</td>
+                        <td>2007</td>
+                        <td>3750</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>2007-01-01</td>
+                        <td>Jan</td>
+                        <td>2007</td>
+                        <td>3800</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>2007-01-01</td>
+                        <td>Jan</td>
+                        <td>2007</td>
+                        <td>3250</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>2007-01-01</td>
+                        <td>Jan</td>
+                        <td>2007</td>
+                        <td>NA</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>2007-01-01</td>
+                        <td>Jan</td>
+                        <td>2007</td>
+                        <td>3450</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>2007-01-01</td>
+                        <td>Jan</td>
+                        <td>2007</td>
+                        <td>3650</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-69">
+            <div class="code-toolbar">
+              <span>R · Cell 51 · In [51]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Parsing dates from character strings — common when importing field data
+date_strings &lt;- c(&quot;2007-11-11&quot;, &quot;2008-01-15&quot;, &quot;2009-03-02&quot;)
+
+parsed_dates &lt;- ymd(date_strings)   # Year-Month-Day
+class(parsed_dates)
+
+# Other parsers: dmy(), mdy(), ymd_hms()</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content"><div class="notebook-table">'Date'</div></div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-70">
+            <div class="code-toolbar">
+              <span>R · Cell 52 · In [52]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Extracting components
+today_date &lt;- today()   # Current date
+year(today_date)
+month(today_date)
+day(today_date)
+yday(today_date)   # Day of year (1–365/366) — useful for phenology
+wday(today_date, label = TRUE)  # Day of week</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">2026</div>
+                <div class="notebook-table">4</div>
+                <div class="notebook-table">26</div>
+                <div class="notebook-table">116</div>
+                <div class="notebook-table">
+                  Sun
+                  <details>
+                    <summary style="display: list-item; cursor: pointer">
+                      <strong>Levels</strong>:
+                    </summary>
+                    <style>
+                      .list-inline {
+                        list-style: none;
+                        margin: 0;
+                        padding: 0;
+                      }
+                      .list-inline > li {
+                        display: inline-block;
+                      }
+                      .list-inline > li:not(:last-child)::after {
+                        content: '\00b7';
+                        padding: 0 0.5ex;
+                      }
+                    </style>
+                    <ol class="list-inline">
+                      <li>'Sun'</li>
+                      <li>'Mon'</li>
+                      <li>'Tue'</li>
+                      <li>'Wed'</li>
+                      <li>'Thu'</li>
+                      <li>'Fri'</li>
+                      <li>'Sat'</li>
+                    </ol>
+                  </details>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-71">
+            <div class="code-toolbar">
+              <span>R · Cell 53 · In [53]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Calculating durations and intervals — e.g., days between surveys
+start_survey &lt;- ymd(&quot;2007-11-11&quot;)
+end_survey   &lt;- ymd(&quot;2009-03-02&quot;)
+
+interval_duration &lt;- end_survey - start_survey
+interval_duration   # in days</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">Time difference of 477 days</pre>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <hr />
+            <h2 id="section-72-22"><code>purrr</code> — Functional Programming</h2>
+            <img src="../media/f6d69231dd5e927cc4e3.png" align="right" width="130" />
+
+            <p>
+              <code>purrr</code> provides tools for working with
+              <strong>functions</strong> and <strong>lists</strong> systematically,
+              replacing explicit <code>for</code> loops with concise, readable code. The
+              <code>map</code> family of functions applies a function to each element of
+              a list or vector.
+            </p>
+            <p>
+              <strong>Reference:</strong> Henry, L. &amp; Wickham, H. (2023).
+              <em>purrr: Functional Programming Tools</em>.
+              <a href="https://purrr.tidyverse.org">https://purrr.tidyverse.org</a>
+            </p>
+          </section>
+          <section class="code-cell" id="cell-73">
+            <div class="code-toolbar">
+              <span>R · Cell 54 · In [54]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># map() applies a function to each element of a list and returns a list
+# map_dbl() returns a numeric vector, map_chr() returns character, etc.
+
+# Example: compute mean of each numeric column in penguins
+penguins |&gt;
+  select(where(is.numeric)) |&gt;
+  map_dbl(mean, na.rm = TRUE)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <style>
+                    .dl-inline {
+                      width: auto;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .dl-inline > dt,
+                    .dl-inline > dd {
+                      float: none;
+                      width: auto;
+                      display: inline-block;
+                    }
+                    .dl-inline > dt::after {
+                      content: ':\0020';
+                      padding-right: 0.5ex;
+                    }
+                    .dl-inline > dt:not(:first-of-type) {
+                      padding-left: 0.5ex;
+                    }
+                  </style>
+                  <dl class="dl-inline">
+                    <dt>bill_length_mm</dt>
+                    <dd>43.9219298245614</dd>
+                    <dt>bill_depth_mm</dt>
+                    <dd>17.1511695906433</dd>
+                    <dt>flipper_length_mm</dt>
+                    <dd>200.915204678363</dd>
+                    <dt>body_mass_g</dt>
+                    <dd>4201.75438596491</dd>
+                    <dt>year</dt>
+                    <dd>2008.02906976744</dd>
+                  </dl>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-74">
+            <div class="code-toolbar">
+              <span>R · Cell 55 · In [55]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Fitting a model to each species separately — a common ecology use case
+# Split the data by species, fit a linear model for each
+models &lt;- penguins |&gt;
+  drop_na() |&gt;
+  split(~ species) |&gt;                        # split into a list by species
+  map(~ lm(body_mass_g ~ flipper_length_mm, data = .x))   # fit model to each
+
+# Extract R-squared from each model
+map_dbl(models, ~ summary(.x)$r.squared)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <style>
+                    .dl-inline {
+                      width: auto;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .dl-inline > dt,
+                    .dl-inline > dd {
+                      float: none;
+                      width: auto;
+                      display: inline-block;
+                    }
+                    .dl-inline > dt::after {
+                      content: ':\0020';
+                      padding-right: 0.5ex;
+                    }
+                    .dl-inline > dt:not(:first-of-type) {
+                      padding-left: 0.5ex;
+                    }
+                  </style>
+                  <dl class="dl-inline">
+                    <dt>Adelie</dt>
+                    <dd>0.216089176479171</dd>
+                    <dt>Chinstrap</dt>
+                    <dd>0.411598480321263</dd>
+                    <dt>Gentoo</dt>
+                    <dd>0.505955167418825</dd>
+                  </dl>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-75">
+            <div class="code-toolbar">
+              <span>R · Cell 56 · In [56]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Extracting model coefficients cleanly
+models |&gt;
+  map(coef)   # List of coefficient vectors</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <dl>
+                    <dt>$Adelie</dt>
+                    <dd>
+                      <style>
+                        .dl-inline {
+                          width: auto;
+                          margin: 0;
+                          padding: 0;
+                        }
+                        .dl-inline > dt,
+                        .dl-inline > dd {
+                          float: none;
+                          width: auto;
+                          display: inline-block;
+                        }
+                        .dl-inline > dt::after {
+                          content: ':\0020';
+                          padding-right: 0.5ex;
+                        }
+                        .dl-inline > dt:not(:first-of-type) {
+                          padding-left: 0.5ex;
+                        }
+                      </style>
+                      <dl class="dl-inline">
+                        <dt>(Intercept)</dt>
+                        <dd>-2508.08774289273</dd>
+                        <dt>flipper_length_mm</dt>
+                        <dd>32.6889140861949</dd>
+                      </dl>
+                    </dd>
+                    <dt>$Chinstrap</dt>
+                    <dd>
+                      <style>
+                        .dl-inline {
+                          width: auto;
+                          margin: 0;
+                          padding: 0;
+                        }
+                        .dl-inline > dt,
+                        .dl-inline > dd {
+                          float: none;
+                          width: auto;
+                          display: inline-block;
+                        }
+                        .dl-inline > dt::after {
+                          content: ':\0020';
+                          padding-right: 0.5ex;
+                        }
+                        .dl-inline > dt:not(:first-of-type) {
+                          padding-left: 0.5ex;
+                        }
+                      </style>
+                      <dl class="dl-inline">
+                        <dt>(Intercept)</dt>
+                        <dd>-3037.19577450202</dd>
+                        <dt>flipper_length_mm</dt>
+                        <dd>34.5733938619809</dd>
+                      </dl>
+                    </dd>
+                    <dt>$Gentoo</dt>
+                    <dd>
+                      <style>
+                        .dl-inline {
+                          width: auto;
+                          margin: 0;
+                          padding: 0;
+                        }
+                        .dl-inline > dt,
+                        .dl-inline > dd {
+                          float: none;
+                          width: auto;
+                          display: inline-block;
+                        }
+                        .dl-inline > dt::after {
+                          content: ':\0020';
+                          padding-right: 0.5ex;
+                        }
+                        .dl-inline > dt:not(:first-of-type) {
+                          padding-left: 0.5ex;
+                        }
+                      </style>
+                      <dl class="dl-inline">
+                        <dt>(Intercept)</dt>
+                        <dd>-6674.20427375972</dd>
+                        <dt>flipper_length_mm</dt>
+                        <dd>54.165421398685</dd>
+                      </dl>
+                    </dd>
+                  </dl>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <hr />
+            <h2 id="section-76-23">Putting It All Together — A Complete Workflow</h2>
+            <p>
+              Here we demonstrate a complete data manipulation pipeline: from raw data
+              to a clean, summarised, analysis-ready table.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-77">
+            <div class="code-toolbar">
+              <span>R · Cell 57 · In [57]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Complete workflow: raw penguins data → clean summary for analysis
+penguin_summary &lt;- penguins_raw |&gt;
+
+  # 1. Clean column names with janitor (or rename manually)
+  rename(
+    species       = Species,
+    island        = Island,
+    bill_length_mm = `Culmen Length (mm)`,
+    bill_depth_mm  = `Culmen Depth (mm)`,
+    flipper_length_mm = `Flipper Length (mm)`,
+    body_mass_g    = `Body Mass (g)`,
+    sex            = Sex,
+    year           = `Date Egg`
+  ) |&gt;
+
+  # 2. Extract clean species name
+  mutate(
+    species = str_remove(species, &quot; Penguin.*&quot;) |&gt; str_trim(),
+    species = as.factor(species)
+  ) |&gt;
+
+  # 3. Remove rows with missing morphological measurements
+  drop_na(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g) |&gt;
+
+  # 4. Add derived variables
+  mutate(
+    body_mass_kg  = body_mass_g / 1000,
+    bill_ratio    = bill_length_mm / bill_depth_mm,
+    size_class    = case_when(
+      body_mass_g &lt; 3500  ~ &quot;small&quot;,
+      body_mass_g &lt; 4500  ~ &quot;medium&quot;,
+      TRUE                ~ &quot;large&quot;
+    )
+  ) |&gt;
+
+  # 5. Summarise by species
+  group_by(species, island) |&gt;
+  summarise(
+    n              = n(),
+    mean_mass_kg   = mean(body_mass_kg, na.rm = TRUE),
+    sd_mass_kg     = sd(body_mass_kg, na.rm = TRUE),
+    mean_bill_ratio = mean(bill_ratio, na.rm = TRUE),
+    .groups = &quot;drop&quot;
+  ) |&gt;
+
+  # 6. Sort by mean mass descending
+  arrange(desc(mean_mass_kg))
+
+penguin_summary</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A tibble: 5 × 6
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">species</th>
+                        <th scope="col">island</th>
+                        <th scope="col">n</th>
+                        <th scope="col">mean_mass_kg</th>
+                        <th scope="col">sd_mass_kg</th>
+                        <th scope="col">mean_bill_ratio</th>
+                      </tr>
+                      <tr>
+                        <th scope="col">&lt;fct&gt;</th>
+                        <th scope="col">&lt;chr&gt;</th>
+                        <th scope="col">&lt;int&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Gentoo penguin (Pygoscelis papua)</td>
+                        <td>Biscoe</td>
+                        <td>123</td>
+                        <td>5.076016</td>
+                        <td>0.5041162</td>
+                        <td>3.175592</td>
+                      </tr>
+                      <tr>
+                        <td>Chinstrap penguin (Pygoscelis antarctica)</td>
+                        <td>Dream</td>
+                        <td>68</td>
+                        <td>3.733088</td>
+                        <td>0.3843351</td>
+                        <td>2.653756</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>Biscoe</td>
+                        <td>44</td>
+                        <td>3.709659</td>
+                        <td>0.4877337</td>
+                        <td>2.126299</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>Torgersen</td>
+                        <td>51</td>
+                        <td>3.706373</td>
+                        <td>0.4451079</td>
+                        <td>2.121287</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>Dream</td>
+                        <td>56</td>
+                        <td>3.688393</td>
+                        <td>0.4551464</td>
+                        <td>2.113139</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <hr />
+            <h2 id="section-78-24">Summary</h2>
+            <p>
+              In this notebook, you have learned to use all core tidyverse packages
+              (excluding <code>ggplot2</code>, which is covered in Part 3):
+            </p>
+            <ul>
+              <li>
+                <strong><code>readr</code></strong
+                >: fast and consistent data import/export
+              </li>
+              <li>
+                <strong><code>dplyr</code></strong
+                >: the six primary verbs (<code>filter</code>, <code>select</code>,
+                <code>mutate</code>, <code>summarise</code>, <code>arrange</code>,
+                <code>rename</code>) and joins
+              </li>
+              <li>
+                <strong><code>tidyr</code></strong
+                >: pivoting between wide and long formats, separating/uniting columns,
+                handling missingness
+              </li>
+              <li>
+                <strong><code>stringr</code></strong
+                >: pattern matching, replacement, and text cleaning
+              </li>
+              <li>
+                <strong><code>forcats</code></strong
+                >: reordering and recoding factor levels
+              </li>
+              <li>
+                <strong><code>lubridate</code></strong
+                >: parsing, extracting, and computing with dates
+              </li>
+              <li>
+                <strong><code>purrr</code></strong
+                >: applying functions across lists and vectors
+              </li>
+            </ul>
+            <hr />
+            <h2 id="section-78-25">References</h2>
+            <ul>
+              <li>
+                Gorman, K.B., Williams, T.D. &amp; Fraser, W.R. (2014). Ecological
+                sexual dimorphism and environmental variability within a community of
+                Antarctic penguins. <em>PLOS ONE</em>, 9(3), e90081.
+              </li>
+              <li>
+                Grolemund, G. &amp; Wickham, H. (2011). Dates and times made easy with
+                lubridate. <em>Journal of Statistical Software</em>, 40(3).
+              </li>
+              <li>
+                Henry, L. &amp; Wickham, H. (2023).
+                <em>purrr: Functional Programming Tools</em>. R package version 1.0.2.
+              </li>
+              <li>
+                Horst, A.M., Hill, A.P. &amp; Gorman, K.B. (2020).
+                <em>palmerpenguins</em>.
+                <a href="https://doi.org/10.5281/zenodo.3960218"
+                  >https://doi.org/10.5281/zenodo.3960218</a
+                >
+              </li>
+              <li>
+                Wickham, H. (2014). Tidy data. <em>Journal of Statistical Software</em>,
+                59(10), 1–23.
+              </li>
+              <li>
+                Wickham, H. et al. (2019). Welcome to the tidyverse.
+                <em>Journal of Open Source Software</em>, 4(43), 1686.
+              </li>
+              <li>
+                Wickham, H., François, R., Henry, L., Müller, K. &amp; Vaughan, D.
+                (2023). <em>dplyr: A Grammar of Data Manipulation</em>. R package
+                version 1.1.4.
+              </li>
+              <li>
+                Wickham, H. &amp; Vaughan, D. (2023). <em>tidyr: Tidy Messy Data</em>. R
+                package version 1.3.0.
+              </li>
+            </ul>
+          </section>
+          <div class="reader-end">
+            <p>You’ve reached the end of this notebook.</p>
+            <a class="text-link" href="../../notebooks.html"
+              >Return to all notebooks
+              <svg
+                class=""
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M4 12h15m-6-6 6 6-6 6" /></svg
+            ></a>
+          </div>
+        </article>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-main">
+          <a class="brand" href="../../index.html" aria-label="Les Hyperion — home"
+            ><img
+              class="brand-face"
+              src="../../assets/brand/silvi-face.png"
+              alt=""
+              width="55"
+              height="59"
+            /><span class="brand-name" aria-hidden="true"
+              >LES HYPERI<svg class="compass-o" viewBox="0 0 36 46" aria-hidden="true">
+                <circle
+                  cx="18"
+                  cy="23"
+                  r="14.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <path
+                  d="m18 1 4 17 14 5-14 4-4 18-4-18L0 23l14-5Z"
+                  fill="currentColor"
+                /></svg
+              >N</span
+            ></a
+          >
+          <p class="footer-thought">Understanding nature.<br />Sharing the evidence.</p>
+          <nav class="footer-links" aria-label="Footer">
+            <a href="../../about.html">About Phemelo</a><a href="../../cv.html">CV</a
+            ><a
+              href="https://github.com/Phemelo-R"
+              target="_blank"
+              rel="noopener noreferrer"
+              >GitHub ↗</a
+            ><a href="#main">Back to top ↑</a>
+          </nav>
+        </div>
+        <div class="footer-bottom">
+          <span>© 2026 Phemelo Rutlokoane</span><span>Nature × Data × People</span
+          ><span>Johannesburg, South Africa</span>
+        </div>
+      </div>
+    </footer>
+    <div class="toast" id="toast" role="status" hidden></div>
+    <script src="../../js/site.js"></script>
+    <script src="../../js/silvi.js"></script>
+    <script src="../../js/math-config.js"></script>
+    <script src="../../assets/vendor/mathjax/tex-chtml.js"></script>
+    <script src="../../js/reader.js"></script>
+  </body>
+</html>

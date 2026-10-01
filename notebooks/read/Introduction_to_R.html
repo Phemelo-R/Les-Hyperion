@@ -1,0 +1,2489 @@
+<!doctype html>
+<html lang="en-GB" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Introduction to R — Les Hyperion</title>
+    <meta
+      name="description"
+      content="A foundation in R: installation, data types, functions, and reading and writing data."
+    />
+    <meta name="theme-color" content="#0f2d3a" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../../assets/brand/favicon-32.png"
+    />
+    <link rel="icon" sizes="192x192" href="../../assets/brand/favicon-192.png" />
+    <link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png" />
+    <script src="../../js/theme-init.js"></script>
+    <link rel="stylesheet" href="../../css/site.css" />
+    <link rel="stylesheet" href="../../css/silvi.css" />
+    <link rel="stylesheet" href="../../css/revision.css" />
+    <link rel="stylesheet" href="../../css/refinement.css" />
+    <link rel="stylesheet" href="../../css/reader.css" />
+  </head>
+  <body class="reader-page">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../../index.html" aria-label="Les Hyperion — home"
+          ><img
+            class="brand-face"
+            src="../../assets/brand/silvi-face.png"
+            alt=""
+            width="55"
+            height="59"
+          /><span class="brand-name" aria-hidden="true"
+            >LES HYPERI<svg class="compass-o" viewBox="0 0 36 46" aria-hidden="true">
+              <circle
+                cx="18"
+                cy="23"
+                r="14.5"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              />
+              <path
+                d="m18 1 4 17 14 5-14 4-4 18-4-18L0 23l14-5Z"
+                fill="currentColor"
+              /></svg
+            >N</span
+          ></a
+        >
+        <nav class="desktop-nav" aria-label="Main navigation">
+          <a href="../../index.html">Home</a><a href="../../research.html">Research</a
+          ><a href="../../notebooks.html" aria-current="page">Notebooks</a
+          ><a href="../../carbon.html">Carbon</a><a href="../../about.html">About</a
+          ><a href="../../cv.html">CV</a>
+        </nav>
+        <div class="header-actions">
+          <button
+            class="icon-button theme-toggle"
+            data-theme-toggle
+            aria-label="Switch colour theme"
+          >
+            <svg
+              class="moon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path
+                d="M20.6 13.7A8.8 8.8 0 0 1 10.3 3.4a8.8 8.8 0 1 0 10.3 10.3Z"
+              /></svg
+            ><svg
+              class="sun"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path
+                d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"
+              />
+            </svg></button
+          ><button
+            class="icon-button menu-toggle"
+            aria-label="Open navigation"
+            aria-expanded="false"
+            aria-controls="mobile-nav"
+          >
+            <svg
+              class=""
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" hidden>
+        <a href="../../index.html">Home</a><a href="../../research.html">Research</a
+        ><a href="../../notebooks.html" aria-current="page">Notebooks</a
+        ><a href="../../carbon.html">Carbon</a><a href="../../about.html">About</a
+        ><a href="../../cv.html">CV</a>
+      </nav>
+    </header>
+    <main id="main">
+      <div class="reader-bar">
+        <div class="reader-bar-inner">
+          <a href="../../notebooks.html"
+            ><svg
+              class=""
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M20 12H5m6-6-6 6 6 6" />
+            </svg>
+            Notebooks</a
+          ><span class="reader-crumb">R Fundamentals / Part 1</span
+          ><a href="../Introduction_to_R.ipynb" download
+            ><svg
+              class=""
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5" />
+            </svg>
+            Download .ipynb</a
+          >
+        </div>
+      </div>
+      <div class="reader-layout">
+        <aside class="reader-sidebar">
+          <figure
+            class="silvi-scene reader-silvi"
+            data-silvi-scene="notebook-Introduction_to_R"
+          >
+            <div class="silvi-stage">
+              <img
+                src="../../assets/brand/unique-r.png"
+                alt="Exploring Introduction to R with Silvi"
+                width="480"
+                height="250"
+                loading="lazy"
+              />
+            </div>
+          </figure>
+          <details class="reader-contents" open>
+            <summary>In this notebook</summary>
+            <nav aria-label="Notebook contents">
+              <a href="#section-0-0">Introduction to R</a
+              ><a href="#section-0-2">What is R?</a
+              ><a href="#section-1-4">Graphical User Interfaces for R</a
+              ><a href="#section-2-7">Installation</a
+              ><a href="#section-3-11">The RStudio Interface</a
+              ><a href="#section-4-16">R Projects</a
+              ><a href="#section-5-20">Setting Up GitHub Copilot in RStudio</a
+              ><a href="#section-6-23">Basic R Operations</a
+              ><a href="#section-12-27">Functions</a
+              ><a href="#section-18-29">Data Types</a
+              ><a href="#section-23-30">Data Structures</a
+              ><a href="#section-38-36">Indexing</a><a href="#section-43-37">Packages</a
+              ><a href="#section-47-40">Loading and Inspecting Real Data</a
+              ><a href="#section-55-42">Getting Help</a
+              ><a href="#section-58-45">A First Complete Example</a
+              ><a href="#section-63-46">Summary</a
+              ><a href="#section-63-47">References</a>
+            </nav>
+          </details>
+          <div class="reader-tools">
+            <button id="toggle-outputs" aria-pressed="false">Collapse outputs</button
+            ><button class="print-button">Print notebook</button>
+          </div>
+          <p>Original code and saved outputs.<br />R · 64 cells</p>
+        </aside>
+        <article class="notebook-document">
+          <div class="reader-intro">
+            <p class="eyebrow">R Fundamentals · 2025-08-12</p>
+          </div>
+          <section class="markdown-cell">
+            <h1 id="section-0-0">Introduction to R</h1>
+            <h3 id="section-0-1">
+              <em>A Foundation for Biological Sciences and Spatial Ecology</em>
+            </h3>
+            <hr />
+            <blockquote>
+              <p>
+                <em
+                  >&quot;The best thing about R is that it was written by statisticians.
+                  The worst thing about R is that it was written by
+                  statisticians.&quot;</em
+                >
+                — Bo Cowgill, Google
+              </p>
+            </blockquote>
+            <hr />
+            <h2 id="section-0-2">What is R?</h2>
+            <p>
+              <strong>R</strong> is a free, open-source programming language and
+              statistical computing environment, built for data analysis, statistical
+              modelling, and data visualisation. It is the <em>lingua franca</em> of
+              modern quantitative biology, ecology, epidemiology, and bioinformatics.
+            </p>
+            <h3 id="section-0-3">A brief history</h3>
+            <p>
+              R was created in <strong>1993</strong> at the
+              <strong>University of Auckland, New Zealand</strong>, by statisticians
+              <strong>Ross Ihaka</strong> and <strong>Robert Gentleman</strong> — the
+              language is named after both creators (Ihaka &amp; Gentleman, 1996). It
+              was also a deliberate nod to <strong>S</strong>, its intellectual
+              predecessor: a statistical language developed at
+              <strong>Bell Laboratories</strong> in the 1970s by John Chambers and
+              colleagues. Where S was proprietary, Ihaka and Gentleman envisioned
+              something open, collaborative, and free.
+            </p>
+            <p>
+              In <strong>1997</strong>, a group of volunteers formed the
+              <strong>R Core Team</strong> and the language was released under the
+              <strong>GNU General Public Licence (GPL)</strong>. Today, R is stewarded
+              by the <strong>R Foundation for Statistical Computing</strong> (Vienna,
+              Austria) and maintained by a global community of thousands of
+              contributors.
+            </p>
+            <p><strong>Why R specifically for biology and ecology?</strong></p>
+            <ul>
+              <li>
+                Decades of ecological, statistical, and spatial packages have been
+                written in and for R (e.g., <code>vegan</code>, <code>ape</code>,
+                <code>terra</code>, <code>sdm</code>).
+              </li>
+              <li>
+                The vast majority of peer-reviewed ecology journals accept or even
+                require R-based reproducible analyses.
+              </li>
+              <li>
+                R integrates seamlessly with LaTeX, Quarto, and R Markdown — the
+                dominant tools for scientific reporting.
+              </li>
+              <li>
+                The
+                <a href="https://cran.r-project.org/web/views/Environmetrics.html"
+                  >CRAN Task View for Ecology</a
+                >
+                lists over 80 curated packages for ecological and environmental
+                analysis.
+              </li>
+            </ul>
+            <p><strong>References:</strong></p>
+            <ul>
+              <li>
+                Ihaka, R. &amp; Gentleman, R. (1996). R: A language for data analysis
+                and graphics.
+                <em>Journal of Computational and Graphical Statistics</em>, 5(3),
+                299–314.
+              </li>
+              <li>
+                R Core Team (2024).
+                <em>R: A language and environment for statistical computing</em>. R
+                Foundation for Statistical Computing, Vienna, Austria.
+                <a href="https://www.R-project.org/">https://www.R-project.org/</a>
+              </li>
+            </ul>
+            <hr />
+          </section>
+          <section class="markdown-cell">
+            <h2 id="section-1-4">Graphical User Interfaces for R</h2>
+            <p>
+              R itself is a command-line language — a bare console where you type
+              commands and receive output. Most users, however, interact with R through
+              a <strong>Graphical User Interface (GUI)</strong> or
+              <strong>Integrated Development Environment (IDE)</strong>, which provides
+              panels, syntax highlighting, package management, and much more.
+            </p>
+            <h3 id="section-1-5">Available interfaces</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Interface</th>
+                  <th>Description</th>
+                  <th>Best for</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>RStudio</strong></td>
+                  <td>
+                    The premier IDE for R, developed by
+                    <a href="https://posit.co">Posit</a>
+                  </td>
+                  <td>Most users — beginners to advanced</td>
+                </tr>
+                <tr>
+                  <td><strong>VSCode</strong></td>
+                  <td>
+                    A general-purpose code editor with R extension
+                    (<code>languageserver</code>)
+                  </td>
+                  <td>Users who already use VSCode for other languages</td>
+                </tr>
+                <tr>
+                  <td><strong>Positron</strong></td>
+                  <td>A new, next-generation IDE by Posit (in active development)</td>
+                  <td>Data scientists using both R and Python</td>
+                </tr>
+                <tr>
+                  <td><strong>Jupyter Notebook</strong></td>
+                  <td>
+                    Browser-based, cell-based interface (what you are reading now)
+                  </td>
+                  <td>Teaching, reproducible reports, sharing analyses</td>
+                </tr>
+                <tr>
+                  <td><strong>Base R Console</strong></td>
+                  <td>The minimal R terminal, installed with R itself</td>
+                  <td>Debugging, scripting without an IDE</td>
+                </tr>
+                <tr>
+                  <td><strong>Neovim / Emacs</strong></td>
+                  <td>Terminal-based editors with R plugins</td>
+                  <td>Power users who prefer the keyboard</td>
+                </tr>
+              </tbody>
+            </table>
+            <h3 id="section-1-6">Our focus: RStudio</h3>
+            <p>
+              <strong>RStudio</strong> is the gold standard for R development. It is
+              developed and maintained by <strong>Posit PBC</strong> (formerly RStudio,
+              Inc.) and is available free of charge as <strong>RStudio Desktop</strong>.
+              RStudio provides:
+            </p>
+            <ul>
+              <li>A structured four-panel interface</li>
+              <li>Syntax highlighting and code completion</li>
+              <li>Integrated plot viewer and package manager</li>
+              <li>Project management and version control (Git)</li>
+              <li>Support for R Markdown and Quarto documents</li>
+              <li>GitHub Copilot integration (covered below)</li>
+            </ul>
+            <p><strong>References:</strong></p>
+            <ul>
+              <li>
+                Posit team (2024).
+                <em>RStudio: Integrated development environment for R</em>. Posit
+                Software, PBC, Boston, MA.
+                <a href="https://www.posit.co">https://www.posit.co</a>
+              </li>
+            </ul>
+          </section>
+          <section class="markdown-cell">
+            <hr />
+            <h2 id="section-2-7">Installation</h2>
+            <p>Before you can use R with RStudio, you must install both — in order.</p>
+            <h3 id="section-2-8">Step 1 — Install R</h3>
+            <p>
+              Download the appropriate installer for your operating system from the
+              <strong>Comprehensive R Archive Network (CRAN)</strong>:
+            </p>
+            <blockquote>
+              <p><a href="https://cran.r-project.org">https://cran.r-project.org</a></p>
+            </blockquote>
+            <p>
+              Always download the <strong>latest stable release</strong> (R ≥ 4.3 is
+              recommended).
+            </p>
+            <h3 id="section-2-9">Step 2 — Install RStudio Desktop</h3>
+            <p>
+              Download the free <strong>RStudio Desktop</strong> installer from Posit:
+            </p>
+            <blockquote>
+              <p>
+                <a href="https://posit.co/download/rstudio-desktop/"
+                  >https://posit.co/download/rstudio-desktop/</a
+                >
+              </p>
+            </blockquote>
+            <p>
+              Install RStudio <em>after</em> R — RStudio detects your R installation
+              automatically.
+            </p>
+            <h3 id="section-2-10">Step 3 — Verify the installation</h3>
+            <p>
+              Open RStudio. In the <strong>Console</strong> panel (bottom-left), type:
+            </p>
+            <!-- prettier-ignore -->
+            <pre><code class="language-r">R.version.string
+</code></pre>
+            <p>
+              You should see something like:
+              <code>&quot;R version 4.5.2 (2025-10-31)&quot;</code>
+            </p>
+            <blockquote>
+              <p>
+                💡 <strong>Tip:</strong> Keep both R and RStudio updated. Outdated
+                versions can cause package conflicts and security issues. Update R via
+                the <code>installr</code> package on Windows, or by reinstalling from
+                CRAN on macOS/Linux.
+              </p>
+            </blockquote>
+            <hr />
+          </section>
+          <section class="markdown-cell">
+            <h2 id="section-3-11">The RStudio Interface</h2>
+            <p>
+              When you open RStudio, the workspace is divided into
+              <strong>four panels</strong> (panes). Understanding each pane is
+              fundamental to working efficiently.
+            </p>
+            <!-- prettier-ignore -->
+            <pre><code>┌────────────────────────┬────────────────────────┐
+│                        │                        │
+│   SOURCE EDITOR        │   ENVIRONMENT          │
+│   (top-left)           │   (top-right)          │
+│                        │                        │
+├────────────────────────┼────────────────────────┤
+│                        │                        │
+│   CONSOLE              │   FILES / PLOTS /      │
+│   (bottom-left)        │   PACKAGES / HELP      │
+│                        │   (bottom-right)       │
+└────────────────────────┴────────────────────────┘
+</code></pre>
+            <p>
+              <img
+                src="../media/3f6015541336bee8000f.png"
+                alt="RStudio interface showing the four panes"
+              />
+            </p>
+            <h3 id="section-3-12">1. Source Editor (top-left)</h3>
+            <p>
+              This is where you <strong>write and save your R scripts</strong> (<code
+                >.R</code
+              >
+              files). Think of it as your laboratory notebook — a persistent, editable
+              record of every analysis step.
+            </p>
+            <p>Key features:</p>
+            <ul>
+              <li>
+                <strong>Syntax highlighting</strong>: different colours for functions,
+                strings, numbers, and comments aid readability.
+              </li>
+              <li>
+                <strong>Code completion</strong>: pressing <code>Tab</code> mid-word
+                suggests completions.
+              </li>
+              <li>
+                <strong>Smart indentation</strong>: R code inside functions is
+                automatically indented.
+              </li>
+              <li>
+                <strong>Run code</strong>: place your cursor on a line (or select
+                multiple lines) and press <code>Ctrl+Enter</code> (Windows/Linux) or
+                <code>Cmd+Enter</code> (macOS) to send code to the console.
+              </li>
+              <li>
+                <strong>Comments</strong>: the <code>#</code> symbol tells R to ignore
+                everything to its right on that line.
+              </li>
+            </ul>
+            <h3 id="section-3-13">2. Console (bottom-left)</h3>
+            <p>
+              The console is the <strong>live R interpreter</strong> — the engine. Code
+              sent from the source editor, or typed directly here, is executed
+              immediately and output appears below.
+            </p>
+            <ul>
+              <li>The <code>&gt;</code> prompt indicates R is ready for input.</li>
+              <li>
+                A <code>+</code> prompt means R is awaiting the completion of an
+                unfinished expression (e.g., an unclosed bracket).
+              </li>
+              <li>
+                Use the <strong>up/down arrow keys</strong> to navigate your command
+                history.
+              </li>
+            </ul>
+            <blockquote>
+              <p>
+                ⚠️ Code typed directly into the console is <strong>not saved</strong> in
+                your script. Always write analyses in the Source Editor.
+              </p>
+            </blockquote>
+            <h3 id="section-3-14">3. Environment / History (top-right)</h3>
+            <p>
+              The <strong>Environment</strong> tab lists every
+              <strong>object</strong> currently loaded into R&#39;s working memory (the
+              <em>global environment</em>). For each object you will see its name, type,
+              dimensions, and a preview of its contents.
+            </p>
+            <p>
+              The <strong>History</strong> tab records every command you have executed.
+              You can search, select, and resend commands to the console or source
+              editor.
+            </p>
+            <h3 id="section-3-15">
+              4. Files / Plots / Packages / Help / Viewer (bottom-right)
+            </h3>
+            <p>This multi-tab panel serves several roles:</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Tab</th>
+                  <th>Function</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Files</strong></td>
+                  <td>A file browser for your project directory</td>
+                </tr>
+                <tr>
+                  <td><strong>Plots</strong></td>
+                  <td>Displays all graphics produced by your code</td>
+                </tr>
+                <tr>
+                  <td><strong>Packages</strong></td>
+                  <td>Lists installed packages; allows installation and loading</td>
+                </tr>
+                <tr>
+                  <td><strong>Help</strong></td>
+                  <td>Displays R documentation for functions and packages</td>
+                </tr>
+                <tr>
+                  <td><strong>Viewer</strong></td>
+                  <td>Renders HTML output (e.g., R Markdown, Shiny apps)</td>
+                </tr>
+              </tbody>
+            </table>
+            <hr />
+          </section>
+          <section class="markdown-cell">
+            <h2 id="section-4-16">R Projects</h2>
+            <p>
+              <strong>R Projects</strong> are one of RStudio&#39;s most important
+              features for reproducible science. A project is a self-contained working
+              directory — a folder that holds your scripts, data, and outputs, and
+              configures R&#39;s working directory automatically when opened.
+            </p>
+            <h3 id="section-4-17">Why use projects?</h3>
+            <p>
+              Without projects, file paths are <em>absolute</em> (e.g.,
+              <code>/Users/yourname/Desktop/analysis/data.csv</code>) and will break on
+              any other machine. With projects, paths are <em>relative</em> (e.g.,
+              <code>data/data.csv</code>) and your analysis is fully portable.
+            </p>
+            <h3 id="section-4-18">Creating a new project</h3>
+            <ol>
+              <li>
+                Click <strong><code>Project: (None)</code></strong> in the top-right
+                corner of RStudio.
+              </li>
+              <li>
+                Select <strong>New Project</strong> → <strong>New Directory</strong> →
+                <strong>New Project</strong>.
+              </li>
+              <li>
+                Give the project a descriptive name (e.g.,
+                <code>penguin_ecology_2026</code>).
+              </li>
+              <li>Choose a location on your computer.</li>
+              <li>Click <strong>Create Project</strong>.</li>
+            </ol>
+            <p>
+              RStudio will restart and the project name will appear in the top-right
+              corner. A <code>.Rproj</code> file is created in your directory — this is
+              the project anchor.
+            </p>
+            <h3 id="section-4-19">Recommended project structure</h3>
+            <!-- prettier-ignore -->
+            <pre><code>penguin_ecology_2026/
+├── data/           # raw data — never modify
+├── scripts/        # your R scripts
+├── outputs/        # figures, tables, model results
+└── README.md       # project description
+</code></pre>
+            <blockquote>
+              <p>
+                📌 <strong>Best practice:</strong> Treat raw data as sacred. Never
+                overwrite it. Keep all derived data and figures in separate folders.
+              </p>
+            </blockquote>
+            <hr />
+          </section>
+          <section class="markdown-cell">
+            <h2 id="section-5-20">Setting Up GitHub Copilot in RStudio</h2>
+            <p>
+              <strong>GitHub Copilot</strong> is an AI-powered coding assistant
+              developed by GitHub and OpenAI. It suggests code completions in real time,
+              explains functions, and can substantially accelerate your R workflow.
+              RStudio supports Copilot natively from
+              <strong>version 2023.09.0</strong> onwards.
+            </p>
+            <blockquote>
+              <p>
+                ⚠️ <strong>Note:</strong> GitHub Copilot requires a GitHub account and
+                an active Copilot subscription (free for verified students and educators
+                via <a href="https://education.github.com/">GitHub Education</a>). All
+                code suggestions should be reviewed critically — Copilot can and does
+                produce incorrect code.
+              </p>
+            </blockquote>
+            <h3 id="section-5-21">Setup steps</h3>
+            <p>
+              <strong>1. Verify your RStudio version</strong> Copilot support requires
+              RStudio ≥ 2023.09.0. Check via <code>Help &gt; About RStudio</code>.
+            </p>
+            <p>
+              <strong>2. Enable Copilot in RStudio</strong> Navigate to:
+              <code>Tools &gt; Global Options &gt; Copilot</code> Check
+              <strong>&quot;Enable GitHub Copilot&quot;</strong> and click
+              <strong>OK</strong>.
+            </p>
+            <p>
+              <img
+                src="../media/236c697f0dd9e7bd1160.png"
+                alt="Screenshot showing the GitHub Copilot activation settings. Once Copilot is enables, you will see an signout button."
+              />
+            </p>
+            <p>
+              <strong>3. Sign in to GitHub</strong> A prompt will appear with an
+              8-character device code. Visit
+              <a href="https://github.com/login/device">github.com/login/device</a>,
+              enter the code, and authorise RStudio.
+            </p>
+            <p>
+              <strong>4. Start coding</strong> Open any <code>.R</code> script. Copilot
+              suggestions will appear as greyed-out text as you type. Press
+              <code>Tab</code> to accept a suggestion, or continue typing to dismiss it.
+            </p>
+            <p>
+              <img
+                src="../media/9a5f07eb1e7e27eb6602.png"
+                alt="Screenshot showing Copilot suggestion on the console."
+              />
+            </p>
+            <h3 id="section-5-22">Using Copilot responsibly in science</h3>
+            <ul>
+              <li>
+                Always verify that suggested code produces biologically meaningful
+                results.
+              </li>
+              <li>
+                Do not submit AI-generated code as your own in assessments without
+                disclosure.
+              </li>
+              <li>
+                Use Copilot as a learning aid — read and understand every suggestion it
+                makes.
+              </li>
+            </ul>
+            <hr />
+          </section>
+          <section class="markdown-cell">
+            <h2 id="section-6-23">Basic R Operations</h2>
+            <h3 id="section-6-24">1. Arithmetic</h3>
+            <p>
+              R can be used as an advanced scientific calculator. All standard
+              mathematical operations are available.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-7">
+            <div class="code-toolbar">
+              <span>R · Cell 1 · In [1]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Basic arithmetic
+2 + 2          # Addition
+5 * 6 / 4      # Multiplication and division
+2^3            # Exponentiation
+(5 + 4) / 3    # Parentheses enforce order of operations
+sqrt(144)      # Square root
+log(10)        # Natural logarithm
+log10(100)     # Base-10 logarithm
+exp(1)         # Euler&#39;s number (e)
+pi             # π — a built-in constant</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">4</div>
+                <div class="notebook-table">7.5</div>
+                <div class="notebook-table">8</div>
+                <div class="notebook-table">3</div>
+                <div class="notebook-table">12</div>
+                <div class="notebook-table">2.30258509299405</div>
+                <div class="notebook-table">2</div>
+                <div class="notebook-table">2.71828182845905</div>
+                <div class="notebook-table">3.14159265358979</div>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <p>
+              R evaluates expressions following standard mathematical precedence
+              (BODMAS/PEMDAS). When in doubt, use parentheses.
+            </p>
+            <h3 id="section-8-25">2. Assignment and Objects</h3>
+            <p>
+              In R, we store values in <strong>objects</strong> using the assignment
+              operator <code>&lt;-</code> (keyboard shortcut: <code>Alt+-</code> on
+              Windows, <code>Option+-</code> on macOS). Objects persist in the
+              <strong>global environment</strong> for the duration of your session.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-9">
+            <div class="code-toolbar">
+              <span>R · Cell 2 · In [2]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Assigning ecological values to objects
+krill_density    &lt;- 12.4   # individuals per m²
+adder_records    &lt;- 58     # count at a site
+
+# Objects can be used in further calculations
+krill_density * 100        # density per 100 m²</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content"><div class="notebook-table">1240</div></div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-10">
+            <div class="code-toolbar">
+              <span>R · Cell 3 · In [3]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Use descriptive names — avoid single letters like &#39;a&#39; or &#39;x&#39;
+mean_flipper_length_mm &lt;- 200.9   # example: Gentoo penguin
+body_mass_kg           &lt;- 5.1     # example: Gentoo penguin in kg
+
+# Print an object by simply typing its name
+adder_records</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content"><div class="notebook-table">58</div></div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-11-26">3. The Comment (<code>#</code>)</h3>
+            <p>
+              The <code>#</code> symbol tells R to ignore everything to its right. Use
+              comments <strong>liberally</strong> — well-commented code is a hallmark of
+              reproducible science.
+            </p>
+            <!-- prettier-ignore -->
+            <pre><code class="language-r"># This entire line is a comment
+
+x &lt;- 5   # This is an inline comment — x stores the value 5
+</code></pre>
+            <hr />
+          </section>
+          <section class="markdown-cell">
+            <h2 id="section-12-27">Functions</h2>
+            <p>
+              <strong>Functions</strong> are pre-written blocks of code that perform
+              specific tasks. They accept <strong>arguments</strong> (inputs) and return
+              <strong>values</strong> (outputs). In R, functions are called with the
+              syntax <code>function_name(argument1, argument2, ...)</code>.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-13">
+            <div class="code-toolbar">
+              <span>R · Cell 4 · In [4]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># The c() function — concatenate values into a vector
+flipper_lengths &lt;- c(181, 186, 195, 193, 190, 181, 195, 182, 191)
+
+# Apply mathematical functions to the vector
+mean(flipper_lengths)      # Arithmetic mean
+median(flipper_lengths)    # Median
+sd(flipper_lengths)        # Standard deviation
+var(flipper_lengths)       # Variance
+range(flipper_lengths)     # Minimum and maximum
+length(flipper_lengths)    # Number of elements</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">188.222222222222</div>
+                <div class="notebook-table">190</div>
+                <div class="notebook-table">5.84760159761628</div>
+                <div class="notebook-table">34.1944444444444</div>
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>181</li>
+                    <li>195</li>
+                  </ol>
+                </div>
+                <div class="notebook-table">9</div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-14">
+            <div class="code-toolbar">
+              <span>R · Cell 5</span><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Access documentation for any function with ?
+?mean
+
+# Or use help()
+help(sd)
+
+# For a broader search across all installed packages
+??ecological</code></pre>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-15-28">Named arguments</h3>
+            <p>
+              Many functions accept <strong>named arguments</strong> that control their
+              behaviour. For example, <code>mean()</code> has a
+              <code>na.rm</code> argument to handle missing values:
+            </p>
+          </section>
+          <section class="code-cell" id="cell-16">
+            <div class="code-toolbar">
+              <span>R · Cell 6 · In [5]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Missing values (NA) propagate through calculations by default
+weights_with_missing &lt;- c(3750, 3800, NA, 3250, 4200)
+
+mean(weights_with_missing)          # Returns NA</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">&lt;NA&gt;</div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-17">
+            <div class="code-toolbar">
+              <span>R · Cell 7 · In [6]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code>mean(weights_with_missing, na.rm = TRUE)   # Removes NAs before calculating</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content"><div class="notebook-table">3750</div></div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <hr />
+            <h2 id="section-18-29">Data Types</h2>
+            <p>
+              R has six fundamental data types. Understanding them is essential for
+              avoiding type-related errors in analysis.
+            </p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>Description</th>
+                  <th>Example</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Numeric</strong></td>
+                  <td>Real numbers (doubles)</td>
+                  <td><code>3.14</code>, <code>200.9</code>, <code>-0.5</code></td>
+                </tr>
+                <tr>
+                  <td><strong>Integer</strong></td>
+                  <td>Whole numbers</td>
+                  <td><code>1L</code>, <code>58L</code>, <code>344L</code></td>
+                </tr>
+                <tr>
+                  <td><strong>Character</strong></td>
+                  <td>Text strings</td>
+                  <td>
+                    <code>&quot;Adelie&quot;</code>, <code>&quot;Biscoe&quot;</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Logical</strong></td>
+                  <td>Boolean values</td>
+                  <td><code>TRUE</code>, <code>FALSE</code></td>
+                </tr>
+                <tr>
+                  <td><strong>Factor</strong></td>
+                  <td>Ordered or unordered categories</td>
+                  <td><code>factor(c(&quot;Low&quot;,&quot;High&quot;))</code></td>
+                </tr>
+                <tr>
+                  <td><strong>Complex</strong></td>
+                  <td>Complex numbers (rare)</td>
+                  <td><code>2 + 3i</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+          <section class="code-cell" id="cell-19">
+            <div class="code-toolbar">
+              <span>R · Cell 8 · In [7]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Creating vectors of each type
+numeric_vec   &lt;- c(3.14, 200.9, 48.7)
+integer_vec   &lt;- c(1L, 58L, 344L)              # The L suffix forces integer type
+character_vec &lt;- c(&quot;Adelie&quot;, &quot;Chinstrap&quot;, &quot;Gentoo&quot;)
+logical_vec   &lt;- c(TRUE, FALSE, TRUE, TRUE)
+
+# Factors — categorical variables with defined levels
+island_vec    &lt;- factor(c(&quot;Biscoe&quot;, &quot;Dream&quot;, &quot;Torgersen&quot;, &quot;Biscoe&quot;, &quot;Dream&quot;))
+sex_vec       &lt;- factor(c(&quot;male&quot;, &quot;female&quot;, &quot;female&quot;, &quot;male&quot;),
+                        levels = c(&quot;female&quot;, &quot;male&quot;))  # specify level order
+
+# Check the type of any object
+class(numeric_vec)
+class(character_vec)
+class(island_vec)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">'numeric'</div>
+                <div class="notebook-table">'character'</div>
+                <div class="notebook-table">'factor'</div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-20">
+            <div class="code-toolbar">
+              <span>R · Cell 9 · In [8]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Type coercion — R resolves mixed types by promoting to a more general type
+mixed &lt;- c(1, &quot;Adelie&quot;, TRUE)
+class(mixed)       # Everything becomes character — the most general type</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">'character'</div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-21">
+            <div class="code-toolbar">
+              <span>R · Cell 10 · In [9]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code>mixed</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>'1'</li>
+                    <li>'Adelie'</li>
+                    <li>'TRUE'</li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-22">
+            <div class="code-toolbar">
+              <span>R · Cell 11 · In [10]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Explicit type conversion
+as.numeric(&quot;3.14&quot;)
+as.character(200.9)
+as.integer(3.99)   # truncates, not rounds
+as.logical(0)      # 0 is FALSE; any non-zero is TRUE</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">3.14</div>
+                <div class="notebook-table">'200.9'</div>
+                <div class="notebook-table">3</div>
+                <div class="notebook-table">FALSE</div>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <blockquote>
+              <p>
+                💡 <strong>Ecological relevance:</strong> Misidentified data types are a
+                common source of bugs. A species name coded as a factor when you
+                expected a character string, or a site ID stored as a number, can
+                silently corrupt analyses. Always inspect types with
+                <code>class()</code> after loading data.
+              </p>
+            </blockquote>
+            <hr />
+            <h2 id="section-23-30">Data Structures</h2>
+            <p>
+              R organises data in several structures. Each has specific properties and
+              use cases.
+            </p>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-24-31">1. Vectors</h3>
+            <p>
+              The most fundamental structure in R — a one-dimensional sequence of values
+              of the <strong>same type</strong>.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-25">
+            <div class="code-toolbar">
+              <span>R · Cell 12 · In [11]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Vectors
+bill_lengths  &lt;- c(39.1, 39.5, 40.3, 36.7, 39.3, 38.9)
+species_names &lt;- c(&quot;Adelie&quot;, &quot;Adelie&quot;, &quot;Adelie&quot;, &quot;Chinstrap&quot;, &quot;Gentoo&quot;, &quot;Gentoo&quot;)
+
+# Generate sequences
+year_sequence &lt;- seq(from = 2007, to = 2009, by = 1)
+rep_sequence  &lt;- rep(c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;), times = 3)  # repeat elements
+
+length(bill_lengths)
+summary(bill_lengths)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">6</div>
+                <!-- prettier-ignore -->
+                <pre class="output-text">   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  36.70   38.95   39.20   38.97   39.45   40.30 </pre>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-26-32">2. Matrices</h3>
+            <p>
+              A two-dimensional array of values, all of the <strong>same type</strong>.
+              Useful for linear algebra and mathematical operations.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-27">
+            <div class="code-toolbar">
+              <span>R · Cell 13 · In [12]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Create a matrix — specify rows and columns
+morphology_matrix &lt;- matrix(
+  data  = c(39.1, 181, 3750,
+             39.5, 186, 3800,
+             40.3, 195, 3250),
+  nrow  = 3,        # 3 rows
+  ncol  = 3,        # 3 columns
+  byrow = TRUE      # fill row by row
+)
+
+colnames(morphology_matrix) &lt;- c(&quot;bill_mm&quot;, &quot;flipper_mm&quot;, &quot;mass_g&quot;)
+rownames(morphology_matrix) &lt;- c(&quot;Ind_1&quot;, &quot;Ind_2&quot;, &quot;Ind_3&quot;)
+
+morphology_matrix</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A matrix: 3 × 3 of type dbl
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th scope="col">bill_mm</th>
+                        <th scope="col">flipper_mm</th>
+                        <th scope="col">mass_g</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">Ind_1</th>
+                        <td>39.1</td>
+                        <td>181</td>
+                        <td>3750</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Ind_2</th>
+                        <td>39.5</td>
+                        <td>186</td>
+                        <td>3800</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Ind_3</th>
+                        <td>40.3</td>
+                        <td>195</td>
+                        <td>3250</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-28-33">3. Data Frames</h3>
+            <p>
+              The <strong>workhorse of R data analysis</strong>. A data frame is a
+              rectangular table where:
+            </p>
+            <ul>
+              <li>
+                Each <strong>column</strong> is a variable (can be a different type).
+              </li>
+              <li>Each <strong>row</strong> is an observation.</li>
+              <li>All columns have the same number of rows.</li>
+            </ul>
+          </section>
+          <section class="code-cell" id="cell-29">
+            <div class="code-toolbar">
+              <span>R · Cell 14 · In [13]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Constructing a data frame manually
+penguin_sample &lt;- data.frame(
+  species      = c(&quot;Adelie&quot;, &quot;Gentoo&quot;, &quot;Chinstrap&quot;),
+  island       = c(&quot;Torgersen&quot;, &quot;Biscoe&quot;, &quot;Dream&quot;),
+  bill_length  = c(39.1, 47.3, 49.2),
+  body_mass_g  = c(3750, 5200, 3900),
+  sex          = factor(c(&quot;male&quot;, &quot;female&quot;, &quot;female&quot;))
+)</code></pre>
+          </section>
+          <section class="code-cell" id="cell-30">
+            <div class="code-toolbar">
+              <span>R · Cell 15 · In [14]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Essential inspection functions
+str(penguin_sample)      # Structure: types and dimensions</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">&#39;data.frame&#39;:	3 obs. of  5 variables:
+ $ species    : chr  &quot;Adelie&quot; &quot;Gentoo&quot; &quot;Chinstrap&quot;
+ $ island     : chr  &quot;Torgersen&quot; &quot;Biscoe&quot; &quot;Dream&quot;
+ $ bill_length: num  39.1 47.3 49.2
+ $ body_mass_g: num  3750 5200 3900
+ $ sex        : Factor w/ 2 levels &quot;female&quot;,&quot;male&quot;: 2 1 1
+</pre>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-31">
+            <div class="code-toolbar">
+              <span>R · Cell 16 · In [15]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code>head(penguin_sample)     # First 6 rows</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A data.frame: 3 × 5
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th scope="col">species</th>
+                        <th scope="col">island</th>
+                        <th scope="col">bill_length</th>
+                        <th scope="col">body_mass_g</th>
+                        <th scope="col">sex</th>
+                      </tr>
+                      <tr>
+                        <th></th>
+                        <th scope="col">&lt;chr&gt;</th>
+                        <th scope="col">&lt;chr&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                        <th scope="col">&lt;fct&gt;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Adelie</td>
+                        <td>Torgersen</td>
+                        <td>39.1</td>
+                        <td>3750</td>
+                        <td>male</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>47.3</td>
+                        <td>5200</td>
+                        <td>female</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">3</th>
+                        <td>Chinstrap</td>
+                        <td>Dream</td>
+                        <td>49.2</td>
+                        <td>3900</td>
+                        <td>female</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-32">
+            <div class="code-toolbar">
+              <span>R · Cell 17 · In [16]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code>summary(penguin_sample)  # Statistical summary of each column</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">   species             island           bill_length     body_mass_g  
+ Length:3           Length:3           Min.   :39.10   Min.   :3750  
+ Class :character   Class :character   1st Qu.:43.20   1st Qu.:3825  
+ Mode  :character   Mode  :character   Median :47.30   Median :3900  
+                                       Mean   :45.20   Mean   :4283  
+                                       3rd Qu.:48.25   3rd Qu.:4550  
+                                       Max.   :49.20   Max.   :5200  
+     sex   
+ female:2  
+ male  :1  
+           
+           
+           
+           </pre>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-33">
+            <div class="code-toolbar">
+              <span>R · Cell 18 · In [17]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Access a column with the $ operator
+penguin_sample$species
+penguin_sample$bill_length</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>'Adelie'</li>
+                    <li>'Gentoo'</li>
+                    <li>'Chinstrap'</li>
+                  </ol>
+                </div>
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>39.1</li>
+                    <li>47.3</li>
+                    <li>49.2</li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-34-34">4. Lists</h3>
+            <p>
+              Lists are the most flexible data structure — they can contain objects of
+              <strong>any type and any length</strong>, including other lists. They are
+              commonly used as outputs of statistical models.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-35">
+            <div class="code-toolbar">
+              <span>R · Cell 19 · In [18]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># A list can mix data types and structures freely
+ecology_list &lt;- list(
+  site_name     = &quot;Torgersen Island&quot;,
+  survey_years  = c(2007, 2008, 2009),
+  measurements  = penguin_sample,
+  notes         = &quot;LTER breeding study&quot;
+)
+
+# Access list elements by name (with $) or position (with [[]])
+ecology_list$site_name
+ecology_list[[&quot;survey_years&quot;]]
+ecology_list[[3]]      # Returns the data frame</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">'Torgersen Island'</div>
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>2007</li>
+                    <li>2008</li>
+                    <li>2009</li>
+                  </ol>
+                </div>
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A data.frame: 3 × 5
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">species</th>
+                        <th scope="col">island</th>
+                        <th scope="col">bill_length</th>
+                        <th scope="col">body_mass_g</th>
+                        <th scope="col">sex</th>
+                      </tr>
+                      <tr>
+                        <th scope="col">&lt;chr&gt;</th>
+                        <th scope="col">&lt;chr&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                        <th scope="col">&lt;fct&gt;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>Torgersen</td>
+                        <td>39.1</td>
+                        <td>3750</td>
+                        <td>male</td>
+                      </tr>
+                      <tr>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>47.3</td>
+                        <td>5200</td>
+                        <td>female</td>
+                      </tr>
+                      <tr>
+                        <td>Chinstrap</td>
+                        <td>Dream</td>
+                        <td>49.2</td>
+                        <td>3900</td>
+                        <td>female</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-36-35">5. Arrays</h3>
+            <p>
+              Multi-dimensional extensions of matrices. Particularly common in
+              <strong>spatial ecology</strong> (e.g., raster stacks, species
+              distribution grids).
+            </p>
+          </section>
+          <section class="code-cell" id="cell-37">
+            <div class="code-toolbar">
+              <span>R · Cell 20 · In [19]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># A 3D array — think raster layers for different years
+spatial_array &lt;- array(
+  data = 1:24,
+  dim  = c(4, 3, 2),   # 4 rows, 3 columns, 2 layers
+  dimnames = list(
+    paste0(&quot;row_&quot;, 1:4),
+    paste0(&quot;col_&quot;, 1:3),
+    c(&quot;year_2008&quot;, &quot;year_2009&quot;)
+  )
+)
+
+spatial_array</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                    <li>6</li>
+                    <li>7</li>
+                    <li>8</li>
+                    <li>9</li>
+                    <li>10</li>
+                    <li>11</li>
+                    <li>12</li>
+                    <li>13</li>
+                    <li>14</li>
+                    <li>15</li>
+                    <li>16</li>
+                    <li>17</li>
+                    <li>18</li>
+                    <li>19</li>
+                    <li>20</li>
+                    <li>21</li>
+                    <li>22</li>
+                    <li>23</li>
+                    <li>24</li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <hr />
+            <h2 id="section-38-36">Indexing</h2>
+            <p>
+              <strong>Indexing</strong> is the technique of extracting specific elements
+              from an object using square brackets <code>[]</code>. It is one of the
+              most frequently used operations in R.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-39">
+            <div class="code-toolbar">
+              <span>R · Cell 21 · In [20]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># --- Vector indexing ---
+bill_lengths  &lt;- c(39.1, 39.5, 40.3, 36.7, 39.3, 38.9)
+
+bill_lengths[1]         # First element (R is 1-indexed, not 0-indexed)
+bill_lengths[3]         # Third element
+bill_lengths[c(1, 3)]   # First and third elements
+bill_lengths[-2]        # All elements EXCEPT the second
+bill_lengths[bill_lengths &gt; 39]   # Logical indexing — elements &gt; 39</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">39.1</div>
+                <div class="notebook-table">40.3</div>
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>39.1</li>
+                    <li>40.3</li>
+                  </ol>
+                </div>
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>39.1</li>
+                    <li>40.3</li>
+                    <li>36.7</li>
+                    <li>39.3</li>
+                    <li>38.9</li>
+                  </ol>
+                </div>
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>39.1</li>
+                    <li>39.5</li>
+                    <li>40.3</li>
+                    <li>39.3</li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-40">
+            <div class="code-toolbar">
+              <span>R · Cell 22 · In [21]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># --- Data frame indexing [row, column] ---
+# Leaving either blank selects all
+
+penguin_sample[1, ]     # Entire first row
+penguin_sample[, 2]     # Entire second column
+penguin_sample[2, 3]    # Row 2, column 3 (single value)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A data.frame: 1 × 5
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th scope="col">species</th>
+                        <th scope="col">island</th>
+                        <th scope="col">bill_length</th>
+                        <th scope="col">body_mass_g</th>
+                        <th scope="col">sex</th>
+                      </tr>
+                      <tr>
+                        <th></th>
+                        <th scope="col">&lt;chr&gt;</th>
+                        <th scope="col">&lt;chr&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                        <th scope="col">&lt;fct&gt;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Adelie</td>
+                        <td>Torgersen</td>
+                        <td>39.1</td>
+                        <td>3750</td>
+                        <td>male</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>'Torgersen'</li>
+                    <li>'Biscoe'</li>
+                    <li>'Dream'</li>
+                  </ol>
+                </div>
+                <div class="notebook-table">47.3</div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-41">
+            <div class="code-toolbar">
+              <span>R · Cell 23 · In [22]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Column access by name (most readable — preferred)
+penguin_sample[, &quot;species&quot;]
+penguin_sample$body_mass_g</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>'Adelie'</li>
+                    <li>'Gentoo'</li>
+                    <li>'Chinstrap'</li>
+                  </ol>
+                </div>
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>3750</li>
+                    <li>5200</li>
+                    <li>3900</li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-42">
+            <div class="code-toolbar">
+              <span>R · Cell 24 · In [23]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Logical row filtering
+penguin_sample[penguin_sample$body_mass_g &gt; 4000, ]   # Large penguins only</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A data.frame: 1 × 5
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th scope="col">species</th>
+                        <th scope="col">island</th>
+                        <th scope="col">bill_length</th>
+                        <th scope="col">body_mass_g</th>
+                        <th scope="col">sex</th>
+                      </tr>
+                      <tr>
+                        <th></th>
+                        <th scope="col">&lt;chr&gt;</th>
+                        <th scope="col">&lt;chr&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                        <th scope="col">&lt;fct&gt;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Gentoo</td>
+                        <td>Biscoe</td>
+                        <td>47.3</td>
+                        <td>5200</td>
+                        <td>female</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <hr />
+            <h2 id="section-43-37">Packages</h2>
+            <p>
+              R&#39;s true power comes from its <strong>package ecosystem</strong>.
+              Packages are collections of functions, data, and documentation that extend
+              base R. As of 2024, CRAN hosts over <strong>21,000 packages</strong>.
+            </p>
+            <h3 id="section-43-38">Installing and loading packages</h3>
+          </section>
+          <section class="code-cell" id="cell-44">
+            <div class="code-toolbar">
+              <span>R · Cell 25 · In [24]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Install a package from CRAN (only needed once)
+# install.packages(&quot;tidyverse&quot;)
+# install.packages(&quot;palmerpenguins&quot;)
+
+# Load a package into the current session (needed every session)
+library(tidyverse)
+library(palmerpenguins)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">── Attaching core tidyverse packages ─────────────────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.0     ✔ readr     2.1.6
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.2     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.1     
+── Conflicts ───────────────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors
+
+Attaching package: ‘palmerpenguins’
+
+
+The following objects are masked from ‘package:datasets’:
+
+    penguins, penguins_raw
+
+
+</pre>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-45">
+            <div class="code-toolbar">
+              <span>R · Cell 26 · In [25]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Verify a package is loaded
+&quot;tidyverse&quot; %in% (.packages())  # Should return TRUE
+
+# Check the version of an installed package
+packageVersion(&quot;tidyverse&quot;)
+
+# Update all installed packages
+# update.packages(ask = FALSE)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">TRUE</div>
+                <!-- prettier-ignore -->
+                <pre class="output-text">[1] ‘2.0.0’</pre>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-46-39">
+              Key packages for biological sciences and spatial ecology
+            </h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Domain</th>
+                  <th>Packages</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Data wrangling</strong></td>
+                  <td>
+                    <code>tidyverse</code>, <code>dplyr</code>, <code>tidyr</code>,
+                    <code>readr</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Visualisation</strong></td>
+                  <td>
+                    <code>ggplot2</code>, <code>patchwork</code>, <code>ggrepel</code>,
+                    <code>viridis</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Statistical modelling</strong></td>
+                  <td>
+                    <code>lme4</code>, <code>nlme</code>, <code>MASS</code>,
+                    <code>glmmTMB</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Community ecology</strong></td>
+                  <td><code>vegan</code>, <code>BiodiversityR</code></td>
+                </tr>
+                <tr>
+                  <td><strong>Phylogenetics</strong></td>
+                  <td><code>ape</code>, <code>phytools</code></td>
+                </tr>
+                <tr>
+                  <td><strong>Spatial data</strong></td>
+                  <td>
+                    <code>sf</code>, <code>terra</code>, <code>stars</code>,
+                    <code>tmap</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Species distribution modelling</strong></td>
+                  <td><code>sdm</code>, <code>biomod2</code>, <code>ENMeval</code></td>
+                </tr>
+                <tr>
+                  <td><strong>Bioinformatics</strong></td>
+                  <td><code>Bioconductor</code> packages</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>
+              Search the full CRAN catalogue:
+              <a href="https://cran.r-project.org/web/packages/"
+                >https://cran.r-project.org/web/packages/</a
+              >
+            </p>
+            <hr />
+          </section>
+          <section class="markdown-cell">
+            <h2 id="section-47-40">Loading and Inspecting Real Data</h2>
+            <p>
+              Most analyses begin with importing data from an external file. Always
+              inspect data immediately after loading —
+              <em>never analyse data you have not examined</em>.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-48">
+            <div class="code-toolbar">
+              <span>R · Cell 27 · In [26]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Load the Palmer Penguins dataset — a real ecological dataset
+# used throughout this course
+library(palmerpenguins)
+
+data(&quot;penguins&quot;)   # Load the clean version into your environment</code></pre>
+          </section>
+          <section class="code-cell" id="cell-49">
+            <div class="code-toolbar">
+              <span>R · Cell 28 · In [27]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Three layers of inspection — run all three every time you load new data
+head(penguins)      # First 6 rows: get a feel for the data</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A tibble: 6 × 8
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">species</th>
+                        <th scope="col">island</th>
+                        <th scope="col">bill_length_mm</th>
+                        <th scope="col">bill_depth_mm</th>
+                        <th scope="col">flipper_length_mm</th>
+                        <th scope="col">body_mass_g</th>
+                        <th scope="col">sex</th>
+                        <th scope="col">year</th>
+                      </tr>
+                      <tr>
+                        <th scope="col">&lt;fct&gt;</th>
+                        <th scope="col">&lt;fct&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                        <th scope="col">&lt;int&gt;</th>
+                        <th scope="col">&lt;int&gt;</th>
+                        <th scope="col">&lt;fct&gt;</th>
+                        <th scope="col">&lt;int&gt;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>Torgersen</td>
+                        <td>39.1</td>
+                        <td>18.7</td>
+                        <td>181</td>
+                        <td>3750</td>
+                        <td>male</td>
+                        <td>2007</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>Torgersen</td>
+                        <td>39.5</td>
+                        <td>17.4</td>
+                        <td>186</td>
+                        <td>3800</td>
+                        <td>female</td>
+                        <td>2007</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>Torgersen</td>
+                        <td>40.3</td>
+                        <td>18.0</td>
+                        <td>195</td>
+                        <td>3250</td>
+                        <td>female</td>
+                        <td>2007</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>Torgersen</td>
+                        <td>NA</td>
+                        <td>NA</td>
+                        <td>NA</td>
+                        <td>NA</td>
+                        <td>NA</td>
+                        <td>2007</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>Torgersen</td>
+                        <td>36.7</td>
+                        <td>19.3</td>
+                        <td>193</td>
+                        <td>3450</td>
+                        <td>female</td>
+                        <td>2007</td>
+                      </tr>
+                      <tr>
+                        <td>Adelie</td>
+                        <td>Torgersen</td>
+                        <td>39.3</td>
+                        <td>20.6</td>
+                        <td>190</td>
+                        <td>3650</td>
+                        <td>male</td>
+                        <td>2007</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-50">
+            <div class="code-toolbar">
+              <span>R · Cell 29 · In [28]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code>str(penguins)       # Structure: variable types and dimensions</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">tibble [344 × 8] (S3: tbl_df/tbl/data.frame)
+ $ species          : Factor w/ 3 levels &quot;Adelie&quot;,&quot;Chinstrap&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+ $ island           : Factor w/ 3 levels &quot;Biscoe&quot;,&quot;Dream&quot;,..: 3 3 3 3 3 3 3 3 3 3 ...
+ $ bill_length_mm   : num [1:344] 39.1 39.5 40.3 NA 36.7 39.3 38.9 39.2 34.1 42 ...
+ $ bill_depth_mm    : num [1:344] 18.7 17.4 18 NA 19.3 20.6 17.8 19.6 18.1 20.2 ...
+ $ flipper_length_mm: int [1:344] 181 186 195 NA 193 190 181 195 193 190 ...
+ $ body_mass_g      : int [1:344] 3750 3800 3250 NA 3450 3650 3625 4675 3475 4250 ...
+ $ sex              : Factor w/ 2 levels &quot;female&quot;,&quot;male&quot;: 2 1 1 NA 1 2 1 2 NA NA ...
+ $ year             : int [1:344] 2007 2007 2007 2007 2007 2007 2007 2007 2007 2007 ...
+</pre>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-51">
+            <div class="code-toolbar">
+              <span>R · Cell 30 · In [29]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code>summary(penguins)   # Statistical summary: ranges, NAs, factor levels</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">      species          island    bill_length_mm  bill_depth_mm  
+ Adelie   :152   Biscoe   :168   Min.   :32.10   Min.   :13.10  
+ Chinstrap: 68   Dream    :124   1st Qu.:39.23   1st Qu.:15.60  
+ Gentoo   :124   Torgersen: 52   Median :44.45   Median :17.30  
+                                 Mean   :43.92   Mean   :17.15  
+                                 3rd Qu.:48.50   3rd Qu.:18.70  
+                                 Max.   :59.60   Max.   :21.50  
+                                 NA&#39;s   :2       NA&#39;s   :2      
+ flipper_length_mm  body_mass_g       sex           year     
+ Min.   :172.0     Min.   :2700   female:165   Min.   :2007  
+ 1st Qu.:190.0     1st Qu.:3550   male  :168   1st Qu.:2007  
+ Median :197.0     Median :4050   NA&#39;s  : 11   Median :2008  
+ Mean   :200.9     Mean   :4202                Mean   :2008  
+ 3rd Qu.:213.0     3rd Qu.:4750                3rd Qu.:2009  
+ Max.   :231.0     Max.   :6300                Max.   :2009  
+ NA&#39;s   :2         NA&#39;s   :2                                 </pre>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-52">
+            <div class="code-toolbar">
+              <span>R · Cell 31 · In [30]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># The Palmer Penguins dataset
+# 344 observations of 3 penguin species
+# (Adelie, Chinstrap, Gentoo) on 3 islands in the Palmer Archipelago, Antarctica
+# Source: Gorman et al. (2014); Horst, Hill &amp; Gorman (2020)
+# DOI: https://doi.org/10.5281/zenodo.3960218
+
+# Dimensions
+nrow(penguins)   # Number of rows (observations)
+ncol(penguins)   # Number of columns (variables)
+dim(penguins)    # Both at once</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">344</div>
+                <div class="notebook-table">8</div>
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>344</li>
+                    <li>8</li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-53">
+            <div class="code-toolbar">
+              <span>R · Cell 32</span><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Reading data from files (the most common real-world case)
+
+# CSV files (comma-separated values) — the universal format
+# data &lt;- read.csv(&quot;data/my_file.csv&quot;)               # Base R
+# data &lt;- readr::read_csv(&quot;data/my_file.csv&quot;)        # Tidyverse (preferred)
+
+# Excel files
+# install.packages(&quot;readxl&quot;)
+# data &lt;- readxl::read_excel(&quot;data/my_file.xlsx&quot;)
+
+# Always verify after loading
+# head(data)
+# str(data)
+# summary(data)</code></pre>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-54-41">The golden rule of data inspection</h3>
+            <blockquote>
+              <p>
+                <strong
+                  >&quot;Look at your data from every angle before you model
+                  it.&quot;</strong
+                >
+              </p>
+            </blockquote>
+            <p>Check for:</p>
+            <ul>
+              <li>
+                Missing values (<code>NA</code>) — how many? where? random or
+                systematic?
+              </li>
+              <li>Implausible values — a penguin with a body mass of 0 g?</li>
+              <li>
+                Unexpected factor levels — typos in species names (<code
+                  >&quot;adelie&quot;</code
+                >
+                vs <code>&quot;Adelie&quot;</code>)
+              </li>
+              <li>Wrong data types — dates stored as characters</li>
+            </ul>
+            <hr />
+          </section>
+          <section class="markdown-cell">
+            <h2 id="section-55-42">Getting Help</h2>
+            <p>
+              R has an excellent built-in help system and a large, welcoming community.
+            </p>
+            <h3 id="section-55-43">Built-in help</h3>
+          </section>
+          <section class="code-cell" id="cell-56">
+            <div class="code-toolbar">
+              <span>R · Cell 33</span><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code>?mean           # Opens the documentation for mean()
+help(summary)   # Equivalent to ?summary
+??penguin       # Broad search across all installed packages — finds palmerpenguins
+example(hist)   # Runs the examples from a function&#39;s documentation</code></pre>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-57-44">Online resources</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Resource</th>
+                  <th>URL</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Stack Overflow</strong> (R tag)</td>
+                  <td>
+                    <a href="https://stackoverflow.com/questions/tagged/r"
+                      >https://stackoverflow.com/questions/tagged/r</a
+                    >
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>RStudio Cheatsheets</strong></td>
+                  <td>
+                    <a href="https://posit.co/resources/cheatsheets/"
+                      >https://posit.co/resources/cheatsheets/</a
+                    >
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>CRAN Task Views</strong> (ecology)</td>
+                  <td>
+                    <a href="https://cran.r-project.org/web/views/Environmetrics.html"
+                      >https://cran.r-project.org/web/views/Environmetrics.html</a
+                    >
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>R for Data Science</strong> (free book)</td>
+                  <td><a href="https://r4ds.hadley.nz">https://r4ds.hadley.nz</a></td>
+                </tr>
+                <tr>
+                  <td><strong>Advanced R</strong> (free book)</td>
+                  <td><a href="https://adv-r.hadley.nz">https://adv-r.hadley.nz</a></td>
+                </tr>
+                <tr>
+                  <td><strong>Bioconductor</strong> (bioinformatics)</td>
+                  <td>
+                    <a href="https://www.bioconductor.org"
+                      >https://www.bioconductor.org</a
+                    >
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <blockquote>
+              <p>
+                💡 When posting a question on Stack Overflow, always include a
+                <strong>reproducible example</strong> (<code>reprex</code>). The
+                <code>reprex</code> package makes this easy.
+              </p>
+            </blockquote>
+            <hr />
+          </section>
+          <section class="markdown-cell">
+            <h2 id="section-58-45">A First Complete Example</h2>
+            <p>
+              Let us put everything together with a brief but complete analysis using
+              the Palmer Penguins dataset.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-59">
+            <div class="code-toolbar">
+              <span>R · Cell 34</span><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code>library(palmerpenguins)
+
+# 1. Load and inspect
+data(&quot;penguins&quot;)
+summary(penguins)</code></pre>
+          </section>
+          <section class="code-cell" id="cell-60">
+            <div class="code-toolbar">
+              <span>R · Cell 35</span><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># 2. Basic summary statistics by species
+# (We will learn tidyverse syntax for this in the next notebook)
+tapply(penguins$body_mass_g, penguins$species, mean, na.rm = TRUE)</code></pre>
+          </section>
+          <section class="code-cell" id="cell-61">
+            <div class="code-toolbar">
+              <span>R · Cell 36</span><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># 3. A quick base-R visualisation (we cover ggplot2 in Notebook 3)
+boxplot(body_mass_g ~ species,
+        data   = penguins,
+        main   = &quot;Body Mass by Species — Palmer Penguins&quot;,
+        xlab   = &quot;Species&quot;,
+        ylab   = &quot;Body Mass (g)&quot;,
+        col    = c(&quot;darkorange&quot;, &quot;purple&quot;, &quot;cyan4&quot;),
+        notch  = TRUE)</code></pre>
+          </section>
+          <section class="code-cell" id="cell-62">
+            <div class="code-toolbar">
+              <span>R · Cell 37</span><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># 4. Save your work — write a clean dataset to file
+# (Remove rows with any NA before saving)
+penguins_clean &lt;- penguins[complete.cases(penguins), ]
+
+# write.csv(penguins_clean, &quot;data/penguins_clean.csv&quot;, row.names = FALSE)
+# Or with readr (preferred — no row names added by default):
+# readr::write_csv(penguins_clean, &quot;data/penguins_clean.csv&quot;)
+
+cat(&quot;Clean dataset has&quot;, nrow(penguins_clean), &quot;rows and&quot;,
+    ncol(penguins_clean), &quot;columns.\n&quot;)</code></pre>
+          </section>
+          <section class="markdown-cell">
+            <hr />
+            <h2 id="section-63-46">Summary</h2>
+            <p>In this notebook, you have learned:</p>
+            <ul>
+              <li>
+                The <strong>origins and design philosophy</strong> of R as an
+                open-source statistical language
+              </li>
+              <li>
+                The main <strong>GUIs and IDEs</strong> available for R, with RStudio as
+                the course standard
+              </li>
+              <li>
+                How to navigate the <strong>four RStudio panels</strong> effectively
+              </li>
+              <li>
+                How to create and structure <strong>R Projects</strong> for reproducible
+                research
+              </li>
+              <li>How to set up <strong>GitHub Copilot</strong> in RStudio</li>
+              <li>
+                The core <strong>data types</strong> (numeric, integer, character,
+                logical, factor) and <strong>data structures</strong> (vector, matrix,
+                data frame, list, array)
+              </li>
+              <li>How to <strong>index</strong> objects to extract subsets of data</li>
+              <li>How to <strong>install and load packages</strong></li>
+              <li>How to <strong>load, inspect, and save</strong> data</li>
+            </ul>
+            <hr />
+            <h2 id="section-63-47">References</h2>
+            <ul>
+              <li>
+                Gorman, K.B., Williams, T.D. &amp; Fraser, W.R. (2014). Ecological
+                sexual dimorphism and environmental variability within a community of
+                Antarctic penguins. <em>PLOS ONE</em>, 9(3), e90081.
+                <a href="https://doi.org/10.1371/journal.pone.0090081"
+                  >https://doi.org/10.1371/journal.pone.0090081</a
+                >
+              </li>
+              <li>
+                Horst, A.M., Hill, A.P. &amp; Gorman, K.B. (2020).
+                <em>palmerpenguins: Palmer Archipelago (Antarctica) penguin data</em>. R
+                package version 0.1.0.
+                <a href="https://doi.org/10.5281/zenodo.3960218"
+                  >https://doi.org/10.5281/zenodo.3960218</a
+                >
+              </li>
+              <li>
+                Ihaka, R. &amp; Gentleman, R. (1996). R: A language for data analysis
+                and graphics.
+                <em>Journal of Computational and Graphical Statistics</em>, 5(3),
+                299–314.
+              </li>
+              <li>
+                R Core Team (2024).
+                <em>R: A language and environment for statistical computing</em>. R
+                Foundation for Statistical Computing, Vienna, Austria.
+                <a href="https://www.R-project.org/">https://www.R-project.org/</a>
+              </li>
+              <li>
+                Wickham, H. &amp; Grolemund, G. (2023). <em>R for Data Science</em> (2nd
+                ed.). O&#39;Reilly Media.
+                <a href="https://r4ds.hadley.nz">https://r4ds.hadley.nz</a>
+              </li>
+            </ul>
+          </section>
+          <div class="reader-end">
+            <p>You’ve reached the end of this notebook.</p>
+            <a class="text-link" href="../../notebooks.html"
+              >Return to all notebooks
+              <svg
+                class=""
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M4 12h15m-6-6 6 6-6 6" /></svg
+            ></a>
+          </div>
+        </article>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-main">
+          <a class="brand" href="../../index.html" aria-label="Les Hyperion — home"
+            ><img
+              class="brand-face"
+              src="../../assets/brand/silvi-face.png"
+              alt=""
+              width="55"
+              height="59"
+            /><span class="brand-name" aria-hidden="true"
+              >LES HYPERI<svg class="compass-o" viewBox="0 0 36 46" aria-hidden="true">
+                <circle
+                  cx="18"
+                  cy="23"
+                  r="14.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <path
+                  d="m18 1 4 17 14 5-14 4-4 18-4-18L0 23l14-5Z"
+                  fill="currentColor"
+                /></svg
+              >N</span
+            ></a
+          >
+          <p class="footer-thought">Understanding nature.<br />Sharing the evidence.</p>
+          <nav class="footer-links" aria-label="Footer">
+            <a href="../../about.html">About Phemelo</a><a href="../../cv.html">CV</a
+            ><a
+              href="https://github.com/Phemelo-R"
+              target="_blank"
+              rel="noopener noreferrer"
+              >GitHub ↗</a
+            ><a href="#main">Back to top ↑</a>
+          </nav>
+        </div>
+        <div class="footer-bottom">
+          <span>© 2026 Phemelo Rutlokoane</span><span>Nature × Data × People</span
+          ><span>Johannesburg, South Africa</span>
+        </div>
+      </div>
+    </footer>
+    <div class="toast" id="toast" role="status" hidden></div>
+    <script src="../../js/site.js"></script>
+    <script src="../../js/silvi.js"></script>
+    <script src="../../js/math-config.js"></script>
+    <script src="../../assets/vendor/mathjax/tex-chtml.js"></script>
+    <script src="../../js/reader.js"></script>
+  </body>
+</html>

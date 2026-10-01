@@ -1,0 +1,327 @@
+.globe-panel {
+  min-width: 0;
+}
+.globe-scope-note {
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 31ch;
+}
+.globe-bottom {
+  align-items: start;
+}
+.globe-label > span {
+  display: block;
+}
+.landscape-selector {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 1.1rem;
+  margin-top: 0.8rem;
+}
+.landscape-selector button {
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  color: var(--text);
+  text-align: left;
+  padding: 0.7rem 0.3rem;
+  font: 500 0.78rem/1.4 var(--font-b);
+  cursor: pointer;
+}
+.landscape-selector small {
+  display: block;
+  font-size: 0.65rem;
+  color: var(--muted);
+  font-weight: 400;
+}
+.landscape-selector button[aria-pressed='true'] {
+  border-bottom-color: var(--gold);
+  color: var(--accent);
+}
+.landscape-selector button:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+.silvi-welcome {
+  display: block;
+  position: relative;
+  padding-block: 0.6rem;
+  min-height: 0;
+  border-bottom: 0;
+}
+.silvi-welcome .silvi-scene {
+  width: 150px;
+  margin-left: auto;
+  margin-right: 4%;
+}
+.silvi-welcome .silvi-stage {
+  aspect-ratio: 1;
+}
+/* -- Cutouts stay transparent in both themes. -- */
+[data-habitat='cutout'] .silvi-stage {
+  aspect-ratio: 1.15;
+  border-radius: 0;
+  overflow: visible;
+}
+[data-habitat='cutout'] .topic-character {
+  height: 94%;
+  aspect-ratio: auto;
+  width: 94%;
+  left: 3%;
+  bottom: 0;
+  filter: none;
+}
+[data-silvi-scene='welcome'] .topic-character {
+  width: 92%;
+  left: 4%;
+}
+[data-silvi-scene='about'] .silvi-stage {
+  aspect-ratio: 1.25;
+}
+[data-silvi-scene='cv'] .silvi-stage {
+  aspect-ratio: 1;
+}
+[data-silvi-scene='soap'] .topic-character {
+  width: 88%;
+  left: 6%;
+}
+@keyframes introduce-bow {
+  0%,
+  100% {
+    transform: rotate(-1deg) translateY(0);
+  }
+  45% {
+    transform: rotate(1.3deg) translateY(2px);
+  }
+}
+@keyframes evidence-inspect {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-1.5deg) translateY(-3px);
+  }
+}
+.about-silvi-band {
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 330px);
+}
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2.2rem 2rem;
+}
+.portfolio-slot {
+  min-width: 0;
+  margin: 0;
+}
+.portfolio-empty,
+.portfolio-slot > img {
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  object-fit: cover;
+}
+.portfolio-empty {
+  position: relative;
+  border: 1px dashed var(--line);
+  background: linear-gradient(
+    140deg,
+    color-mix(in srgb, var(--sage) 12%, transparent),
+    transparent
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--muted);
+}
+.portfolio-empty > span {
+  position: absolute;
+  left: 1.2rem;
+  top: 1rem;
+  font: 1rem var(--font-d);
+}
+.portfolio-empty svg {
+  width: 30px;
+  height: 30px;
+  opacity: 0.45;
+}
+.portfolio-empty small {
+  position: absolute;
+  bottom: 1rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.portfolio-slot figcaption {
+  padding-top: 1rem;
+}
+.portfolio-slot h3 {
+  font: 1.4rem var(--font-d);
+  margin-bottom: 0.35rem;
+}
+.portfolio-slot p {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.work-development {
+  margin-top: 2rem;
+}
+.development-entry {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 240px;
+  column-gap: 2rem;
+  padding: 1.7rem 0;
+  border-top: 1px solid var(--line);
+}
+.development-entry h3 {
+  font: 1.65rem var(--font-d);
+  margin: 0.5rem 0 0.6rem;
+}
+.development-entry p {
+  max-width: 70ch;
+  color: var(--muted);
+}
+.work-status {
+  font-size: 0.76rem;
+  color: var(--accent);
+  align-self: start;
+  padding-top: 0.3rem;
+}
+.development-entry details {
+  grid-column: 1 / -1;
+  margin-top: 1rem;
+}
+.development-entry summary {
+  font-size: 0.84rem;
+  cursor: pointer;
+}
+.development-entry details > p {
+  margin-top: 0.7rem;
+  font-size: 0.9rem;
+}
+.development-entry .silvi-scene {
+  width: min(100%, 420px);
+  margin-top: 1rem;
+}
+.writing-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1.5rem;
+}
+.writing-heading h1 {
+  font-size: clamp(2.3rem, 4vw, 4rem) !important;
+}
+.writing-layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 3rem;
+  align-items: start;
+  padding-bottom: 3rem;
+}
+.writing-layout > aside {
+  position: sticky;
+  top: 110px;
+  max-height: calc(100dvh - 140px);
+  overflow: auto;
+}
+.research-writing {
+  max-width: 860px;
+}
+.research-writing .markdown-cell {
+  overflow-wrap: anywhere;
+}
+.research-figure {
+  margin: 2rem 0;
+}
+.research-figure img {
+  width: 100%;
+  height: auto;
+  background: white;
+}
+.research-figure figcaption {
+  color: var(--muted);
+  font-size: 0.83rem;
+  line-height: 1.6;
+  margin-top: 0.7rem;
+}
+@media (min-width: 1800px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 760px) {
+  .portfolio-grid {
+    gap: 1.5rem 1rem;
+  }
+  .portfolio-slot h3 {
+    font-size: 1.15rem;
+  }
+  .development-entry {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+  .development-entry details {
+    margin-top: 0;
+  }
+  .writing-layout {
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+  }
+  .writing-layout > aside {
+    position: static;
+    max-height: none;
+  }
+  .about-silvi-band {
+    grid-template-columns: 1fr;
+  }
+  .about-silvi-band .silvi-scene {
+    width: 230px;
+    justify-self: end;
+  }
+  .page-heading.with-silvi > .silvi-scene {
+    width: min(100%, 260px);
+  }
+  .writing-heading {
+    padding-bottom: 1.5rem;
+  }
+}
+@media (max-width: 450px) {
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+  .globe-topline {
+    font-size: 0.6rem;
+  }
+}
+@media print {
+  .writing-top,
+  .writing-layout > aside {
+    display: none;
+  }
+  .writing-layout {
+    display: block;
+  }
+  .research-writing {
+    max-width: none;
+  }
+}
+
+.hero-signoff {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+.hero-signoff .hero-person {
+  margin: 0;
+  max-width: 32ch;
+}
+.hero-signoff .silvi-scene {
+  width: 110px;
+  flex-shrink: 0;
+}
+.hero-signoff .silvi-stage {
+  aspect-ratio: 1;
+}

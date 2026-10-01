@@ -1,0 +1,19 @@
+{
+  "name": "les-hyperion-rebrand",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "preview": "node scripts/serve.mjs",
+    "build": "node scripts/build.mjs",
+    "format": "prettier --write \"*.html\" \"content/**/*.html\" \"pages/**/*.html\" \"data/json/**/*.json\" \"css/**/*.css\" \"js/**/*.js\" \"scripts/**/*.mjs\"",
+    "format:check": "prettier --check \"*.html\" \"content/**/*.html\" \"pages/**/*.html\" \"data/json/**/*.json\" \"css/**/*.css\" \"js/**/*.js\" \"scripts/**/*.mjs\""
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "prettier": "3.9.8"
+  }
+}

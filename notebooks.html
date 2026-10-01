@@ -1,202 +1,746 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="light">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Notebooks — Les Hyperion</title>
-  <meta name="description" content="Jupyter notebooks on R, Python, spatial analysis, remote sensing, and ocean climatology." />
-
-  <link rel="stylesheet" href="css/tokens.css" />
-  <link rel="stylesheet" href="css/base.css" />
-  <link rel="stylesheet" href="css/nav.css" />
-  <link rel="stylesheet" href="css/notebooks.css" />
-  <link rel="stylesheet" href="css/modal.css" />
-
-  <!-- highlight.js — syntax highlighting for notebook code cells -->
-  <!-- Light theme by default; swapped in modal.js when dark theme is active -->
-  <link rel="stylesheet" id="hljs-theme"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/r.min.js"></script>
-
-  <!-- marked.js — markdown parsing for notebook markdown cells -->
-  <script src="https://cdn.jsdelivr.net/npm/marked@9/marked.min.js"></script>
-
-  <!-- MathJax 3 — renders $...$ and $$...$$ LaTeX equations -->
-<script>
-  window.MathJax = {
-    tex: {
-      inlineMath:  [['$', '$']],
-      displayMath: [['$$', '$$']],
-      processEscapes: true,
-      tags: 'ams',
-    },
-    options: {
-      skipHtmlTags: ['script','noscript','style','textarea','pre','code'],
-    },
-    startup: { typeset: false },
-  };
-</script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
-
-  <script>
-    (function(){
-      const t = localStorage.getItem('lh-theme');
-      if (t) document.documentElement.setAttribute('data-theme', t);
-    })();
-  </script>
-
-  <style>
-    /* Keep highlight.js theme in sync with site theme */
-    :root[data-theme="dark"] #hljs-theme { }
-  </style>
-</head>
-<body>
-
-<div class="topo-bg" aria-hidden="true"></div>
-<div class="scan-bg"  aria-hidden="true"></div>
-
-<!-- ============ NAV ============ -->
-<nav class="nav" role="navigation" aria-label="Main navigation">
-  <a class="nav-brand" href="index.html">
-    <img class="nav-logo" src="assets/LesHyperion_logo.png" alt="Les Hyperion logo"
-         onerror="this.style.display='none';this.nextSibling.style.display='inline'" />
-    <span style="display:none">🗺</span>
-    Les Hyperion
-  </a>
-
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="notebooks.html" class="active">Notebooks</a></li>
-    <li><a href="research.html">Research</a></li>
-    <li><a href="carbon.html">Carbon</a></li>
-    <li><a href="about.html">About</a></li>
-  </ul>
-
-  <div class="nav-right">
-    <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
-      <span class="theme-icon">🌙</span>
-      <span class="theme-label">Dark</span>
-    </button>
-    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
-
-<nav class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
-  <a href="index.html">Home</a>
-  <a href="notebooks.html" class="active">Notebooks</a>
-  <a href="research.html">Research</a>
-  <a href="carbon.html">Carbon</a>
-  <a href="about.html">About</a>
-</nav>
-
-<!-- ============ MAIN ============ -->
-<div class="page-wrap">
-
-  <!-- Grid section (hidden when viewer is open) -->
-  <div id="notebooks-grid-section">
-
-    <!-- Page header -->
-    <header class="notebooks-header">
-      <div class="section-inner">
-        <div class="section-tag">Portfolio</div>
-        <h1 class="section-title">All Notebooks</h1>
-        <p class="section-desc">
-          All reproducible code notebooks on this site are listed here.
-          Each category has its own section, and notebooks are organised 
-          into series where applicable (e.g. R Fundamentals, Machine Learning). Series are 
-          numbered — start at <strong>Part 1</strong> and follow the sequence. 
-          Click any notebook to open it.
+<!doctype html>
+<html lang="en-GB" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Notebooks — Les Hyperion</title>
+    <meta
+      name="description"
+      content="Spatial ecology, remote sensing and conservation by Phemelo Rutlokoane."
+    />
+    <meta name="theme-color" content="#0f2d3a" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/brand/favicon-32.png"
+    />
+    <link rel="icon" sizes="192x192" href="assets/brand/favicon-192.png" />
+    <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png" />
+    <script src="js/theme-init.js"></script>
+    <link rel="stylesheet" href="css/site.css" />
+    <link rel="stylesheet" href="css/silvi.css" />
+    <link rel="stylesheet" href="css/revision.css" />
+    <link rel="stylesheet" href="css/refinement.css" />
+  </head>
+  <body class="">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="index.html" aria-label="Les Hyperion — home"
+          ><img
+            class="brand-face"
+            src="assets/brand/silvi-face.png"
+            alt=""
+            width="55"
+            height="59"
+          /><span class="brand-name" aria-hidden="true"
+            >LES HYPERI<svg class="compass-o" viewBox="0 0 36 46" aria-hidden="true">
+              <circle
+                cx="18"
+                cy="23"
+                r="14.5"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              />
+              <path
+                d="m18 1 4 17 14 5-14 4-4 18-4-18L0 23l14-5Z"
+                fill="currentColor"
+              /></svg
+            >N</span
+          ></a
+        >
+        <nav class="desktop-nav" aria-label="Main navigation">
+          <a href="index.html">Home</a><a href="research.html">Research</a
+          ><a href="notebooks.html" aria-current="page">Notebooks</a
+          ><a href="carbon.html">Carbon</a><a href="about.html">About</a
+          ><a href="cv.html">CV</a>
+        </nav>
+        <div class="header-actions">
+          <button
+            class="icon-button theme-toggle"
+            data-theme-toggle
+            aria-label="Switch colour theme"
+          >
+            <svg
+              class="moon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path
+                d="M20.6 13.7A8.8 8.8 0 0 1 10.3 3.4a8.8 8.8 0 1 0 10.3 10.3Z"
+              /></svg
+            ><svg
+              class="sun"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path
+                d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"
+              />
+            </svg></button
+          ><button
+            class="icon-button menu-toggle"
+            aria-label="Open navigation"
+            aria-expanded="false"
+            aria-controls="mobile-nav"
+          >
+            <svg
+              class=""
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" hidden>
+        <a href="index.html">Home</a><a href="research.html">Research</a
+        ><a href="notebooks.html" aria-current="page">Notebooks</a
+        ><a href="carbon.html">Carbon</a><a href="about.html">About</a
+        ><a href="cv.html">CV</a>
+      </nav>
+    </header>
+    <main id="main">
+      <div class="container">
+        <header class="page-heading with-silvi">
+          <div>
+            <p class="eyebrow">Learn · Reproduce · Adapt</p>
+            <h1>The open notebook.</h1>
+            <p>
+              R workflows for ecology, spatial analysis and machine learning. Read the
+              methods, inspect the outputs and download the original notebooks.
+            </p>
+          </div>
+          <figure class="silvi-scene" data-silvi-scene="data">
+            <div class="silvi-stage">
+              <img
+                src="assets/brand/silvi-data-explorer.png"
+                alt="Making sense of the data"
+                width="480"
+                height="250"
+                loading="lazy"
+              />
+            </div>
+          </figure>
+        </header>
+        <div class="archive-toolbar">
+          <div
+            class="filter-options"
+            role="group"
+            aria-label="Filter notebooks by collection"
+          >
+            <button class="filter-option" data-filter="all" aria-pressed="true">
+              All collections</button
+            ><button
+              class="filter-option"
+              data-filter="R Fundamentals"
+              aria-pressed="false"
+            >
+              R Fundamentals</button
+            ><button
+              class="filter-option"
+              data-filter="Spatial &amp; Remote Sensing"
+              aria-pressed="false"
+            >
+              Spatial &amp; remote sensing</button
+            ><button
+              class="filter-option"
+              data-filter="Marine &amp; Environmental"
+              aria-pressed="false"
+            >
+              Marine ecology</button
+            ><button
+              class="filter-option"
+              data-filter="Machine Learning"
+              aria-pressed="false"
+            >
+              Machine Learning
+            </button>
+          </div>
+          <label class="search-field"
+            ><svg
+              class=""
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="10" cy="10" r="6" />
+              <path d="m15 15 5 5" /></svg
+            ><span class="sr-only">Search notebooks</span
+            ><input
+              type="search"
+              id="notebook-search"
+              placeholder="Search the notebooks…"
+          /></label>
+        </div>
+        <p class="archive-count" id="archive-count" role="status">
+          8 notebooks available · 13 listed across 4 collections
+        </p>
+        <section class="notebook-group" data-group="R Fundamentals">
+          <div class="group-heading">
+            <h2>R Fundamentals</h2>
+            <p>Start here if you&#39;re new to R. Each part builds on the last.</p>
+          </div>
+          <article
+            class="notebook-row"
+            data-notebook
+            data-category="R Fundamentals"
+            data-search="introduction to r a foundation in r: installation, data types, functions, and reading and writing data. base r functions data types"
+          >
+            <span class="notebook-index">01</span>
+            <div>
+              <h3 class="notebook-title">
+                <a href="notebooks/read/Introduction_to_R.html">Introduction to R</a>
+              </h3>
+              <p>
+                A foundation in R: installation, data types, functions, and reading and
+                writing data.
+              </p>
+              <div class="notebook-bottom">
+                <span>Base R · Functions · Data Types</span
+                ><a href="notebooks/Introduction_to_R.ipynb" download
+                  >Download .ipynb</a
+                >
+              </div>
+            </div>
+            <div class="notebook-meta">
+              <span>12 Aug 2025</span><span>R · Read & download</span>
+            </div>
+            <a
+              class="row-arrow"
+              href="notebooks/read/Introduction_to_R.html"
+              aria-label="Read Introduction to R"
+              ><svg
+                class=""
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M4 12h15m-6-6 6 6-6 6" /></svg
+            ></a>
+          </article>
+          <article
+            class="notebook-row"
+            data-notebook
+            data-category="R Fundamentals"
+            data-search="data manipulation in r from data creation to wrangling: tidyverse pipelines, wide/long pivots and the palmer penguins dataset. tidyverse dplyr tidyr"
+          >
+            <span class="notebook-index">02</span>
+            <div>
+              <h3 class="notebook-title">
+                <a href="notebooks/read/Data_Manipulation.html"
+                  >Data Manipulation in R</a
+                >
+              </h3>
+              <p>
+                From data creation to wrangling: tidyverse pipelines, wide/long pivots
+                and the Palmer Penguins dataset.
+              </p>
+              <div class="notebook-bottom">
+                <span>Tidyverse · dplyr · tidyr</span
+                ><a href="notebooks/Data_Manipulation.ipynb" download
+                  >Download .ipynb</a
+                >
+              </div>
+            </div>
+            <div class="notebook-meta">
+              <span>13 Aug 2025</span><span>R · Read & download</span>
+            </div>
+            <a
+              class="row-arrow"
+              href="notebooks/read/Data_Manipulation.html"
+              aria-label="Read Data Manipulation in R"
+              ><svg
+                class=""
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M4 12h15m-6-6 6 6-6 6" /></svg
+            ></a>
+          </article>
+          <article
+            class="notebook-row"
+            data-notebook
+            data-category="R Fundamentals"
+            data-search="data visualisation in r base r plots to publication-quality facetted ggplots — the complete visualisation toolkit. ggplot2 themes facets"
+          >
+            <span class="notebook-index">03</span>
+            <div>
+              <h3 class="notebook-title">
+                <a href="notebooks/read/Data_Visualisation.html"
+                  >Data Visualisation in R</a
+                >
+              </h3>
+              <p>
+                Base R plots to publication-quality facetted ggplots — the complete
+                visualisation toolkit.
+              </p>
+              <div class="notebook-bottom">
+                <span>ggplot2 · Themes · Facets</span
+                ><a href="notebooks/Data_Visualisation.ipynb" download
+                  >Download .ipynb</a
+                >
+              </div>
+            </div>
+            <div class="notebook-meta">
+              <span>13 Aug 2025</span><span>R · Read & download</span>
+            </div>
+            <a
+              class="row-arrow"
+              href="notebooks/read/Data_Visualisation.html"
+              aria-label="Read Data Visualisation in R"
+              ><svg
+                class=""
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M4 12h15m-6-6 6 6-6 6" /></svg
+            ></a>
+          </article>
+        </section>
+        <section class="notebook-group" data-group="Spatial &amp; Remote Sensing">
+          <div class="group-heading">
+            <h2>Spatial &amp; Remote Sensing</h2>
+            <p>Geospatial workflows in R — vector, raster, and satellite imagery.</p>
+          </div>
+          <article
+            class="notebook-row"
+            data-notebook
+            data-category="Spatial &amp; Remote Sensing"
+            data-search="introduction to spatial mapping and remote sensing for ecology an introductory guide and conceptual overview of spatial data handling, mapping, and remote sensing in r. spatial analysis remote sensing raster vector projections"
+          >
+            <span class="notebook-index">01</span>
+            <div>
+              <h3 class="notebook-title">
+                <a href="notebooks/read/Introduction_to_Spatial_Mapping999.html"
+                  >Introduction to Spatial Mapping and Remote Sensing for Ecology</a
+                >
+              </h3>
+              <p>
+                An introductory guide and conceptual overview of spatial data handling,
+                mapping, and remote sensing in R.
+              </p>
+              <div class="notebook-bottom">
+                <span
+                  >Spatial Analysis · Remote Sensing · Raster · Vector ·
+                  Projections</span
+                ><a href="notebooks/Introduction_to_Spatial_Mapping999.ipynb" download
+                  >Download .ipynb</a
+                >
+              </div>
+            </div>
+            <div class="notebook-meta">
+              <span>24 Mar 2026</span><span>R · Read & download</span>
+            </div>
+            <a
+              class="row-arrow"
+              href="notebooks/read/Introduction_to_Spatial_Mapping999.html"
+              aria-label="Read Introduction to Spatial Mapping and Remote Sensing for Ecology"
+              ><svg
+                class=""
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M4 12h15m-6-6 6 6-6 6" /></svg
+            ></a>
+          </article>
+          <article
+            class="notebook-row"
+            data-notebook
+            data-category="Spatial &amp; Remote Sensing"
+            data-search="vector data with sf working with vector spatial data in r using the sf package. reading, writing, transforming, and visualising points, lines, and polygons. sf vector data spatial analysis"
+          >
+            <span class="notebook-index">02</span>
+            <div>
+              <h3 class="notebook-title">
+                <a href="notebooks/read/Vector_Data_with_sf.html"
+                  >Vector Data with sf</a
+                >
+              </h3>
+              <p>
+                Working with vector spatial data in R using the sf package. Reading,
+                writing, transforming, and visualising points, lines, and polygons.
+              </p>
+              <div class="notebook-bottom">
+                <span>sf · Vector Data · Spatial Analysis</span
+                ><a href="notebooks/Vector_Data_with_sf.ipynb" download
+                  >Download .ipynb</a
+                >
+              </div>
+            </div>
+            <div class="notebook-meta">
+              <span>1 May 2026</span><span>R · Read & download</span>
+            </div>
+            <a
+              class="row-arrow"
+              href="notebooks/read/Vector_Data_with_sf.html"
+              aria-label="Read Vector Data with sf"
+              ><svg
+                class=""
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M4 12h15m-6-6 6 6-6 6" /></svg
+            ></a>
+          </article>
+          <article
+            class="notebook-row"
+            data-notebook
+            data-category="Spatial &amp; Remote Sensing"
+            data-search="mapping with satellite imagery landsat-based ndvi, spectral resolution and rgb composite mapping in r. landsat ndvi rgb"
+          >
+            <span class="notebook-index">03</span>
+            <div>
+              <h3 class="notebook-title">Mapping with Satellite Imagery</h3>
+              <p>
+                Landsat-based NDVI, spectral resolution and RGB composite mapping in R.
+              </p>
+              <div class="notebook-bottom">
+                <span>Landsat · NDVI · RGB</span
+                ><span class="unavailable">Notebook file not yet supplied</span>
+              </div>
+            </div>
+            <div class="notebook-meta">
+              <span>10 Feb 2026</span><span>Description only</span>
+            </div>
+            <span aria-hidden="true">—</span>
+          </article>
+        </section>
+        <section class="notebook-group" data-group="Marine &amp; Environmental">
+          <div class="group-heading">
+            <h2>Marine &amp; Environmental</h2>
+            <p>Ocean climatology and time-series analysis of oceanographic data.</p>
+          </div>
+          <article
+            class="notebook-row"
+            data-notebook
+            data-category="Marine &amp; Environmental"
+            data-search="sea surface temperature time series loading, cleaning, and decomposing daily sst records into climatology and anomaly components. sst climatology anomalies"
+          >
+            <span class="notebook-index">01</span>
+            <div>
+              <h3 class="notebook-title">Sea Surface Temperature Time Series</h3>
+              <p>
+                Loading, cleaning, and decomposing daily SST records into climatology
+                and anomaly components.
+              </p>
+              <div class="notebook-bottom">
+                <span>SST · Climatology · Anomalies</span
+                ><span class="unavailable">Notebook file not yet supplied</span>
+              </div>
+            </div>
+            <div class="notebook-meta">
+              <span>8 Feb 2026</span><span>Description only</span>
+            </div>
+            <span aria-hidden="true">—</span>
+          </article>
+          <article
+            class="notebook-row"
+            data-notebook
+            data-category="Marine &amp; Environmental"
+            data-search="building a mhw climatology creating the seasonally-varying baseline and 90th-percentile threshold for mhw detection. heatwaver threshold baseline"
+          >
+            <span class="notebook-index">02</span>
+            <div>
+              <h3 class="notebook-title">Building a MHW Climatology</h3>
+              <p>
+                Creating the seasonally-varying baseline and 90th-percentile threshold
+                for MHW detection.
+              </p>
+              <div class="notebook-bottom">
+                <span>heatwaveR · Threshold · Baseline</span
+                ><span class="unavailable">Notebook file not yet supplied</span>
+              </div>
+            </div>
+            <div class="notebook-meta">
+              <span>9 Feb 2026</span><span>Description only</span>
+            </div>
+            <span aria-hidden="true">—</span>
+          </article>
+          <article
+            class="notebook-row"
+            data-notebook
+            data-category="Marine &amp; Environmental"
+            data-search="marine heatwave analysis detection and characterisation of marine heatwave events using sea surface temperature data. mhw sst heatwaver"
+          >
+            <span class="notebook-index">03</span>
+            <div>
+              <h3 class="notebook-title">Marine Heatwave Analysis</h3>
+              <p>
+                Detection and characterisation of marine heatwave events using sea
+                surface temperature data.
+              </p>
+              <div class="notebook-bottom">
+                <span>MHW · SST · heatwaveR</span
+                ><span class="unavailable">Notebook file not yet supplied</span>
+              </div>
+            </div>
+            <div class="notebook-meta">
+              <span>10 Feb 2026</span><span>Description only</span>
+            </div>
+            <span aria-hidden="true">—</span>
+          </article>
+          <article
+            class="notebook-row"
+            data-notebook
+            data-category="Marine &amp; Environmental"
+            data-search="diel vertical migration of euphausia lucens vertical distribution and life-stage composition of euphausia lucens at inshore and offshore stations in st helena bay over a 48-hour mocness survey. dvm euphausiids st helena bay mocness"
+          >
+            <span class="notebook-index">04</span>
+            <div>
+              <h3 class="notebook-title">
+                Diel Vertical Migration of Euphausia lucens
+              </h3>
+              <p>
+                Vertical distribution and life-stage composition of Euphausia lucens at
+                inshore and offshore stations in St Helena Bay over a 48-hour MOCNESS
+                survey.
+              </p>
+              <div class="notebook-bottom">
+                <span>DVM · Euphausiids · St Helena Bay · MOCNESS</span
+                ><span class="unavailable">Notebook file not yet supplied</span>
+              </div>
+            </div>
+            <div class="notebook-meta">
+              <span>1 Oct 2024</span><span>Description only</span>
+            </div>
+            <span aria-hidden="true">—</span>
+          </article>
+        </section>
+        <section class="notebook-group" data-group="Machine Learning">
+          <div class="group-heading">
+            <h2>Machine Learning</h2>
+            <p>Machine learning applied to ecological and spatial data in R.</p>
+          </div>
+          <article
+            class="notebook-row"
+            data-notebook
+            data-category="Machine Learning"
+            data-search="introduction to machine learning a practical introduction to machine learning for ecologists — core concepts, model types, and your first end-to-end workflow in r. machine learning ecology palmerpenguins modelling"
+          >
+            <span class="notebook-index">01</span>
+            <div>
+              <h3 class="notebook-title">
+                <a href="notebooks/read/Introduction_to_Machine_Learning.html"
+                  >Introduction to Machine Learning</a
+                >
+              </h3>
+              <p>
+                A practical introduction to machine learning for ecologists — core
+                concepts, model types, and your first end-to-end workflow in R.
+              </p>
+              <div class="notebook-bottom">
+                <span>Machine Learning · Ecology · Palmerpenguins · Modelling</span
+                ><a href="notebooks/Introduction_to_Machine_Learning.ipynb" download
+                  >Download .ipynb</a
+                >
+              </div>
+            </div>
+            <div class="notebook-meta">
+              <span>20 Apr 2026</span><span>R · Read & download</span>
+            </div>
+            <a
+              class="row-arrow"
+              href="notebooks/read/Introduction_to_Machine_Learning.html"
+              aria-label="Read Introduction to Machine Learning"
+              ><svg
+                class=""
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M4 12h15m-6-6 6 6-6 6" /></svg
+            ></a>
+          </article>
+          <article
+            class="notebook-row"
+            data-notebook
+            data-category="Machine Learning"
+            data-search="linear regression a practical introduction to linear regression for ecologists — model fitting, evaluation, and interpretation in r. linear regression ecology palmerpenguins modelling"
+          >
+            <span class="notebook-index">02</span>
+            <div>
+              <h3 class="notebook-title">
+                <a href="notebooks/read/Linear_Regression.html">Linear Regression</a>
+              </h3>
+              <p>
+                A practical introduction to linear regression for ecologists — model
+                fitting, evaluation, and interpretation in R.
+              </p>
+              <div class="notebook-bottom">
+                <span>Linear Regression · Ecology · Palmerpenguins · Modelling</span
+                ><a href="notebooks/Linear_Regression.ipynb" download
+                  >Download .ipynb</a
+                >
+              </div>
+            </div>
+            <div class="notebook-meta">
+              <span>21 Apr 2026</span><span>R · Read & download</span>
+            </div>
+            <a
+              class="row-arrow"
+              href="notebooks/read/Linear_Regression.html"
+              aria-label="Read Linear Regression"
+              ><svg
+                class=""
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M4 12h15m-6-6 6 6-6 6" /></svg
+            ></a>
+          </article>
+          <article
+            class="notebook-row"
+            data-notebook
+            data-category="Machine Learning"
+            data-search="generalized linear models a practical introduction to generalized linear models for ecologists — model fitting, evaluation, and interpretation in r. generalized linear models regression modelling"
+          >
+            <span class="notebook-index">03</span>
+            <div>
+              <h3 class="notebook-title">
+                <a href="notebooks/read/Generalized_Linear_Models.html"
+                  >Generalized Linear Models</a
+                >
+              </h3>
+              <p>
+                A practical introduction to generalized linear models for ecologists —
+                model fitting, evaluation, and interpretation in R.
+              </p>
+              <div class="notebook-bottom">
+                <span>Generalized Linear Models · Regression · Modelling</span
+                ><a href="notebooks/Generalized_Linear_Models.ipynb" download
+                  >Download .ipynb</a
+                >
+              </div>
+            </div>
+            <div class="notebook-meta">
+              <span>23 Apr 2026</span><span>R · Read & download</span>
+            </div>
+            <a
+              class="row-arrow"
+              href="notebooks/read/Generalized_Linear_Models.html"
+              aria-label="Read Generalized Linear Models"
+              ><svg
+                class=""
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M4 12h15m-6-6 6 6-6 6" /></svg
+            ></a>
+          </article>
+        </section>
+        <p class="no-results" id="no-results" hidden>
+          No notebooks match this search. Try another title, package or topic.
         </p>
       </div>
-    </header>
-
-    <!-- Filter + grid -->
-    <section>
-      <div class="section-inner">
-        <div class="filter-bar" id="filter-bar" role="group" aria-label="Filter by category">
-          <!-- Populated by notebooks.js -->
+    </main>
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-main">
+          <a class="brand" href="index.html" aria-label="Les Hyperion — home"
+            ><img
+              class="brand-face"
+              src="assets/brand/silvi-face.png"
+              alt=""
+              width="55"
+              height="59"
+            /><span class="brand-name" aria-hidden="true"
+              >LES HYPERI<svg class="compass-o" viewBox="0 0 36 46" aria-hidden="true">
+                <circle
+                  cx="18"
+                  cy="23"
+                  r="14.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <path
+                  d="m18 1 4 17 14 5-14 4-4 18-4-18L0 23l14-5Z"
+                  fill="currentColor"
+                /></svg
+              >N</span
+            ></a
+          >
+          <p class="footer-thought">Understanding nature.<br />Sharing the evidence.</p>
+          <nav class="footer-links" aria-label="Footer">
+            <a href="about.html">About Me</a><a href="cv.html">CV</a
+            ><a
+              href="https://github.com/Phemelo-R"
+              target="_blank"
+              rel="noopener noreferrer"
+              >GitHub ↗</a
+            ><a href="#main">Back to top ↑</a>
+          </nav>
         </div>
-        <div id="notebooks-list">
-          <!-- Populated by notebooks.js -->
+        <div class="footer-bottom">
+          <span>© 2026 Phemelo Rutlokoane</span><span>Nature × Data × People</span
+          ><span>Johannesburg, South Africa</span>
         </div>
       </div>
-    </section>
-
-  </div><!-- /notebooks-grid-section -->
-
-  <!-- Footer (only visible when grid is shown) -->
-  <footer class="footer" id="grid-footer">
-    <span class="footer-brand">Les Hyperion</span>
-    <span>© <span id="footer-year"></span> Phemelo Rutlokoane</span>
-    <div class="footer-links">
-      <a href="https://github.com/Phemelo-R" target="_blank" rel="noopener">GitHub ↗</a>
-    </div>
-  </footer>
-
-</div><!-- /page-wrap -->
-
-<!-- ============ FULL-PAGE NOTEBOOK VIEWER ============ -->
-<div class="nb-viewer" id="nb-viewer" role="dialog" aria-modal="true" aria-label="Notebook viewer">
-
-  <!-- Top bar -->
-  <div class="vwr-bar">
-    <button class="vwr-back" id="vwr-back" aria-label="Back to notebooks">
-      ← Back
-    </button>
-
-    <div class="vwr-breadcrumb">
-      Notebooks /
-      <span id="vwr-breadcrumb-nb"></span>
-      <span style="margin-left:.5rem;color:var(--text-faint);font-size:.62rem" id="vwr-file-title"></span>
-    </div>
-
-    <div class="vwr-actions">
-      <button class="vwr-theme-btn" data-theme-toggle aria-label="Toggle theme">
-        <span class="theme-icon">🌙</span>
-        <span class="theme-label">Dark</span>
-      </button>
-    </div>
-  </div>
-
-  <!-- Scrollable content -->
-  <div class="vwr-body" id="vwr-body">
-    <!-- Populated by notebooks.js when a notebook is opened -->
-  </div>
-
-</div><!-- /nb-viewer -->
-
-<!-- Scripts -->
-<script src="js/theme.js"></script>
-<script src="js/nav.js"></script>
-<script src="js/data.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
-<script src="js/notebooks.js"></script>
-<script>
-  document.getElementById('footer-year').textContent = new Date().getFullYear();
-
-  // Back button
-  document.getElementById('vwr-back').addEventListener('click', () => {
-    history.back();
-  });
-
-  // Sync highlight.js theme with site theme
-  function syncHljsTheme() {
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    document.getElementById('hljs-theme').href = isDark
-      ? 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css'
-      : 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css';
-  }
-
-  // Run on load
-  syncHljsTheme();
-
-  // Watch for theme changes
-  const observer = new MutationObserver(syncHljsTheme);
-  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-</script>
-</body>
+    </footer>
+    <div class="toast" id="toast" role="status" hidden></div>
+    <script src="js/site.js"></script>
+    <script src="js/silvi.js"></script>
+  </body>
 </html>
