@@ -1,0 +1,1548 @@
+<!doctype html>
+<html lang="en-GB" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>
+      Introduction to Spatial Mapping and Remote Sensing for Ecology — Les Hyperion
+    </title>
+    <meta
+      name="description"
+      content="An introductory guide and conceptual overview of spatial data handling, mapping, and remote sensing in R."
+    />
+    <meta name="theme-color" content="#0f2d3a" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../../assets/brand/favicon-32.png"
+    />
+    <link rel="icon" sizes="192x192" href="../../assets/brand/favicon-192.png" />
+    <link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png" />
+    <script src="../../js/theme-init.js"></script>
+    <link rel="stylesheet" href="../../css/site.css" />
+    <link rel="stylesheet" href="../../css/silvi.css" />
+    <link rel="stylesheet" href="../../css/revision.css" />
+    <link rel="stylesheet" href="../../css/refinement.css" />
+    <link rel="stylesheet" href="../../css/reader.css" />
+  </head>
+  <body class="reader-page">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../../index.html" aria-label="Les Hyperion — home"
+          ><img
+            class="brand-face"
+            src="../../assets/brand/silvi-face.png"
+            alt=""
+            width="55"
+            height="59"
+          /><span class="brand-name" aria-hidden="true"
+            >LES HYPERI<svg class="compass-o" viewBox="0 0 36 46" aria-hidden="true">
+              <circle
+                cx="18"
+                cy="23"
+                r="14.5"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              />
+              <path
+                d="m18 1 4 17 14 5-14 4-4 18-4-18L0 23l14-5Z"
+                fill="currentColor"
+              /></svg
+            >N</span
+          ></a
+        >
+        <nav class="desktop-nav" aria-label="Main navigation">
+          <a href="../../index.html">Home</a><a href="../../research.html">Research</a
+          ><a href="../../notebooks.html" aria-current="page">Notebooks</a
+          ><a href="../../carbon.html">Carbon</a><a href="../../about.html">About</a
+          ><a href="../../cv.html">CV</a>
+        </nav>
+        <div class="header-actions">
+          <button
+            class="icon-button theme-toggle"
+            data-theme-toggle
+            aria-label="Switch colour theme"
+          >
+            <svg
+              class="moon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path
+                d="M20.6 13.7A8.8 8.8 0 0 1 10.3 3.4a8.8 8.8 0 1 0 10.3 10.3Z"
+              /></svg
+            ><svg
+              class="sun"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path
+                d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"
+              />
+            </svg></button
+          ><button
+            class="icon-button menu-toggle"
+            aria-label="Open navigation"
+            aria-expanded="false"
+            aria-controls="mobile-nav"
+          >
+            <svg
+              class=""
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" hidden>
+        <a href="../../index.html">Home</a><a href="../../research.html">Research</a
+        ><a href="../../notebooks.html" aria-current="page">Notebooks</a
+        ><a href="../../carbon.html">Carbon</a><a href="../../about.html">About</a
+        ><a href="../../cv.html">CV</a>
+      </nav>
+    </header>
+    <main id="main">
+      <div class="reader-bar">
+        <div class="reader-bar-inner">
+          <a href="../../notebooks.html"
+            ><svg
+              class=""
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M20 12H5m6-6-6 6 6 6" />
+            </svg>
+            Notebooks</a
+          ><span class="reader-crumb">Spatial &amp; Remote Sensing / Part 1</span
+          ><a href="../Introduction_to_Spatial_Mapping999.ipynb" download
+            ><svg
+              class=""
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5" />
+            </svg>
+            Download .ipynb</a
+          >
+        </div>
+      </div>
+      <div class="reader-layout">
+        <aside class="reader-sidebar">
+          <figure
+            class="silvi-scene reader-silvi"
+            data-silvi-scene="notebook-Introduction_to_Spatial_Mapping999"
+          >
+            <div class="silvi-stage">
+              <img
+                src="../../assets/brand/unique-map.png"
+                alt="Exploring Introduction to Spatial Mapping and Remote Sensing for Ecology with Silvi"
+                width="480"
+                height="250"
+                loading="lazy"
+              />
+            </div>
+          </figure>
+          <details class="reader-contents" open>
+            <summary>In this notebook</summary>
+            <nav aria-label="Notebook contents">
+              <a href="#section-0-0"
+                >Introduction to Spatial Mapping and Remote Sensing for Ecology</a
+              ><a href="#section-0-2">Introduction</a
+              ><a href="#section-0-3">What is Spatial Analysis and Spatial Ecology?</a
+              ><a href="#section-1-8"
+                >Why Spatial Ecology Matters: Real-World Applications</a
+              ><a href="#section-2-19">Spatial Data: The Two Worlds</a
+              ><a href="#section-3-24">How Spatial Analysis is Done in R</a
+              ><a href="#section-4-30">What is Remote Sensing?</a
+              ><a href="#section-5-37">Remote Sensing for Ecology</a
+              ><a href="#section-6-44">What You Will Learn in This series</a
+              ><a href="#section-7-47">References and Further Reading</a>
+            </nav>
+          </details>
+          <div class="reader-tools">
+            <button id="toggle-outputs" aria-pressed="false">Collapse outputs</button
+            ><button class="print-button">Print notebook</button>
+          </div>
+          <p>Original code and saved outputs.<br />R · 8 cells</p>
+        </aside>
+        <article class="notebook-document">
+          <div class="reader-intro">
+            <p class="eyebrow">Spatial &amp; Remote Sensing · 2026-03-24</p>
+          </div>
+          <section class="markdown-cell">
+            <h1 id="section-0-0">
+              Introduction to Spatial Mapping and Remote Sensing for Ecology
+            </h1>
+            <h3 id="section-0-1">
+              A guide to spatial mapping and remote sensing using R
+            </h3>
+            <hr />
+            <blockquote>
+              <p>
+                <em>&quot;The map is not the territory.&quot;</em> — Alfred Korzybski
+              </p>
+            </blockquote>
+            <hr />
+            <h2 id="section-0-2">Introduction</h2>
+            <p>
+              Welcome to the spatial mapping and remote sensing series. The first
+              section (R Fundamentals) taught you how to work as a data analyst in R:
+              the basics of the language and the RStudio environment (Part 1), the
+              manipulation of tidy data with the <code>tidyverse</code> (Part 2), the
+              grammar of graphics with <code>ggplot2</code> (Part 3). From this point
+              onward, our subject changes. We move from generic data analysis to the
+              explicitly geographical and ecological: the science of
+              <em>where</em> things live, <em>how</em> environments vary across space,
+              and <em>what</em> satellites orbiting hundreds of kilometres above us can
+              tell us about life on Earth.
+            </p>
+            <p>
+              This page contains no R code. It is a conceptual map of the areas we are
+              about to explore. Subsequent pages (Part 2 onward) will load the
+              <code>sf</code>, <code>terra</code>, <code>stars</code>,
+              <code>tmap</code>, and <code>ggspatial</code> packages and begin the
+              technical work of reading, transforming, analysing, and visualising
+              spatial data. Before we get to that, however, you need to understand what
+              spatial ecology <em>is</em>, why it matters for the biodiversity crisis of
+              the twenty-first century, what kinds of data exist, and how a satellite
+              turns reflected sunlight into a number you can analyse. The maps shown
+              throughout this page were produced by myself as showcase examples of some
+              of the maps you should be able to make after this series.
+            </p>
+            <hr />
+            <h2 id="section-0-3">What is Spatial Analysis and Spatial Ecology?</h2>
+            <p>
+              <strong>Spatial analysis</strong> is the family of techniques used to
+              study phenomena whose properties depend on, or are organised by, their
+              location in space. It encompasses the description of spatial patterns
+              (where are things?), the testing of hypotheses about those patterns (are
+              they clustered, dispersed, or random?), and the modelling of processes
+              that generate them (what causes the pattern?).
+              <strong>Spatial ecology</strong>, on the other hand, is the application of
+              these techniques to ecological questions: the distribution and abundance
+              of organisms, the structure of habitats, the movement of individuals, the
+              connectivity of populations, and the flow of energy and matter through
+              landscapes and seascapes (Fortin and Dale, 2005; Wegmann et al., 2016).
+            </p>
+            <p>
+              Although ecology has always been concerned with place (Darwin&#39;s
+              <em>Voyage of the Beagle</em> is fundamentally a spatial document), the
+              formal incorporation of geographical concepts into ecological theory is
+              more recent. The discipline now recognises that almost every ecological
+              process plays out across heterogeneous space and that ignoring this
+              heterogeneity introduces serious bias. Two organisms sampled one metre
+              apart are not statistically independent; neither are two pixels of a
+              satellite image. Recognising spatial structure is therefore not a
+              stylistic preference but a prerequisite for valid inference (Legendre,
+              1993; Dormann et al., 2007).
+            </p>
+            <h3 id="section-0-4">Tobler&#39;s First Law of Geography</h3>
+            <p>
+              The intuition that proximity matters was crystallised by Waldo Tobler in
+              1970 in a paper describing a computer simulation of urban growth in
+              Detroit. To justify a simplification in his model, Tobler invoked what he
+              called &quot;the first law of geography&quot;:
+              <em
+                >everything is related to everything else, but near things are more
+                related than distant things</em
+              >
+              (Tobler, 1970). Although Tobler was not entirely serious in elevating this
+              observation to the status of a law, the phrase has become foundational. It
+              highlights spatial autocorrelation statistics, geostatistical
+              interpolation methods such as kriging, inverse distance weighting, and
+              most modern species distribution models. For the ecologist, Tobler&#39;s
+              law captures an inescapable fact: a temperature reading, a soil sample, or
+              a species occurrence is profoundly informative about its immediate
+              neighbourhood and progressively less informative further away.
+            </p>
+            <h3 id="section-0-5">A Brief History: From Humboldt to the Cloud</h3>
+            <p>
+              Spatial thinking in the life sciences is older than the satellite era.
+              Alexander von Humboldt, on his Andean expeditions with Aimé Bonpland in
+              the early nineteenth century, produced the <em>Tableau Physique</em> of
+              Mount Chimborazo, a cross-section of the volcano showing how plant
+              communities are stratified by altitude and climate (Humboldt and Bonpland,
+              1807). This was arguably the first quantitative biogeographic profile and
+              the conceptual ancestor of every elevation gradient study since.
+            </p>
+            <p>
+              In London in 1854, the physician John Snow mapped the addresses of cholera
+              fatalities in Soho, demonstrating that deaths clustered around the Broad
+              Street water pump and providing decisive evidence for waterborne (rather
+              than miasmatic) transmission of disease (Snow, 1855). Snow&#39;s map is
+              now an icon of epidemiology, public health, and spatial reasoning, even if
+              the details of its historical role are more nuanced than the popular
+              legend suggests. A century later, Robert MacArthur and Edward O. Wilson
+              formalised the spatial logic of biodiversity in
+              <em>The Theory of Island Biogeography</em> (1967), demonstrating that
+              species richness on islands is a predictable function of island area and
+              isolation. Their equilibrium theory remains the conceptual scaffold for
+              the design of nature reserves and for our understanding of habitat
+              fragmentation.
+            </p>
+            <p>
+              The late twentieth century brought the digital revolution: Geographic
+              Information Systems (GIS) emerged in the 1960s and 1970s with pioneers
+              such as Roger Tomlinson and the Harvard Laboratory for Computer Graphics;
+              the first Earth-observation satellite for civilian use, ERTS-1 (later
+              renamed Landsat 1), was launched by NASA in 1972, beginning a continuous
+              archive of the Earth&#39;s land surface that is now over five decades long
+              (Wulder et al., 2022). Today, the field has moved into the cloud:
+              petabyte-scale archives such as Google Earth Engine, the Microsoft
+              Planetary Computer, and AWS Open Data make the entire Landsat and Sentinel
+              record analysable from a laptop (Gorelick et al., 2017).
+            </p>
+            <h3 id="section-0-6">Why Ecology is Inherently Spatial</h3>
+            <p>
+              Organisms occupy space, compete for it, disperse through it, and are
+              shaped by environmental gradients distributed across it. Climate,
+              topography, soil, hydrology, and disturbance regimes all vary
+              geographically and structure the assemblages that ecologists study.
+              Spatial position determines what a population experiences and which other
+              populations it can exchange genes with. A non-spatial ecology, in which
+              all individuals are treated as interchangeable points in an abstract niche
+              space, will systematically misrepresent the dynamics of real ecosystems
+              (Levin, 1992; Tilman and Kareiva, 1997).
+            </p>
+            <h3 id="section-0-7">Scales of Analysis</h3>
+            <p>
+              Ecological questions are scale-dependent, and choosing the wrong scale can
+              render a study uninformative or misleading. The <em>grain</em> (the
+              resolution of measurement, for example a 10 m Sentinel-2 pixel) and the
+              <em>extent</em> (the total area covered, for example the Cape Floristic
+              Region) jointly define what can be inferred. Conventionally, ecologists
+              distinguish:
+            </p>
+            <ul>
+              <li>
+                <strong>Local scale</strong> (metres to hectares): individual movement,
+                microhabitat selection, plant-pollinator interactions.
+              </li>
+              <li>
+                <strong>Landscape scale</strong> (kilometres to tens of kilometres):
+                patch dynamics, corridor function, metapopulation processes.
+              </li>
+              <li>
+                <strong>Regional scale</strong> (hundreds of kilometres): biogeographic
+                provinces, beta diversity, climate gradients.
+              </li>
+              <li>
+                <strong>Global scale</strong> (continents and oceans): biome
+                distributions, planetary biogeochemistry, climate-biodiversity
+                feedbacks.
+              </li>
+            </ul>
+            <p>
+              A satellite product useful at one scale may be invisible at another: 30 m
+              Landsat data can resolve a forest clearing but not an individual tree,
+              whereas 250 m MODIS imagery captures continental phenology but blurs every
+              field boundary. Throughout this block, you will learn to match data,
+              methods, and questions to scales appropriately.
+            </p>
+          </section>
+          <section class="markdown-cell">
+            <hr />
+            <h2 id="section-1-8">
+              Why Spatial Ecology Matters: Real-World Applications
+            </h2>
+            <p>
+              Spatial methods are no longer optional for the working ecologist. They are
+              central to nearly every contemporary applied question in conservation
+              biology, environmental management, and global change science.
+            </p>
+            <h3 id="section-1-9">1. Conservation Planning and Protected Area Design</h3>
+            <p>
+              Systematic conservation planning, formalised by Margules and Pressey
+              (2000), uses spatial optimisation algorithms (such as those implemented in
+              Marxan and <code>prioritizr</code>) to design networks of protected areas
+              that maximise biodiversity representation while minimising socioeconomic
+              cost. The Kunming-Montreal Global Biodiversity Framework (KMGBF), adopted
+              under the Convention on Biological Diversity in December 2022, includes
+              the well-known &quot;30 by 30&quot; target of conserving 30% of land and
+              ocean by 2030; meeting it without spatial analysis is impossible
+              (Convention on Biological Diversity, 2022; Cavender-Bares et al., 2022).
+            </p>
+            <h3 id="section-1-10">
+              2. Species Distribution Modelling and Climate Projections
+            </h3>
+            <p>
+              Species distribution models (SDMs) correlate occurrence records with
+              environmental predictors to estimate habitat suitability across space and
+              project it under future climates (Elith and Leathwick, 2009; Zurell et
+              al., 2020). Modern SDMs increasingly incorporate raw satellite imagery and
+              time series via deep learning, capturing seasonal and structural cues that
+              bioclimatic averages miss (Dollinger et al., 2024). These models inform
+              IUCN Red List assessments, climate-adaptation planning for endangered
+              species, and the identification of climate refugia.
+            </p>
+            <h3 id="section-1-11">3. Disease Ecology</h3>
+            <p>
+              The spatial mapping of disease vectors and hosts is now indispensable. The
+              Malaria Atlas Project produces global, high-resolution surfaces of
+              <em>Plasmodium falciparum</em> prevalence by combining household surveys
+              with environmental covariates (Weiss et al., 2019). Similar approaches map
+              <em>Ixodes</em> tick habitat for Lyme disease in Europe and North America,
+              dengue and Zika risk in the tropics, and the geography of zoonotic
+              spillover. Snow&#39;s 1854 cholera map has direct intellectual descendants
+              in every contemporary epidemiological dashboard.
+            </p>
+            <h3 id="section-1-12">4. Invasive Species Management</h3>
+            <p>
+              Remote sensing combined with SDMs predicts where alien species are most
+              likely to establish, allowing managers to allocate scarce surveillance and
+              eradication resources. Recent work has mapped the expansion of
+              <em>Lantana camara</em> across African savannas using fused satellite and
+              field data (Saranya et al., 2024), and similar pipelines now monitor
+              <em>Acacia</em> invasions in the Cape, <em>Prosopis</em> in East Africa,
+              and <em>Caulerpa</em> in the Mediterranean.
+            </p>
+            <h3 id="section-1-13">5. Marine Spatial Planning and MPA Design</h3>
+            <p>
+              Marine protected area (MPA) networks rely on spatial analyses of habitat,
+              productivity, connectivity, and human pressure. Sea surface temperature,
+              chlorophyll-<em>a</em> concentration, bathymetry, and modelled larval
+              dispersal are routinely combined to identify priority sites, evaluate
+              representativeness, and forecast climate-driven shifts in species ranges
+              (Lubchenco and Grorud-Colvert, 2015).
+            </p>
+            <h3 id="section-1-14">6. Habitat Connectivity and Corridor Design</h3>
+            <p>
+              Landscape genetics and circuit theory (McRae et al., 2008) translate maps
+              of land cover into maps of resistance to movement, allowing the
+              identification of corridors that maintain gene flow between fragmented
+              populations. The Yellowstone-to-Yukon initiative and similar
+              continental-scale connectivity projects depend entirely on such spatial
+              modelling.
+            </p>
+            <h3 id="section-1-15">7. Ecosystem Services Valuation</h3>
+            <p>
+              Biophysical and economic valuation of services such as carbon storage,
+              pollination, water provision, and coastal protection requires their
+              explicit mapping. Tools such as InVEST and ARIES map service supply,
+              demand, and beneficiaries to inform land-use decisions and
+              payment-for-ecosystem-services schemes.
+            </p>
+            <h3 id="section-1-16">8. Land-Use Change and Deforestation Monitoring</h3>
+            <p>
+              The Hansen Global Forest Change dataset, derived from time-series analysis
+              of Landsat imagery and now extending from 2000 to 2024 in version 1.12,
+              provides the world&#39;s standard reference for tropical and global forest
+              loss (Hansen et al., 2013). It is used by national REDD+ programmes, by
+              Global Forest Watch, and by court-admissible deforestation tracking under
+              the EU Deforestation Regulation. A 2025 analysis using the same data found
+              that forest disturbance from fire reached unprecedented levels in 2023 and
+              2024, with the largest increases in intact forest landscapes (Potapov et
+              al., 2025).
+            </p>
+            <p>
+              <img
+                src="../media/bb380505e6b3e0dc874e.png"
+                alt="Figure 1: Gauteng urban change 2016–2026 from Landsat 8/9 dNDBI."
+              />
+            </p>
+            <h3 id="section-1-17">9. Wildlife Trafficking and Anti-Poaching</h3>
+            <p>
+              Spatial intelligence highlights modern anti-poaching: predictive policing
+              models built on past poaching incidents direct ranger patrols (the SMART
+              system); satellite radar detects illegal fishing vessels (Global Fishing
+              Watch); and isotopic plus genetic forensics, mapped spatially, trace ivory
+              shipments back to source populations.
+            </p>
+            <h3 id="section-1-18">10. Climate Change Impacts on Biodiversity</h3>
+            <p>
+              From poleward and uphill range shifts (Chen et al., 2011), to
+              coral-bleaching forecasts driven by NOAA&#39;s satellite SST products, to
+              phenological mismatch in temperate forests, the empirical study of climate
+              impacts on biodiversity is overwhelmingly spatial. The integration of
+              remote sensing with ecology, as articulated by Cavender-Bares et al.
+              (2022), is now indispensable for tracking the Essential Biodiversity
+              Variables that support global monitoring.
+            </p>
+          </section>
+          <section class="markdown-cell">
+            <hr />
+            <h2 id="section-2-19">Spatial Data: The Two Worlds</h2>
+            <p>
+              Spatial data come in two fundamental flavours, each suited to different
+              kinds of phenomena. Mastery of the distinction, and of the conversions
+              between them, is the central technical skill of this block.
+            </p>
+            <h3 id="section-2-20">Vector Data: Discrete Features</h3>
+            <p>
+              <strong>Vector data</strong> represent discrete spatial features as
+              geometries: <em>points</em> (zero-dimensional),
+              <em>lines</em> (one-dimensional), and <em>polygons</em> (two-dimensional).
+              Each feature carries an attribute table linking it to descriptive
+              variables.
+            </p>
+            <ul>
+              <li>
+                <em>Points</em> might represent species occurrences from GBIF, the
+                locations of camera traps, GPS fixes from a tracked elephant, or weather
+                stations.
+              </li>
+              <li>
+                <em>Lines</em> commonly represent rivers, roads, transects walked by
+                field surveyors, or migration tracks.
+              </li>
+              <li>
+                <em>Polygons</em> delineate countries, protected areas, vegetation
+                patches, or species range maps.
+              </li>
+            </ul>
+            <p>
+              Vector data are the natural representation for things with sharp
+              boundaries. The international standard for representing them is the Open
+              Geospatial Consortium&#39;s Simple Features specification (ISO 19125),
+              which <code>sf</code> implements directly in R (Pebesma, 2018; Pebesma and
+              Bivand, 2023).
+            </p>
+            <h3 id="section-2-21">Raster Data: Continuous Surfaces</h3>
+            <p>
+              <strong>Raster data</strong> represent space as a regular grid of cells
+              (pixels), each holding one or more numerical values. Rasters are the
+              natural representation for continuously varying phenomena.
+            </p>
+            <ul>
+              <li>
+                A <em>digital elevation model</em> (DEM) records altitude at every cell.
+              </li>
+              <li>
+                A <em>sea surface temperature</em> grid records degrees Celsius over the
+                ocean, daily.
+              </li>
+              <li>
+                A <em>land cover</em> map assigns each pixel to a categorical class
+                (e.g., the eleven classes of ESA WorldCover).
+              </li>
+              <li>
+                A <em>Sentinel-2 scene</em> records reflectance in thirteen spectral
+                bands at 10 to 60 m resolution.
+              </li>
+            </ul>
+            <p>
+              A multi-band or multi-date raster naturally extends to a
+              <em>data cube</em>, a three- or four-dimensional array indexed by space,
+              time, and band. Modern packages such as <code>terra</code> and
+              <code>stars</code> support this view directly (Pebesma and Bivand, 2023).
+            </p>
+            <p>
+              <img
+                src="../media/29e8c7905e9c49a76ceb.png"
+                alt="Figure 2: Hill-shaded South Africa with rivers, AWS Terrain Tiles SRTM. This relief map portrays the topography of South Africa derived from Shuttle Radar Topography Mission (SRTM) elevation data, served as cloud-optimised Mapzen Terrain Tiles via AWS Open Data and processed in R."
+              />
+            </p>
+            <h3 id="section-2-22">
+              Coordinate Reference Systems: Why Latitude and Longitude Are Not Enough
+            </h3>
+            <p>
+              Every spatial dataset must be tagged with a
+              <strong>coordinate reference system</strong> (CRS) that specifies how its
+              numerical coordinates relate to positions on the real Earth. A CRS has
+              three ingredients: a <em>datum</em> (a model of the Earth&#39;s shape,
+              most commonly the WGS84 ellipsoid used by GPS); a
+              <em>coordinate system</em> (geographic in degrees of latitude and
+              longitude, or projected in metres on a flat plane); and, for projected
+              systems, a <em>projection</em> (the mathematical transformation from
+              sphere to plane). Each known CRS is identified by an EPSG code: 4326 for
+              WGS84 geographic coordinates, 3857 for the Web Mercator used by Google
+              Maps, 3035 for ETRS89 / LAEA Europe, and so on.
+            </p>
+            <p>
+              Mismatched CRSs are the single most common source of bugs in spatial
+              analysis. If you overlay a raster in WGS84 on a polygon in UTM, your
+              software will plot them in the same window but they will not align in any
+              meaningful sense; any spatial join will fail. Modern R-spatial packages
+              handle reprojection through the PROJ library, but the user must remain
+              aware of which CRS is in use.
+            </p>
+            <h3 id="section-2-23">Map Projections and Their Distortions</h3>
+            <p>
+              The Earth is (very nearly) an oblate spheroid; a flat map necessarily
+              distorts it. Every projection preserves some properties at the expense of
+              others.
+            </p>
+            <ul>
+              <li>
+                The <strong>Mercator projection</strong> (1569) preserves angles, making
+                it useful for navigation but grotesquely inflating the polar regions. On
+                a Mercator map, Greenland appears comparable in size to Africa, even
+                though Africa is roughly fourteen times larger. For ecological mapping
+                at global scales, Mercator is almost always the wrong choice.
+              </li>
+              <li>
+                The <strong>Robinson projection</strong> is a compromise that distorts
+                both area and angle modestly, producing visually pleasing world maps
+                suitable for thematic display.
+              </li>
+              <li>
+                The <strong>Mollweide</strong> and
+                <strong>Eckert IV</strong> projections are equal-area, preserving the
+                relative sizes of regions, which is essential for any choropleth where
+                area is part of the message.
+              </li>
+              <li>
+                <strong>Albers Equal-Area Conic</strong> is the standard for
+                continental-scale maps (such as the contiguous United States or southern
+                Africa) where minimising area distortion matters.
+              </li>
+              <li>
+                <strong>Universal Transverse Mercator (UTM)</strong> divides the world
+                into 6-degree zones, each with low local distortion, and is the
+                workhorse for fieldwork and high-resolution analysis.
+              </li>
+              <li>
+                <strong>Orthographic</strong> projections show the Earth as it appears
+                from space, useful for visualising hemispheric phenomena such as Pacific
+                tectonics or polar sea ice.
+              </li>
+            </ul>
+            <p>
+              Choosing a projection is therefore an ecological as well as an aesthetic
+              decision. A global biodiversity choropleth on a Mercator base will
+              visually exaggerate boreal countries and trivialise the tropics; an
+              equal-area projection corrects this.
+            </p>
+            <hr />
+            <p>
+              <img
+                src="../media/a395dfc4d72c958fbee9.png"
+                alt="Figure 3: Bathymetry of the Western Indian Ocean with island insets on a Lambert Azimuthal Equal-Area projection."
+              />
+            </p>
+            <hr />
+            <p>
+              <img
+                src="../media/28411e5a89df122bfd24.png"
+                alt="Figure 4: GBIF biodiversity records by country on a Robinson projection."
+              />
+            </p>
+            <hr />
+            <p>
+              <img
+                src="../media/31ce9fd6993160a5730b.png"
+                alt="Figure 5: Earthquakes near Fiji on an orthographic projection."
+              />
+            </p>
+            <hr />
+          </section>
+          <section class="markdown-cell">
+            <hr />
+            <h2 id="section-3-24">How Spatial Analysis is Done in R</h2>
+            <h3 id="section-3-25">A Brief History of R-Spatial</h3>
+            <p>
+              R has been used for spatial analysis since the early 2000s, but the
+              toolchain has changed dramatically. The first generation, built around the
+              <code>sp</code> package (Pebesma and Bivand, 2005) for vector data and the
+              <code>raster</code> package (Hijmans, 2010) for raster data, dominated the
+              discipline for over a decade. Two companion packages,
+              <code>rgdal</code> (interface to GDAL and PROJ) and
+              <code>rgeos</code> (interface to GEOS), provided the link to the
+              underlying open-source geospatial C++ libraries; a third,
+              <code>maptools</code>, supplied legacy utilities.
+            </p>
+            <p>
+              The second generation began with <code>sf</code> in 2016, which
+              implemented the OGC Simple Features standard natively in R using modern
+              data structures (tibbles with list columns of geometries) and direct
+              linkage to GDAL, GEOS, and PROJ (Pebesma, 2018). It was followed by
+              <code>stars</code> (2018) for raster and vector data cubes, and by
+              <code>terra</code> (2020), Robert Hijmans&#39;s successor to
+              <code>raster</code>, with its own direct C++ bindings to the same
+              geospatial stack (Pebesma and Bivand, 2023; Hijmans, 2023).
+            </p>
+            <h3 id="section-3-26">The Retirement of rgdal, rgeos, and maptools</h3>
+            <p>
+              On 16 October 2023, the legacy packages <code>rgdal</code>,
+              <code>rgeos</code>, <code>maptools</code>, and <code>rgrass7</code> were
+              archived on CRAN, marking the formal end of the first-generation R-spatial
+              toolchain (Bivand, 2023). The retirement was anticipated for years, was
+              coordinated by the R Consortium&#39;s R-Spatial Evolution project, and
+              reflects two converging realities: the maintainer, Roger Bivand, retired
+              from active development; and the modern packages had reached parity and
+              superseded the legacy ones. You, however, are fortunate: you will learn
+              the modern stack from the start and will not need to translate between two
+              paradigms. Older textbooks, blog posts, and Stack Overflow answers that
+              load <code>rgdal</code> or <code>rgeos</code> should now be treated as
+              historical documents.
+            </p>
+            <h3 id="section-3-27">The Modern Toolkit</h3>
+            <p>The packages you will encounter in this block are:</p>
+            <ul>
+              <li>
+                <strong><code>sf</code></strong> (Simple Features) for vector data:
+                points, lines, polygons, and their attributes, all stored in a tidy data
+                frame with a geometry column. Reads and writes shapefiles, GeoPackages,
+                GeoJSON, and many other formats through GDAL.
+              </li>
+              <li>
+                <strong><code>terra</code></strong> for raster data and lighter-weight
+                vector data, optimised for speed and memory efficiency on very large
+                grids. The natural successor to <code>raster</code>.
+              </li>
+              <li>
+                <strong><code>stars</code></strong> for spatiotemporal arrays and data
+                cubes, including curvilinear and rotated grids that arise in climate
+                model output.
+              </li>
+              <li>
+                <strong><code>ggplot2</code></strong> with <code>geom_sf()</code> for
+                static maps in the grammar of graphics.
+              </li>
+              <li>
+                <strong><code>tmap</code></strong> for thematic mapping in a layered,
+                ggplot-like syntax with strong defaults for both static and interactive
+                output (Tennekes, 2018).
+              </li>
+              <li>
+                <strong><code>ggspatial</code></strong> for adding north arrows, scale
+                bars, and tile basemaps to ggplot2 maps.
+              </li>
+              <li>
+                <strong><code>leaflet</code></strong> for interactive web maps embedded
+                in R Markdown or Shiny.
+              </li>
+              <li>
+                Helper packages such as <code>rnaturalearth</code> (country and ocean
+                polygons), <code>rgbif</code> (GBIF occurrences),
+                <code>elevatr</code> (DEMs), <code>rstac</code> (SpatioTemporal Asset
+                Catalogues), and <code>gdalcubes</code> (analysis-ready data cubes from
+                satellite imagery).
+              </li>
+            </ul>
+            <h3 id="section-3-28">Why R Rather Than ArcGIS or QGIS?</h3>
+            <p>
+              Desktop GIS software (ArcGIS Pro, QGIS) excels at point-and-click
+              cartography and is widely used in industry. R offers complementary
+              strengths that matter especially in research:
+            </p>
+            <ul>
+              <li>
+                <strong>Reproducibility</strong>. A script encodes every step from raw
+                data to final figure, can be re-run by anyone (including the author six
+                months later), and can be version-controlled with Git.
+              </li>
+              <li>
+                <strong>Integration with statistics</strong>. R is a statistical
+                language first. Spatial data flow seamlessly into mixed models, machine
+                learning pipelines, Bayesian inference, and time-series analyses without
+                leaving the environment.
+              </li>
+              <li>
+                <strong>Automation</strong>. Producing one map for one country is easy
+                in any GIS; producing the same map for all 195 countries is trivial in R
+                and tedious by point-and-click.
+              </li>
+              <li>
+                <strong>Open-source transparency</strong>. Every algorithm is
+                inspectable, citable, and free. There are no licence dongles standing
+                between you and your data.
+              </li>
+              <li>
+                <strong>Community and longevity</strong>. The CRAN Task View on Analysis
+                of Spatial Data lists hundreds of curated packages spanning
+                point-pattern analysis, geostatistics, areal regression, and ecological
+                niche modelling.
+              </li>
+            </ul>
+            <p>
+              For ecological research, the consensus of the field, articulated in
+              successive editions of Lovelace, Nowosad, and Muenchow&#39;s
+              <em>Geocomputation with R</em> (2025) and Pebesma and Bivand&#39;s
+              <em>Spatial Data Science</em> (2023), is that R is the best
+              general-purpose environment.
+            </p>
+            <h3 id="section-3-29">
+              The OGC Simple Features Standard and the GDAL/GEOS/PROJ Stack
+            </h3>
+            <p>
+              Underneath the R packages lies a foundation of open-source C/C++ libraries
+              shared across the geospatial world (used also by QGIS, PostGIS, GeoPandas
+              in Python, and many commercial products). Three are essential:
+            </p>
+            <ul>
+              <li>
+                <strong>GDAL</strong> (Geospatial Data Abstraction Library) reads and
+                writes hundreds of vector and raster formats and handles reprojection.
+              </li>
+              <li>
+                <strong>GEOS</strong> (Geometry Engine, Open Source) computes geometric
+                predicates and operations: intersections, unions, buffers, distances.
+              </li>
+              <li>
+                <strong>PROJ</strong> maintains a database of coordinate reference
+                systems and the transformations between them.
+              </li>
+            </ul>
+            <p>
+              The Open Geospatial Consortium&#39;s
+              <strong>Simple Features</strong> specification, formalised as ISO 19125,
+              defines a small set of geometry types (POINT, LINESTRING, POLYGON, and
+              their MULTI- variants) and a vocabulary of operations on them.
+              <code>sf</code> implements this standard in R, ensuring that data and
+              methods written in R are interoperable with PostGIS databases, ArcGIS,
+              QGIS, and GeoPandas.
+            </p>
+          </section>
+          <section class="markdown-cell">
+            <hr />
+            <h2 id="section-4-30">What is Remote Sensing?</h2>
+            <h3 id="section-4-31">Definition and Conceptual Basis</h3>
+            <p>
+              <strong>Remote sensing</strong> is the acquisition of information about an
+              object or phenomenon without making physical contact with it. In Earth
+              observation, this almost always means measuring electromagnetic radiation
+              (reflected sunlight, emitted thermal radiation, or returned radar pulses)
+              from instruments on satellites, aircraft, or drones. The information
+              content of a measurement depends on how the target interacts with
+              radiation at different wavelengths: chlorophyll absorbs red light, water
+              absorbs near-infrared, snow reflects almost everything in the visible
+              spectrum, and burnt vegetation has a distinctive shortwave-infrared
+              signature.
+            </p>
+            <p>
+              Two fundamental classes of sensor exist.
+              <strong>Passive sensors</strong> detect natural radiation, principally
+              reflected solar radiation (in the visible, near-infrared, and shortwave
+              infrared) and emitted thermal radiation (in the thermal infrared). They
+              depend on the sun and cannot see through cloud at most wavelengths.
+              Examples include Landsat&#39;s Operational Land Imager and
+              Sentinel-2&#39;s MultiSpectral Instrument.
+              <strong>Active sensors</strong> emit their own radiation and measure the
+              return: synthetic aperture radar (Sentinel-1, ALOS PALSAR), lidar
+              (ICESat-2, GEDI), and altimeters (Sentinel-3, SWOT). They work day and
+              night and, at radar wavelengths, see through cloud.
+            </p>
+            <h3 id="section-4-32">A Brief History of Earth Observation</h3>
+            <p>
+              Civilian satellite remote sensing began with the launch of ERTS-1 (Landsat
+              1) on 23 July 1972. The Landsat programme has continued without
+              interruption ever since, with Landsat 9 (launched September 2021) and
+              Landsat 8 (launched 2013) currently operational at 30 m resolution and a
+              16-day revisit (Wulder et al., 2022). The European Space Agency&#39;s
+              Copernicus programme, launched in the mid-2010s, added a constellation of
+              Sentinel satellites with open data policies that catalysed a global
+              community of users. Sentinel-2A (2015) and Sentinel-2B (2017) deliver 10
+              to 20 m optical imagery; Sentinel-2C, launched 5 September 2024, replaced
+              Sentinel-2A in primary operations on 21 January 2025, and Sentinel-2D will
+              succeed Sentinel-2B in due course (ESA, 2025). NASA&#39;s Harmonised
+              Landsat and Sentinel-2 (HLS) project now combines the two missions into a
+              virtual constellation with a global revisit of better than 1.4 days (NASA,
+              2025). The era of &quot;every place, every few days&quot; is here.
+            </p>
+            <h3 id="section-4-33">Key Satellite Missions and Their Resolutions</h3>
+            <p>
+              Four kinds of resolution characterise any sensor and must be considered
+              jointly:
+            </p>
+            <ul>
+              <li>
+                <strong>Spatial resolution</strong>: the size of one pixel on the
+                ground. Examples: Sentinel-2 at 10 m for visible and near-infrared
+                bands, Landsat at 30 m, MODIS at 250 m to 1 km, and the NOAA OISST
+                product at 25 km.
+              </li>
+              <li>
+                <strong>Temporal resolution</strong> (revisit time): how often the
+                satellite returns to the same place. Examples: MODIS daily, Sentinel-2
+                every 5 days, Landsat every 16 days.
+              </li>
+              <li>
+                <strong>Spectral resolution</strong>: the number and width of wavelength
+                bands measured. A natural-colour camera has 3 bands (RGB); Sentinel-2
+                has 13; hyperspectral sensors such as PRISMA, EnMAP, and the planned
+                NASA SBG mission have hundreds.
+              </li>
+              <li>
+                <strong>Radiometric resolution</strong>: how finely the signal is
+                digitised, expressed in bits. Landsat 8 records 12-bit data (4,096
+                levels); older sensors offered 8-bit (256 levels).
+              </li>
+            </ul>
+            <p>
+              There is no free lunch: high spatial resolution is usually traded against
+              low temporal resolution and limited spectral coverage. The art of remote
+              sensing is choosing the right instrument for the question.
+            </p>
+            <p>The principal missions you will encounter are:</p>
+            <ul>
+              <li>
+                <strong>Landsat (1972 to present)</strong>, jointly operated by NASA and
+                the USGS, providing the longest continuous land-imaging record at 30 m.
+              </li>
+              <li>
+                <strong>Sentinel-2 (2015 to present)</strong>, ESA&#39;s Copernicus
+                optical mission, delivering 10–20 m imagery every 5 days globally.
+              </li>
+              <li>
+                <strong>MODIS (1999, 2002 to present)</strong>, NASA&#39;s Moderate
+                Resolution Imaging Spectroradiometer aboard the Terra and Aqua
+                satellites, providing daily 250 m to 1 km imagery; succeeded by VIIRS.
+              </li>
+              <li>
+                <strong>NOAA AVHRR / OISST</strong>, providing the longest record of sea
+                surface temperature, used for climate science and fisheries.
+              </li>
+              <li>
+                <strong>SRTM</strong> (Shuttle Radar Topography Mission, February 2000),
+                <strong>ASTER GDEM</strong>, and the
+                <strong>Copernicus DEM (GLO-30)</strong> for elevation at 30 m globally.
+              </li>
+              <li>
+                <strong>Sentinel-1</strong> (C-band radar) for cloud-penetrating
+                imaging.
+              </li>
+              <li><strong>GEDI and ICESat-2</strong> for canopy-height lidar.</li>
+            </ul>
+            <p>
+              <img
+                src="../media/089e5b0a0d817ed98a9c.png"
+                alt="Figure 6: ESA WorldCover land cover around Florence, Italy. This map shows the eleven-class land cover classification of the area around Florence, Italy, from the ESA WorldCover v200 product for the year 2021 at 10 m resolution (Zanaga et al., 2022)."
+              />
+            </p>
+            <h3 id="section-4-34">Spectral Bands and What They Mean</h3>
+            <p>
+              Beyond the visible <strong>red, green, and blue</strong> (the bands we see
+              with our eyes), the most ecologically informative bands are:
+            </p>
+            <ul>
+              <li>
+                <strong>Near-infrared (NIR, ~700–1300 nm)</strong>, strongly reflected
+                by healthy leaves and the basis for vegetation indices.
+              </li>
+              <li>
+                <strong>Shortwave infrared (SWIR, ~1300–2500 nm)</strong>, sensitive to
+                plant water content, mineralogy, and burnt area.
+              </li>
+              <li>
+                <strong>Thermal infrared (~3000–14000 nm)</strong>, used for land and
+                sea surface temperature.
+              </li>
+              <li>
+                <strong>Red edge</strong> (~700–750 nm), a transition zone exquisitely
+                sensitive to chlorophyll status, sampled by Sentinel-2 (bands 5, 6, 7)
+                and used for crop monitoring and species discrimination.
+              </li>
+            </ul>
+            <h3 id="section-4-35">Vegetation Indices</h3>
+            <p>
+              A vegetation index combines reflectance in two or more bands into a single
+              number that emphasises a property of the vegetation. The most famous is
+              <strong>NDVI</strong> = (NIR − Red) / (NIR + Red), introduced in the early
+              1970s (Rouse et al., 1974) and still ubiquitous (Pettorelli et al., 2005;
+              Pettorelli, 2013). NDVI ranges from approximately −1 to +1; live, dense
+              vegetation typically scores above 0.6, sparse vegetation around 0.2 to
+              0.5, and bare ground and water below 0.1. NDVI saturates over dense
+              canopies and is sensitive to soil background and atmospheric conditions;
+              alternatives include the <strong>Enhanced Vegetation Index (EVI)</strong>,
+              which corrects for these effects, the
+              <strong>Soil-Adjusted Vegetation Index (SAVI)</strong> for sparse
+              vegetation, the
+              <strong>Normalised Difference Water Index (NDWI)</strong> for moisture,
+              and the <strong>Normalised Difference Built-up Index (NDBI)</strong> for
+              urban areas. For mapping urban expansion, the difference of NDBI between
+              two dates (dNDBI) is a robust change detector.
+            </p>
+            <p>
+              <img
+                src="../media/7ee6f0cef7ae59b0adb6.png"
+                alt="Figure 7: NDVI Cape Peninsula from Sentinel-2. This map shows the Normalised Difference Vegetation Index (NDVI) for the Cape Peninsula derived from a cloud-free Sentinel-2 Level-2A composite."
+              />
+            </p>
+            <h3 id="section-4-36">Cloud Computing Platforms</h3>
+            <p>
+              The volume of modern Earth observation data is staggering: the Sentinel
+              and Landsat archives jointly exceed 50 petabytes and grow by terabytes
+              daily. No laptop can hold them, and downloading even a national-scale
+              analysis is impractical. Modern workflow has therefore moved to the cloud:
+            </p>
+            <ul>
+              <li>
+                <strong>Google Earth Engine</strong> (Gorelick et al., 2017) provides a
+                JavaScript and Python interface to a curated petabyte-scale archive with
+                massive parallel computation. The R package <code>rgee</code> connects R
+                users.
+              </li>
+              <li>
+                <strong>Microsoft Planetary Computer</strong> offers a similar service
+                with native Python and STAC APIs.
+              </li>
+              <li>
+                <strong>AWS Open Data</strong> hosts Landsat, Sentinel, NAIP, and many
+                other archives as Cloud Optimised GeoTIFFs that R can stream pixel by
+                pixel via <code>rstac</code> and <code>gdalcubes</code>.
+              </li>
+              <li>
+                <strong>The Copernicus Data Space Ecosystem</strong> provides ESA&#39;s
+                primary public access to Sentinel data.
+              </li>
+            </ul>
+            <p>
+              These platforms have democratised continental-scale remote sensing
+              analysis, opening it to graduate students and small NGOs whose budgets
+              would never have afforded the storage and computation a decade ago.
+            </p>
+          </section>
+          <section class="markdown-cell">
+            <hr />
+            <h2 id="section-5-37">Remote Sensing for Ecology</h2>
+            <p>
+              Beyond the obvious applications to land cover and vegetation, remote
+              sensing now permeates virtually every subdiscipline of ecology.
+            </p>
+            <h3 id="section-5-38">Forest Cover and Deforestation</h3>
+            <p>
+              The Hansen <em>et al.</em> (2013) Global Forest Change product, updated
+              annually, provides 30 m global maps of tree cover in 2000, the year of any
+              subsequent loss through 2024 (in version 1.12), and tree-cover gain. It
+              underpins Global Forest Watch, national REDD+ Monitoring, Reporting, and
+              Verification systems, and the EU Deforestation Regulation due-diligence
+              requirements. Allied products from the European Commission Joint Research
+              Centre map tropical moist forest dynamics from 1990, distinguishing
+              degradation from outright deforestation (Vancutsem et al., 2021). Together
+              they enable real-time monitoring of frontier deforestation in the Amazon,
+              the Congo Basin, and Southeast Asia at scales no field campaign could ever
+              match.
+            </p>
+            <h3 id="section-5-39">Marine Remote Sensing</h3>
+            <p>
+              Sea surface temperature (NOAA OISST, MUR-SST), chlorophyll-<em>a</em>
+              concentration (MODIS, OLCI on Sentinel-3), salinity (SMOS, SMAP), sea
+              surface height (Jason, SWOT), and ocean colour generally drive marine
+              ecology in the satellite era. They forecast harmful algal blooms, identify
+              marine heatwaves before they bleach reefs, track the migration of pelagic
+              predators such as bluefin tuna and white sharks, and define dynamic ocean
+              management zones whose boundaries shift with the conditions (Lubchenco and
+              Grorud-Colvert, 2015).
+            </p>
+            <p>
+              <img
+                src="../media/725e1cf5a8efd5a10267.png"
+                alt="Figure 8: Seasonal SST trends around Southern Africa, NOAA OISST 1982–2024."
+              />
+            </p>
+            <h3 id="section-5-40">Phenology and Time Series</h3>
+            <p>
+              Long-term satellite vegetation indices reveal the timing of green-up and
+              senescence with unprecedented spatial detail. Phenological metrics (start
+              of season, peak, length) extracted from MODIS or Landsat are essential for
+              studying climate-driven shifts in growing seasons, mismatches between
+              herbivores and forage, the timing of bird migration, and the productivity
+              of grazing systems (Pettorelli et al., 2005; Cleland et al., 2007).
+            </p>
+            <h3 id="section-5-41">
+              Disturbance Detection: Fire, Flood, and Urbanisation
+            </h3>
+            <p>
+              Burned area products (MODIS MCD64A1, Sentinel-2 FireCCI) provide
+              near-real-time fire mapping at global scales, while change-detection
+              algorithms such as LandTrendr, BFAST, and CCDC quantify the timing,
+              magnitude, and duration of disturbances at the per-pixel level. The 2025
+              finding that global forest fire disturbance reached unprecedented levels
+              in 2023 and 2024 (Potapov et al., 2025) is built directly on these
+              products. Flood mapping by Sentinel-1 radar and the OPERA Dynamic Surface
+              Water Extent product is now routine; urbanisation can be tracked at high
+              temporal frequency by HLS data.
+            </p>
+            <h3 id="section-5-42">Animal Tracking Integrated with Remote Sensing</h3>
+            <p>
+              Modern movement ecology, the &quot;golden age of biologging&quot; (Wilmers
+              et al., 2015; Kays et al., 2015), now produces tracks of millions of GPS
+              fixes from individual animals. Linking these tracks to time-matched remote
+              sensing layers (NDVI for forage availability, snow cover, sea surface
+              temperature, fire history) reveals the environmental drivers of movement
+              at fine spatiotemporal resolution. The Movebank repository archives such
+              datasets and provides direct integration with environmental data services.
+              The integration of multi-species tracking with high-resolution
+              environmental imagery is reshaping community ecology by enabling
+              simultaneous quantification of biotic and abiotic determinants of
+              distribution (Tuia et al., 2022; Costa-Pereira et al., 2022; Nathan et
+              al., 2022).
+            </p>
+            <p>
+              <img
+                src="../media/eec37d8c0e3f8ac0593c.png"
+                alt="Figure 9: GBIF kernel density of Loxodonta africana."
+              />
+            </p>
+            <h3 id="section-5-43">Integration with Field Data</h3>
+            <p>
+              Remote sensing does not replace fieldwork. The most powerful inferences
+              come from combining the two, with satellite imagery providing wall-to-wall
+              coverage and field plots providing ground truth, validation, and the
+              biological detail that pixels alone cannot capture. The Biodiversity
+              Survey of the Cape (BioSCape) campaign in South Africa, which deployed
+              NASA AVIRIS-NG hyperspectral and lidar instruments in tandem with
+              intensive field sampling, exemplifies this paradigm and is testing the
+              limits of what space can tell us about biodiversity (Cavender-Bares et
+              al., 2024). The Essential Biodiversity Variables framework, developed by
+              GEO BON, formalises which dimensions of biodiversity are best monitored by
+              remote sensing, which by field methods, and which require both (Pereira et
+              al., 2013; Skidmore et al., 2021; Cavender-Bares et al., 2022).
+            </p>
+          </section>
+          <section class="markdown-cell">
+            <hr />
+            <h2 id="section-6-44">What You Will Learn in This series</h2>
+            <h3 id="section-6-45">The Progression of Upcoming Notebooks</h3>
+            <p>
+              Having set the stage conceptually, the rest of this block builds the
+              practical skills, layer by layer:
+            </p>
+            <ul>
+              <li>
+                <strong>Part 2: Vector data with <code>sf</code>.</strong> Reading
+                shapefiles and GeoPackages, basic geometry operations (intersect, union,
+                buffer, distance), attribute joins, and your first
+                <code>geom_sf()</code> maps in <code>ggplot2</code>.
+              </li>
+              <li>
+                <strong
+                  >Part 3: Raster data with <code>terra</code> and
+                  <code>stars</code>.</strong
+                >
+                Loading GeoTIFFs, cropping and masking, band arithmetic, computing NDVI
+                and other indices, basic raster algebra.
+              </li>
+              <li>
+                <strong>Part 4: Coordinate reference systems and projections.</strong>
+                Diagnosing CRS issues, reprojecting between systems, choosing
+                projections for specific tasks.
+              </li>
+              <li>
+                <strong>Part 5: Cartography in R.</strong> Producing publication-quality
+                maps with <code>tmap</code> and <code>ggspatial</code>, scale bars and
+                north arrows, basemap tiles, choropleths, and small multiples.
+              </li>
+              <li>
+                <strong>Part 6: Working with GBIF and species occurrences.</strong>
+                Querying the GBIF API with <code>rgbif</code>, cleaning records with
+                <code>CoordinateCleaner</code>, and producing kernel density and range
+                maps.
+              </li>
+              <li>
+                <strong>Part 7: Remote sensing in practice.</strong> Streaming
+                Sentinel-2 and Landsat data from STAC catalogues, computing time series,
+                and detecting change.
+              </li>
+            </ul>
+            <h3 id="section-6-46">Software Stack and Skills Developed</h3>
+            <p>
+              By the end of this block, you will be fluent in <code>sf</code>,
+              <code>terra</code>, <code>stars</code>, <code>ggplot2</code>,
+              <code>tmap</code>, and <code>ggspatial</code>, and will be able to query
+              cloud-hosted Earth observation archives via STAC. You will be comfortable
+              interpreting metadata, diagnosing CRS problems, and reasoning about scale
+              and resolution. You will know how to read a satellite image as a
+              quantitative ecological measurement, not merely a pretty picture. You will
+              be able to design, execute, and document a reproducible spatial analysis
+              from raw data to final figure entirely in R. These are skills that
+              transfer directly to graduate research, conservation NGOs, government
+              agencies, and the private sector.
+            </p>
+          </section>
+          <section class="markdown-cell">
+            <hr />
+            <h2 id="section-7-47">References and Further Reading</h2>
+            <h3 id="section-7-48">Foundational Textbooks</h3>
+            <p>
+              Pebesma, E. and Bivand, R. (2023).
+              <em>Spatial Data Science: With Applications in R</em>. Chapman and
+              Hall/CRC, Boca Raton. Open-access online edition at
+              <a href="https://r-spatial.org/book/">https://r-spatial.org/book/</a>.
+            </p>
+            <p>
+              Lovelace, R., Nowosad, J. and Muenchow, J. (2025).
+              <em>Geocomputation with R</em>, 2nd edn. CRC Press, Boca Raton.
+              Open-access online edition at
+              <a href="https://r.geocompx.org/">https://r.geocompx.org/</a>.
+            </p>
+            <p>
+              Wegmann, M., Leutner, B. and Dech, S. (eds.) (2016).
+              <em>Remote Sensing and GIS for Ecologists: Using Open Source Software</em
+              >. Pelagic Publishing, Exeter.
+            </p>
+            <p>
+              Pettorelli, N. (2013).
+              <em>The Normalized Difference Vegetation Index</em>. Oxford University
+              Press, Oxford.
+            </p>
+            <p>
+              Cavender-Bares, J., Gamon, J. A. and Townsend, P. A. (eds.) (2020).
+              <em>Remote Sensing of Plant Biodiversity</em>. Springer, Cham.
+            </p>
+            <p>
+              Fortin, M. J. and Dale, M. R. T. (2005).
+              <em>Spatial Analysis: A Guide for Ecologists</em>. Cambridge University
+              Press, Cambridge.
+            </p>
+            <h3 id="section-7-49">Historical and Theoretical Foundations</h3>
+            <p>
+              Humboldt, A. von and Bonpland, A. (1807).
+              <em>Essai sur la géographie des plantes</em>. Levrault, Schoell et
+              Compagnie, Paris.
+            </p>
+            <p>
+              Snow, J. (1855). <em>On the Mode of Communication of Cholera</em>, 2nd
+              edn. John Churchill, London.
+            </p>
+            <p>
+              MacArthur, R. H. and Wilson, E. O. (1967).
+              <em>The Theory of Island Biogeography</em>. Princeton University Press,
+              Princeton.
+            </p>
+            <p>
+              Tobler, W. R. (1970). A computer movie simulating urban growth in the
+              Detroit region. <em>Economic Geography</em> 46(sup1): 234–240.
+            </p>
+            <p>
+              Levin, S. A. (1992). The problem of pattern and scale in ecology.
+              <em>Ecology</em> 73(6): 1943–1967.
+            </p>
+            <p>
+              Legendre, P. (1993). Spatial autocorrelation: trouble or new paradigm?
+              <em>Ecology</em> 74(6): 1659–1673.
+            </p>
+            <p>
+              Margules, C. R. and Pressey, R. L. (2000). Systematic conservation
+              planning. <em>Nature</em> 405: 243–253.
+            </p>
+            <p>
+              Tilman, D. and Kareiva, P. (eds.) (1997).
+              <em
+                >Spatial Ecology: The Role of Space in Population Dynamics and
+                Interspecific Interactions</em
+              >. Princeton University Press, Princeton.
+            </p>
+            <h3 id="section-7-50">R-Spatial Software and Standards</h3>
+            <p>
+              Pebesma, E. (2018). Simple Features for R: standardized support for
+              spatial vector data. <em>The R Journal</em> 10(1): 439–446.
+            </p>
+            <p>
+              Pebesma, E. and Bivand, R. S. (2005). Classes and methods for spatial data
+              in R. <em>R News</em> 5(2): 9–13.
+            </p>
+            <p>
+              Hijmans, R. J. (2023). <em>terra: Spatial Data Analysis</em>. R package.
+              <a href="https://CRAN.R-project.org/package=terra"
+                >https://CRAN.R-project.org/package=terra</a
+              >.
+            </p>
+            <p>
+              Bivand, R. (2023). Progress in modernizing and replacing infrastructure
+              packages in R-spatial workflows. R-Spatial Evolution Project Report.
+              <a href="https://r-spatial.github.io/evolution/"
+                >https://r-spatial.github.io/evolution/</a
+              >.
+            </p>
+            <p>
+              Tennekes, M. (2018). tmap: Thematic maps in R.
+              <em>Journal of Statistical Software</em> 84(6): 1–39.
+            </p>
+            <h3 id="section-7-51">Remote Sensing for Biodiversity and Ecology</h3>
+            <p>
+              Cavender-Bares, J., Schneider, F. D., Santos, M. J., Armstrong, A.,
+              Carnaval, A., Dahlin, K. M., Fatoyinbo, L., Hurtt, G. C., Schimel, D.,
+              Townsend, P. A., Ustin, S. L., Wang, Z. and Wilson, A. M. (2022).
+              Integrating remote sensing with ecology and evolution to advance
+              biodiversity conservation. <em>Nature Ecology and Evolution</em> 6:
+              506–519.
+            </p>
+            <p>
+              Cavender-Bares, J., Slingsby, J. A. and BioSCape Team (2024). BioSCape
+              combines local knowledge and remote-sensing technology for inclusive
+              biodiversity science. <em>Nature Reviews Biodiversity</em> 1: 8–10.
+            </p>
+            <p>
+              Pereira, H. M., Ferrier, S., Walters, M., Geller, G. N., Jongman, R. H.
+              G., Scholes, R. J. <em>et al.</em> (2013). Essential Biodiversity
+              Variables. <em>Science</em> 339(6117): 277–278.
+            </p>
+            <p>
+              Skidmore, A. K., Coops, N. C., Neinavaz, E., Ali, A., Schaepman, M. E.,
+              Paganini, M. <em>et al.</em> (2021). Priority list of biodiversity metrics
+              to observe from space. <em>Nature Ecology and Evolution</em> 5: 896–906.
+            </p>
+            <p>
+              Pettorelli, N., Vik, J. O., Mysterud, A., Gaillard, J.-M., Tucker, C. J.
+              and Stenseth, N. C. (2005). Using the satellite-derived NDVI to assess
+              ecological responses to environmental change.
+              <em>Trends in Ecology and Evolution</em> 20(9): 503–510.
+            </p>
+            <p>
+              Rouse, J. W., Haas, R. H., Schell, J. A. and Deering, D. W. (1974).
+              Monitoring vegetation systems in the Great Plains with ERTS.
+              <em
+                >Proceedings of the Third Earth Resources Technology Satellite-1
+                Symposium</em
+              >: 309–317.
+            </p>
+            <p>
+              Hansen, M. C., Potapov, P. V., Moore, R., Hancher, M., Turubanova, S. A.,
+              Tyukavina, A. <em>et al.</em> (2013). High-resolution global maps of
+              21st-century forest cover change. <em>Science</em> 342(6160): 850–853.
+            </p>
+            <p>
+              Potapov, P., Tyukavina, A., Turubanova, S., Hansen, M. C., Giglio, L.,
+              Hernandez-Serna, A., Lima, A., Harris, N. and Stolle, F. (2025).
+              Unprecedentedly high global forest disturbance due to fire in 2023 and
+              2024. <em>Proceedings of the National Academy of Sciences</em> 122.
+              doi:10.1073/pnas.2505418122.
+            </p>
+            <p>
+              Wulder, M. A., Roy, D. P., Radeloff, V. C., Loveland, T. R., Anderson, M.
+              C., Johnson, D. M. <em>et al.</em> (2022). Fifty years of Landsat science
+              and impacts. <em>Remote Sensing of Environment</em> 280: 113195.
+            </p>
+            <p>
+              Gorelick, N., Hancher, M., Dixon, M., Ilyushchenko, S., Thau, D. and
+              Moore, R. (2017). Google Earth Engine: planetary-scale geospatial analysis
+              for everyone. <em>Remote Sensing of Environment</em> 202: 18–27.
+            </p>
+            <p>
+              Zanaga, D., Van De Kerchove, R., Daems, D., De Keersmaecker, W.,
+              Brockmann, C., Kirches, G. <em>et al.</em> (2022). ESA WorldCover 10 m
+              2021 v200. <em>Zenodo</em>. doi:10.5281/zenodo.7254221.
+            </p>
+            <p>
+              Huang, B., Liu, C., Banzon, V., Freeman, E., Graham, G., Hankins, B.,
+              Smith, T. and Zhang, H. M. (2021). Improvements of the daily Optimum
+              Interpolation Sea Surface Temperature (DOISST) version 2.1.
+              <em>Journal of Climate</em> 34: 2923–2939.
+            </p>
+            <p>
+              Vancutsem, C., Achard, F., Pekel, J. F., Vieilledent, G., Carboni, S.,
+              Simonetti, D. <em>et al.</em> (2021). Long-term (1990–2019) monitoring of
+              forest cover changes in the humid tropics.
+              <em>Science Advances</em> 7(10): eabe1603.
+            </p>
+            <h3 id="section-7-52">Movement Ecology and Animal Tracking</h3>
+            <p>
+              Kays, R., Crofoot, M. C., Jetz, W. and Wikelski, M. (2015). Terrestrial
+              animal tracking as an eye on life and planet. <em>Science</em> 348(6240):
+              aaa2478.
+            </p>
+            <p>
+              Wilmers, C. C., Nickel, B., Bryce, C. M., Smith, J. A., Wheat, R. E. and
+              Yovovich, V. (2015). The golden age of bio-logging: how animal-borne
+              sensors are advancing the frontiers of ecology. <em>Ecology</em> 96(7):
+              1741–1753.
+            </p>
+            <p>
+              Tuia, D., Kellenberger, B., Beery, S., Costelloe, B. R., Zuffi, S., Risse,
+              B. <em>et al.</em> (2022). Perspectives in machine learning for wildlife
+              conservation. <em>Nature Communications</em> 13: 792.
+            </p>
+            <p>
+              Nathan, R., Monk, C. T., Arlinghaus, R., Adam, T., Alós, J., Assaf, M.
+              <em>et al.</em> (2022). Big-data approaches lead to an increased
+              understanding of the ecology of animal movement.
+              <em>Science</em> 375(6582): eabg1780.
+            </p>
+            <h3 id="section-7-53">Disease and Invasive Species</h3>
+            <p>
+              Weiss, D. J., Lucas, T. C. D., Nguyen, M., Nandi, A. K., Bertozzi-Villa,
+              A., Rumisha, S. F. <em>et al.</em> (2019). Mapping the global prevalence,
+              incidence, and mortality of <em>Plasmodium falciparum</em>, 2000–17: a
+              spatial and temporal modelling study. <em>The Lancet</em> 394(10195):
+              322–331.
+            </p>
+            <p>
+              Saranya, K. R. L., Satish, K. V. and Sudhakar Reddy, C. (2024). Remote
+              sensing enabled essential biodiversity variables for invasive alien
+              species management. <em>Biological Invasions</em> 26: 943–951.
+            </p>
+            <h3 id="section-7-54">
+              Connectivity, Landscape Ecology and Climate Change
+            </h3>
+            <p>
+              McRae, B. H., Dickson, B. G., Keitt, T. H. and Shah, V. B. (2008). Using
+              circuit theory to model connectivity in ecology, evolution, and
+              conservation. <em>Ecology</em> 89(10): 2712–2724.
+            </p>
+            <p>
+              Chen, I. C., Hill, J. K., Ohlemüller, R., Roy, D. B. and Thomas, C. D.
+              (2011). Rapid range shifts of species associated with high levels of
+              climate warming. <em>Science</em> 333(6045): 1024–1026.
+            </p>
+            <p>
+              Cleland, E. E., Chuine, I., Menzel, A., Mooney, H. A. and Schwartz, M. D.
+              (2007). Shifting plant phenology in response to global change.
+              <em>Trends in Ecology and Evolution</em> 22(7): 357–365.
+            </p>
+            <p>
+              Lehner, B. and Grill, G. (2013). Global river hydrography and network
+              routing: baseline data and new approaches to study the world&#39;s large
+              river systems. <em>Hydrological Processes</em> 27(15): 2171–2186.
+            </p>
+            <h3 id="section-7-55">Species Distribution Modelling</h3>
+            <p>
+              Elith, J. and Leathwick, J. R. (2009). Species distribution models:
+              ecological explanation and prediction across space and time.
+              <em>Annual Review of Ecology, Evolution, and Systematics</em> 40: 677–697.
+            </p>
+            <p>
+              Zurell, D., Franklin, J., König, C., Bouchet, P. J., Dormann, C. F.,
+              Elith, J. <em>et al.</em> (2020). A standard protocol for reporting
+              species distribution models. <em>Ecography</em> 43(9): 1261–1277.
+            </p>
+            <p>
+              Dormann, C. F., McPherson, J. M., Araújo, M. B., Bivand, R., Bolliger, J.,
+              Carl, G. <em>et al.</em> (2007). Methods to account for spatial
+              autocorrelation in the analysis of species distributional data: a review.
+              <em>Ecography</em> 30(5): 609–628.
+            </p>
+            <p>
+              Beck, J., Böller, M., Erhardt, A. and Schwanghart, W. (2014). Spatial bias
+              in the GBIF database and its effect on modeling species&#39; geographic
+              distributions. <em>Ecological Informatics</em> 19: 10–15.
+            </p>
+            <h3 id="section-7-56">Marine and Conservation</h3>
+            <p>
+              Lubchenco, J. and Grorud-Colvert, K. (2015). Making waves: the science and
+              politics of ocean protection. <em>Science</em> 350(6259): 382–383.
+            </p>
+            <p>
+              Clark, M. R., Rowden, A. A., Schlacher, T., Williams, A., Consalvey, M.,
+              Stocks, K. I. <em>et al.</em> (2010). The ecology of seamounts: structure,
+              function, and human impacts. <em>Annual Review of Marine Science</em> 2:
+              253–278.
+            </p>
+            <p>
+              Gobush, K. S., Edwards, C. T. T., Balfour, D., Wittemyer, G., Maisels, F.
+              and Taylor, R. D. (2021). <em>Loxodonta africana</em> (amended version of
+              2021 assessment). <em>The IUCN Red List of Threatened Species</em> 2021:
+              e.T181008073A204401095.
+            </p>
+            <p>
+              GEBCO Compilation Group (2024). <em>GEBCO 2024 Grid</em>.
+              doi:10.5285/1c44ce99-0a0d-5f4f-e063-7086abc0ea0f.
+            </p>
+            <h3 id="section-7-57">Frameworks and Policy</h3>
+            <p>
+              Convention on Biological Diversity (2022).
+              <em>Kunming-Montreal Global Biodiversity Framework</em>. CBD/COP/DEC/15/4.
+            </p>
+            <p>
+              IPBES (2019).
+              <em>Global Assessment Report on Biodiversity and Ecosystem Services</em>.
+              IPBES Secretariat, Bonn.
+            </p>
+            <p>
+              Costa-Pereira, R., Moll, R. J., Jesmer, B. R. and Jetz, W. (2022). Animal
+              tracking moves community ecology: opportunities and challenges.
+              <em>Journal of Animal Ecology</em> 91(7): 1334–1344.
+            </p>
+            <hr />
+            <p>
+              <em
+                >End of Introduction to Spatial Mapping and Remote Sensing for Ecology.
+                The next notebook (Part 2) begins the practical work with the
+                <code>sf</code> package and vector data.</em
+              >
+            </p>
+          </section>
+          <div class="reader-end">
+            <p>You’ve reached the end of this notebook.</p>
+            <a class="text-link" href="../../notebooks.html"
+              >Return to all notebooks
+              <svg
+                class=""
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M4 12h15m-6-6 6 6-6 6" /></svg
+            ></a>
+          </div>
+        </article>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-main">
+          <a class="brand" href="../../index.html" aria-label="Les Hyperion — home"
+            ><img
+              class="brand-face"
+              src="../../assets/brand/silvi-face.png"
+              alt=""
+              width="55"
+              height="59"
+            /><span class="brand-name" aria-hidden="true"
+              >LES HYPERI<svg class="compass-o" viewBox="0 0 36 46" aria-hidden="true">
+                <circle
+                  cx="18"
+                  cy="23"
+                  r="14.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <path
+                  d="m18 1 4 17 14 5-14 4-4 18-4-18L0 23l14-5Z"
+                  fill="currentColor"
+                /></svg
+              >N</span
+            ></a
+          >
+          <p class="footer-thought">Understanding nature.<br />Sharing the evidence.</p>
+          <nav class="footer-links" aria-label="Footer">
+            <a href="../../about.html">About Phemelo</a><a href="../../cv.html">CV</a
+            ><a
+              href="https://github.com/Phemelo-R"
+              target="_blank"
+              rel="noopener noreferrer"
+              >GitHub ↗</a
+            ><a href="#main">Back to top ↑</a>
+          </nav>
+        </div>
+        <div class="footer-bottom">
+          <span>© 2026 Phemelo Rutlokoane</span><span>Nature × Data × People</span
+          ><span>Johannesburg, South Africa</span>
+        </div>
+      </div>
+    </footer>
+    <div class="toast" id="toast" role="status" hidden></div>
+    <script src="../../js/site.js"></script>
+    <script src="../../js/silvi.js"></script>
+    <script src="../../js/math-config.js"></script>
+    <script src="../../assets/vendor/mathjax/tex-chtml.js"></script>
+    <script src="../../js/reader.js"></script>
+  </body>
+</html>

@@ -1,0 +1,3293 @@
+<!doctype html>
+<html lang="en-GB" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Vector Data with sf — Les Hyperion</title>
+    <meta
+      name="description"
+      content="Working with vector spatial data in R using the sf package. Reading, writing, transforming, and visualising points, lines, and polygons."
+    />
+    <meta name="theme-color" content="#0f2d3a" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../../assets/brand/favicon-32.png"
+    />
+    <link rel="icon" sizes="192x192" href="../../assets/brand/favicon-192.png" />
+    <link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png" />
+    <script src="../../js/theme-init.js"></script>
+    <link rel="stylesheet" href="../../css/site.css" />
+    <link rel="stylesheet" href="../../css/silvi.css" />
+    <link rel="stylesheet" href="../../css/revision.css" />
+    <link rel="stylesheet" href="../../css/refinement.css" />
+    <link rel="stylesheet" href="../../css/reader.css" />
+  </head>
+  <body class="reader-page">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../../index.html" aria-label="Les Hyperion — home"
+          ><img
+            class="brand-face"
+            src="../../assets/brand/silvi-face.png"
+            alt=""
+            width="55"
+            height="59"
+          /><span class="brand-name" aria-hidden="true"
+            >LES HYPERI<svg class="compass-o" viewBox="0 0 36 46" aria-hidden="true">
+              <circle
+                cx="18"
+                cy="23"
+                r="14.5"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              />
+              <path
+                d="m18 1 4 17 14 5-14 4-4 18-4-18L0 23l14-5Z"
+                fill="currentColor"
+              /></svg
+            >N</span
+          ></a
+        >
+        <nav class="desktop-nav" aria-label="Main navigation">
+          <a href="../../index.html">Home</a><a href="../../research.html">Research</a
+          ><a href="../../notebooks.html" aria-current="page">Notebooks</a
+          ><a href="../../carbon.html">Carbon</a><a href="../../about.html">About</a
+          ><a href="../../cv.html">CV</a>
+        </nav>
+        <div class="header-actions">
+          <button
+            class="icon-button theme-toggle"
+            data-theme-toggle
+            aria-label="Switch colour theme"
+          >
+            <svg
+              class="moon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path
+                d="M20.6 13.7A8.8 8.8 0 0 1 10.3 3.4a8.8 8.8 0 1 0 10.3 10.3Z"
+              /></svg
+            ><svg
+              class="sun"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path
+                d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"
+              />
+            </svg></button
+          ><button
+            class="icon-button menu-toggle"
+            aria-label="Open navigation"
+            aria-expanded="false"
+            aria-controls="mobile-nav"
+          >
+            <svg
+              class=""
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" hidden>
+        <a href="../../index.html">Home</a><a href="../../research.html">Research</a
+        ><a href="../../notebooks.html" aria-current="page">Notebooks</a
+        ><a href="../../carbon.html">Carbon</a><a href="../../about.html">About</a
+        ><a href="../../cv.html">CV</a>
+      </nav>
+    </header>
+    <main id="main">
+      <div class="reader-bar">
+        <div class="reader-bar-inner">
+          <a href="../../notebooks.html"
+            ><svg
+              class=""
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M20 12H5m6-6-6 6 6 6" />
+            </svg>
+            Notebooks</a
+          ><span class="reader-crumb">Spatial &amp; Remote Sensing / Part 2</span
+          ><a href="../Vector_Data_with_sf.ipynb" download
+            ><svg
+              class=""
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5" />
+            </svg>
+            Download .ipynb</a
+          >
+        </div>
+      </div>
+      <div class="reader-layout">
+        <aside class="reader-sidebar">
+          <figure
+            class="silvi-scene reader-silvi"
+            data-silvi-scene="notebook-Vector_Data_with_sf"
+          >
+            <div class="silvi-stage">
+              <img
+                src="../../assets/brand/unique-vector.png"
+                alt="Exploring Vector Data with sf with Silvi"
+                width="480"
+                height="250"
+                loading="lazy"
+              />
+            </div>
+          </figure>
+          <details class="reader-contents" open>
+            <summary>In this notebook</summary>
+            <nav aria-label="Notebook contents">
+              <a href="#section-0-0">Vector Data with sf</a
+              ><a href="#section-1-2">Introduction</a
+              ><a href="#section-2-3">What You Will Learn</a
+              ><a href="#section-3-4">Packages</a
+              ><a href="#section-6-5"
+                >Section 1: The Manual Approach — Working with Downloaded Shapefiles</a
+              ><a href="#section-62-22"
+                >Section 2: The Programmatic Approach — No Downloads Required</a
+              ><a href="#section-79-29">Summary</a
+              ><a href="#section-79-30">References</a>
+            </nav>
+          </details>
+          <div class="reader-tools">
+            <button id="toggle-outputs" aria-pressed="false">Collapse outputs</button
+            ><button class="print-button">Print notebook</button>
+          </div>
+          <p>Original code and saved outputs.<br />R · 80 cells</p>
+        </aside>
+        <article class="notebook-document">
+          <div class="reader-intro">
+            <p class="eyebrow">Spatial &amp; Remote Sensing · 2026-05-01</p>
+          </div>
+          <section class="markdown-cell">
+            <h1 id="section-0-0">Vector Data with <code>sf</code></h1>
+            <h3 id="section-0-1">Working with Spatial Features in R</h3>
+            <hr />
+            <blockquote>
+              <p>
+                <em
+                  >&quot;What begins as undifferentiated space becomes place as we get
+                  to know it better and endow it with value.&quot;</em
+                ><br />— Yi-Fu Tuan, <em>Topophilia</em> (1974)
+              </p>
+            </blockquote>
+            <hr />
+          </section>
+          <section class="markdown-cell">
+            <h2 id="section-1-2">Introduction</h2>
+            <p>
+              In Part 1, we discussed what spatial ecology is, why it matters, and what
+              kinds of data exist. We understood that spatial data come in two
+              fundamental types, <strong>vector</strong> and <strong>raster</strong>,
+              and that the modern R-spatial ecosystem is built around <code>sf</code>,
+              <code>terra</code>, and <code>stars</code>, supported by GDAL, GEOS, and
+              PROJ.
+            </p>
+            <p>
+              Now we build things. This part marks the transition from theory to
+              practice. We begin with <strong>vector data</strong> (discrete features):
+              province boundaries, protected areas, city locations, rivers, roads.
+              Vector data are what most ecologists encounter first, and the
+              <code>sf</code> package makes working with them feel as natural as working
+              with a <code>tidyverse</code> data frame.
+            </p>
+            <p>
+              Throughout this notebook, we use <strong>South Africa</strong> as our
+              study system. South Africa is one of the most biogeographically
+              interesting countries on Earth: it spans three oceans, two biodiversity
+              hotspots (the Cape Floristic Region and the Succulent Karoo), and nine
+              provinces whose human and ecological geographies are different.
+            </p>
+            <p>
+              There are two parts/sections in this notebook that teach the same workflow
+              in two different ways:
+            </p>
+            <ul>
+              <li>
+                <strong>Section 1 — The Manual Approach</strong>: You download
+                shapefiles from trusted sources, load them from your computer, and work
+                through the full vector data pipeline.
+              </li>
+              <li>
+                <strong>Section 2 — The Programmatic Approach</strong>: You let R
+                packages fetch the same data for you. No browser downloads, no file
+                management — just code.
+              </li>
+            </ul>
+            <p>
+              Both sections produce the same kind of final map. Understanding both
+              approaches, and knowing <em>when</em> each is appropriate, is a
+              professional skill.
+            </p>
+          </section>
+          <section class="markdown-cell">
+            <h2 id="section-2-3">What You Will Learn</h2>
+            <p>By the end of this notebook you will be able to:</p>
+            <ul>
+              <li>
+                Read shapefiles and GeoPackages into R with <code>st_read()</code>
+              </li>
+              <li>Understand and inspect the structure of an <code>sf</code> object</li>
+              <li>
+                Check and transform coordinate reference systems with
+                <code>st_crs()</code> and <code>st_transform()</code>
+              </li>
+              <li>
+                Join tabular data to spatial objects using <code>tidyverse</code> join
+                functions
+              </li>
+              <li>
+                Perform basic geometry operations: <code>st_buffer()</code>,
+                <code>st_intersection()</code>, <code>st_union()</code>,
+                <code>st_distance()</code>
+              </li>
+              <li>
+                Produce styled, informative maps with <code>geom_sf()</code> in
+                <code>ggplot2</code>
+              </li>
+              <li>
+                Fetch spatial data programmatically using <code>geodata</code>,
+                <code>rnaturalearth</code>, and <code>wdpar</code>
+              </li>
+            </ul>
+          </section>
+          <section class="markdown-cell">
+            <h2 id="section-3-4">Packages</h2>
+            <p>
+              The core packages for this notebook are listed below. Install any you do
+              not yet have by uncommenting the <code>install.packages()</code> line.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-4">
+            <div class="code-toolbar">
+              <span>R · Cell 1 · In [1]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># install.packages(c(
+#   &quot;sf&quot;, &quot;tidyverse&quot;, &quot;ggplot2&quot;, &quot;ggspatial&quot;, &quot;patchwork&quot;,
+#   &quot;scales&quot;, &quot;ggrepel&quot;, &quot;rnaturalearth&quot;, &quot;rnaturalearthdata&quot;,
+#   &quot;geodata&quot;, &quot;wdpar&quot;, &quot;terra&quot;, &quot;remotes&quot;
+# ))
+# remotes::install_github(&quot;ropensci/rnaturalearthhires&quot;)  # high-resolution borders
+
+suppressPackageStartupMessages({
+    library(sf)           # the workhorse: vector data in R
+    library(tidyverse)    # data wrangling and the pipe
+    library(ggplot2)      # grammar of graphics
+    library(ggspatial)    # scale bars and north arrows for ggplot2 maps
+    library(patchwork)    # composing multi-panel figures
+    library(scales)       # nice axis labels (comma(), percent(), etc.)
+    library(ggrepel)      # non-overlapping text labels
+})</code></pre>
+          </section>
+          <section class="code-cell" id="cell-5">
+            <div class="code-toolbar">
+              <span>R · Cell 2 · In [2]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Set consistent plot dimensions for the notebook
+options(
+  repr.plot.width  = 10,
+  repr.plot.height = 7,
+  repr.plot.res    = 200
+)</code></pre>
+          </section>
+          <section class="markdown-cell">
+            <hr />
+            <h2 id="section-6-5">
+              Section 1: The Manual Approach — Working with Downloaded Shapefiles
+            </h2>
+            <p>
+              In this section, you will download two spatial datasets from authoritative
+              online repositories, load them into R, explore them, transform them, and
+              ultimately combine them into a publication-quality map of South Africa.
+              Every step is explained in detail.
+            </p>
+            <hr />
+            <h3 id="section-6-6">1.1 What is a Shapefile? What is a GeoPackage?</h3>
+            <p>Before you can load data you need to understand what you are loading.</p>
+            <p>
+              A <strong>shapefile</strong> is actually a collection of at least three
+              files that must live in the same folder and share the same base name:
+            </p>
+            <table>
+              <thead>
+                <tr>
+                  <th>File extension</th>
+                  <th>Contents</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>.shp</code></td>
+                  <td>
+                    The geometry itself (coordinates of points, lines, or polygons)
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>.dbf</code></td>
+                  <td>
+                    The attribute table (columns of data associated with each feature)
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>.shx</code></td>
+                  <td>
+                    A spatial index linking the <code>.shp</code> and <code>.dbf</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>.prj</code></td>
+                  <td>
+                    <em>(Optional but important)</em> The coordinate reference system
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>.cpg</code></td>
+                  <td>
+                    <em>(Optional)</em> Character encoding of the <code>.dbf</code>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p>
+              The shapefile format was developed by ESRI in the early 1990s and remains
+              the most widely used vector format worldwide, even though it has serious
+              limitations: column names are truncated to 10 characters, file sizes are
+              capped, and you need to keep track of several files at once. Modern
+              workflows increasingly prefer the
+              <strong>GeoPackage</strong> (<code>.gpkg</code>), a single-file,
+              open-standard container based on SQLite that can hold multiple layers, has
+              no size limit, supports longer field names, and is fully readable by
+              <code>sf</code>. You load both with the same function.
+            </p>
+            <blockquote>
+              <p>
+                <strong>Rule of thumb</strong>: prefer GeoPackage for any data you
+                create or export yourself. Use shapefiles when a data provider only
+                offers that format.
+              </p>
+            </blockquote>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-7-7">1.2 Downloading Your Data</h3>
+            <p>
+              We will work with two datasets. Follow the instructions below to download
+              them <strong>before</strong> running the code in this section.
+            </p>
+            <hr />
+            <p>
+              <strong
+                >Dataset 1 — South African Provincial Boundaries (GADM v4.1)</strong
+              >
+            </p>
+            <p>
+              GADM (Global Administrative Areas,
+              <a href="https://gadm.org">gadm.org</a>) is the most authoritative source
+              of administrative boundaries. It is updated regularly, free to use for
+              academic purposes, and covers the entire world.
+            </p>
+            <ol>
+              <li>
+                Navigate to
+                <a href="https://gadm.org/download_country.html"
+                  >https://gadm.org/download_country.html</a
+                >
+              </li>
+              <li>
+                In the <em>Country</em> dropdown, select <strong>South Africa</strong>
+              </li>
+              <li>Click <strong>Shapefile</strong> to download the full package</li>
+              <li>
+                Unzip the archive. You will find files for Level 0 (country), Level 1
+                (provinces), and Level 2 (districts). We need
+                <strong>Level 1</strong> (<code>gadm41_ZAF_1.*</code>) and
+                <strong>Level 0</strong> (<code>gadm41_ZAF_0.*</code>)
+              </li>
+              <li>
+                Place these files in a folder called <code>data/</code> inside your
+                working directory
+              </li>
+            </ol>
+            <hr />
+            <p><strong>Dataset 2 — South African Protected Areas (WDPA)</strong></p>
+            <p>
+              The World Database on Protected Areas (<a
+                href="https://www.protectedplanet.net"
+                >protectedplanet.net</a
+              >) is the global standard for protected area data, maintained by UNEP-WCMC
+              and IUCN.
+            </p>
+            <ol>
+              <li>
+                Navigate to
+                <a href="https://www.protectedplanet.net/country/ZAF"
+                  >https://www.protectedplanet.net/country/ZAF</a
+                >
+              </li>
+              <li>
+                Click <strong>Download</strong> → select
+                <strong>Shapefile</strong> format
+              </li>
+              <li>
+                Extract the archive. You will see multiple folders. We want the zip file
+                titled <code>WDPA_WDOECM_May2026_Public_ZAF_shp_0</code> (Month and year
+                displayed will change depending on the day of download).
+              </li>
+              <li>
+                Extract the zip file and you will see the shapefile
+                (WDPA_WDOECM_May2026_Public_ZAF_shp-polygons)
+              </li>
+              <li>
+                Place this and its associated files (<code>.dbf</code>,
+                <code>.shx</code>, <code>.prj</code>) into your
+                <code>data/</code> folder as well
+              </li>
+            </ol>
+            <hr />
+            <p>
+              Once downloaded, your <code>data/</code> folder should look something like
+              this:
+            </p>
+            <!-- prettier-ignore -->
+            <pre><code>data/
+├── gadm41_ZAF_0.shp  (.dbf  .shx  .prj)
+├── gadm41_ZAF_1.shp  (.dbf  .shx  .prj)
+└── WDPA_WDOECM_May2026_Public_ZAF_shp-polygons.shp  (.dbf  .shx  .prj)
+</code></pre>
+            <blockquote>
+              <p>
+                <strong>Setting your working directory</strong>: In RStudio, use
+                <code>Session → Set Working Directory → To Source File Location</code>
+                to ensure R looks for the <code>data/</code> folder relative to where
+                this notebook is saved.
+              </p>
+            </blockquote>
+            <p>
+              <em
+                >For the purpose of this exercise, I will not be placing the data under
+                the <code>data/</code> folder, instead I will place them under
+                <code>Data/SA_boundaries/</code> and
+                <code>Data/SA_protected_areas</code> because I place every dataset under
+                a subfolder. You can also choose to do so, which will make your life
+                much easier.</em
+              >
+            </p>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-8-8">1.3 Reading Shapefiles with <code>st_read()</code></h3>
+            <p>
+              The entry point for all vector data in <code>sf</code> is
+              <code>st_read()</code>. It reads shapefiles, GeoPackages, GeoJSON, KML,
+              and over 200 other formats through GDAL — the same library that powers
+              QGIS. You give it a file path; it gives you an <code>sf</code> object.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-9">
+            <div class="code-toolbar">
+              <span>R · Cell 3 · In [3]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Read the South Africa provinces (GADM Level 1)
+# Adjust the path if your files are in a different location
+sa_provinces &lt;- st_read(&quot;Data/SA_boundaries/gadm41_ZAF_1.shp&quot;)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">Reading layer `gadm41_ZAF_1&#39; from data source 
+  `/Users/phemelo/Documents/LesHyperion/Data/SA_boundaries/gadm41_ZAF_1.shp&#39; 
+  using driver `ESRI Shapefile&#39;
+Simple feature collection with 9 features and 11 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: 16.45189 ymin: -34.83514 xmax: 32.89125 ymax: -22.12503
+Geodetic CRS:  WGS 84
+</pre>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-10">
+            <div class="code-toolbar">
+              <span>R · Cell 4 · In [4]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Read the country outline (GADM Level 0)
+sa_country &lt;- st_read(&quot;Data/SA_boundaries/gadm41_ZAF_0.shp&quot;)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">Reading layer `gadm41_ZAF_0&#39; from data source 
+  `/Users/phemelo/Documents/LesHyperion/Data/SA_boundaries/gadm41_ZAF_0.shp&#39; 
+  using driver `ESRI Shapefile&#39;
+Simple feature collection with 1 feature and 2 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: 16.45189 ymin: -34.83514 xmax: 32.89125 ymax: -22.12503
+Geodetic CRS:  WGS 84
+</pre>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <p>
+              When <code>st_read()</code> runs, it prints a brief summary: the driver it
+              used (ESRI Shapefile), the number of features, the number of fields, the
+              geometry type, and the bounding box. Get into the habit of reading this
+              output, it is your first sanity check that the data loaded correctly.
+            </p>
+            <h3 id="section-11-9">1.4 Exploring an <code>sf</code> Object</h3>
+            <p>
+              An <code>sf</code> object behaves almost exactly like a
+              <code>data.frame</code> or <code>tibble</code>, with one special addition:
+              a <strong>geometry column</strong> (usually named <code>geometry</code>)
+              that stores the spatial information. Every row is one feature; every
+              column is one attribute, except the geometry column which holds the shape.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-12">
+            <div class="code-toolbar">
+              <span>R · Cell 5 · In [5]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># An sf object is both a data frame AND a spatial object
+class(sa_provinces)
+
+# How many features (rows) and attribute fields (columns)?
+dim(sa_provinces)
+
+# What are the columns?
+names(sa_provinces)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>'sf'</li>
+                    <li>'data.frame'</li>
+                  </ol>
+                </div>
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>9</li>
+                    <li>12</li>
+                  </ol>
+                </div>
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>'GID_1'</li>
+                    <li>'GID_0'</li>
+                    <li>'COUNTRY'</li>
+                    <li>'NAME_1'</li>
+                    <li>'VARNAME_1'</li>
+                    <li>'NL_NAME_1'</li>
+                    <li>'TYPE_1'</li>
+                    <li>'ENGTYPE_1'</li>
+                    <li>'CC_1'</li>
+                    <li>'HASC_1'</li>
+                    <li>'ISO_1'</li>
+                    <li>'geometry'</li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-13">
+            <div class="code-toolbar">
+              <span>R · Cell 6 · In [6]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Peek at the attribute table — use st_drop_geometry() to ignore the geometry column
+sa_provinces %&gt;%
+  st_drop_geometry() %&gt;%
+  select(NAME_1, TYPE_1, ENGTYPE_1) %&gt;%
+  head(9)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A data.frame: 9 × 3
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th scope="col">NAME_1</th>
+                        <th scope="col">TYPE_1</th>
+                        <th scope="col">ENGTYPE_1</th>
+                      </tr>
+                      <tr>
+                        <th></th>
+                        <th scope="col">&lt;chr&gt;</th>
+                        <th scope="col">&lt;chr&gt;</th>
+                        <th scope="col">&lt;chr&gt;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Eastern Cape</td>
+                        <td>Provinsie</td>
+                        <td>Province</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Free State</td>
+                        <td>Provinsie</td>
+                        <td>Province</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">3</th>
+                        <td>Gauteng</td>
+                        <td>Provinsie</td>
+                        <td>Province</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">4</th>
+                        <td>KwaZulu-Natal</td>
+                        <td>Provinsie</td>
+                        <td>Province</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">5</th>
+                        <td>Limpopo</td>
+                        <td>Provinsie</td>
+                        <td>Province</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">6</th>
+                        <td>Mpumalanga</td>
+                        <td>Provinsie</td>
+                        <td>Province</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">7</th>
+                        <td>North West</td>
+                        <td>Provinsie</td>
+                        <td>Province</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">8</th>
+                        <td>Northern Cape</td>
+                        <td>Provinsie</td>
+                        <td>Province</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">9</th>
+                        <td>Western Cape</td>
+                        <td>Provinsie</td>
+                        <td>Province</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-14">
+            <div class="code-toolbar">
+              <span>R · Cell 7 · In [7]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># What geometry types are stored?
+st_geometry_type(sa_provinces)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>MULTIPOLYGON</li>
+                    <li>MULTIPOLYGON</li>
+                    <li>MULTIPOLYGON</li>
+                    <li>MULTIPOLYGON</li>
+                    <li>MULTIPOLYGON</li>
+                    <li>MULTIPOLYGON</li>
+                    <li>MULTIPOLYGON</li>
+                    <li>MULTIPOLYGON</li>
+                    <li>MULTIPOLYGON</li>
+                  </ol>
+
+                  <details>
+                    <summary style="display: list-item; cursor: pointer">
+                      <strong>Levels</strong>:
+                    </summary>
+                    <style>
+                      .list-inline {
+                        list-style: none;
+                        margin: 0;
+                        padding: 0;
+                      }
+                      .list-inline > li {
+                        display: inline-block;
+                      }
+                      .list-inline > li:not(:last-child)::after {
+                        content: '\00b7';
+                        padding: 0 0.5ex;
+                      }
+                    </style>
+                    <ol class="list-inline">
+                      <li>'GEOMETRY'</li>
+                      <li>'POINT'</li>
+                      <li>'LINESTRING'</li>
+                      <li>'POLYGON'</li>
+                      <li>'MULTIPOINT'</li>
+                      <li>'MULTILINESTRING'</li>
+                      <li>'MULTIPOLYGON'</li>
+                      <li>'GEOMETRYCOLLECTION'</li>
+                      <li>'CIRCULARSTRING'</li>
+                      <li>'COMPOUNDCURVE'</li>
+                      <li>'CURVEPOLYGON'</li>
+                      <li>'MULTICURVE'</li>
+                      <li>'MULTISURFACE'</li>
+                      <li>'CURVE'</li>
+                      <li>'SURFACE'</li>
+                      <li>'POLYHEDRALSURFACE'</li>
+                      <li>'TIN'</li>
+                      <li>'TRIANGLE'</li>
+                    </ol>
+                  </details>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-15">
+            <div class="code-toolbar">
+              <span>R · Cell 8 · In [8]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># What is the coordinate reference system?
+st_crs(sa_provinces)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">Coordinate Reference System:
+  User input: WGS 84 
+  wkt:
+GEOGCRS[&quot;WGS 84&quot;,
+    DATUM[&quot;World Geodetic System 1984&quot;,
+        ELLIPSOID[&quot;WGS 84&quot;,6378137,298.257223563,
+            LENGTHUNIT[&quot;metre&quot;,1]]],
+    PRIMEM[&quot;Greenwich&quot;,0,
+        ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],
+    CS[ellipsoidal,2],
+        AXIS[&quot;latitude&quot;,north,
+            ORDER[1],
+            ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],
+        AXIS[&quot;longitude&quot;,east,
+            ORDER[2],
+            ANGLEUNIT[&quot;degree&quot;,0.0174532925199433]],
+    ID[&quot;EPSG&quot;,4326]]</pre>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-16">
+            <div class="code-toolbar">
+              <span>R · Cell 9 · In [9]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># The bounding box (spatial extent)
+st_bbox(sa_provinces)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">     xmin      ymin      xmax      ymax 
+ 16.45189 -34.83514  32.89125 -22.12503 </pre>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <p>A few things to notice:</p>
+            <ul>
+              <li>
+                <code>st_geometry_type()</code> returns <code>MULTIPOLYGON</code>. Each
+                province is a multipolygon because some provinces include islands or
+                disconnected territories.
+              </li>
+              <li>
+                <code>st_crs()</code> should report
+                <strong>WGS 84 (EPSG: 4326)</strong> — the geographic coordinate system
+                used by GPS and most global datasets, with coordinates in decimal
+                degrees of latitude and longitude.
+              </li>
+              <li>
+                <code>st_bbox()</code> gives you the bounding box: minimum and maximum x
+                (longitude) and y (latitude). For South Africa this should be roughly
+                16–33°E longitude and 22–35°S latitude — check this against a mental
+                map.
+              </li>
+            </ul>
+            <p>
+              These three checks — geometry type, CRS, bounding box — are the first
+              things you should do with any new spatial dataset. They catch problems
+              before they propagate.
+            </p>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-18-10">1.5 Coordinate Reference Systems in Practice</h3>
+            <p>
+              You have already encountered CRS theory in Part 1. Now you will use it.
+              The key function is <code>st_transform()</code>, which reprojects an
+              <code>sf</code> object from one CRS to another. It calls the PROJ library
+              internally and handles all the mathematics.
+            </p>
+            <p>
+              For South Africa,
+              <strong>WGS84 geographic coordinates (EPSG: 4326)</strong> are fine for
+              visualisation, but <strong>projected coordinates</strong> are better for
+              any analysis involving area, distance, or buffer calculations. When you
+              work in geographic coordinates (degrees), distances and areas are
+              meaningless — a degree of longitude in Limpopo covers a different number
+              of metres than a degree of longitude in Cape Town. A projected CRS solves
+              this by converting coordinates to metres on a flat plane.
+            </p>
+            <p>
+              A good choice for South Africa is an
+              <strong>Albers Equal-Area Conic</strong> projection centred on the
+              country. This preserves area (critical for ecological and conservation
+              analyses) and minimises distortion across South Africa&#39;s extent.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-19">
+            <div class="code-toolbar">
+              <span>R · Cell 10 · In [10]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Define the Albers Equal-Area projection for South Africa
+# Parallel latitudes chosen to bracket the country; central meridian at 25E
+sa_albers &lt;- &quot;+proj=aea +lat_1=-18 +lat_2=-32 +lat_0=-25 +lon_0=25 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs&quot;
+
+# Reproject both layers
+sa_provinces_proj &lt;- sa_provinces %&gt;% st_transform(crs = sa_albers)
+sa_country_proj   &lt;- sa_country   %&gt;% st_transform(crs = sa_albers)
+
+# Confirm: coordinates are now in metres, not degrees
+st_bbox(sa_provinces_proj)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">      xmin       ymin       xmax       ymax 
+ -830747.7 -1101501.6   778305.2   312493.6 </pre>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <p>
+              The bounding box values are now in <strong>metres</strong> from the
+              projection origin — large numbers, but correct. Note that
+              <code>st_transform()</code> is non-destructive: it creates a new object
+              and leaves the original unchanged. Always preserve both the geographic and
+              projected versions of your data.
+            </p>
+            <blockquote>
+              <p>
+                <strong>A note on EPSG codes</strong>: You can also use
+                <code>st_transform(crs = 32735)</code> (WGS 84 / UTM Zone 35S), which is
+                another good choice for eastern South Africa. The Albers projection
+                above does not have its own EPSG code, so we supply the PROJ string
+                directly. This is a common pattern for country-specific projections.
+              </p>
+            </blockquote>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-21-11">1.6 <code>geom_sf()</code> Map</h3>
+            <p>
+              The <code>geom_sf()</code> function is <code>ggplot2</code>&#39;s
+              interface to <code>sf</code> objects. It reads the geometry column
+              automatically and determines how to draw each feature — polygons as filled
+              shapes, lines as lines, points as points. You do not need to specify
+              <code>x</code> and <code>y</code> aesthetics; <code>sf</code> handles
+              that.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-22">
+            <div class="code-toolbar">
+              <span>R · Cell 11 · In [11]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># The simplest possible map — one function call
+ggplot(sa_provinces_proj) +
+  geom_sf()</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/31c56cfa34662c0bb7be.png"
+                    alt="Original figure output from code cell 11"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <p>
+              That is a recognisable map of South Africa in about 15 words of code. Now
+              let us style it properly.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-24">
+            <div class="code-toolbar">
+              <span>R · Cell 12 · In [12]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># A styled map: province boundaries with province names
+ggplot(sa_provinces_proj) +
+  geom_sf(fill      = &quot;#d8f3dc&quot;,
+          colour    = &quot;grey30&quot;,
+          linewidth = 0.4) +
+  geom_sf_text(aes(label = NAME_1),
+               size     = 2.5,
+               colour   = &quot;grey20&quot;,
+               fontface = &quot;italic&quot;) +
+  labs(
+    title    = &quot;South Africa: Provincial Boundaries&quot;,
+    subtitle = &quot;Nine provinces from the GADM v4.1 administrative boundaries dataset&quot;,
+    caption  = &quot;Projection: Albers Equal-Area Conic  |  Source: GADM v4.1 (gadm.org)&quot;
+  ) +
+  theme(
+    panel.background = element_blank(),
+    panel.grid.major = element_line(linetype = &quot;dotted&quot;, colour = &quot;grey70&quot;, linewidth = 0.25),
+    panel.ontop      = TRUE,
+    panel.grid.minor = element_blank(),
+    panel.border     = element_rect(colour = &quot;black&quot;, fill = NA, linewidth = 1),
+    plot.title       = element_text(face = &quot;bold&quot;, size = 14),
+    plot.subtitle    = element_text(size = 10, colour = &quot;grey40&quot;),
+    plot.caption     = element_text(size = 8,  colour = &quot;grey50&quot;)
+  )</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/803e92de030de676ac9e.png"
+                    alt="Original figure output from code cell 12"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <p>A few <code>ggplot2</code> notes specific to spatial mapping:</p>
+            <ul>
+              <li>
+                <code>fill</code> and <code>colour</code> inside
+                <code>geom_sf()</code> but <em>outside</em> <code>aes()</code> apply a
+                single value to all features. Move them inside <code>aes()</code> when
+                you want to vary by an attribute — we do this in the choropleth below.
+              </li>
+              <li>
+                <code>geom_sf_text()</code> places a label at the centroid of each
+                feature automatically.
+              </li>
+              <li>
+                <code>theme(panel.ontop = TRUE)</code> draws the grid lines (graticule)
+                <em>on top of</em> filled polygons rather than beneath them, preventing
+                fill from obscuring the grid.
+              </li>
+            </ul>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-26-12">1.7 Attribute Joins</h3>
+            <p>
+              One of the most powerful features of <code>sf</code> is that, because it
+              is a data frame at heart, you can use the full
+              <code>tidyverse</code> toolkit on it, including <code>left_join()</code>.
+              Joining tabular data to spatial objects requires only a shared key column,
+              exactly as with non-spatial data.
+            </p>
+            <p>
+              We will join 2022 South African Census population figures to the province
+              polygons. The Census 2022 was the first conducted since 2011, providing
+              the most current demographic picture of the country (Statistics South
+              Africa, 2023).
+            </p>
+          </section>
+          <section class="code-cell" id="cell-27">
+            <div class="code-toolbar">
+              <span>R · Cell 13 · In [13]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># South African Census 2022 provincial data
+# Source: Statistics South Africa, Census 2022 (StatsSA, 2023)
+province_data &lt;- tibble(
+  NAME_1     = c(&quot;Eastern Cape&quot;, &quot;Free State&quot;, &quot;Gauteng&quot;, &quot;KwaZulu-Natal&quot;,
+                 &quot;Limpopo&quot;, &quot;Mpumalanga&quot;, &quot;North West&quot;, &quot;Northern Cape&quot;, &quot;Western Cape&quot;),
+  population = c(6976490, 2887465, 15176116, 11289086,
+                 5852553, 4679786, 4072848, 1262395, 7081534),
+  area_km2   = c(168966, 129825, 18178, 94361,
+                 125754, 76495, 104882, 372889, 129462),
+  main_biome = c(&quot;Grassland/Thicket&quot;, &quot;Grassland&quot;, &quot;Grassland/Savanna&quot;,
+                 &quot;Grassland/Forest&quot;, &quot;Savanna&quot;, &quot;Savanna/Grassland&quot;,
+                 &quot;Savanna/Grassland&quot;, &quot;Succulent Karoo/Nama-Karoo&quot;,
+                 &quot;Fynbos/Succulent Karoo&quot;)
+)
+
+province_data</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A tibble: 9 × 4
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">NAME_1</th>
+                        <th scope="col">population</th>
+                        <th scope="col">area_km2</th>
+                        <th scope="col">main_biome</th>
+                      </tr>
+                      <tr>
+                        <th scope="col">&lt;chr&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                        <th scope="col">&lt;chr&gt;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Eastern Cape</td>
+                        <td>6976490</td>
+                        <td>168966</td>
+                        <td>Grassland/Thicket</td>
+                      </tr>
+                      <tr>
+                        <td>Free State</td>
+                        <td>2887465</td>
+                        <td>129825</td>
+                        <td>Grassland</td>
+                      </tr>
+                      <tr>
+                        <td>Gauteng</td>
+                        <td>15176116</td>
+                        <td>18178</td>
+                        <td>Grassland/Savanna</td>
+                      </tr>
+                      <tr>
+                        <td>KwaZulu-Natal</td>
+                        <td>11289086</td>
+                        <td>94361</td>
+                        <td>Grassland/Forest</td>
+                      </tr>
+                      <tr>
+                        <td>Limpopo</td>
+                        <td>5852553</td>
+                        <td>125754</td>
+                        <td>Savanna</td>
+                      </tr>
+                      <tr>
+                        <td>Mpumalanga</td>
+                        <td>4679786</td>
+                        <td>76495</td>
+                        <td>Savanna/Grassland</td>
+                      </tr>
+                      <tr>
+                        <td>North West</td>
+                        <td>4072848</td>
+                        <td>104882</td>
+                        <td>Savanna/Grassland</td>
+                      </tr>
+                      <tr>
+                        <td>Northern Cape</td>
+                        <td>1262395</td>
+                        <td>372889</td>
+                        <td>Succulent Karoo/Nama-Karoo</td>
+                      </tr>
+                      <tr>
+                        <td>Western Cape</td>
+                        <td>7081534</td>
+                        <td>129462</td>
+                        <td>Fynbos/Succulent Karoo</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-28">
+            <div class="code-toolbar">
+              <span>R · Cell 14 · In [14]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Join demographic data to the spatial object
+sa_provinces_data &lt;- sa_provinces_proj %&gt;%
+  left_join(province_data, by = &quot;NAME_1&quot;) %&gt;%
+  mutate(pop_density = population / area_km2)</code></pre>
+          </section>
+          <section class="code-cell" id="cell-29">
+            <div class="code-toolbar">
+              <span>R · Cell 15 · In [15]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Verify: new columns should appear
+sa_provinces_data %&gt;%
+  st_drop_geometry() %&gt;%
+  select(NAME_1, population, area_km2, pop_density) %&gt;%
+  arrange(desc(pop_density))</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A data.frame: 9 × 4
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">NAME_1</th>
+                        <th scope="col">population</th>
+                        <th scope="col">area_km2</th>
+                        <th scope="col">pop_density</th>
+                      </tr>
+                      <tr>
+                        <th scope="col">&lt;chr&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Gauteng</td>
+                        <td>15176116</td>
+                        <td>18178</td>
+                        <td>834.861701</td>
+                      </tr>
+                      <tr>
+                        <td>KwaZulu-Natal</td>
+                        <td>11289086</td>
+                        <td>94361</td>
+                        <td>119.637202</td>
+                      </tr>
+                      <tr>
+                        <td>Mpumalanga</td>
+                        <td>4679786</td>
+                        <td>76495</td>
+                        <td>61.177672</td>
+                      </tr>
+                      <tr>
+                        <td>Western Cape</td>
+                        <td>7081534</td>
+                        <td>129462</td>
+                        <td>54.699711</td>
+                      </tr>
+                      <tr>
+                        <td>Limpopo</td>
+                        <td>5852553</td>
+                        <td>125754</td>
+                        <td>46.539697</td>
+                      </tr>
+                      <tr>
+                        <td>Eastern Cape</td>
+                        <td>6976490</td>
+                        <td>168966</td>
+                        <td>41.289313</td>
+                      </tr>
+                      <tr>
+                        <td>North West</td>
+                        <td>4072848</td>
+                        <td>104882</td>
+                        <td>38.832669</td>
+                      </tr>
+                      <tr>
+                        <td>Free State</td>
+                        <td>2887465</td>
+                        <td>129825</td>
+                        <td>22.241209</td>
+                      </tr>
+                      <tr>
+                        <td>Northern Cape</td>
+                        <td>1262395</td>
+                        <td>372889</td>
+                        <td>3.385444</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <p>
+              The contrast is striking: Gauteng, South Africa&#39;s smallest province,
+              has a population density more than 200 times that of the Northern Cape —
+              the country&#39;s largest province by area. This reflects South
+              Africa&#39;s highly uneven urbanisation, centred on the
+              Johannesburg–Pretoria metropolitan corridor.
+            </p>
+            <h3 id="section-30-13">1.8 Choropleth Map</h3>
+            <p>
+              A <strong>choropleth</strong> is a thematic map in which areas are shaded
+              in proportion to a statistical variable. Now that we have joined
+              population density to our polygons, we can map it by placing
+              <code>fill = pop_density</code> inside <code>aes()</code>.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-31">
+            <div class="code-toolbar">
+              <span>R · Cell 16 · In [17]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code>ggplot(sa_provinces_data) +
+  geom_sf(aes(fill = pop_density),
+          colour    = &quot;grey30&quot;,
+          linewidth = 0.6) +
+  scale_fill_gradientn(
+    colours = c(&quot;#f7fcf5&quot;, &quot;#c7e9c0&quot;, &quot;#74c476&quot;, &quot;#238b45&quot;, &quot;#00441b&quot;),
+    name    = &quot;People\nper km\u00b2&quot;,
+    labels  = comma,
+    trans   = &quot;log10&quot;   # log scale: Gauteng dominates otherwise
+  ) +
+  geom_sf_text(aes(label = NAME_1),
+               size     = 2.4,
+               colour   = &quot;grey20&quot;,
+               fontface = &quot;italic&quot;) +
+  labs(
+    title    = &quot;Population Density by Province&quot;,
+    subtitle = &quot;South Africa — Census 2022  |  Log\u2081\u2080 scale&quot;,
+    caption  = &quot;Source: Statistics South Africa, Census 2022; GADM v4.1&quot;
+  ) +
+  theme(
+    panel.background  = element_blank(),
+    panel.grid.major  = element_line(linetype = &quot;dotted&quot;, colour = &quot;grey70&quot;, linewidth = 0.25),
+    panel.ontop       = TRUE,
+    panel.grid.minor  = element_blank(),
+    panel.border      = element_rect(colour = &quot;black&quot;, fill = NA, linewidth = 1),
+    plot.title        = element_text(face = &quot;bold&quot;, size = 14),
+    plot.subtitle     = element_text(size = 10, colour = &quot;grey40&quot;),
+    plot.caption      = element_text(size = 8,  colour = &quot;grey50&quot;),
+    legend.position   = &quot;right&quot;,
+    legend.key.height = unit(1.5, &quot;cm&quot;)
+  )</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/939e92a3dca00ea4fe26.png"
+                    alt="Original figure output from code cell 16"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <p>
+              Notice <code>trans = &quot;log10&quot;</code>. Gauteng&#39;s density is so
+              much higher than the rest that on a linear scale every other province
+              would appear indistinguishably pale. A log transform reveals the gradient
+              that would otherwise be invisible — this is a common challenge in
+              choropleth mapping, and a good reason to always inspect your data
+              distribution before choosing a colour scale.
+            </p>
+            <p>You can also save your dataset as a GeoPackage for future use:</p>
+          </section>
+          <section class="code-cell" id="cell-33">
+            <div class="code-toolbar">
+              <span>R · Cell 17</span><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Save your work as a GeoPackage
+# st_write(sa_provinces_data, &quot;data/sa_provinces_enriched.gpkg&quot;)
+
+# To reload:
+# sa_provinces_data &lt;- st_read(&quot;data/sa_provinces_enriched.gpkg&quot;)</code></pre>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-34-14">1.9 Loading Protected Areas</h3>
+            <p>
+              Now we load the WDPA protected areas dataset downloaded from Protected
+              Planet. This is a much larger and more complex dataset. South Africa has
+              hundreds of protected areas ranging from small municipal reserves to the
+              vast Kgalagadi Transfrontier Park spanning South Africa and Botswana.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-35">
+            <div class="code-toolbar">
+              <span>R · Cell 18 · In [20]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Read the WDPA polygons for South Africa
+sa_protected &lt;- st_read(&quot;data/SA_protected_areas/WDPA_WDOECM_May2026_Public_ZAF_shp-polygons.shp&quot;)
+
+# Reproject to match the provinces layer
+sa_protected_proj &lt;- sa_protected %&gt;% st_transform(crs = sa_albers)
+
+cat(&quot;Number of protected area polygons:&quot;, nrow(sa_protected_proj), &quot;\n&quot;)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">Reading layer `WDPA_WDOECM_May2026_Public_ZAF_shp-polygons&#39; from data source 
+  `/Users/phemelo/Documents/LesHyperion/Data/SA_protected_areas/WDPA_WDOECM_May2026_Public_ZAF_shp-polygons.shp&#39; 
+  using driver `ESRI Shapefile&#39;
+Simple feature collection with 577 features and 33 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: 16.45228 ymin: -50.23333 xmax: 43.0397 ymax: -22.16815
+Geodetic CRS:  WGS 84
+Number of protected area polygons: 577 
+</pre>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-36">
+            <div class="code-toolbar">
+              <span>R · Cell 19 · In [21]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Explore the attribute table
+sa_protected_proj %&gt;%
+  st_drop_geometry() %&gt;%
+  select(NAME, DESIG_ENG, IUCN_CAT, GIS_AREA) %&gt;%
+  head(10)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A data.frame: 10 × 4
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th scope="col">NAME</th>
+                        <th scope="col">DESIG_ENG</th>
+                        <th scope="col">IUCN_CAT</th>
+                        <th scope="col">GIS_AREA</th>
+                      </tr>
+                      <tr>
+                        <th></th>
+                        <th scope="col">&lt;chr&gt;</th>
+                        <th scope="col">&lt;chr&gt;</th>
+                        <th scope="col">&lt;chr&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Kruger National Park</td>
+                        <td>National Park</td>
+                        <td>Not Reported</td>
+                        <td>19169.74954</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Kalahari Gemsbok National Park</td>
+                        <td>National Park</td>
+                        <td>Not Reported</td>
+                        <td>9589.55846</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">3</th>
+                        <td>Addo-Elephant National Park</td>
+                        <td>National Park</td>
+                        <td>Not Reported</td>
+                        <td>1538.28204</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">4</th>
+                        <td>Karoo National Park</td>
+                        <td>National Park</td>
+                        <td>Not Reported</td>
+                        <td>844.69178</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">5</th>
+                        <td>Mountain Zebra National Park</td>
+                        <td>National Park</td>
+                        <td>Not Reported</td>
+                        <td>202.47136</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">6</th>
+                        <td>Augrabies Falls National Park</td>
+                        <td>National Park</td>
+                        <td>Not Reported</td>
+                        <td>493.54145</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">7</th>
+                        <td>Golden Gate Highlands National Park</td>
+                        <td>National Park</td>
+                        <td>Not Reported</td>
+                        <td>327.57800</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">8</th>
+                        <td>Garden Route National Park</td>
+                        <td>National Park</td>
+                        <td>Not Reported</td>
+                        <td>1257.88446</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">9</th>
+                        <td>Bontebok National Park</td>
+                        <td>National Park</td>
+                        <td>Not Reported</td>
+                        <td>34.13733</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">10</th>
+                        <td>Itala Nature Reserve</td>
+                        <td>Nature Reserve</td>
+                        <td>Not Reported</td>
+                        <td>292.87725</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-37">
+            <div class="code-toolbar">
+              <span>R · Cell 20 · In [22]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># What designation types exist?
+sa_protected_proj %&gt;%
+  st_drop_geometry() %&gt;%
+  count(DESIG_ENG, sort = TRUE) %&gt;%
+  head(12)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A data.frame: 10 × 2
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th scope="col">DESIG_ENG</th>
+                        <th scope="col">n</th>
+                      </tr>
+                      <tr>
+                        <th></th>
+                        <th scope="col">&lt;chr&gt;</th>
+                        <th scope="col">&lt;int&gt;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Nature Reserve</td>
+                        <td>422</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Forest Nature Reserve</td>
+                        <td>50</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">3</th>
+                        <td>Marine Protected Area</td>
+                        <td>22</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">4</th>
+                        <td>National Park</td>
+                        <td>21</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">5</th>
+                        <td>Wetland of International Importance (Ramsar Site)</td>
+                        <td>21</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">6</th>
+                        <td>Mountain Catchment Area</td>
+                        <td>15</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">7</th>
+                        <td>Forest Wilderness Area</td>
+                        <td>12</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">8</th>
+                        <td>Protected Environment</td>
+                        <td>10</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">9</th>
+                        <td>Special Nature Reserve</td>
+                        <td>2</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">10</th>
+                        <td>World Heritage Site (natural or mixed)</td>
+                        <td>2</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <p>
+              The <code>DESIG_ENG</code> column contains the legal designation of each
+              area. National Parks managed by SANParks are the most iconic, but Nature
+              Reserves, Marine Protected Areas, World Heritage Sites, and Ramsar
+              Wetlands all contribute to the total conservation estate.
+            </p>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-39-15">1.10 Geometry Operations</h3>
+            <p>
+              This is where <code>sf</code> reveals its full power. The following four
+              operations: buffer, intersection, union, and distance — are the foundation
+              of almost all quantitative spatial analysis. They are implemented through
+              GEOS, the same geometry engine used by PostGIS, QGIS, and ArcGIS.
+            </p>
+            <hr />
+            <h4 id="section-39-16">
+              <code>st_buffer()</code> — Creating a Buffer Zone
+            </h4>
+            <p>
+              A <strong>buffer</strong> expands every feature by a specified distance.
+              Buffers answer questions such as: &quot;What land falls within 50 km of
+              Kruger National Park?&quot;, useful for assessing wildlife corridor
+              potential or human–wildlife conflict risk.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-40">
+            <div class="code-toolbar">
+              <span>R · Cell 21 · In [23]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Isolate Kruger National Park
+kruger &lt;- sa_protected_proj %&gt;%
+  filter(str_detect(NAME, regex(&quot;Kruger&quot;, ignore_case = TRUE)),
+         DESIG_ENG == &quot;National Park&quot;)
+
+cat(&quot;Features matching &#39;Kruger&#39;:&quot;, nrow(kruger), &quot;\n&quot;)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">Features matching &#39;Kruger&#39;: 1 
+</pre>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-41">
+            <div class="code-toolbar">
+              <span>R · Cell 22 · In [24]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Create a 50 km buffer (units are metres in our Albers projection)
+kruger_buffer &lt;- kruger %&gt;% st_buffer(dist = 50000)
+
+cat(&quot;Kruger area (km\u00b2):  &quot;, round(sum(kruger$GIS_AREA)), &quot;\n&quot;)
+cat(&quot;Buffer area (km\u00b2): &quot;, round(as.numeric(st_area(kruger_buffer)) / 1e6), &quot;\n&quot;)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">Kruger area (km²):   19170 
+Buffer area (km²):  70900 
+</pre>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-42">
+            <div class="code-toolbar">
+              <span>R · Cell 23 · In [25]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Map: Kruger + 50 km buffer zone
+pad  &lt;- 80000
+bbox &lt;- st_bbox(kruger_buffer)
+
+ggplot() +
+  geom_sf(data = sa_provinces_proj,
+          fill = &quot;#f5f5f0&quot;, colour = &quot;grey60&quot;, linewidth = 0.3) +
+  geom_sf(data = kruger_buffer,
+          fill = &quot;#ff990033&quot;, colour = &quot;#e07b00&quot;,
+          linewidth = 0.8, linetype = &quot;dashed&quot;) +
+  geom_sf(data = kruger,
+          fill = &quot;#2d6a4f&quot;, colour = &quot;#1b4332&quot;) +
+  coord_sf(xlim = c(bbox[&quot;xmin&quot;] - pad, bbox[&quot;xmax&quot;] + pad),
+           ylim = c(bbox[&quot;ymin&quot;] - pad, bbox[&quot;ymax&quot;] + pad)) +
+  labs(
+    title    = &quot;Kruger National Park: 50 km Buffer Zone&quot;,
+    subtitle = &quot;Forest green = Kruger NP  |  Dashed orange = 50 km buffer&quot;,
+    caption  = &quot;Source: WDPA (2024)  |  Projection: Albers Equal-Area Conic&quot;
+  ) +
+  theme(
+    panel.background = element_blank(),
+    panel.grid.major = element_line(linetype = &quot;dotted&quot;, colour = &quot;grey70&quot;, linewidth = 0.25),
+    panel.ontop      = TRUE,
+    panel.grid.minor = element_blank(),
+    panel.border     = element_rect(colour = &quot;black&quot;, fill = NA, linewidth = 1),
+    plot.title       = element_text(face = &quot;bold&quot;, size = 13),
+    plot.subtitle    = element_text(size = 9, colour = &quot;grey40&quot;),
+    plot.caption     = element_text(size = 8, colour = &quot;grey50&quot;)
+  )</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/23ae792571c5ff904dab.png"
+                    alt="Original figure output from code cell 23"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <h4 id="section-43-17">
+              <code>st_intersection()</code> — Clipping Features to an Area of Interest
+            </h4>
+            <p>
+              <code>st_intersection()</code> returns the parts of one geometry that
+              overlap with another. It is the spatial equivalent of
+              <code>filter()</code>, but it clips geometries at the boundary of the
+              intersecting feature rather than simply dropping entire rows.
+            </p>
+            <p>
+              A typical use case: &quot;Show me only the protected areas within Limpopo
+              province&quot; — essential when you need spatially bounded subsets of
+              national datasets for regional analysis.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-44">
+            <div class="code-toolbar">
+              <span>R · Cell 24 · In [26]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Extract Limpopo province
+limpopo &lt;- sa_provinces_proj %&gt;% filter(NAME_1 == &quot;Limpopo&quot;)
+
+# Clip protected areas to Limpopo&#39;s boundary
+limpopo_protected &lt;- st_intersection(sa_protected_proj, limpopo)
+
+cat(&quot;Protected areas in South Africa: &quot;, nrow(sa_protected_proj), &quot;\n&quot;)
+cat(&quot;Intersecting Limpopo:            &quot;, nrow(limpopo_protected), &quot;\n&quot;)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">Warning message:
+“attribute variables are assumed to be spatially constant throughout all geometries”
+</pre>
+                <!-- prettier-ignore -->
+                <pre class="output-text">Protected areas in South Africa:  577 
+Intersecting Limpopo:             134 
+</pre>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-45">
+            <div class="code-toolbar">
+              <span>R · Cell 25 · In [27]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code>limpopo_protected %&gt;%
+  st_drop_geometry() %&gt;%
+  count(DESIG_ENG, sort = TRUE) %&gt;%
+  head(8)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A data.frame: 5 × 2
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th scope="col">DESIG_ENG</th>
+                        <th scope="col">n</th>
+                      </tr>
+                      <tr>
+                        <th></th>
+                        <th scope="col">&lt;chr&gt;</th>
+                        <th scope="col">&lt;int&gt;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Nature Reserve</td>
+                        <td>122</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Forest Nature Reserve</td>
+                        <td>6</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">3</th>
+                        <td>National Park</td>
+                        <td>3</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">4</th>
+                        <td>Wetland of International Importance (Ramsar Site)</td>
+                        <td>2</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">5</th>
+                        <td>Forest Wilderness Area</td>
+                        <td>1</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-46">
+            <div class="code-toolbar">
+              <span>R · Cell 26 · In [28]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code>ggplot() +
+  geom_sf(data = limpopo,
+          fill = &quot;#f0f4c3&quot;, colour = &quot;grey40&quot;, linewidth = 0.6) +
+  geom_sf(data  = limpopo_protected,
+          aes(fill = DESIG_ENG),
+          colour = NA, alpha = 0.8) +
+  scale_fill_brewer(palette = &quot;Set2&quot;, name = &quot;Designation&quot;) +
+  labs(
+    title    = &quot;Protected Areas within Limpopo Province&quot;,
+    subtitle = &quot;st_intersection() clips protected areas to the provincial boundary&quot;,
+    caption  = &quot;Sources: WDPA (2024); GADM v4.1&quot;
+  ) +
+  theme(
+    panel.background = element_blank(),
+    panel.grid.major = element_line(linetype = &quot;dotted&quot;, colour = &quot;grey70&quot;, linewidth = 0.25),
+    panel.ontop      = TRUE,
+    panel.grid.minor = element_blank(),
+    panel.border     = element_rect(colour = &quot;black&quot;, fill = NA, linewidth = 1),
+    plot.title       = element_text(face = &quot;bold&quot;, size = 13),
+    plot.subtitle    = element_text(size = 9, colour = &quot;grey40&quot;),
+    plot.caption     = element_text(size = 8, colour = &quot;grey50&quot;),
+    legend.position  = &quot;right&quot;
+  )</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/824cc9e0ea0f6e079b70.png"
+                    alt="Original figure output from code cell 26"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <h4 id="section-47-18"><code>st_union()</code> — Merging Geometries</h4>
+            <p>
+              <code>st_union()</code> dissolves boundaries between features to produce a
+              single merged geometry. Applied to all nine provinces, it reconstructs the
+              national boundary from its parts — a useful sanity check, and a technique
+              for aggregating geometries from finer to coarser scales.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-48">
+            <div class="code-toolbar">
+              <span>R · Cell 27 · In [29]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Union all provinces into a single national polygon
+sa_from_union &lt;- sa_provinces_proj %&gt;% st_union()
+
+cat(&quot;Area from union (km\u00b2):           &quot;, round(as.numeric(st_area(sa_from_union)) / 1e6), &quot;\n&quot;)
+cat(&quot;Area from country polygon (km\u00b2): &quot;, round(as.numeric(st_area(sa_country_proj)) / 1e6), &quot;\n&quot;)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">Area from union (km²):            1219709 
+Area from country polygon (km²):  1219709 
+</pre>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <p><em>Merging geometries might take a while, be patient.</em></p>
+          </section>
+          <section class="code-cell" id="cell-50">
+            <div class="code-toolbar">
+              <span>R · Cell 28 · In [30]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code>ggplot() +
+  geom_sf(data = sa_provinces_proj,
+          fill = &quot;#e8f5e9&quot;, colour = &quot;grey70&quot;, linewidth = 0.3) +
+  geom_sf(data = sa_from_union,
+          fill = NA, colour = &quot;#1b5e20&quot;, linewidth = 1.2) +
+  labs(
+    title    = &quot;st_union(): Nine Provinces \u2192 One Country&quot;,
+    subtitle = &quot;Province boundaries (grey) dissolved into the national outline (dark green)&quot;,
+    caption  = &quot;Source: GADM v4.1&quot;
+  ) +
+  theme(
+    panel.background = element_blank(),
+    panel.grid.major = element_line(linetype = &quot;dotted&quot;, colour = &quot;grey70&quot;, linewidth = 0.25),
+    panel.ontop      = TRUE,
+    panel.grid.minor = element_blank(),
+    panel.border     = element_rect(colour = &quot;black&quot;, fill = NA, linewidth = 1),
+    plot.title       = element_text(face = &quot;bold&quot;, size = 13),
+    plot.subtitle    = element_text(size = 9, colour = &quot;grey40&quot;),
+    plot.caption     = element_text(size = 8, colour = &quot;grey50&quot;)
+  )</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/a9073e8c5890692558eb.png"
+                    alt="Original figure output from code cell 28"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <h4 id="section-51-19"><code>st_distance()</code> — Computing Distances</h4>
+            <p>
+              <code>st_distance()</code> computes pairwise distances between two sets of
+              features, returning a distance matrix. In a projected CRS the units are
+              metres. Applied to province centroids and national park polygons, it
+              answers: &quot;How far is each province&#39;s population centre from the
+              nearest national park?&quot; — a question with implications for
+              environmental justice and eco-tourism access.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-52">
+            <div class="code-toolbar">
+              <span>R · Cell 29 · In [31]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Centroid of each province
+province_centroids &lt;- sa_provinces_proj %&gt;% st_centroid()
+
+# National parks only
+national_parks &lt;- sa_protected_proj %&gt;% filter(DESIG_ENG == &quot;National Park&quot;)
+
+cat(&quot;National parks:&quot;, nrow(national_parks), &quot;\n&quot;)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">Warning message:
+“st_centroid assumes attributes are constant over geometries”
+</pre>
+                <!-- prettier-ignore -->
+                <pre class="output-text">National parks: 21 
+</pre>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-53">
+            <div class="code-toolbar">
+              <span>R · Cell 30 · In [32]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Distance matrix: 9 provinces x n national parks (units: metres)
+dist_matrix &lt;- st_distance(province_centroids, national_parks)
+dim(dist_matrix)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <style>
+                    .list-inline {
+                      list-style: none;
+                      margin: 0;
+                      padding: 0;
+                    }
+                    .list-inline > li {
+                      display: inline-block;
+                    }
+                    .list-inline > li:not(:last-child)::after {
+                      content: '\00b7';
+                      padding: 0 0.5ex;
+                    }
+                  </style>
+                  <ol class="list-inline">
+                    <li>9</li>
+                    <li>21</li>
+                  </ol>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-54">
+            <div class="code-toolbar">
+              <span>R · Cell 31 · In [33]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># For each province, distance (km) to the NEAREST national park
+sa_provinces_data &lt;- sa_provinces_data %&gt;%
+  mutate(dist_to_np_km = apply(dist_matrix, 1, min) / 1000)
+
+sa_provinces_data %&gt;%
+  st_drop_geometry() %&gt;%
+  select(NAME_1, dist_to_np_km) %&gt;%
+  arrange(desc(dist_to_np_km))</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A data.frame: 9 × 2
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">NAME_1</th>
+                        <th scope="col">dist_to_np_km</th>
+                      </tr>
+                      <tr>
+                        <th scope="col">&lt;chr&gt;</th>
+                        <th scope="col">&lt;dbl&gt;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>North West</td>
+                        <td>271.74755</td>
+                      </tr>
+                      <tr>
+                        <td>KwaZulu-Natal</td>
+                        <td>189.18562</td>
+                      </tr>
+                      <tr>
+                        <td>Limpopo</td>
+                        <td>164.04836</td>
+                      </tr>
+                      <tr>
+                        <td>Free State</td>
+                        <td>161.03808</td>
+                      </tr>
+                      <tr>
+                        <td>Northern Cape</td>
+                        <td>135.00957</td>
+                      </tr>
+                      <tr>
+                        <td>Mpumalanga</td>
+                        <td>110.09385</td>
+                      </tr>
+                      <tr>
+                        <td>Eastern Cape</td>
+                        <td>88.12712</td>
+                      </tr>
+                      <tr>
+                        <td>Western Cape</td>
+                        <td>81.09407</td>
+                      </tr>
+                      <tr>
+                        <td>Gauteng</td>
+                        <td>38.45197</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-55">
+            <div class="code-toolbar">
+              <span>R · Cell 32 · In [34]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code>ggplot(sa_provinces_data) +
+  geom_sf(aes(fill = dist_to_np_km),
+          colour = &quot;white&quot;, linewidth = 0.5) +
+  geom_sf(data  = national_parks,
+          fill   = &quot;#2d6a4f&quot;, colour = NA, alpha = 0.9) +
+  scale_fill_gradientn(
+    colours = c(&quot;#fff176&quot;, &quot;#ffca28&quot;, &quot;#fb8c00&quot;, &quot;#e53935&quot;, &quot;#880e4f&quot;),
+    name    = &quot;Distance to\nNearest NP (km)&quot;,
+    labels  = comma
+  ) +
+  labs(
+    title    = &quot;Distance from Province Centroid to Nearest National Park&quot;,
+    subtitle = &quot;Green polygons = SANParks National Parks&quot;,
+    caption  = &quot;Sources: WDPA (2024); GADM v4.1  |  Distances computed from province centroids&quot;
+  ) +
+  theme(
+    panel.background  = element_blank(),
+    panel.grid.major  = element_line(linetype = &quot;dotted&quot;, colour = &quot;grey70&quot;, linewidth = 0.25),
+    panel.ontop       = TRUE,
+    panel.grid.minor  = element_blank(),
+    panel.border      = element_rect(colour = &quot;black&quot;, fill = NA, linewidth = 1),
+    plot.title        = element_text(face = &quot;bold&quot;, size = 13),
+    plot.subtitle     = element_text(size = 9, colour = &quot;grey40&quot;),
+    plot.caption      = element_text(size = 8, colour = &quot;grey50&quot;),
+    legend.key.height = unit(1.2, &quot;cm&quot;)
+  )</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/242ddf013e8b9c121628.png"
+                    alt="Original figure output from code cell 32"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-56-20">1.11 Adding Cities as Point Features</h3>
+            <p>
+              So far all our features have been polygons. Points are simpler: each
+              feature is a single x, y coordinate pair. We create a cities dataset from
+              a <code>tibble</code> using <code>st_as_sf()</code>, which converts a data
+              frame with coordinate columns into an <code>sf</code> object. This is the
+              standard pattern for any GPS-derived data or tabular data with
+              latitude/longitude columns.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-57">
+            <div class="code-toolbar">
+              <span>R · Cell 33 · In [35]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Major South African cities with WGS84 coordinates
+cities_df &lt;- tibble(
+  city = c(&quot;Johannesburg&quot;, &quot;Cape Town&quot;, &quot;Durban&quot;, &quot;Pretoria&quot;,
+           &quot;Gqeberha&quot;, &quot;Bloemfontein&quot;, &quot;East London&quot;, &quot;Mbombela&quot;,
+           &quot;Polokwane&quot;, &quot;Kimberley&quot;),
+  lon  = c(28.047, 18.424, 30.960, 28.229, 25.602, 26.160,
+            27.912, 30.974, 29.465, 24.750),
+  lat  = c(-26.204, -33.925, -29.859, -25.748, -33.961, -29.085,
+            -33.015, -25.475, -23.904, -28.728)
+)
+
+# Convert to sf: specify coordinate columns and CRS, then reproject
+cities_sf &lt;- cities_df %&gt;%
+  st_as_sf(coords = c(&quot;lon&quot;, &quot;lat&quot;), crs = 4326) %&gt;%
+  st_transform(crs = sa_albers)
+
+# Extract projected coordinates for ggrepel (needs explicit x, y)
+cities_coords &lt;- cities_sf %&gt;%
+  mutate(X = st_coordinates(.)[, 1],
+         Y = st_coordinates(.)[, 2]) %&gt;%
+  st_drop_geometry()
+
+cities_sf</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">Registered S3 method overwritten by &#39;geojsonsf&#39;:
+  method        from   
+  print.geojson geojson
+
+</pre>
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A sf: 10 × 2
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th scope="col">city</th>
+                        <th scope="col">geometry</th>
+                      </tr>
+                      <tr>
+                        <th></th>
+                        <th scope="col">&lt;chr&gt;</th>
+                        <th scope="col">&lt;POINT [m]&gt;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Johannesburg</td>
+                        <td>POINT (302293.6 -137744.1)</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Cape Town</td>
+                        <td>POINT (-610896.2 -1007430)</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">3</th>
+                        <td>Durban</td>
+                        <td>POINT (573377.8 -554376.7)</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">4</th>
+                        <td>Pretoria</td>
+                        <td>POINT (321549.7 -87281.49)</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">5</th>
+                        <td>Gqeberha</td>
+                        <td>POINT (55928.42 -996816)</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">6</th>
+                        <td>Bloemfontein</td>
+                        <td>POINT (112363.1 -456155.7)</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">7</th>
+                        <td>East London</td>
+                        <td>POINT (272746.4 -895073.7)</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">8</th>
+                        <td>Mbombela</td>
+                        <td>POINT (596099.9 -66050.72)</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">9</th>
+                        <td>Polokwane</td>
+                        <td>POINT (451321.1 114914.7)</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">10</th>
+                        <td>Kimberley</td>
+                        <td>POINT (-24289.28 -415922.9)</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-58-21">1.12 The Final Map — Bringing It All Together</h3>
+            <p>We now have every ingredient for a publication-quality map:</p>
+            <ul>
+              <li>Province polygons coloured by population density (choropleth)</li>
+              <li>Protected areas as a semi-transparent overlay</li>
+              <li>Major cities as labelled point features</li>
+              <li>A projected CRS that preserves area</li>
+              <li>Scale bar and north arrow from <code>ggspatial</code></li>
+            </ul>
+            <p>The map below synthesises everything introduced in this section.</p>
+          </section>
+          <section class="code-cell" id="cell-59">
+            <div class="code-toolbar">
+              <span>R · Cell 34 · In [36]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Keep the most ecologically significant protected area designations
+major_pas &lt;- sa_protected_proj %&gt;%
+  filter(DESIG_ENG %in% c(&quot;National Park&quot;, &quot;Marine Protected Area&quot;,
+                           &quot;World Heritage Site (natural or mixed)&quot;,
+                           &quot;Ramsar Site, Wetland of International Importance&quot;))
+
+sa_map_final &lt;- ggplot() +
+
+  # 1. Province polygons coloured by population density
+  geom_sf(data = sa_provinces_data,
+          aes(fill = pop_density),
+          colour = &quot;white&quot;, linewidth = 0.55) +
+
+  # 2. Protected areas — semi-transparent forest green
+  geom_sf(data = major_pas,
+          fill = &quot;#1b4332&quot;, colour = NA, alpha = 0.65) +
+
+  # 3. Country outline
+  geom_sf(data = sa_country_proj,
+          fill = NA, colour = &quot;grey20&quot;, linewidth = 0.8) +
+
+  # 4. City points
+  geom_sf(data = cities_sf,
+          shape = 21, size = 2.8,
+          fill = &quot;#ffca28&quot;, colour = &quot;grey20&quot;, stroke = 0.8) +
+
+  # 5. City labels (non-overlapping)
+  geom_text_repel(
+    data = cities_coords,
+    aes(x = X, y = Y, label = city),
+    size = 2.6, fontface = &quot;bold&quot;, colour = &quot;grey10&quot;,
+    segment.colour = &quot;grey50&quot;, segment.linewidth = 0.35,
+    box.padding = 0.5, max.overlaps = 15
+  ) +
+
+  # Colour scale
+  scale_fill_gradientn(
+    colours  = c(&quot;#f7fcf5&quot;, &quot;#c7e9c0&quot;, &quot;#74c476&quot;, &quot;#238b45&quot;, &quot;#00441b&quot;),
+    name     = &quot;Population\nDensity (km\u00b2)&quot;,
+    labels   = comma,
+    trans    = &quot;log10&quot;,
+    na.value = &quot;grey85&quot;,
+    guide    = guide_colourbar(barheight = unit(4, &quot;cm&quot;))
+  ) +
+
+  # Cartographic elements
+  annotation_scale(location = &quot;bl&quot;, width_hint = 0.25,
+                   text_cex = 0.75, line_width = 0.8) +
+  annotation_north_arrow(
+    location = &quot;bl&quot;, which_north = &quot;true&quot;,
+    pad_x = unit(0.15, &quot;in&quot;), pad_y = unit(0.35, &quot;in&quot;),
+    style = north_arrow_fancy_orienteering(
+      fill     = c(&quot;grey40&quot;, &quot;white&quot;),
+      line_col = &quot;grey20&quot;, text_col = &quot;grey20&quot;, text_size = 8
+    )
+  ) +
+
+  labs(
+    title    = &quot;South Africa: People, Provinces &amp; Protected Areas&quot;,
+    subtitle = &quot;Population density by province  \u00b7  Conservation estate in forest green  \u00b7  Major cities in yellow&quot;,
+    caption  = &quot;Projection: Albers Equal-Area Conic  |  Sources: Stats SA Census 2022; GADM v4.1; WDPA (2024)&quot;
+  ) +
+
+  theme(
+    panel.background  = element_blank(),
+    panel.grid.major  = element_line(linetype = &quot;dotted&quot;, colour = &quot;grey65&quot;, linewidth = 0.25),
+    panel.ontop       = TRUE,
+    panel.grid.minor  = element_blank(),
+    panel.border      = element_rect(colour = &quot;black&quot;, fill = NA, linewidth = 1),
+    plot.title        = element_text(face = &quot;bold&quot;, size = 15),
+    plot.subtitle     = element_text(size = 9, colour = &quot;grey40&quot;),
+    plot.caption      = element_text(size = 7.5, colour = &quot;grey50&quot;),
+    legend.position   = &quot;right&quot;,
+    legend.title      = element_text(size = 9, face = &quot;bold&quot;),
+    legend.text       = element_text(size = 8)
+  )
+
+sa_map_final</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">Warning message in geom_text_repel(data = cities_coords, aes(x = X, y = Y, label = city), :
+“Ignoring unknown parameters: `segment.linewidth`”
+Scale on map varies by more than 10%, scale bar may be inaccurate
+
+</pre>
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/a02d9fe65d64d6658aee.png"
+                    alt="Original figure output from code cell 34"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <p>
+              On second thoughts, let us remove marine protected areas. Although the map
+              is good, personally, I do not like how the marine protected area below
+              makes the map look. Professionally, I would advice to keep it (only if it
+              is relevant to your research).
+            </p>
+          </section>
+          <section class="code-cell" id="cell-61">
+            <div class="code-toolbar">
+              <span>R · Cell 35 · In [37]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Keep the most ecologically significant protected area designations
+major_pas2 &lt;- sa_protected_proj %&gt;%
+  filter(DESIG_ENG %in% c(&quot;National Park&quot;,
+                           &quot;World Heritage Site (natural or mixed)&quot;,
+                           &quot;Ramsar Site, Wetland of International Importance&quot;))
+
+sa_map_final2 &lt;- ggplot() +
+
+  # 1. Province polygons coloured by population density
+  geom_sf(data = sa_provinces_data,
+          aes(fill = pop_density),
+          colour = &quot;white&quot;, linewidth = 0.55) +
+
+  # 2. Protected areas — semi-transparent forest green
+  geom_sf(data = major_pas2,
+          fill = &quot;#1b4332&quot;, colour = NA, alpha = 0.65) +
+
+  # 3. Country outline
+  geom_sf(data = sa_country_proj,
+          fill = NA, colour = &quot;grey20&quot;, linewidth = 0.8) +
+
+  # 4. City points
+  geom_sf(data = cities_sf,
+          shape = 21, size = 2.8,
+          fill = &quot;#ffca28&quot;, colour = &quot;grey20&quot;, stroke = 0.8) +
+
+  # 5. City labels (non-overlapping)
+  geom_text_repel(
+    data = cities_coords,
+    aes(x = X, y = Y, label = city),
+    size = 2.6, fontface = &quot;bold&quot;, colour = &quot;grey10&quot;,
+    segment.colour = &quot;grey50&quot;, segment.linewidth = 0.35,
+    box.padding = 0.5, max.overlaps = 15
+  ) +
+
+  # Colour scale
+  scale_fill_gradientn(
+    colours  = c(&quot;#f7fcf5&quot;, &quot;#c7e9c0&quot;, &quot;#74c476&quot;, &quot;#238b45&quot;, &quot;#00441b&quot;),
+    name     = &quot;Population\nDensity (km\u00b2)&quot;,
+    labels   = comma,
+    trans    = &quot;log10&quot;,
+    na.value = &quot;grey85&quot;,
+    guide    = guide_colourbar(barheight = unit(4, &quot;cm&quot;))
+  ) +
+
+  # Cartographic elements
+  annotation_scale(location = &quot;bl&quot;, width_hint = 0.25,
+                   text_cex = 0.75, line_width = 0.8) +
+  annotation_north_arrow(
+    location = &quot;bl&quot;, which_north = &quot;true&quot;,
+    pad_x = unit(0.15, &quot;in&quot;), pad_y = unit(0.35, &quot;in&quot;),
+    style = north_arrow_fancy_orienteering(
+      fill     = c(&quot;grey40&quot;, &quot;white&quot;),
+      line_col = &quot;grey20&quot;, text_col = &quot;grey20&quot;, text_size = 8
+    )
+  ) +
+
+  labs(
+    title    = &quot;South Africa: People, Provinces &amp; Protected Areas&quot;,
+    subtitle = &quot;Population density by province  \u00b7  Conservation estate in forest green  \u00b7  Major cities in yellow&quot;,
+    caption  = &quot;Projection: Albers Equal-Area Conic  |  Sources: Stats SA Census 2022; GADM v4.1; WDPA (2024)&quot;
+  ) +
+
+  theme(
+    panel.background  = element_blank(),
+    panel.grid.major  = element_line(linetype = &quot;dotted&quot;, colour = &quot;grey65&quot;, linewidth = 0.25),
+    panel.ontop       = TRUE,
+    panel.grid.minor  = element_blank(),
+    panel.border      = element_rect(colour = &quot;black&quot;, fill = NA, linewidth = 1),
+    plot.title        = element_text(face = &quot;bold&quot;, size = 15),
+    plot.subtitle     = element_text(size = 9, colour = &quot;grey40&quot;),
+    plot.caption      = element_text(size = 7.5, colour = &quot;grey50&quot;),
+    legend.position   = &quot;right&quot;,
+    legend.title      = element_text(size = 9, face = &quot;bold&quot;),
+    legend.text       = element_text(size = 8)
+  )
+
+sa_map_final2</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">Warning message in geom_text_repel(data = cities_coords, aes(x = X, y = Y, label = city), :
+“Ignoring unknown parameters: `segment.linewidth`”
+</pre>
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/830cd555378a0d924e08.png"
+                    alt="Original figure output from code cell 35"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <hr />
+            <h2 id="section-62-22">
+              Section 2: The Programmatic Approach — No Downloads Required
+            </h2>
+            <p>
+              In Section 1, the workflow required you to navigate to websites, download
+              archives, unzip them, and manage files on your hard drive. For small
+              projects with infrequently updated data this is perfectly reasonable. But
+              it has real limitations:
+            </p>
+            <ul>
+              <li>
+                <strong>Reproducibility</strong>: A colleague running your script needs
+                all the same files in the same locations.
+              </li>
+              <li>
+                <strong>Version drift</strong>: When GADM or WDPA release updated data,
+                your cached files become stale.
+              </li>
+              <li>
+                <strong>Automation</strong>: If you are producing the same analysis for
+                many countries or as a recurring report, manual downloads do not scale.
+              </li>
+            </ul>
+            <p>
+              The solution is R packages that fetch data <em>programmatically</em> —
+              using code, not mouse clicks. The data comes from the same authoritative
+              sources (GADM, WDPA, Natural Earth), but R handles downloading, caching,
+              and reading automatically. Your script becomes fully self-contained:
+              anyone can clone your repository and reproduce your results with a single
+              <code>source()</code> call.
+            </p>
+            <hr />
+            <h3 id="section-62-23">
+              2.1 Additional Packages for Programmatic Data Access
+            </h3>
+          </section>
+          <section class="code-cell" id="cell-63">
+            <div class="code-toolbar">
+              <span>R · Cell 36 · In [40]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># install.packages(c(&quot;geodata&quot;, &quot;wdpar&quot;, &quot;rnaturalearth&quot;, &quot;rnaturalearthdata&quot;))
+# remotes::install_github(&quot;ropensci/rnaturalearthhires&quot;)
+
+suppressPackageStartupMessages({
+    library(rnaturalearth)
+    library(rnaturalearthdata)
+    library(rnaturalearthhires)   # required for scale = &quot;large&quot;
+    library(geodata)              # GADM, climate, elevation, species
+    library(wdpar)                # World Database on Protected Areas
+    })</code></pre>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-64-24">
+              2.2 Getting Province Boundaries with <code>geodata</code>
+            </h3>
+            <p>
+              The <code>geodata</code> package provides a one-line interface to the same
+              GADM data you downloaded manually in Section 1. Downloaded files are
+              cached locally, so subsequent calls are fast. It returns a
+              <code>terra</code> <code>SpatVector</code>, which we convert to
+              <code>sf</code> with <code>st_as_sf()</code>.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-65">
+            <div class="code-toolbar">
+              <span>R · Cell 37 · In [41]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Download GADM Level 1 (provinces) for South Africa
+sa_provinces_auto &lt;- geodata::gadm(country = &quot;ZAF&quot;, level = 1, path = tempdir()) %&gt;%
+  st_as_sf()
+
+# Country boundary (Level 0)
+sa_country_auto &lt;- geodata::gadm(country = &quot;ZAF&quot;, level = 0, path = tempdir()) %&gt;%
+  st_as_sf()
+
+# Reproject both
+sa_provinces_auto_proj &lt;- sa_provinces_auto %&gt;% st_transform(crs = sa_albers)
+sa_country_auto_proj   &lt;- sa_country_auto   %&gt;% st_transform(crs = sa_albers)
+
+cat(&quot;Provinces in auto dataset:&quot;, nrow(sa_provinces_auto_proj), &quot;\n&quot;)
+head(sa_provinces_auto_proj[&quot;NAME_1&quot;], 4)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">Provinces in auto dataset: 9 
+</pre>
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A sf: 4 × 2
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th scope="col">NAME_1</th>
+                        <th scope="col">geometry</th>
+                      </tr>
+                      <tr>
+                        <th></th>
+                        <th scope="col">&lt;chr&gt;</th>
+                        <th scope="col">&lt;GEOMETRY [m]&gt;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Eastern Cape</td>
+                        <td>MULTIPOLYGON (((-8932.448 -...</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Free State</td>
+                        <td>POLYGON ((141728.2 -628273,...</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">3</th>
+                        <td>Gauteng</td>
+                        <td>POLYGON ((280381.9 -198110....</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">4</th>
+                        <td>KwaZulu-Natal</td>
+                        <td>MULTIPOLYGON (((503596.6 -6...</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <p>
+              Column names are identical to the manually downloaded shapefile because
+              the underlying source is the same GADM database. The only difference is
+              <em>how</em> the data arrived.
+            </p>
+            <p>
+              <code>rnaturalearth</code> provides a convenient alternative with slightly
+              lower resolution — sufficient for most regional mapping tasks:
+            </p>
+          </section>
+          <section class="code-cell" id="cell-67">
+            <div class="code-toolbar">
+              <span>R · Cell 38 · In [42]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># rnaturalearth: province-level data from Natural Earth
+sa_provinces_ne &lt;- rnaturalearth::ne_states(
+  country     = &quot;south africa&quot;,
+  returnclass = &quot;sf&quot;
+)
+
+# Natural Earth uses different column names
+glimpse(sa_provinces_ne[, c(&quot;name&quot;, &quot;region&quot;, &quot;type_en&quot;)])</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">Rows: 9
+Columns: 4
+$ name     &lt;chr&gt; &quot;Northern Cape&quot;, &quot;KwaZulu-Natal&quot;, &quot;Free State&quot;, &quot;Eastern Cape…
+$ region   &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA
+$ type_en  &lt;chr&gt; &quot;Province&quot;, &quot;Province&quot;, &quot;Province&quot;, &quot;Province&quot;, &quot;Province&quot;, &quot;…
+$ geometry &lt;MULTIPOLYGON [°]&gt; MULTIPOLYGON (((16.48707 -2..., MULTIPOLYGON (((28.98085 -2..…
+</pre>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-68-25">
+              2.3 Getting Protected Areas with <code>wdpar</code>
+            </h3>
+            <p>
+              The <code>wdpar</code> package interfaces directly with the Protected
+              Planet API. <code>wdpa_fetch()</code> downloads the WDPA dataset for a
+              country; <code>wdpa_clean()</code> applies standard quality-control steps:
+              removing invalid geometries, duplicate records, and marine-only
+              designations.
+            </p>
+            <blockquote>
+              <p>
+                <strong>Note on download time</strong>:
+                <code>wdpa_fetch()</code> contacts the internet and may take several
+                minutes for South Africa. Data are cached between sessions — run this
+                cell once, and subsequent calls will be fast.
+              </p>
+            </blockquote>
+            <p>
+              <strong>Note for Mac users</strong>: <code>wdpar</code> package uses the
+              chromote package to scrape download URLs from the Protected Planet
+              website, which requires a Chromium-based browser. Chrome needs to be
+              installed and placed under Applications. Run this line before running
+              <code>wdpa_fetch()</code>:
+            </p>
+            <!-- prettier-ignore -->
+            <pre><code># Set the path to the Chrome executable on your Mac
+Sys.setenv(CHROMOTE_CHROME = &quot;/Applications/Google Chrome.app/Contents/MacOS/Google Chrome&quot;)
+</code></pre>
+          </section>
+          <section class="code-cell" id="cell-69">
+            <div class="code-toolbar">
+              <span>R · Cell 39 · In [46]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code>Sys.setenv(CHROMOTE_CHROME = &quot;/Applications/Google Chrome.app/Contents/MacOS/Google Chrome&quot;)</code></pre>
+          </section>
+          <section class="code-cell" id="cell-70">
+            <div class="code-toolbar">
+              <span>R · Cell 40 · In [47]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Fetch and clean the South Africa WDPA dataset
+sa_pa_auto &lt;- wdpar::wdpa_fetch(&quot;South Africa&quot;, wait = TRUE)
+sa_pa_auto_clean &lt;- wdpar::wdpa_clean(sa_pa_auto)
+
+# Reproject
+sa_pa_auto_proj &lt;- sa_pa_auto_clean %&gt;% st_transform(crs = sa_albers)
+
+cat(&quot;Protected area polygons (after cleaning):&quot;, nrow(sa_pa_auto_proj), &quot;\n&quot;)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">Warning message in CPL_read_ogr(dsn, layer, query, as.character(options), quiet, :
+“GDAL Message 1: organizePolygons() received a polygon with more than 100 parts. The processing may be really slow.  You can skip the processing by setting METHOD=SKIP, or only make it analyze counter-clock wise parts by setting METHOD=ONLY_CCW if you can assume that the outline of holes is counter-clock wise defined”
+</pre>
+                <!-- prettier-ignore -->
+                <pre class="output-text">Protected area polygons (after cleaning): 1679 
+</pre>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-71">
+            <div class="code-toolbar">
+              <span>R · Cell 41 · In [48]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code>sa_pa_auto_proj %&gt;%
+  st_drop_geometry() %&gt;%
+  count(DESIG_ENG, sort = TRUE) %&gt;%
+  head(8)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <div class="notebook-table">
+                  <table class="dataframe">
+                    <caption>
+                      A tibble: 8 × 2
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">DESIG_ENG</th>
+                        <th scope="col">n</th>
+                      </tr>
+                      <tr>
+                        <th scope="col">&lt;chr&gt;</th>
+                        <th scope="col">&lt;int&gt;</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Nature Reserve</td>
+                        <td>1431</td>
+                      </tr>
+                      <tr>
+                        <td>Protected Environment</td>
+                        <td>69</td>
+                      </tr>
+                      <tr>
+                        <td>Forest Nature Reserve</td>
+                        <td>52</td>
+                      </tr>
+                      <tr>
+                        <td>Marine Protected Area</td>
+                        <td>42</td>
+                      </tr>
+                      <tr>
+                        <td>Wetland of International Importance (Ramsar Site)</td>
+                        <td>31</td>
+                      </tr>
+                      <tr>
+                        <td>National Park</td>
+                        <td>22</td>
+                      </tr>
+                      <tr>
+                        <td>Mountain Catchment Area</td>
+                        <td>16</td>
+                      </tr>
+                      <tr>
+                        <td>Forest Wilderness Area</td>
+                        <td>12</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <p>
+              The cleaning step may return slightly fewer rows than the raw fetch
+              because it removes invalid geometries and duplicate records — exactly the
+              quality-control steps that the WDPA documentation recommends and that you
+              would otherwise apply manually.
+            </p>
+            <h3 id="section-72-26">2.4 Preparing the Joined Data and Cities</h3>
+            <p>
+              The attribute join and city creation are identical to Section 1. We reuse
+              the same <code>province_data</code> and <code>cities_df</code> objects we
+              created earlier. This illustrates an important principle:
+              <strong
+                >data wrangling code does not change; only the data acquisition step
+                differs between workflows</strong
+              >.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-73">
+            <div class="code-toolbar">
+              <span>R · Cell 42 · In [50]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Attribute join (same province_data tibble as Section 1)
+sa_provinces_auto_data &lt;- sa_provinces_auto_proj %&gt;%
+  left_join(province_data, by = &quot;NAME_1&quot;) %&gt;%
+  mutate(pop_density = population / area_km2)
+
+# Cities (same cities_df as Section 1)
+cities_sf_auto &lt;- cities_df %&gt;%
+  st_as_sf(coords = c(&quot;lon&quot;, &quot;lat&quot;), crs = 4326) %&gt;%
+  st_transform(crs = sa_albers)
+
+cities_coords_auto &lt;- cities_sf_auto %&gt;%
+  mutate(X = st_coordinates(.)[, 1],
+         Y = st_coordinates(.)[, 2]) %&gt;%
+  st_drop_geometry()
+
+# Major protected areas
+major_pas_auto &lt;- sa_pa_auto_proj %&gt;%
+  filter(DESIG_ENG %in% c(&quot;National Park&quot;,
+                           &quot;World Heritage Site (natural or mixed)&quot;,
+                           &quot;Ramsar Site, Wetland of International Importance&quot;))
+
+cat(&quot;Join complete. Province rows:&quot;, nrow(sa_provinces_auto_data), &quot;\n&quot;)</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">Join complete. Province rows: 9 
+</pre>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-74-27">2.5 Reproducing the Final Map — Programmatically</h3>
+            <p>
+              The map code below is essentially identical to the Section 1 final map.
+              Only the data objects differ. The visual result should be
+              indistinguishable — which is the whole point:
+              <strong>reproducible code produces reproducible results</strong>,
+              regardless of how the underlying data arrived.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-75">
+            <div class="code-toolbar">
+              <span>R · Cell 43 · In [51]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code>sa_map_programmatic &lt;- ggplot() +
+
+  geom_sf(data = sa_provinces_auto_data,
+          aes(fill = pop_density),
+          colour = &quot;white&quot;, linewidth = 0.55) +
+
+  geom_sf(data = major_pas_auto,
+          fill = &quot;#1b4332&quot;, colour = NA, alpha = 0.65) +
+
+  geom_sf(data = sa_country_auto_proj,
+          fill = NA, colour = &quot;grey20&quot;, linewidth = 0.8) +
+
+  geom_sf(data = cities_sf_auto,
+          shape = 21, size = 2.8,
+          fill = &quot;#ffca28&quot;, colour = &quot;grey20&quot;, stroke = 0.8) +
+
+  geom_text_repel(
+    data = cities_coords_auto,
+    aes(x = X, y = Y, label = city),
+    size = 2.6, fontface = &quot;bold&quot;, colour = &quot;grey10&quot;,
+    segment.colour = &quot;grey50&quot;, segment.linewidth = 0.35,
+    box.padding = 0.5, max.overlaps = 15
+  ) +
+
+  scale_fill_gradientn(
+    colours  = c(&quot;#f7fcf5&quot;, &quot;#c7e9c0&quot;, &quot;#74c476&quot;, &quot;#238b45&quot;, &quot;#00441b&quot;),
+    name     = &quot;Population\nDensity (km\u00b2)&quot;,
+    labels   = comma, trans = &quot;log10&quot;,
+    na.value = &quot;grey85&quot;,
+    guide    = guide_colourbar(barheight = unit(4, &quot;cm&quot;))
+  ) +
+
+  annotation_scale(location = &quot;bl&quot;, width_hint = 0.25,
+                   text_cex = 0.75, line_width = 0.8) +
+  annotation_north_arrow(
+    location = &quot;bl&quot;, which_north = &quot;true&quot;,
+    pad_x = unit(0.15, &quot;in&quot;), pad_y = unit(0.35, &quot;in&quot;),
+    style = north_arrow_fancy_orienteering(
+      fill = c(&quot;grey40&quot;, &quot;white&quot;), line_col = &quot;grey20&quot;,
+      text_col = &quot;grey20&quot;, text_size = 8
+    )
+  ) +
+
+  labs(
+    title    = &quot;South Africa: People, Provinces &amp; Protected Areas&quot;,
+    subtitle = &quot;Reproduced programmatically — no manual downloads required&quot;,
+    caption  = &quot;Projection: Albers Equal-Area Conic  |  Sources: Stats SA Census 2022; geodata/GADM; wdpar/WDPA (2024)&quot;
+  ) +
+
+  theme(
+    panel.background  = element_blank(),
+    panel.grid.major  = element_line(linetype = &quot;dotted&quot;, colour = &quot;grey65&quot;, linewidth = 0.25),
+    panel.ontop       = TRUE,
+    panel.grid.minor  = element_blank(),
+    panel.border      = element_rect(colour = &quot;black&quot;, fill = NA, linewidth = 1),
+    plot.title        = element_text(face = &quot;bold&quot;, size = 15),
+    plot.subtitle     = element_text(size = 9, colour = &quot;grey40&quot;),
+    plot.caption      = element_text(size = 7.5, colour = &quot;grey50&quot;),
+    legend.position   = &quot;right&quot;,
+    legend.title      = element_text(size = 9, face = &quot;bold&quot;),
+    legend.text       = element_text(size = 8)
+  )
+
+sa_map_programmatic</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <!-- prettier-ignore -->
+                <pre class="output-text">Warning message in geom_text_repel(data = cities_coords_auto, aes(x = X, y = Y, :
+“Ignoring unknown parameters: `segment.linewidth`”
+</pre>
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/41b15cb2e0b573f62250.png"
+                    alt="Original figure output from code cell 43"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="markdown-cell">
+            <h3 id="section-76-28">
+              2.6 A Side-by-Side Comparison with <code>patchwork</code>
+            </h3>
+            <p>
+              <code>patchwork</code> lets us compose multiple
+              <code>ggplot2</code> objects into a single figure. Placing the two maps
+              side-by-side makes the equivalence of the two workflows immediately
+              visible.
+            </p>
+          </section>
+          <section class="code-cell" id="cell-77">
+            <div class="code-toolbar">
+              <span>R · Cell 44 · In [52]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code>options(repr.plot.width = 20, repr.plot.height = 8, repr.plot.res = 200)
+
+map_A &lt;- sa_map_final2 +
+  labs(title = &quot;Section 1: Manual download&quot;,
+       subtitle = &quot;data loaded from local shapefiles&quot;) +
+  theme(legend.position = &quot;none&quot;)
+
+map_B &lt;- sa_map_programmatic +
+  labs(title = &quot;Section 2: Programmatic fetch&quot;,
+       subtitle = &quot;data retrieved via geodata + wdpar&quot;) +
+  theme(legend.position = &quot;right&quot;)
+
+map_A + map_B +
+  plot_annotation(
+    title   = &quot;Same Data, Same Map \u2014 Two Different Workflows&quot;,
+    caption = &quot;Left: manual shapefile download  |  Right: fully programmatic acquisition&quot;,
+    theme   = theme(
+      plot.title   = element_text(face = &quot;bold&quot;, size = 17),
+      plot.caption = element_text(size = 8, colour = &quot;grey50&quot;)
+    )
+  )</code></pre>
+            <details class="cell-output" open>
+              <summary>Output</summary>
+              <div class="output-content">
+                <figure class="notebook-figure">
+                  <img
+                    loading="lazy"
+                    src="../media/bf85b788e51265d859f1.png"
+                    alt="Original figure output from code cell 44"
+                  />
+                </figure>
+              </div>
+            </details>
+          </section>
+          <section class="code-cell" id="cell-78">
+            <div class="code-toolbar">
+              <span>R · Cell 45 · In [54]</span
+              ><button class="copy-code">Copy code</button>
+            </div>
+            <!-- prettier-ignore -->
+            <pre class="source-code"><code># Reset plot dimensions
+options(repr.plot.width = 10, repr.plot.height = 7, repr.plot.res = 200)</code></pre>
+          </section>
+          <section class="markdown-cell">
+            <hr />
+            <h2 id="section-79-29">Summary</h2>
+            <p>
+              This notebook has introduced the core workflow for vector spatial data in
+              R using the <code>sf</code> package.
+            </p>
+            <p><strong>Data I/O</strong></p>
+            <ul>
+              <li>
+                <code>st_read()</code> reads shapefiles, GeoPackages, and dozens of
+                other formats through GDAL
+              </li>
+              <li>
+                <code>st_write()</code> saves spatial objects; prefer GeoPackage
+                (<code>.gpkg</code>) over shapefile for new data
+              </li>
+            </ul>
+            <p><strong>Exploration</strong></p>
+            <ul>
+              <li>
+                <code>sf</code> objects are data frames with a special geometry column —
+                all <code>dplyr</code> verbs apply
+              </li>
+              <li>
+                Always run <code>st_geometry_type()</code>, <code>st_crs()</code>, and
+                <code>st_bbox()</code> on any new dataset
+              </li>
+              <li>
+                <code>st_drop_geometry()</code> returns the attribute table as a plain
+                tibble
+              </li>
+            </ul>
+            <p><strong>Coordinate Reference Systems</strong></p>
+            <ul>
+              <li>
+                Check CRS with <code>st_crs()</code>; reproject with
+                <code>st_transform()</code>
+              </li>
+              <li>Use a projected CRS (metres) for any distance or area calculation</li>
+              <li>
+                The Albers Equal-Area Conic is a good default for South Africa-wide
+                analyses
+              </li>
+            </ul>
+            <p><strong>Attribute Joins</strong></p>
+            <ul>
+              <li>
+                <code>left_join()</code> attaches tabular data to spatial objects via a
+                shared key column
+              </li>
+              <li>
+                The result is a spatially enriched <code>sf</code> object ready for
+                choropleth mapping
+              </li>
+            </ul>
+            <p><strong>Geometry Operations</strong> (GEOS-powered)</p>
+            <ul>
+              <li>
+                <code>st_buffer(dist)</code> — expand features outward by a distance
+              </li>
+              <li>
+                <code>st_intersection(x, y)</code> — clip to the overlap of two
+                geometries
+              </li>
+              <li><code>st_union()</code> — dissolve boundaries between features</li>
+              <li>
+                <code>st_distance(x, y)</code> — compute pairwise distance matrix
+                (units: metres in projected CRS)
+              </li>
+            </ul>
+            <p><strong>Visualisation</strong></p>
+            <ul>
+              <li>
+                <code>geom_sf()</code> integrates directly with <code>ggplot2</code>
+              </li>
+              <li><code>geom_sf_text()</code> labels features at their centroids</li>
+              <li><code>ggrepel::geom_text_repel()</code> avoids overlapping labels</li>
+              <li>
+                <code>ggspatial::annotation_scale()</code> and
+                <code>annotation_north_arrow()</code> add cartographic elements
+              </li>
+            </ul>
+            <p><strong>Programmatic Data Access</strong></p>
+            <ul>
+              <li>
+                <code>geodata::gadm()</code> fetches GADM administrative boundaries
+              </li>
+              <li>
+                <code>rnaturalearth::ne_states()</code> provides Natural Earth province
+                boundaries
+              </li>
+              <li>
+                <code>wdpar::wdpa_fetch()</code> + <code>wdpa_clean()</code> provides
+                analysis-ready WDPA data
+              </li>
+            </ul>
+            <hr />
+            <h2 id="section-79-30">References</h2>
+            <p>
+              Bivand, R. (2023). Progress in modernizing and replacing infrastructure
+              packages in R-spatial workflows.
+              <em>R-Spatial Evolution Project Report</em>.
+              <a href="https://r-spatial.github.io/evolution/"
+                >https://r-spatial.github.io/evolution/</a
+              >
+            </p>
+            <p>
+              Hijmans, R. J. (2023). <em>geodata: Download Geographic Data</em>. R
+              package, version 0.5.10.
+              <a href="https://CRAN.R-project.org/package=geodata"
+                >https://CRAN.R-project.org/package=geodata</a
+              >
+            </p>
+            <p>
+              Lovelace, R., Nowosad, J. and Muenchow, J. (2025).
+              <em>Geocomputation with R</em>, 2nd edn. CRC Press, Boca Raton.
+              <a href="https://r.geocompx.org/">https://r.geocompx.org/</a>
+            </p>
+            <p>
+              Pebesma, E. (2018). Simple Features for R: standardized support for
+              spatial vector data. <em>The R Journal</em> 10(1): 439–446.
+            </p>
+            <p>
+              Pebesma, E. and Bivand, R. (2023).
+              <em>Spatial Data Science: With Applications in R</em>. Chapman and
+              Hall/CRC.
+              <a href="https://r-spatial.org/book/">https://r-spatial.org/book/</a>
+            </p>
+            <p>
+              Slater, H. (2024).
+              <em>wdpar: Interface to the World Database on Protected Areas</em>. R
+              package.
+              <a href="https://CRAN.R-project.org/package=wdpar"
+                >https://CRAN.R-project.org/package=wdpar</a
+              >
+            </p>
+            <p>
+              South African National Parks (2024). <em>SANParks National Parks</em>.
+              <a href="https://www.sanparks.org">https://www.sanparks.org</a>
+            </p>
+            <p>
+              Statistics South Africa (2023). <em>Census 2022 Statistical Release</em>.
+              Statistics South Africa, Pretoria.
+            </p>
+            <p>
+              Tennekes, M. (2018). tmap: Thematic maps in R.
+              <em>Journal of Statistical Software</em> 84(6): 1–39.
+            </p>
+            <p>
+              Tuan, Y.-F. (1974).
+              <em
+                >Topophilia: A Study of Environmental Perceptions, Attitudes, and
+                Values</em
+              >. Prentice-Hall, Englewood Cliffs.
+            </p>
+            <p>
+              UNEP-WCMC and IUCN (2024).
+              <em>Protected Planet: The World Database on Protected Areas (WDPA)</em>.
+              UNEP-WCMC and IUCN, Cambridge.
+              <a href="http://www.protectedplanet.net">www.protectedplanet.net</a>
+            </p>
+            <hr />
+            <p>
+              <em
+                >End of Part 2. Part 3 introduces raster data with
+                <code>terra</code> and <code>stars</code>: loading GeoTIFFs, computing
+                NDVI, and basic raster algebra over South African landscapes.</em
+              >
+            </p>
+          </section>
+          <div class="reader-end">
+            <p>You’ve reached the end of this notebook.</p>
+            <a class="text-link" href="../../notebooks.html"
+              >Return to all notebooks
+              <svg
+                class=""
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M4 12h15m-6-6 6 6-6 6" /></svg
+            ></a>
+          </div>
+        </article>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-main">
+          <a class="brand" href="../../index.html" aria-label="Les Hyperion — home"
+            ><img
+              class="brand-face"
+              src="../../assets/brand/silvi-face.png"
+              alt=""
+              width="55"
+              height="59"
+            /><span class="brand-name" aria-hidden="true"
+              >LES HYPERI<svg class="compass-o" viewBox="0 0 36 46" aria-hidden="true">
+                <circle
+                  cx="18"
+                  cy="23"
+                  r="14.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <path
+                  d="m18 1 4 17 14 5-14 4-4 18-4-18L0 23l14-5Z"
+                  fill="currentColor"
+                /></svg
+              >N</span
+            ></a
+          >
+          <p class="footer-thought">Understanding nature.<br />Sharing the evidence.</p>
+          <nav class="footer-links" aria-label="Footer">
+            <a href="../../about.html">About Phemelo</a><a href="../../cv.html">CV</a
+            ><a
+              href="https://github.com/Phemelo-R"
+              target="_blank"
+              rel="noopener noreferrer"
+              >GitHub ↗</a
+            ><a href="#main">Back to top ↑</a>
+          </nav>
+        </div>
+        <div class="footer-bottom">
+          <span>© 2026 Phemelo Rutlokoane</span><span>Nature × Data × People</span
+          ><span>Johannesburg, South Africa</span>
+        </div>
+      </div>
+    </footer>
+    <div class="toast" id="toast" role="status" hidden></div>
+    <script src="../../js/site.js"></script>
+    <script src="../../js/silvi.js"></script>
+    <script src="../../js/math-config.js"></script>
+    <script src="../../assets/vendor/mathjax/tex-chtml.js"></script>
+    <script src="../../js/reader.js"></script>
+  </body>
+</html>
