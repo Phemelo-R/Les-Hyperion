@@ -1,0 +1,779 @@
+/* ---- Silvi: topic-specific illustrations, continuous motion and site-theme lighting. ---- */
+.silvi-welcome {
+  display: grid;
+  grid-template-columns: 290px minmax(0, 1fr);
+  align-items: center;
+  gap: 3rem;
+  padding-block: 2rem;
+  border-bottom: 1px solid var(--line);
+}
+.silvi-welcome h2 {
+  font-size: 2.2rem;
+  margin: 0.5rem 0 0.7rem;
+}
+.silvi-welcome p:last-child {
+  max-width: 620px;
+  color: var(--muted);
+}
+.page-heading.with-silvi {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 310px;
+  gap: 3rem;
+  align-items: center;
+}
+.page-heading.with-silvi .silvi-scene {
+  align-self: end;
+}
+.page-heading.with-silvi h1 {
+  font-size: clamp(2.7rem, 4.6vw, 4.7rem);
+}
+.research-details-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 1.5rem;
+  align-items: start;
+  padding-top: 1rem;
+}
+.research-details-body .silvi-scene {
+  grid-column: 2;
+  grid-row: 1;
+}
+.research-details-body > div {
+  grid-column: 1;
+  grid-row: 1;
+}
+.research-details .research-context {
+  font-size: 0.875rem;
+  margin-top: 0.8rem;
+}
+.research-details ul {
+  margin-top: 1rem;
+}
+.research-status {
+  font-size: 0.875rem;
+  letter-spacing: 0.025em;
+  text-transform: none;
+  display: inline-block !important;
+}
+.research-status[data-status='under-review'] {
+  color: var(--accent3);
+  border-bottom: 2px solid var(--gold);
+  padding-bottom: 0.25rem;
+}
+.research-status[data-status='published'] {
+  color: var(--accent);
+  border-bottom: 2px solid var(--sage);
+  padding-bottom: 0.25rem;
+}
+.research-status[data-status='in-progress'],
+.research-status[data-status='draft'] {
+  color: var(--muted);
+}
+.research-order {
+  font-size: 0.8125rem !important;
+}
+.reader-silvi {
+  margin-bottom: 1.4rem;
+}
+.reader-silvi figcaption {
+  font-size: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0;
+}
+.reader-silvi .silvi-motion {
+  min-height: 36px;
+}
+.about-silvi-band {
+  display: grid;
+  grid-template-columns: 1fr 310px;
+  gap: 2rem;
+  align-items: center;
+  padding-block: 2rem;
+  border-bottom: 1px solid var(--line);
+}
+.about-silvi-band p {
+  max-width: 620px;
+  color: var(--muted);
+}
+.about-silvi-band h2 {
+  font-size: 2rem;
+  margin: 0.6rem 0 0.8rem;
+}
+.protocol-silvi {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+.protocol-silvi h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.7rem;
+}
+.protocol-silvi p {
+  color: var(--muted);
+  max-width: 660px;
+}
+.silvi-scene {
+  margin: 0;
+  min-width: 0;
+}
+.silvi-stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1.6;
+  overflow: hidden;
+  border-radius: 14px;
+  isolation: isolate;
+}
+.silvi-stage > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.silvi-scene figcaption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+  line-height: 1.5;
+  padding-top: 0.5rem;
+}
+.silvi-motion {
+  background: none;
+  border: 0;
+  color: var(--accent);
+  font: 500 0.7rem/1.3 var(--font-b);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  min-height: 44px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.silvi-motion:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+.topic-sky {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(#c6dcd6, #eadab7);
+  transition: background 0.6s;
+}
+.topic-sun {
+  position: absolute;
+  top: 15%;
+  right: 15%;
+  width: 9%;
+  aspect-ratio: 1;
+  background: #f8d786;
+  border-radius: 50%;
+}
+.topic-stars {
+  position: absolute;
+  top: 15%;
+  left: 17%;
+  right: 22%;
+  color: #eee9c8;
+  opacity: 0;
+  letter-spacing: 1.8em;
+  font-size: 0.8rem;
+}
+.topic-landscape {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.distant-land {
+  fill: #a7b491;
+}
+.near-land {
+  fill: #b4a581;
+}
+.topic-tree path:first-child {
+  fill: none;
+  stroke: #526f5e;
+  stroke-width: 8;
+}
+.topic-tree path:last-child {
+  fill: #73916e;
+}
+.topic-plants,
+.topic-kelp,
+.journey-trail {
+  display: none;
+}
+.topic-plants path:first-child {
+  fill: none;
+  stroke: #47735e;
+  stroke-width: 6;
+}
+.topic-plants path:last-child {
+  fill: #b6cdb3;
+  stroke: #557e66;
+  stroke-width: 2;
+}
+.topic-kelp {
+  fill: none;
+  stroke: #388476;
+  stroke-width: 17;
+  stroke-linecap: round;
+}
+.journey-trail path {
+  fill: none;
+  stroke: #f9e0a1;
+  stroke-width: 3;
+  stroke-dasharray: 5 7;
+}
+.journey-trail circle {
+  fill: #f9e0a1;
+}
+.scene-time,
+.visitor-animal,
+.topic-caption {
+  position: absolute;
+  z-index: 4;
+  font: 500 0.65rem/1.3 var(--font-b);
+  color: #284b45;
+}
+.scene-time {
+  top: 6%;
+  left: 6%;
+}
+.visitor-animal {
+  right: 7%;
+  bottom: 8%;
+}
+.topic-caption {
+  right: 5%;
+  bottom: 3%;
+  font-size: 0.5rem;
+  opacity: 0.7;
+}
+.topic-character {
+  position: absolute;
+  z-index: 3;
+  left: 4%;
+  bottom: 7%;
+  width: 53%;
+  aspect-ratio: 1;
+  animation: var(--character-motion) 6s ease-in-out infinite;
+  transform-origin: 50% 82%;
+  will-change: transform;
+}
+.topic-character img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+[data-habitat='wildlife'] .topic-character {
+  width: 43%;
+  left: 2%;
+  bottom: 5%;
+}
+.wildlife-visitor {
+  position: absolute;
+  left: 47%;
+  bottom: 15%;
+  width: 46%;
+  aspect-ratio: 1;
+  animation: wildlife-breathe 7s ease-in-out infinite;
+  transform-origin: 50% 90%;
+}
+.wildlife-visitor span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-image: var(--wildlife-sheet);
+  background-size: 300% 200%;
+  background-repeat: no-repeat;
+  background-position: 50% 0;
+}
+[data-animal='leopard'] .wildlife-visitor span {
+  background-position: 50% 0;
+}
+[data-habitat='fynbos'] .topic-tree {
+  display: none;
+}
+[data-habitat='fynbos'] .topic-plants {
+  display: block;
+}
+[data-habitat='fynbos'] .topic-character {
+  left: 20%;
+  width: 62%;
+  bottom: 3%;
+}
+[data-habitat='fynbos'] .distant-land {
+  fill: #8baba0;
+}
+[data-habitat='fynbos'] .near-land {
+  fill: #7e9777;
+}
+[data-habitat='marine'] .topic-sky {
+  background: linear-gradient(#479b9f, #20536b);
+}
+[data-habitat='marine'] .topic-tree {
+  display: none;
+}
+[data-habitat='marine'] .topic-kelp {
+  display: block;
+}
+[data-habitat='marine'] .near-land {
+  fill: #255958;
+}
+[data-habitat='marine'] .distant-land {
+  fill: #1f5663;
+}
+[data-habitat='marine'] .topic-character {
+  width: 54%;
+  left: 6%;
+  bottom: 7%;
+}
+[data-silvi-scene='ocean'] .topic-character {
+  width: 62%;
+  left: 19%;
+  bottom: 2%;
+}
+[data-habitat='marine'] .scene-time,
+[data-habitat='marine'] .topic-caption {
+  color: #eef1d6;
+}
+.topic-rays {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: repeating-linear-gradient(
+    105deg,
+    transparent 0 14%,
+    #e1f9d812 15% 18%,
+    transparent 19% 32%
+  );
+  animation: light-drift 12s ease-in-out infinite alternate;
+}
+.topic-bubbles i {
+  position: absolute;
+  z-index: 2;
+  left: 38%;
+  top: 61%;
+  width: 5px;
+  height: 5px;
+  border: 1px solid #c6eee0;
+  border-radius: 50%;
+  animation: bubble-rise 4s ease-out infinite;
+}
+.topic-bubbles i:nth-child(2) {
+  left: 45%;
+  animation-delay: -1.3s;
+}
+.topic-bubbles i:nth-child(3) {
+  left: 34%;
+  animation-delay: -2.7s;
+}
+.topic-krill {
+  position: absolute;
+  z-index: 2;
+  left: 61%;
+  top: 55%;
+  width: 26%;
+  height: 25%;
+  transition: top 2.5s ease-in-out;
+}
+.topic-krill i {
+  position: absolute;
+  left: calc(var(--column) * 29%);
+  top: calc(var(--row) * 37% + var(--column) * 8%);
+  width: 24%;
+  height: 13%;
+  background: #dd9887;
+  border: 1px solid #f0bca2;
+  border-radius: 50% 40% 35% 50%;
+  animation: krill-paddle 3.2s ease-in-out infinite alternate;
+  animation-delay: var(--delay);
+}
+.topic-krill i::before {
+  content: '';
+  position: absolute;
+  width: 35%;
+  height: 90%;
+  right: -23%;
+  top: -50%;
+  border-top: 1px solid #e5baa0;
+  transform: rotate(-25deg);
+}
+.topic-krill i::after {
+  content: '';
+  position: absolute;
+  left: 10%;
+  bottom: -65%;
+  width: 72%;
+  height: 75%;
+  background: repeating-linear-gradient(
+    65deg,
+    transparent 0 15%,
+    #edbda5 16% 20%,
+    transparent 21% 30%
+  );
+}
+[data-habitat='desk'] .topic-tree,
+[data-habitat='portrait'] .topic-tree {
+  display: none;
+}
+[data-habitat='desk'] .topic-sky,
+[data-habitat='portrait'] .topic-sky {
+  background: linear-gradient(#e4e9db, #e7dbc5);
+}
+[data-habitat='desk'] .topic-character,
+[data-habitat='portrait'] .topic-character {
+  width: 68%;
+  left: 16%;
+  bottom: 2%;
+}
+[data-habitat='journey'] .journey-trail {
+  display: block;
+}
+[data-habitat='journey'] .topic-tree {
+  display: none;
+}
+[data-habitat='journey'] .topic-character {
+  width: 60%;
+  left: 6%;
+}
+[data-night='true'] .topic-sky {
+  background: linear-gradient(#152b42, #465966);
+}
+[data-night='true'][data-habitat='marine'] .topic-sky {
+  background: linear-gradient(#142a42, #133e51);
+}
+[data-night='true'] .topic-sun {
+  background: #efebcf;
+  box-shadow: 6px -4px 0 1px #253a4c inset;
+}
+[data-night='true'] .topic-stars {
+  opacity: 0.85;
+}
+[data-night='true'] .topic-landscape {
+  filter: brightness(0.58) saturate(0.75);
+}
+[data-night='true'] .topic-character,
+[data-night='true'] .wildlife-visitor {
+  filter: brightness(0.87) saturate(0.85);
+}
+[data-night='true'] .scene-time,
+[data-night='true'] .visitor-animal,
+[data-night='true'] .topic-caption {
+  color: #e9edda;
+}
+[data-night='true'] .topic-krill {
+  top: 25%;
+}
+[data-night='true'] .topic-rays {
+  opacity: 0.25;
+}
+/* -- Continuous curves return to the same pose at the seam: no sprite jumps. -- */
+@keyframes welcome-sway {
+  0%,
+  100% {
+    transform: rotate(-1deg);
+  }
+  50% {
+    transform: translateY(-3px) rotate(1deg);
+  }
+}
+@keyframes binocular-watch {
+  0%,
+  100% {
+    transform: rotate(-1deg);
+  }
+  50% {
+    transform: rotate(1.5deg);
+  }
+}
+@keyframes close-inspection {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translate(2px, 3px) rotate(1deg);
+  }
+}
+@keyframes telescope-watch {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  50% {
+    transform: rotate(-1deg) translateY(-2px);
+  }
+}
+@keyframes field-stride {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-0.5deg);
+  }
+  50% {
+    transform: translateY(-4px) rotate(0.5deg);
+  }
+}
+@keyframes checklist-work {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  50% {
+    transform: translate(1px, 2px) rotate(-1deg);
+  }
+}
+@keyframes diver-glide {
+  0%,
+  100% {
+    transform: translate(-3%, 4%) rotate(-2deg);
+  }
+  50% {
+    transform: translate(11%, -5%) rotate(2deg);
+  }
+}
+@keyframes sensor-hover {
+  0%,
+  100% {
+    transform: translateY(2%);
+  }
+  50% {
+    transform: translateY(-3%) rotate(-1deg);
+  }
+}
+@keyframes archive-work {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(2px) rotate(0.6deg);
+  }
+}
+@keyframes journey-rock {
+  0%,
+  100% {
+    transform: rotate(-1deg);
+  }
+  50% {
+    transform: rotate(1deg) translateX(2px);
+  }
+}
+@keyframes portfolio-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.015);
+  }
+}
+@keyframes typing-rock {
+  0%,
+  100% {
+    transform: rotate(-0.7deg);
+  }
+  50% {
+    transform: translateY(1px) rotate(0.7deg);
+  }
+}
+@keyframes sorting-lean {
+  0%,
+  100% {
+    transform: translateX(-2px) rotate(-1deg);
+  }
+  50% {
+    transform: translateX(2px) rotate(1deg);
+  }
+}
+@keyframes painting-reach {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  50% {
+    transform: translateY(-2px) rotate(-1.2deg);
+  }
+}
+@keyframes ruler-trace {
+  0%,
+  100% {
+    transform: translateX(-2px);
+  }
+  50% {
+    transform: translateX(2px) rotate(0.5deg);
+  }
+}
+@keyframes model-adjust {
+  0%,
+  100% {
+    transform: rotate(-0.5deg);
+  }
+  50% {
+    transform: rotate(1deg) translateY(1px);
+  }
+}
+@keyframes model-think {
+  0%,
+  100% {
+    transform: rotate(0.6deg);
+  }
+  50% {
+    transform: rotate(-0.6deg) translateY(-2px);
+  }
+}
+@keyframes map-unfold {
+  0%,
+  100% {
+    transform: rotate(-0.8deg);
+  }
+  50% {
+    transform: translateY(-2px) rotate(0.8deg);
+  }
+}
+@keyframes survey-check {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translate(1px, 2px) rotate(-0.6deg);
+  }
+}
+@keyframes wildlife-breathe {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(1.015);
+  }
+}
+@keyframes light-drift {
+  to {
+    transform: translateX(5%);
+  }
+}
+@keyframes bubble-rise {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(8px, -65px);
+    opacity: 0;
+  }
+}
+@keyframes krill-paddle {
+  to {
+    transform: translate(10%, -12%) rotate(3deg);
+  }
+}
+.silvi-scene[data-paused='true'] * {
+  animation-play-state: paused !important;
+}
+/* -- Scale by placement, rather than using one large illustration everywhere. -- */
+.silvi-welcome {
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 2.5rem;
+}
+.silvi-welcome .silvi-stage,
+.about-silvi-band .silvi-stage {
+  aspect-ratio: 1.8;
+}
+.about-silvi-band {
+  grid-template-columns: 1fr minmax(300px, 440px);
+}
+.research-details-body {
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 380px);
+}
+.reader-silvi .silvi-stage {
+  aspect-ratio: 1;
+}
+.reader-silvi .topic-character {
+  width: 92%;
+  left: 4%;
+  bottom: 1%;
+}
+.reader-silvi .topic-caption,
+.reader-silvi .topic-sun,
+.reader-silvi .topic-stars {
+  display: none;
+}
+.reader-silvi .scene-time {
+  font-size: 0.6rem;
+}
+.cv-heading .silvi-stage {
+  aspect-ratio: 1;
+}
+.cv-heading .topic-character {
+  width: 92%;
+  left: 4%;
+}
+.cv-heading .topic-caption {
+  display: none;
+}
+@media (max-width: 1000px) {
+  .research-details-body {
+    grid-template-columns: 1fr;
+  }
+  .research-details-body .silvi-scene {
+    grid-column: 1;
+    grid-row: 1;
+    width: min(100%, 430px);
+  }
+  .research-details-body > div {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .page-heading.with-silvi {
+    grid-template-columns: minmax(0, 1fr) 270px;
+    gap: 1.5rem;
+  }
+}
+@media (max-width: 700px) {
+  .silvi-welcome,
+  .about-silvi-band,
+  .protocol-silvi,
+  .page-heading.with-silvi {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+  .silvi-welcome .silvi-scene {
+    order: 2;
+  }
+  .page-heading.with-silvi > .silvi-scene,
+  .protocol-silvi > .silvi-scene {
+    width: min(100%, 360px);
+    justify-self: end;
+  }
+  .page-heading.with-silvi h1 {
+    font-size: 2.8rem;
+  }
+  .reader-silvi {
+    width: min(100%, 200px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .silvi-topic *,
+  .silvi-topic *::before,
+  .silvi-topic *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+@media print {
+  .silvi-scene,
+  .silvi-welcome,
+  .about-silvi-band,
+  .protocol-silvi {
+    display: none !important;
+  }
+}

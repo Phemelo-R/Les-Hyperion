@@ -1,416 +1,1294 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="light">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About — Les Hyperion</title>
-  <meta name="description" content="About Phemelo Rutlokoane — GIS Analyst, Spatial Ecologist, and Researcher." />
-
-  <link rel="stylesheet" href="css/tokens.css" />
-  <link rel="stylesheet" href="css/base.css" />
-  <link rel="stylesheet" href="css/nav.css" />
-  <link rel="stylesheet" href="css/about.css" />
-
-  <script>
-    (function(){
-      const t = localStorage.getItem('lh-theme');
-      if (t) document.documentElement.setAttribute('data-theme', t);
-    })();
-  </script>
-</head>
-<body>
-
-<div class="topo-bg" aria-hidden="true"></div>
-<div class="scan-bg"  aria-hidden="true"></div>
-
-<!-- ============ NAV ============ -->
-<nav class="nav" role="navigation" aria-label="Main navigation">
-  <a class="nav-brand" href="index.html">
-    <img class="nav-logo" src="assets/LesHyperion_logo.png" alt="Les Hyperion logo"
-         onerror="this.style.display='none';this.nextSibling.style.display='inline'" />
-    <span style="display:none">🗺</span>
-    Les Hyperion
-  </a>
-
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="notebooks.html">Notebooks</a></li>
-    <li><a href="research.html">Research</a></li>
-    <li><a href="carbon.html">Carbon</a></li>
-    <li><a href="about.html" class="active">About</a></li>
-  </ul>
-
-  <div class="nav-right">
-    <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
-      <span class="theme-icon">🌙</span>
-      <span class="theme-label">Dark</span>
-    </button>
-    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
-
-<nav class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
-  <a href="index.html">Home</a>
-  <a href="notebooks.html">Notebooks</a>
-  <a href="research.html">Research</a>
-  <a href="carbon.html">Carbon</a>
-  <a href="about.html" class="active">About</a>
-</nav>
-
-<!-- ============ MAIN ============ -->
-<div class="page-wrap">
-
-  <!-- ---- Intro / Bio ---- -->
-  <section class="about-intro">
-    <div class="about-intro-inner">
-
-      <!-- Portrait -->
-      <div class="about-portrait-wrap fade-up">
-        <div class="about-portrait">
-          <!--
-            Place a portrait photo at:  assets/images/portrait.jpg
-            If the file is absent the section shows a placeholder.
-          -->
-          <img src="assets/images/portrait.JPG"
-               alt="Phemelo Rutlokoane"
-               onerror="this.parentElement.innerHTML='<div style=\'display:flex;align-items:center;justify-content:center;height:100%;font-size:5rem;background:var(--bg3)\'>🌿</div>'" />
+<!doctype html>
+<html lang="en-GB" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>About Phemelo — Les Hyperion</title>
+    <meta
+      name="description"
+      content="Spatial ecology, remote sensing and conservation by Phemelo Rutlokoane."
+    />
+    <meta name="theme-color" content="#0f2d3a" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/brand/favicon-32.png"
+    />
+    <link rel="icon" sizes="192x192" href="assets/brand/favicon-192.png" />
+    <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png" />
+    <script src="js/theme-init.js"></script>
+    <link rel="stylesheet" href="css/site.css" />
+    <link rel="stylesheet" href="css/silvi.css" />
+    <link rel="stylesheet" href="css/revision.css" />
+    <link rel="stylesheet" href="css/refinement.css" />
+  </head>
+  <body class="">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="index.html" aria-label="Les Hyperion — home"
+          ><img
+            class="brand-face"
+            src="assets/brand/silvi-face.png"
+            alt=""
+            width="55"
+            height="59"
+          /><span class="brand-name" aria-hidden="true"
+            >LES HYPERI<svg class="compass-o" viewBox="0 0 36 46" aria-hidden="true">
+              <circle
+                cx="18"
+                cy="23"
+                r="14.5"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              />
+              <path
+                d="m18 1 4 17 14 5-14 4-4 18-4-18L0 23l14-5Z"
+                fill="currentColor"
+              /></svg
+            >N</span
+          ></a
+        >
+        <nav class="desktop-nav" aria-label="Main navigation">
+          <a href="index.html">Home</a><a href="research.html">Research</a
+          ><a href="notebooks.html">Notebooks</a><a href="carbon.html">Carbon</a
+          ><a href="about.html" aria-current="page">About</a><a href="cv.html">CV</a>
+        </nav>
+        <div class="header-actions">
+          <button
+            class="icon-button theme-toggle"
+            data-theme-toggle
+            aria-label="Switch colour theme"
+          >
+            <svg
+              class="moon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path
+                d="M20.6 13.7A8.8 8.8 0 0 1 10.3 3.4a8.8 8.8 0 1 0 10.3 10.3Z"
+              /></svg
+            ><svg
+              class="sun"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path
+                d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"
+              />
+            </svg></button
+          ><button
+            class="icon-button menu-toggle"
+            aria-label="Open navigation"
+            aria-expanded="false"
+            aria-controls="mobile-nav"
+          >
+            <svg
+              class=""
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
         </div>
-        <div class="about-portrait-caption">👨‍🎓 B.Sc (Hons) Biodiversity & Conservation</div>
       </div>
-
-      <!-- Text -->
-      <div class="fade-up">
-        <div class="about-name">Phemelo<br>Rutlokoane</div>
-        <div class="about-degree">B.Sc (Hons) Biodiversity and Conservation</div>
-
-        <div class="about-body-text">
+      <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" hidden>
+        <a href="index.html">Home</a><a href="research.html">Research</a
+        ><a href="notebooks.html">Notebooks</a><a href="carbon.html">Carbon</a
+        ><a href="about.html" aria-current="page">About</a><a href="cv.html">CV</a>
+      </nav>
+    </header>
+    <main id="main">
+      <div class="container">
+        <section class="about-intro">
+          <figure class="about-portrait">
+            <img
+              src="assets/web/portrait.jpg"
+              alt="Phemelo Rutlokoane"
+              width="700"
+              height="850"
+            />
+            <figcaption>M.Sc in Biodiversity and Conservation</figcaption>
+          </figure>
+          <div class="about-copy">
+            <p class="eyebrow">Ecologist · Researcher · Statistician</p>
+            <h1>Phemelo<br />Rutlokoane.</h1>
+            <p>
+              I am an MSc student in Biodiversity and Conservation at the
+              University of the Western Cape, researching climate change linked 
+              extreme events in coastal marine environments. My research focuses 
+              on remote sensing and spatial ecology.
+            </p>
+            <p>
+              My Masters research uses satellite remote sensing and spatial ecology 
+              to analyse how climate-driven extreme events disrupt coastal marine 
+              environments along the Southern hemisphere's highly productive upwelling 
+              zones. By using hiugh-resolution satellite data – such as sea surface 
+              temperarature anomalies and chlorophyll-a concentrations – I aim to
+              identify patterns and trends in these extreme events and their impacts 
+              on marine ecosystems. Integrating these remote observations with spatial
+              modelling techniques allows me to evaluate how shifting upwelling dynamics
+              alter critical habitats and threaten regional biodiversity, ultimately
+              informing conseravation strategies and management practices for these 
+              vulnerable coastal systems.
+            </p>
+            <p>
+              I build reproducible workflows that connect satellite imagery and field data to
+              ecological inference, documenting my work in R and Python notebooks that
+              others can follow and adapt.
+            </p>
+            <dl class="about-facts">
+              <div>
+                <dt>Based in</dt>
+                <dd>Johannesburg, South Africa</dd>
+              </div>
+              <div>
+                <dt>Conservation work</dt>
+                <dd>Biodiversity monitoring &amp; analysis</dd>
+              </div>
+              <div>
+                <dt>Education</dt>
+                <dd>University of the Western Cape</dd>
+              </div>
+              <div>
+                <dt>Tools</dt>
+                <dd>R · Python · QGIS · ArcGIS</dd>
+              </div>
+            </dl>
+            <a class="text-link" href="cv.html"
+              >View my CV
+              <svg
+                class=""
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M4 12h15m-6-6 6 6-6 6" /></svg
+            ></a>
+          </div>
+        </section>
+        <div class="interests-row">
+          <h2>Research interests</h2>
           <p>
-            I am an Honours graduate in Biodiversity and Conservation at the University 
-            of the Western Cape with a focus on remote sensing and spatial ecology. 
-            My Honours research focused on monitoring <em>leucadendron argenteum</em> (Silvertree)
-            populations on Table Mountain using NASA BioSCape's AVIRIS-NG hyperspectral imagery
-            and LVIS LiDAR. I developed a probability map of Silver Tree presence across the reserve 
-            using machine learning models trained on field-validated presence records. 
-          </p>
-          <p>
-            My interests lie in using geospatial data and ecological modelling to understand and conserve 
-            biodiversity. I spend most of my time working with satellite imagery, building reproducible 
-            workflows that move from raw data to ecological inference. Most of my work is documented as 
-            Jupyter notebooks that others can follow and adapt using R and Python. I also have experience 
-            with GIS software like QGIS for spatial analysis and visualization. 
+            Remote sensing · Species distribution modelling · Ocean climatology ·
+            Biodiversity informatics · Landscape ecology · Wildlife monitoring
           </p>
         </div>
-
-        <!-- Quick meta chips -->
-        <div class="about-meta-row">
-          <span class="about-meta-chip"><span class="chip-icon">🎓</span> University of the Western Cape</span>
-          <span class="about-meta-chip"><span class="chip-icon">📍</span> Johannesburg, ZA</span>
-          <span class="about-meta-chip"><span class="chip-icon">📁</span> Wild Impact — Johannesburg, ZA</span>
-          <span class="about-meta-chip"><span class="chip-icon">🔬</span> GIS · Remote Sensing · Ecology</span>
-        </div>
-
-        <!-- Research interests -->
-        <div class="about-pills-section">
-          <div class="about-pills-label">Research Interests</div>
-          <div class="about-pills">
-            <span class="about-pill">Remote Sensing</span>
-            <span class="about-pill">Species Distribution Modelling</span>
-            <span class="about-pill">Ocean Climatology</span>
-            <span class="about-pill">Biodiversity Informatics</span>
-            <span class="about-pill">Landscape Ecology</span>
-            <span class="about-pill">Fynbos Ecology</span>
-          </div>
-        </div>
-
-        <!-- Tools -->
-        <div class="about-pills-section">
-          <div class="about-pills-label">Tools</div>
-          <div class="about-pills">
-            <span class="about-pill">R</span>
-            <span class="about-pill">Python</span>
-            <span class="about-pill">QGIS</span>
-            <span class="about-pill">ArcGIS</span>
-          </div>
-        </div>
-
-        <div style="margin-top:1.6rem;display:flex;flex-wrap:wrap;gap:.7rem;">
-          <a class="btn btn-primary" href="notebooks.html">Browse Notebooks</a>
-          <a class="btn btn-ghost"   href="research.html">View Research →</a>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ---- Field Work & Experiences ---- -->
-  <section class="about-fieldwork">
-    <div class="section-inner">
-
-      <div class="section-header fade-up">
-        <div class="section-tag">A Few Years of Work</div>
-        <h2 class="section-title">Field Work &amp; Experiences</h2>
-        <p class="section-desc">
-          Throughout my studies and research, I've had the opportunity to engage in various fieldwork 
-          and practical experiences that have enriched my understanding of ecology and conservation. 
-          Below is a selection of some of the most memorable projects and fieldwork I've been involved in, 
-          showcasing the diversity of hands-on experiences that have complemented my academic journey.
-        </p>
-      </div>
-
-      <!-- ================================================================
-           1. Honours Fieldwork — Table Mountain
-           Files: assets/images/fieldwork/fieldwork-1.jpg … fieldwork-4.jpg
-           ================================================================ -->
-      <div class="fw-section fade-up">
-        <div class="fw-header">
+        <section class="about-silvi-band">
           <div>
-            <div class="fw-title">Honours Research Fieldwork</div>
-            <div class="fw-desc">
-              Setting up LiDAR validation plots for my Honours research and ground-truthing satellite imagery 
-              for monitoring the distribution of the endemic Silver Tree on Table Mountain.
+            <p class="eyebrow">Behind the work</p>
+            <h2>Data, monitoring &amp; communication.</h2>
+            <p>
+              I work across wildlife analysis, monitoring tools, education and visual
+              communication, connecting conservation evidence with the people who use
+              it.
+            </p>
+          </div>
+          <figure class="silvi-scene" data-silvi-scene="about">
+            <div class="silvi-stage">
+              <img
+                src="assets/brand/silvi-about-v2.png"
+                alt="Silvi gestures towards Phemelo’s introduction."
+                width="480"
+                height="250"
+                loading="lazy"
+              />
             </div>
+          </figure>
+        </section>
+        <section class="section work-gallery" aria-labelledby="portfolio-title">
+          <div class="section-top">
+            <div>
+              <p class="eyebrow">People · Projects · Practice</p>
+              <h2 id="portfolio-title">Work, in pictures.</h2>
+            </div>
+            <p>A visual record of research, conservation and collaboration.</p>
           </div>
-          <span class="fw-year">2025</span>
-        </div>
-        <div class="fw-grid cols-4">
-          <div class="fw-img-wrap sq">
-            <img src="assets/images/fieldwork/fieldwork-1.JPG"
-                 alt="Phemelo next to a silver tree during fieldwork"
-                 loading="lazy" />
-            <div class="fw-img-caption">Setting up validation plots</div>
-          </div>
-          <div class="fw-img-wrap sq">
-            <img src="assets/images/fieldwork/fieldwork-2.HEIC"
-                 alt="Silver trees on the slope"
-                 loading="lazy" />
-            <div class="fw-img-caption">Taking field measurements</div>
-          </div>
-          <div class="fw-img-wrap sq">
-            <img src="assets/images/fieldwork/fieldwork-3.HEIC"
-                 alt="Supervisor on Table Mountain stairs"
-                 loading="lazy" />
-            <div class="fw-img-caption">Travelling to the site</div>
-          </div>
-          <div class="fw-img-wrap sq">
-            <img src="assets/images/fieldwork/fieldwork-4.HEIC"
-                 alt="Silver tree stand"
-                 loading="lazy" />
-            <div class="fw-img-caption">Silver tree stands — survey area</div>
-          </div>
-        </div>
+          <section
+            class="gallery-section"
+            data-gallery="0"
+            data-gallery-date="2026"
+            data-gallery-unit="items"
+            aria-labelledby="gallery-title-0"
+          >
+            <div class="gallery-heading">
+              <div>
+                <h3 id="gallery-title-0">
+                  Wild Impact · Conservation &amp; communication
+                </h3>
+                <p>
+                  Using TrapTagger to identify animals captured by camera traps, 
+                  EventMeasure to analyise BRUVS footage, and creating educational
+                  content and visual communication for conservation audiences. This 
+                  gallery shows a selection of the work I have done with Wild Impact
+                  throughout 2026.
+                </p>
+              </div>
+              <div>
+                <p class="gallery-year">2026</p>
+                <div class="gallery-navigation">
+                  <button
+                    class="icon-button gallery-prev"
+                    aria-label="Previous photos: Wild Impact · Conservation &amp; communication"
+                  >
+                    <svg
+                      class=""
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M20 12H5m6-6-6 6 6 6" />
+                    </svg></button
+                  ><button
+                    class="icon-button gallery-next"
+                    aria-label="Next photos: Wild Impact · Conservation &amp; communication"
+                  >
+                    <svg
+                      class=""
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M4 12h15m-6-6 6 6-6 6" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div
+              class="gallery-rail"
+              id="gallery-rail-0"
+              tabindex="0"
+              aria-label="Wild Impact · Conservation &amp; communication photo gallery"
+            >
+              <figure class="gallery-item">
+                <div class="portfolio-empty" aria-label="Image to be added">
+                  <span>01</span
+                  ><svg
+                    class=""
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M7 17 18 6M6 6h12v12" /></svg
+                  ><small>Image to come</small>
+                </div>
+                <figcaption>
+                  Team &amp; collaboration — The people and shared effort behind the
+                  projects.
+                </figcaption>
+              </figure>
+              <figure class="gallery-item">
+                <div class="portfolio-empty" aria-label="Image to be added">
+                  <span>02</span
+                  ><svg
+                    class=""
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M7 17 18 6M6 6h12v12" /></svg
+                  ><small>Image to come</small>
+                </div>
+                <figcaption>
+                  Working together — A team session or shared problem-solving moment.
+                </figcaption>
+              </figure>
+              <figure class="gallery-item">
+                <div class="portfolio-empty" aria-label="Image to be added">
+                  <span>03</span
+                  ><svg
+                    class=""
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M7 17 18 6M6 6h12v12" /></svg
+                  ><small>Image to come</small>
+                </div>
+                <figcaption>
+                  Camera-trap workflow — Organising and reviewing wildlife monitoring
+                  material.
+                </figcaption>
+              </figure>
+              <figure class="gallery-item">
+                <div class="portfolio-empty" aria-label="Image to be added">
+                  <span>04</span
+                  ><svg
+                    class=""
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M7 17 18 6M6 6h12v12" /></svg
+                  ><small>Image to come</small>
+                </div>
+                <figcaption>
+                  TrapTagger — A closer look at the identification and tagging workflow.
+                </figcaption>
+              </figure>
+              <figure class="gallery-item">
+                <div class="portfolio-empty" aria-label="Image to be added">
+                  <span>05</span
+                  ><svg
+                    class=""
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M7 17 18 6M6 6h12v12" /></svg
+                  ><small>Image to come</small>
+                </div>
+                <figcaption>
+                  iSimangaliso analysis — From wildlife observations to organised
+                  evidence.
+                </figcaption>
+              </figure>
+              <figure class="gallery-item">
+                <div class="portfolio-empty" aria-label="Image to be added">
+                  <span>06</span
+                  ><svg
+                    class=""
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M7 17 18 6M6 6h12v12" /></svg
+                  ><small>Image to come</small>
+                </div>
+                <figcaption>
+                  EventMeasure &amp; BRUVS — Working with underwater video and
+                  monitoring tools.
+                </figcaption>
+              </figure>
+              <figure class="gallery-item">
+                <div class="portfolio-empty" aria-label="Image to be added">
+                  <span>07</span
+                  ><svg
+                    class=""
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M7 17 18 6M6 6h12v12" /></svg
+                  ><small>Image to come</small>
+                </div>
+                <figcaption>
+                  Conservation education — Learning resources created for conservation
+                  audiences.
+                </figcaption>
+              </figure>
+              <figure class="gallery-item">
+                <div class="portfolio-empty" aria-label="Image to be added">
+                  <span>08</span
+                  ><svg
+                    class=""
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M7 17 18 6M6 6h12v12" /></svg
+                  ><small>Image to come</small>
+                </div>
+                <figcaption>
+                  Wildlife poster — A selected piece of visual science communication.
+                </figcaption>
+              </figure>
+              <figure class="gallery-item">
+                <div class="portfolio-empty" aria-label="Image to be added">
+                  <span>09</span
+                  ><svg
+                    class=""
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M7 17 18 6M6 6h12v12" /></svg
+                  ><small>Image to come</small>
+                </div>
+                <figcaption>
+                  Social media content — Sharing wildlife knowledge through accessible
+                  posts.
+                </figcaption>
+              </figure>
+              <figure class="gallery-item">
+                <div class="portfolio-empty" aria-label="Image to be added">
+                  <span>10</span
+                  ><svg
+                    class=""
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M7 17 18 6M6 6h12v12" /></svg
+                  ><small>Image to come</small>
+                </div>
+                <figcaption>
+                  From data to delivery — A selected report, presentation or project
+                  output.
+                </figcaption>
+              </figure>
+            </div>
+            <div class="gallery-foot">
+              <span class="gallery-position" aria-live="polite">10 items</span
+              ><span>Use the arrows or swipe to explore</span>
+            </div>
+          </section>
+          <section
+            class="gallery-section"
+            data-gallery="1"
+            data-gallery-date="2025"
+            data-gallery-unit="photographs"
+            aria-labelledby="gallery-title-1"
+          >
+            <div class="gallery-heading">
+              <div>
+                <h3 id="gallery-title-1">Carbon Sink Volunteer Work</h3>
+                <p>
+                  Doing field sampling for a project assessing carbon sinks to quantify
+                  habitat health and track ecological restoration progress. I was
+                  collecting soil samples at the Berg River estuary to analyse for
+                  carbon content and other properties.
+                </p>
+              </div>
+              <div>
+                <p class="gallery-year">2025</p>
+                <div class="gallery-navigation">
+                  <button
+                    class="icon-button gallery-prev"
+                    aria-label="Previous photos: Carbon Sink Volunteer Work"
+                  >
+                    <svg
+                      class=""
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M20 12H5m6-6-6 6 6 6" />
+                    </svg></button
+                  ><button
+                    class="icon-button gallery-next"
+                    aria-label="Next photos: Carbon Sink Volunteer Work"
+                  >
+                    <svg
+                      class=""
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M4 12h15m-6-6 6 6-6 6" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div
+              class="gallery-rail"
+              id="gallery-rail-1"
+              tabindex="0"
+              aria-label="Carbon Sink Volunteer Work photo gallery"
+            >
+              <figure class="gallery-item">
+                <button
+                  class="gallery-open"
+                  data-index="0"
+                  aria-label="Enlarge photo 1: Berg River — Carbon Sink Field Sampling"
+                >
+                  <img
+                    src="assets/web/berg-river-1.jpg"
+                    alt="Berg River — Carbon Sink Field Sampling"
+                    width="800"
+                    height="600"
+                    loading="lazy"
+                  />
+                </button>
+                <figcaption>Berg River — Carbon Sink Field Sampling</figcaption>
+              </figure>
+              <figure class="gallery-item">
+                <button
+                  class="gallery-open"
+                  data-index="1"
+                  aria-label="Enlarge photo 2: Berg River — Carbon Sink Field Sampling"
+                >
+                  <img
+                    src="assets/web/berg-river-2.jpg"
+                    alt="Berg River — Carbon Sink Field Sampling"
+                    width="800"
+                    height="600"
+                    loading="lazy"
+                  />
+                </button>
+                <figcaption>Berg River — Carbon Sink Field Sampling</figcaption>
+              </figure>
+              <figure class="gallery-item">
+                <button
+                  class="gallery-open"
+                  data-index="2"
+                  aria-label="Enlarge photo 3: Berg River — Carbon Sink Field Sampling"
+                >
+                  <img
+                    src="assets/web/berg-river-3.jpg"
+                    alt="Berg River — Carbon Sink Field Sampling"
+                    width="800"
+                    height="600"
+                    loading="lazy"
+                  />
+                </button>
+                <figcaption>Berg River — Carbon Sink Field Sampling</figcaption>
+              </figure>
+            </div>
+            <div class="gallery-foot">
+              <span class="gallery-position" aria-live="polite">3 photographs</span
+              ><span>Use the arrows or swipe to explore</span>
+            </div>
+          </section>
+          <section
+            class="gallery-section"
+            data-gallery="2"
+            data-gallery-date="2025"
+            data-gallery-unit="photographs"
+            aria-labelledby="gallery-title-2"
+          >
+            <div class="gallery-heading">
+              <div>
+                <h3 id="gallery-title-2">Honours Research Fieldwork</h3>
+                <p>
+                  Setting up LiDAR validation plots for my Honours research and
+                  ground-truthing satellite imagery for monitoring the distribution of
+                  the endemic Silver Tree on Table Mountain.
+                </p>
+              </div>
+              <div>
+                <p class="gallery-year">2025</p>
+                <div class="gallery-navigation">
+                  <button
+                    class="icon-button gallery-prev"
+                    aria-label="Previous photos: Honours Research Fieldwork"
+                  >
+                    <svg
+                      class=""
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M20 12H5m6-6-6 6 6 6" />
+                    </svg></button
+                  ><button
+                    class="icon-button gallery-next"
+                    aria-label="Next photos: Honours Research Fieldwork"
+                  >
+                    <svg
+                      class=""
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M4 12h15m-6-6 6 6-6 6" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div
+              class="gallery-rail"
+              id="gallery-rail-2"
+              tabindex="0"
+              aria-label="Honours Research Fieldwork photo gallery"
+            >
+              <figure class="gallery-item">
+                <button
+                  class="gallery-open"
+                  data-index="0"
+                  aria-label="Enlarge photo 1: Setting up validation plots"
+                >
+                  <img
+                    src="assets/web/fieldwork-1.jpg"
+                    alt="Setting up validation plots"
+                    width="800"
+                    height="600"
+                    loading="lazy"
+                  />
+                </button>
+                <figcaption>Setting up validation plots</figcaption>
+              </figure>
+              <figure class="gallery-item">
+                <button
+                  class="gallery-open"
+                  data-index="1"
+                  aria-label="Enlarge photo 2: Taking field measurements"
+                >
+                  <img
+                    src="assets/web/fieldwork-2.jpg"
+                    alt="Taking field measurements"
+                    width="800"
+                    height="600"
+                    loading="lazy"
+                  />
+                </button>
+                <figcaption>Taking field measurements</figcaption>
+              </figure>
+              <figure class="gallery-item">
+                <button
+                  class="gallery-open"
+                  data-index="2"
+                  aria-label="Enlarge photo 3: Travelling to the site"
+                >
+                  <img
+                    src="assets/web/fieldwork-3.jpg"
+                    alt="Travelling to the site"
+                    width="800"
+                    height="600"
+                    loading="lazy"
+                  />
+                </button>
+                <figcaption>Travelling to the site</figcaption>
+              </figure>
+              <figure class="gallery-item">
+                <button
+                  class="gallery-open"
+                  data-index="3"
+                  aria-label="Enlarge photo 4: Silver tree stands — survey area"
+                >
+                  <img
+                    src="assets/web/fieldwork-4.jpg"
+                    alt="Silver tree stands — survey area"
+                    width="800"
+                    height="600"
+                    loading="lazy"
+                  />
+                </button>
+                <figcaption>Silver tree stands — survey area</figcaption>
+              </figure>
+            </div>
+            <div class="gallery-foot">
+              <span class="gallery-position" aria-live="polite">4 photographs</span
+              ><span>Use the arrows or swipe to explore</span>
+            </div>
+          </section>
+          <section
+            class="gallery-section"
+            data-gallery="3"
+            data-gallery-date="2024"
+            data-gallery-unit="photographs"
+            aria-labelledby="gallery-title-3"
+          >
+            <div class="gallery-heading">
+              <div>
+                <h3 id="gallery-title-3">Cape Flats Nature Reserve</h3>
+                <p>
+                  My volunteer work at the Cape Flats Nature Reserve involved a range of
+                  activities focused on habitat restoration and biodiversity monitoring.
+                  I participated in nursery maintenance, which included tasks such as
+                  weeding, watering, and preparing seedlings for planting. Additionally,
+                  I was involved in clearing invasive alien plants to help restore
+                  native vegetation and expanding firebreaks for a prepared burn. One of
+                  the most exciting aspects of my volunteer work was conducting
+                  biodiversity surveys where we set up mammal traps and invertebrate
+                  pitfall traps to monitor local fauna. One of the highlights was a
+                  night survey that revealed a variety of nocturnal creatures, including
+                  scorpions, a chameleon, and a large spider.
+                </p>
+              </div>
+              <div>
+                <p class="gallery-year">2022 – 2024</p>
+                <div class="gallery-navigation">
+                  <button
+                    class="icon-button gallery-prev"
+                    aria-label="Previous photos: Cape Flats Nature Reserve"
+                  >
+                    <svg
+                      class=""
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M20 12H5m6-6-6 6 6 6" />
+                    </svg></button
+                  ><button
+                    class="icon-button gallery-next"
+                    aria-label="Next photos: Cape Flats Nature Reserve"
+                  >
+                    <svg
+                      class=""
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M4 12h15m-6-6 6 6-6 6" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div
+              class="gallery-rail"
+              id="gallery-rail-3"
+              tabindex="0"
+              aria-label="Cape Flats Nature Reserve photo gallery"
+            >
+              <figure class="gallery-item">
+                <button
+                  class="gallery-open"
+                  data-index="0"
+                  aria-label="Enlarge photo 1: Nursery maintenance"
+                >
+                  <img
+                    src="assets/web/cape-flats-1.jpg"
+                    alt="Nursery maintenance"
+                    width="800"
+                    height="600"
+                    loading="lazy"
+                  />
+                </button>
+                <figcaption>Nursery maintenance</figcaption>
+              </figure>
+              <figure class="gallery-item">
+                <button
+                  class="gallery-open"
+                  data-index="1"
+                  aria-label="Enlarge photo 2: Cape Striped Fieldmouse — Sherman Trap Rodent Survey"
+                >
+                  <img
+                    src="assets/web/cape-flats-2.jpg"
+                    alt="Cape Striped Fieldmouse — Sherman Trap Rodent Survey"
+                    width="800"
+                    height="600"
+                    loading="lazy"
+                  />
+                </button>
+                <figcaption>
+                  Cape Striped Fieldmouse — Sherman Trap Rodent Survey
+                </figcaption>
+              </figure>
+              <figure class="gallery-item">
+                <button
+                  class="gallery-open"
+                  data-index="2"
+                  aria-label="Enlarge photo 3: Cape Tick-tailed Scorpion — Biodiversity Survey"
+                >
+                  <img
+                    src="assets/web/cape-flats-3.jpg"
+                    alt="Cape Tick-tailed Scorpion — Biodiversity Survey"
+                    width="800"
+                    height="600"
+                    loading="lazy"
+                  />
+                </button>
+                <figcaption>Cape Tick-tailed Scorpion — Biodiversity Survey</figcaption>
+              </figure>
+              <figure class="gallery-item">
+                <button
+                  class="gallery-open"
+                  data-index="3"
+                  aria-label="Enlarge photo 4: Cape Dwarf Chameleon — Biodiversity Survey"
+                >
+                  <img
+                    src="assets/web/cape-flats-4.jpg"
+                    alt="Cape Dwarf Chameleon — Biodiversity Survey"
+                    width="800"
+                    height="600"
+                    loading="lazy"
+                  />
+                </button>
+                <figcaption>Cape Dwarf Chameleon — Biodiversity Survey</figcaption>
+              </figure>
+              <figure class="gallery-item">
+                <button
+                  class="gallery-open"
+                  data-index="4"
+                  aria-label="Enlarge photo 5: Clicking Stream Frog — Night Biodiversity Survey"
+                >
+                  <img
+                    src="assets/web/cape-flats-5.jpg"
+                    alt="Clicking Stream Frog — Night Biodiversity Survey"
+                    width="800"
+                    height="600"
+                    loading="lazy"
+                  />
+                </button>
+                <figcaption>
+                  Clicking Stream Frog — Night Biodiversity Survey
+                </figcaption>
+              </figure>
+              <figure class="gallery-item">
+                <button
+                  class="gallery-open"
+                  data-index="5"
+                  aria-label="Enlarge photo 6: Cape Ticktail Scorpion — Under UV Light"
+                >
+                  <img
+                    src="assets/web/cape-flats-6.jpg"
+                    alt="Cape Ticktail Scorpion — Under UV Light"
+                    width="800"
+                    height="600"
+                    loading="lazy"
+                  />
+                </button>
+                <figcaption>Cape Ticktail Scorpion — Under UV Light</figcaption>
+              </figure>
+              <figure class="gallery-item">
+                <button
+                  class="gallery-open"
+                  data-index="6"
+                  aria-label="Enlarge photo 7: Cape rainspider — Night Biodiversity Survey"
+                >
+                  <img
+                    src="assets/web/cape-flats-7.jpg"
+                    alt="Cape rainspider — Night Biodiversity Survey"
+                    width="800"
+                    height="600"
+                    loading="lazy"
+                  />
+                </button>
+                <figcaption>Cape rainspider — Night Biodiversity Survey</figcaption>
+              </figure>
+              <figure class="gallery-item">
+                <button
+                  class="gallery-open"
+                  data-index="7"
+                  aria-label="Enlarge photo 8: Group Photo — Night biodiversity survey"
+                >
+                  <img
+                    src="assets/web/cape-flats-8.jpg"
+                    alt="Group Photo — Night biodiversity survey"
+                    width="800"
+                    height="600"
+                    loading="lazy"
+                  />
+                </button>
+                <figcaption>Group Photo — Night biodiversity survey</figcaption>
+              </figure>
+            </div>
+            <div class="gallery-foot">
+              <span class="gallery-position" aria-live="polite">8 photographs</span
+              ><span>Use the arrows or swipe to explore</span>
+            </div>
+          </section>
+          <section
+            class="gallery-section"
+            data-gallery="4"
+            data-gallery-date="2024"
+            data-gallery-unit="photographs"
+            aria-labelledby="gallery-title-4"
+          >
+            <div class="gallery-heading">
+              <div>
+                <h3 id="gallery-title-4">
+                  Grootbos Private Nature Reserve — Night Survey
+                </h3>
+                <p>
+                  A mini-biodiversity night survey we conducted at Grootbos Private
+                  Nature Reserve as part of a funtime activity.
+                </p>
+              </div>
+              <div>
+                <p class="gallery-year">2024</p>
+                <div class="gallery-navigation">
+                  <button
+                    class="icon-button gallery-prev"
+                    aria-label="Previous photos: Grootbos Private Nature Reserve — Night Survey"
+                  >
+                    <svg
+                      class=""
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M20 12H5m6-6-6 6 6 6" />
+                    </svg></button
+                  ><button
+                    class="icon-button gallery-next"
+                    aria-label="Next photos: Grootbos Private Nature Reserve — Night Survey"
+                  >
+                    <svg
+                      class=""
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M4 12h15m-6-6 6 6-6 6" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div
+              class="gallery-rail"
+              id="gallery-rail-4"
+              tabindex="0"
+              aria-label="Grootbos Private Nature Reserve — Night Survey photo gallery"
+            >
+              <figure class="gallery-item">
+                <button
+                  class="gallery-open"
+                  data-index="0"
+                  aria-label="Enlarge photo 1: Night mini-biodiversity survey — Grootbos"
+                >
+                  <img
+                    src="assets/web/grootbos-1.jpg"
+                    alt="Night mini-biodiversity survey — Grootbos"
+                    width="800"
+                    height="600"
+                    loading="lazy"
+                  />
+                </button>
+                <figcaption>Night mini-biodiversity survey — Grootbos</figcaption>
+              </figure>
+            </div>
+            <div class="gallery-foot">
+              <span class="gallery-position" aria-live="polite">1 photographs</span
+              ><span>Select the photograph to enlarge</span>
+            </div>
+          </section>
+          <section
+            class="gallery-section"
+            data-gallery="5"
+            data-gallery-date="2024"
+            data-gallery-unit="photographs"
+            aria-labelledby="gallery-title-5"
+          >
+            <div class="gallery-heading">
+              <div>
+                <h3 id="gallery-title-5">University Practicals</h3>
+                <p>
+                  These are the hands-on practicals in environmental sciences and
+                  ecology I was involved in — involving a constant discharge pumping
+                  test at a borehole, an insect collection project, and a DNA extraction
+                  practical.
+                </p>
+              </div>
+              <div>
+                <p class="gallery-year">2022 – 2024</p>
+                <div class="gallery-navigation">
+                  <button
+                    class="icon-button gallery-prev"
+                    aria-label="Previous photos: University Practicals"
+                  >
+                    <svg
+                      class=""
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M20 12H5m6-6-6 6 6 6" />
+                    </svg></button
+                  ><button
+                    class="icon-button gallery-next"
+                    aria-label="Next photos: University Practicals"
+                  >
+                    <svg
+                      class=""
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M4 12h15m-6-6 6 6-6 6" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div
+              class="gallery-rail"
+              id="gallery-rail-5"
+              tabindex="0"
+              aria-label="University Practicals photo gallery"
+            >
+              <figure class="gallery-item">
+                <button
+                  class="gallery-open"
+                  data-index="0"
+                  aria-label="Enlarge photo 1: Constant discharge pumping test — Environmental Sciences"
+                >
+                  <img
+                    src="assets/web/practicals-1.jpg"
+                    alt="Constant discharge pumping test — Environmental Sciences"
+                    width="800"
+                    height="600"
+                    loading="lazy"
+                  />
+                </button>
+                <figcaption>
+                  Constant discharge pumping test — Environmental Sciences
+                </figcaption>
+              </figure>
+              <figure class="gallery-item">
+                <button
+                  class="gallery-open"
+                  data-index="1"
+                  aria-label="Enlarge photo 2: Insect collection — sweep netting"
+                >
+                  <img
+                    src="assets/web/practicals-2.jpg"
+                    alt="Insect collection — sweep netting"
+                    width="800"
+                    height="600"
+                    loading="lazy"
+                  />
+                </button>
+                <figcaption>Insect collection — sweep netting</figcaption>
+              </figure>
+              <figure class="gallery-item">
+                <button
+                  class="gallery-open"
+                  data-index="2"
+                  aria-label="Enlarge photo 3: DNA extraction practical"
+                >
+                  <img
+                    src="assets/web/practicals-3.jpg"
+                    alt="DNA extraction practical"
+                    width="800"
+                    height="600"
+                    loading="lazy"
+                  />
+                </button>
+                <figcaption>DNA extraction practical</figcaption>
+              </figure>
+              <figure class="gallery-item">
+                <button
+                  class="gallery-open"
+                  data-index="3"
+                  aria-label="Enlarge photo 4: DNA extraction — reagent step"
+                >
+                  <img
+                    src="assets/web/practicals-4.jpg"
+                    alt="DNA extraction — reagent step"
+                    width="800"
+                    height="600"
+                    loading="lazy"
+                  />
+                </button>
+                <figcaption>DNA extraction — reagent step</figcaption>
+              </figure>
+            </div>
+            <div class="gallery-foot">
+              <span class="gallery-position" aria-live="polite">4 photographs</span
+              ><span>Use the arrows or swipe to explore</span>
+            </div>
+          </section>
+        </section>
       </div>
-
-      <!-- ================================================================
-           2. Carbon Sink Volunteer Work — Berg River
-           Files: assets/images/berg-river/berg-river-1.jpg
-           ================================================================ -->
-      <div class="fw-section fade-up">
-        <div class="fw-header">
+      <dialog class="lightbox" id="lightbox" aria-labelledby="lightbox-title">
+        <div class="lightbox-header">
+          <p id="lightbox-title"></p>
+          <button class="icon-button" id="lightbox-close" aria-label="Close photograph">
+            <svg
+              class=""
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="m6 6 12 12M6 18 18 6" />
+            </svg>
+          </button>
+        </div>
+        <img id="lightbox-image" alt="" />
+        <div class="lightbox-footer">
           <div>
-            <div class="fw-title">Carbon Sink Volunteer Work</div>
-            <div class="fw-desc">
-              Doing field sampling for a project assessing carbon sinks to quantify
-              habitat health and track ecological restoration progress. I was collecting 
-              soil samples at the Berg River estuary to analyse for carbon content and other
-              properties.
-            </div>
+            <p id="lightbox-caption"></p>
+            <span class="lightbox-count" id="lightbox-count"></span>
           </div>
-          <span class="fw-year">2025</span>
+          <div class="lightbox-buttons">
+            <button
+              class="icon-button"
+              id="lightbox-prev"
+              aria-label="Previous photograph"
+            >
+              <svg
+                class=""
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M20 12H5m6-6-6 6 6 6" />
+              </svg></button
+            ><button
+              class="icon-button"
+              id="lightbox-next"
+              aria-label="Next photograph"
+            >
+              <svg
+                class=""
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M4 12h15m-6-6 6 6-6 6" />
+              </svg>
+            </button>
+          </div>
         </div>
-        <div class="fw-grid cols-4">
-          <div class="fw-img-wrap sq">
-            <img src="assets/images/berg-river/berg-river-1.jpeg"
-                 alt="Group at the Berg River collecting samples"
-                 loading="lazy" />
-            <div class="fw-img-caption">Berg River — Carbon Sink Field Sampling</div>
-          </div>
-          <div class="fw-img-wrap sq">
-            <img src="assets/images/berg-river/berg-river-2.jpeg"
-                 alt="Group at the Berg River collecting samples"
-                 loading="lazy" />
-            <div class="fw-img-caption">Berg River — Carbon Sink Field Sampling</div>
-          </div>
-          <div class="fw-img-wrap sq">
-            <img src="assets/images/berg-river/berg-river-3.jpeg"
-                 alt="Group at the Berg River collecting samples"
-                 loading="lazy" />
-            <div class="fw-img-caption">Berg River — Carbon Sink Field Sampling</div>
-          </div>
+      </dialog>
+    </main>
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-main">
+          <a class="brand" href="index.html" aria-label="Les Hyperion — home"
+            ><img
+              class="brand-face"
+              src="assets/brand/silvi-face.png"
+              alt=""
+              width="55"
+              height="59"
+            /><span class="brand-name" aria-hidden="true"
+              >LES HYPERI<svg class="compass-o" viewBox="0 0 36 46" aria-hidden="true">
+                <circle
+                  cx="18"
+                  cy="23"
+                  r="14.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <path
+                  d="m18 1 4 17 14 5-14 4-4 18-4-18L0 23l14-5Z"
+                  fill="currentColor"
+                /></svg
+              >N</span
+            ></a
+          >
+          <p class="footer-thought">Understanding nature.<br />Sharing the evidence.</p>
+          <nav class="footer-links" aria-label="Footer">
+            <a href="about.html">About Phemelo</a><a href="cv.html">CV</a
+            ><a
+              href="https://github.com/Phemelo-R"
+              target="_blank"
+              rel="noopener noreferrer"
+              >GitHub ↗</a
+            ><a href="#main">Back to top ↑</a>
+          </nav>
         </div>
-      </div>
-
-      <!-- ================================================================
-           3. Cape Flats Nature Reserve
-           Files: assets/images/cape-flats/cape-flats-1.jpg … -7.jpg
-           ================================================================ -->
-      <div class="fw-section fade-up">
-        <div class="fw-header">
-          <div>
-            <div class="fw-title">Cape Flats Nature Reserve</div>
-            <div class="fw-desc">
-              My volunteer work at the Cape Flats Nature Reserve involved a range of activities 
-              focused on habitat restoration and biodiversity monitoring. I participated in 
-              nursery maintenance, which included tasks such as weeding, watering, and preparing 
-              seedlings for planting. Additionally, I was involved in clearing invasive alien plants 
-              to help restore native vegetation and expanding firebreaks for a prepared burn. One of 
-              the most exciting aspects of my volunteer work was conducting biodiversity surveys where 
-              we set up mammal traps and invertebrate pitfall traps to monitor local fauna. One of the 
-              highlights was a night survey that revealed a variety of nocturnal creatures, including 
-              scorpions, a chameleon, and a large spider.
-            </div>
-          </div>
-          <span class="fw-year">2022 – 2024</span>
-        </div>
-        <div class="fw-grid cols-3">
-          <div class="fw-img-wrap wide">
-            <img src="assets/images/cape-flats/cape-flats-1.JPG"
-                 alt="Nursery maintenance at Cape Flats"
-                 loading="lazy" />
-            <div class="fw-img-caption">Nursery maintenance</div>
-          </div>
-          <div class="fw-img-wrap wide">
-            <img src="assets/images/cape-flats/cape-flats-2.HEIC"
-                 alt="Night survey group photo"
-                 loading="lazy" />
-            <div class="fw-img-caption">Cape Striped Fieldmouse — Sherman Trap Rodent Survey</div>
-          </div>
-          <div class="fw-img-wrap wide">
-            <img src="assets/images/cape-flats/cape-flats-3.HEIC"
-                 alt="Scorpion under UV light"
-                 loading="lazy" />
-            <div class="fw-img-caption">Cape Tick-tailed Scorpion — Biodiversity Survey</div>
-          </div>
-          <div class="fw-img-wrap sq">
-            <img src="assets/images/cape-flats/cape-flats-4.HEIC"
-                 alt="Chameleon found during survey"
-                 loading="lazy" />
-            <div class="fw-img-caption">Cape Dwarf Chameleon — Biodiversity Survey</div>
-          </div>
-          <div class="fw-img-wrap sq">
-            <img src="assets/images/cape-flats/cape-flats-5.HEIC"
-                 alt="Glowing scorpion"
-                 loading="lazy" />
-            <div class="fw-img-caption">Clicking Stream Frog — Night Biodiversity Survey</div>
-          </div>
-          <div class="fw-img-wrap sq">
-            <img src="assets/images/cape-flats/cape-flats-6.HEIC"
-                 alt="Large spider"
-                 loading="lazy" />
-            <div class="fw-img-caption">Cape Ticktail Scorpion — Under UV Light</div>
-          </div>
-          <div class="fw-img-wrap sq7">
-            <img src="assets/images/cape-flats/cape-flats-7.JPG"
-                 alt="Large spider"
-                 loading="lazy" />
-            <div class="fw-img-caption">Cape rainspider — Night Biodiversity Survey</div>
-          </div>
-          <div class="fw-img-wrap wide span2">
-            <img src="assets/images/cape-flats/cape-flats-8.JPG"
-                 alt="Striped mouse caught in Sherman trap"
-                 loading="lazy" />
-            <div class="fw-img-caption"> Group Photo — Night biodiversity survey</div>
-          </div>
+        <div class="footer-bottom">
+          <span>© 2026 Phemelo Rutlokoane</span><span>Nature × Data × People</span
+          ><span>Johannesburg, South Africa</span>
         </div>
       </div>
-
-      <!-- ================================================================
-           4. Grootbos Night Survey
-           Files: assets/images/grootbos/grootbos-1.jpg
-           ================================================================ -->
-      <div class="fw-section fade-up">
-        <div class="fw-header">
-          <div>
-            <div class="fw-title">Grootbos Private Nature Reserve — Night Survey</div>
-            <div class="fw-desc">
-              A mini-biodiversity night survey we conducted at Grootbos Private Nature Reserve
-              as part of a funtime activity.
-            </div>
-          </div>
-          <span class="fw-year">2024</span>
-        </div>
-        <div class="fw-grid cols-2">
-          <div class="fw-img-wrap wide">
-            <img src="assets/images/grootbos/grootbos-1.JPG"
-                 alt="Night survey at Grootbos — orange jacket"
-                 loading="lazy" />
-            <div class="fw-img-caption">Night mini-biodiversity survey — Grootbos</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ================================================================
-           5. University Practicals
-           Files: assets/images/practicals/practicals-1.jpg … -4.jpg
-           ================================================================ -->
-      <div class="fw-section fade-up">
-        <div class="fw-header">
-          <div>
-            <div class="fw-title">University Practicals</div>
-            <div class="fw-desc">
-              These are the hands-on practicals in environmental sciences and ecology  I was involved 
-              in — involving a constant discharge pumping test at a borehole, an insect collection project, and a
-              DNA extraction practical.
-            </div>
-          </div>
-          <span class="fw-year">2022 – 2024</span>
-        </div>
-        <div class="fw-grid cols-2">
-          <div class="fw-img-wrap wide">
-            <img src="assets/images/practicals/practicals-1.HEIC"
-                 alt="Borehole pumping test practical"
-                 loading="lazy" />
-            <div class="fw-img-caption">Constant discharge pumping test — Environmental Sciences</div>
-          </div>
-          <div class="fw-img-wrap wide">
-            <img src="assets/images/practicals/practicals-2.heic"
-                 alt="Insect collection practical"
-                 loading="lazy" />
-            <div class="fw-img-caption">Insect collection — sweep netting</div>
-          </div>
-          <div class="fw-img-wrap wide">
-            <img src="assets/images/practicals/practicals-3.HEIC"
-                 alt="DNA extraction — holding capsule in glove"
-                 loading="lazy" />
-            <div class="fw-img-caption">DNA extraction practical</div>
-          </div>
-          <div class="fw-img-wrap wide">
-            <img src="assets/images/practicals/practicals-4.JPG"
-                 alt="DNA extraction — gel or reagent step"
-                 loading="lazy" />
-            <div class="fw-img-caption">DNA extraction — reagent step</div>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /section-inner -->
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <span class="footer-brand">Les Hyperion</span>
-    <span>© <span id="footer-year"></span> Phemelo Rutlokoane</span>
-    <div class="footer-links">
-      <a href="https://github.com/Phemelo-R" target="_blank" rel="noopener">GitHub ↗</a>
-    </div>
-  </footer>
-
-</div><!-- /page-wrap -->
-
-<!-- ============ LIGHTBOX ============ -->
-<div class="lightbox-overlay" id="lightbox-overlay" role="dialog" aria-modal="true" aria-label="Image viewer">
-  <button class="lightbox-close" id="lightbox-close" aria-label="Close image">✕</button>
-  <img class="lightbox-img" id="lightbox-img" alt="" />
-  <div class="lightbox-caption" id="lightbox-caption"></div>
-</div>
-
-<!-- Scripts -->
-<script src="js/theme.js"></script>
-<script src="js/nav.js"></script>
-<script src="js/about.js"></script>
-<script>
-  document.getElementById('footer-year').textContent = new Date().getFullYear();
-</script>
-</body>
+    </footer>
+    <div class="toast" id="toast" role="status" hidden></div>
+    <script src="js/site.js"></script>
+    <script src="js/silvi.js"></script>
+  </body>
 </html>
