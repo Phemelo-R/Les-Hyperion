@@ -1,0 +1,130 @@
+[
+  {
+    "title": "Wild Impact · Conservation & communication",
+    "date": "2026",
+    "year": "2026",
+    "desc": "Wildlife analysis, camera-trap workflows, BRUVS tools, education and visual communication — a year of work across teams and disciplines.",
+    "imagesSource": "portfolio.json",
+    "images": []
+  },
+  {
+    "title": "Honours Research Fieldwork",
+    "desc": "Setting up LiDAR validation plots for my Honours research and ground-truthing satellite imagery for monitoring the distribution of the endemic Silver Tree on Table Mountain.",
+    "year": "2025",
+    "images": [
+      {
+        "src": "assets/web/fieldwork-1.jpg",
+        "caption": "Setting up validation plots"
+      },
+      {
+        "src": "assets/web/fieldwork-2.jpg",
+        "caption": "Taking field measurements"
+      },
+      {
+        "src": "assets/web/fieldwork-3.jpg",
+        "caption": "Travelling to the site"
+      },
+      {
+        "src": "assets/web/fieldwork-4.jpg",
+        "caption": "Silver tree stands — survey area"
+      }
+    ],
+    "date": "2025"
+  },
+  {
+    "title": "Carbon Sink Volunteer Work",
+    "desc": "Doing field sampling for a project assessing carbon sinks to quantify habitat health and track ecological restoration progress. I was collecting soil samples at the Berg River estuary to analyse for carbon content and other properties.",
+    "year": "2025",
+    "images": [
+      {
+        "src": "assets/web/berg-river-1.jpg",
+        "caption": "Berg River — Carbon Sink Field Sampling"
+      },
+      {
+        "src": "assets/web/berg-river-2.jpg",
+        "caption": "Berg River — Carbon Sink Field Sampling"
+      },
+      {
+        "src": "assets/web/berg-river-3.jpg",
+        "caption": "Berg River — Carbon Sink Field Sampling"
+      }
+    ],
+    "date": "2025"
+  },
+  {
+    "title": "Cape Flats Nature Reserve",
+    "desc": "My volunteer work at the Cape Flats Nature Reserve involved a range of activities focused on habitat restoration and biodiversity monitoring. I participated in nursery maintenance, which included tasks such as weeding, watering, and preparing seedlings for planting. Additionally, I was involved in clearing invasive alien plants to help restore native vegetation and expanding firebreaks for a prepared burn. One of the most exciting aspects of my volunteer work was conducting biodiversity surveys where we set up mammal traps and invertebrate pitfall traps to monitor local fauna. One of the highlights was a night survey that revealed a variety of nocturnal creatures, including scorpions, a chameleon, and a large spider.",
+    "year": "2022 – 2024",
+    "images": [
+      {
+        "src": "assets/web/cape-flats-1.jpg",
+        "caption": "Nursery maintenance"
+      },
+      {
+        "src": "assets/web/cape-flats-2.jpg",
+        "caption": "Cape Striped Fieldmouse — Sherman Trap Rodent Survey"
+      },
+      {
+        "src": "assets/web/cape-flats-3.jpg",
+        "caption": "Cape Tick-tailed Scorpion — Biodiversity Survey"
+      },
+      {
+        "src": "assets/web/cape-flats-4.jpg",
+        "caption": "Cape Dwarf Chameleon — Biodiversity Survey"
+      },
+      {
+        "src": "assets/web/cape-flats-5.jpg",
+        "caption": "Clicking Stream Frog — Night Biodiversity Survey"
+      },
+      {
+        "src": "assets/web/cape-flats-6.jpg",
+        "caption": "Cape Ticktail Scorpion — Under UV Light"
+      },
+      {
+        "src": "assets/web/cape-flats-7.jpg",
+        "caption": "Cape rainspider — Night Biodiversity Survey"
+      },
+      {
+        "src": "assets/web/cape-flats-8.jpg",
+        "caption": "Group Photo — Night biodiversity survey"
+      }
+    ],
+    "date": "2024"
+  },
+  {
+    "title": "Grootbos Private Nature Reserve — Night Survey",
+    "desc": "A mini-biodiversity night survey we conducted at Grootbos Private Nature Reserve as part of a funtime activity.",
+    "year": "2024",
+    "images": [
+      {
+        "src": "assets/web/grootbos-1.jpg",
+        "caption": "Night mini-biodiversity survey — Grootbos"
+      }
+    ],
+    "date": "2024"
+  },
+  {
+    "title": "University Practicals",
+    "desc": "These are the hands-on practicals in environmental sciences and ecology I was involved in — involving a constant discharge pumping test at a borehole, an insect collection project, and a DNA extraction practical.",
+    "year": "2022 – 2024",
+    "images": [
+      {
+        "src": "assets/web/practicals-1.jpg",
+        "caption": "Constant discharge pumping test — Environmental Sciences"
+      },
+      {
+        "src": "assets/web/practicals-2.jpg",
+        "caption": "Insect collection — sweep netting"
+      },
+      {
+        "src": "assets/web/practicals-3.jpg",
+        "caption": "DNA extraction practical"
+      },
+      {
+        "src": "assets/web/practicals-4.jpg",
+        "caption": "DNA extraction — reagent step"
+      }
+    ],
+    "date": "2024"
+  }
+]

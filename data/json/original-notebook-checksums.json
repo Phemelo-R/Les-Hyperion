@@ -1,0 +1,10 @@
+{
+  "notebooks/Data_Manipulation.ipynb": "cb7aa1858c13b9c935687c99ed3dcc59bd8c1ce06e52b376545386388ff94b6a",
+  "notebooks/Data_Visualisation.ipynb": "59c1f21d229fabc851e38f2c8fa36da2e32b6f58a3cad6a4678feef639879c57",
+  "notebooks/Generalized_Linear_Models.ipynb": "7d12b49717e10e3fb1b52d3bd3ea02ec18c1c1f888a42ea1443485584fa56b34",
+  "notebooks/Introduction_to_Machine_Learning.ipynb": "202bb1085499de069e3bc76990d9067290c02cfeba8db23e35a172b46042b8d5",
+  "notebooks/Introduction_to_R.ipynb": "19266eb6669583ad1380e59d46354076f725ffc44c0883525ed910a990c2ba2c",
+  "notebooks/Introduction_to_Spatial_Mapping999.ipynb": "1f729e6bd63be55cc751aff8bd64e1e015b1b9569a363189aa5a206510707346",
+  "notebooks/Linear_Regression.ipynb": "d83a21e9a2fe9057d4b7db24c115577961ae6245ef3a4a3b7dbec64c15df83cf",
+  "notebooks/Vector_Data_with_sf.ipynb": "2e1b3177cb60d1bca873e0d9698b2ac2837e31e3ea7716fd4d217540feb97a30"
+}
