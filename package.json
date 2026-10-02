@@ -11,9 +11,11 @@
     "format:check": "prettier --check \"*.html\" \"content/**/*.html\" \"pages/**/*.html\" \"data/json/**/*.json\" \"css/**/*.css\" \"js/**/*.js\" \"scripts/**/*.mjs\""
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "devDependencies": {
+    "marked": "18.0.14",
+    "parse5": "7.3.0",
     "prettier": "3.9.8"
   }
 }
