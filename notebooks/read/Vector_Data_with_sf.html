@@ -15,8 +15,15 @@
       sizes="32x32"
       href="../../assets/brand/favicon-32.png"
     />
-    <link rel="icon" sizes="192x192" href="../../assets/brand/favicon-192.png" />
-    <link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png" />
+    <link
+      rel="icon"
+      sizes="192x192"
+      href="../../assets/brand/favicon-192.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="../../assets/brand/apple-touch-icon.png"
+    />
     <script src="../../js/theme-init.js"></script>
     <link rel="stylesheet" href="../../css/site.css" />
     <link rel="stylesheet" href="../../css/silvi.css" />
@@ -28,7 +35,10 @@
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href="../../index.html" aria-label="Les Hyperion — home"
+        <a
+          class="brand"
+          href="../../index.html"
+          aria-label="Les Hyperion — home"
           ><img
             class="brand-face"
             src="../../assets/brand/silvi-face.png"
@@ -36,7 +46,11 @@
             width="55"
             height="59"
           /><span class="brand-name" aria-hidden="true"
-            >LES HYPERI<svg class="compass-o" viewBox="0 0 36 46" aria-hidden="true">
+            >LES HYPERI<svg
+              class="compass-o"
+              viewBox="0 0 36 46"
+              aria-hidden="true"
+            >
               <circle
                 cx="18"
                 cy="23"
@@ -53,10 +67,11 @@
           ></a
         >
         <nav class="desktop-nav" aria-label="Main navigation">
-          <a href="../../index.html">Home</a><a href="../../research.html">Research</a
+          <a href="../../index.html">Home</a
+          ><a href="../../research.html">Research</a
           ><a href="../../notebooks.html" aria-current="page">Notebooks</a
-          ><a href="../../carbon.html">Carbon</a><a href="../../about.html">About</a
-          ><a href="../../cv.html">CV</a>
+          ><a href="../../carbon.html">Carbon</a
+          ><a href="../../about.html">About</a><a href="../../cv.html">CV</a>
         </nav>
         <div class="header-actions">
           <button
@@ -113,11 +128,17 @@
           </button>
         </div>
       </div>
-      <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" hidden>
-        <a href="../../index.html">Home</a><a href="../../research.html">Research</a
+      <nav
+        class="mobile-nav"
+        id="mobile-nav"
+        aria-label="Mobile navigation"
+        hidden
+      >
+        <a href="../../index.html">Home</a
+        ><a href="../../research.html">Research</a
         ><a href="../../notebooks.html" aria-current="page">Notebooks</a
-        ><a href="../../carbon.html">Carbon</a><a href="../../about.html">About</a
-        ><a href="../../cv.html">CV</a>
+        ><a href="../../carbon.html">Carbon</a
+        ><a href="../../about.html">About</a><a href="../../cv.html">CV</a>
       </nav>
     </header>
     <main id="main">
@@ -137,7 +158,8 @@
               <path d="M20 12H5m6-6-6 6 6 6" />
             </svg>
             Notebooks</a
-          ><span class="reader-crumb">Spatial &amp; Remote Sensing / Part 2</span
+          ><span class="reader-crumb"
+            >Spatial &amp; Remote Sensing / Part 2</span
           ><a href="../Vector_Data_with_sf.ipynb" download
             ><svg
               class=""
@@ -179,7 +201,8 @@
               ><a href="#section-2-3">What You Will Learn</a
               ><a href="#section-3-4">Packages</a
               ><a href="#section-6-5"
-                >Section 1: The Manual Approach — Working with Downloaded Shapefiles</a
+                >Section 1: The Manual Approach — Working with Downloaded
+                Shapefiles</a
               ><a href="#section-62-22"
                 >Section 2: The Programmatic Approach — No Downloads Required</a
               ><a href="#section-79-29">Summary</a
@@ -187,7 +210,8 @@
             </nav>
           </details>
           <div class="reader-tools">
-            <button id="toggle-outputs" aria-pressed="false">Collapse outputs</button
+            <button id="toggle-outputs" aria-pressed="false">
+              Collapse outputs</button
             ><button class="print-button">Print notebook</button>
           </div>
           <p>Original code and saved outputs.<br />R · 80 cells</p>
@@ -203,8 +227,8 @@
             <blockquote>
               <p>
                 <em
-                  >&quot;What begins as undifferentiated space becomes place as we get
-                  to know it better and endow it with value.&quot;</em
+                  >&quot;What begins as undifferentiated space becomes place as
+                  we get to know it better and endow it with value.&quot;</em
                 ><br />— Yi-Fu Tuan, <em>Topophilia</em> (1974)
               </p>
             </blockquote>
@@ -213,48 +237,50 @@
           <section class="markdown-cell">
             <h2 id="section-1-2">Introduction</h2>
             <p>
-              In Part 1, we discussed what spatial ecology is, why it matters, and what
-              kinds of data exist. We understood that spatial data come in two
-              fundamental types, <strong>vector</strong> and <strong>raster</strong>,
-              and that the modern R-spatial ecosystem is built around <code>sf</code>,
-              <code>terra</code>, and <code>stars</code>, supported by GDAL, GEOS, and
-              PROJ.
+              In Part 1, we discussed what spatial ecology is, why it matters,
+              and what kinds of data exist. We understood that spatial data come
+              in two fundamental types, <strong>vector</strong> and
+              <strong>raster</strong>, and that the modern R-spatial ecosystem
+              is built around <code>sf</code>, <code>terra</code>, and
+              <code>stars</code>, supported by GDAL, GEOS, and PROJ.
             </p>
             <p>
               Now we build things. This part marks the transition from theory to
-              practice. We begin with <strong>vector data</strong> (discrete features):
-              province boundaries, protected areas, city locations, rivers, roads.
-              Vector data are what most ecologists encounter first, and the
-              <code>sf</code> package makes working with them feel as natural as working
-              with a <code>tidyverse</code> data frame.
+              practice. We begin with <strong>vector data</strong> (discrete
+              features): province boundaries, protected areas, city locations,
+              rivers, roads. Vector data are what most ecologists encounter
+              first, and the <code>sf</code> package makes working with them
+              feel as natural as working with a <code>tidyverse</code> data
+              frame.
             </p>
             <p>
-              Throughout this notebook, we use <strong>South Africa</strong> as our
-              study system. South Africa is one of the most biogeographically
-              interesting countries on Earth: it spans three oceans, two biodiversity
-              hotspots (the Cape Floristic Region and the Succulent Karoo), and nine
-              provinces whose human and ecological geographies are different.
+              Throughout this notebook, we use <strong>South Africa</strong> as
+              our study system. South Africa is one of the most
+              biogeographically interesting countries on Earth: it spans three
+              oceans, two biodiversity hotspots (the Cape Floristic Region and
+              the Succulent Karoo), and nine provinces whose human and
+              ecological geographies are different.
             </p>
             <p>
-              There are two parts/sections in this notebook that teach the same workflow
-              in two different ways:
+              There are two parts/sections in this notebook that teach the same
+              workflow in two different ways:
             </p>
             <ul>
               <li>
                 <strong>Section 1 — The Manual Approach</strong>: You download
-                shapefiles from trusted sources, load them from your computer, and work
-                through the full vector data pipeline.
+                shapefiles from trusted sources, load them from your computer,
+                and work through the full vector data pipeline.
               </li>
               <li>
-                <strong>Section 2 — The Programmatic Approach</strong>: You let R
-                packages fetch the same data for you. No browser downloads, no file
-                management — just code.
+                <strong>Section 2 — The Programmatic Approach</strong>: You let
+                R packages fetch the same data for you. No browser downloads, no
+                file management — just code.
               </li>
             </ul>
             <p>
-              Both sections produce the same kind of final map. Understanding both
-              approaches, and knowing <em>when</em> each is appropriate, is a
-              professional skill.
+              Both sections produce the same kind of final map. Understanding
+              both approaches, and knowing <em>when</em> each is appropriate, is
+              a professional skill.
             </p>
           </section>
           <section class="markdown-cell">
@@ -262,16 +288,20 @@
             <p>By the end of this notebook you will be able to:</p>
             <ul>
               <li>
-                Read shapefiles and GeoPackages into R with <code>st_read()</code>
+                Read shapefiles and GeoPackages into R with
+                <code>st_read()</code>
               </li>
-              <li>Understand and inspect the structure of an <code>sf</code> object</li>
+              <li>
+                Understand and inspect the structure of an
+                <code>sf</code> object
+              </li>
               <li>
                 Check and transform coordinate reference systems with
                 <code>st_crs()</code> and <code>st_transform()</code>
               </li>
               <li>
-                Join tabular data to spatial objects using <code>tidyverse</code> join
-                functions
+                Join tabular data to spatial objects using
+                <code>tidyverse</code> join functions
               </li>
               <li>
                 Perform basic geometry operations: <code>st_buffer()</code>,
@@ -291,8 +321,9 @@
           <section class="markdown-cell">
             <h2 id="section-3-4">Packages</h2>
             <p>
-              The core packages for this notebook are listed below. Install any you do
-              not yet have by uncommenting the <code>install.packages()</code> line.
+              The core packages for this notebook are listed below. Install any
+              you do not yet have by uncommenting the
+              <code>install.packages()</code> line.
             </p>
           </section>
           <section class="code-cell" id="cell-4">
@@ -334,20 +365,28 @@ options(
           <section class="markdown-cell">
             <hr />
             <h2 id="section-6-5">
-              Section 1: The Manual Approach — Working with Downloaded Shapefiles
+              Section 1: The Manual Approach — Working with Downloaded
+              Shapefiles
             </h2>
             <p>
-              In this section, you will download two spatial datasets from authoritative
-              online repositories, load them into R, explore them, transform them, and
-              ultimately combine them into a publication-quality map of South Africa.
-              Every step is explained in detail.
+              In this section, you will download two spatial datasets from
+              authoritative online repositories, load them into R, explore them,
+              transform them, and ultimately combine them into a
+              publication-quality map of South Africa. Every step is explained
+              in detail.
             </p>
             <hr />
-            <h3 id="section-6-6">1.1 What is a Shapefile? What is a GeoPackage?</h3>
-            <p>Before you can load data you need to understand what you are loading.</p>
+            <h3 id="section-6-6">
+              1.1 What is a Shapefile? What is a GeoPackage?
+            </h3>
             <p>
-              A <strong>shapefile</strong> is actually a collection of at least three
-              files that must live in the same folder and share the same base name:
+              Before you can load data you need to understand what you are
+              loading.
+            </p>
+            <p>
+              A <strong>shapefile</strong> is actually a collection of at least
+              three files that must live in the same folder and share the same
+              base name:
             </p>
             <table>
               <thead>
@@ -360,71 +399,79 @@ options(
                 <tr>
                   <td><code>.shp</code></td>
                   <td>
-                    The geometry itself (coordinates of points, lines, or polygons)
+                    The geometry itself (coordinates of points, lines, or
+                    polygons)
                   </td>
                 </tr>
                 <tr>
                   <td><code>.dbf</code></td>
                   <td>
-                    The attribute table (columns of data associated with each feature)
+                    The attribute table (columns of data associated with each
+                    feature)
                   </td>
                 </tr>
                 <tr>
                   <td><code>.shx</code></td>
                   <td>
-                    A spatial index linking the <code>.shp</code> and <code>.dbf</code>
+                    A spatial index linking the <code>.shp</code> and
+                    <code>.dbf</code>
                   </td>
                 </tr>
                 <tr>
                   <td><code>.prj</code></td>
                   <td>
-                    <em>(Optional but important)</em> The coordinate reference system
+                    <em>(Optional but important)</em> The coordinate reference
+                    system
                   </td>
                 </tr>
                 <tr>
                   <td><code>.cpg</code></td>
                   <td>
-                    <em>(Optional)</em> Character encoding of the <code>.dbf</code>
+                    <em>(Optional)</em> Character encoding of the
+                    <code>.dbf</code>
                   </td>
                 </tr>
               </tbody>
             </table>
             <p>
-              The shapefile format was developed by ESRI in the early 1990s and remains
-              the most widely used vector format worldwide, even though it has serious
-              limitations: column names are truncated to 10 characters, file sizes are
-              capped, and you need to keep track of several files at once. Modern
-              workflows increasingly prefer the
+              The shapefile format was developed by ESRI in the early 1990s and
+              remains the most widely used vector format worldwide, even though
+              it has serious limitations: column names are truncated to 10
+              characters, file sizes are capped, and you need to keep track of
+              several files at once. Modern workflows increasingly prefer the
               <strong>GeoPackage</strong> (<code>.gpkg</code>), a single-file,
-              open-standard container based on SQLite that can hold multiple layers, has
-              no size limit, supports longer field names, and is fully readable by
-              <code>sf</code>. You load both with the same function.
+              open-standard container based on SQLite that can hold multiple
+              layers, has no size limit, supports longer field names, and is
+              fully readable by <code>sf</code>. You load both with the same
+              function.
             </p>
             <blockquote>
               <p>
-                <strong>Rule of thumb</strong>: prefer GeoPackage for any data you
-                create or export yourself. Use shapefiles when a data provider only
-                offers that format.
+                <strong>Rule of thumb</strong>: prefer GeoPackage for any data
+                you create or export yourself. Use shapefiles when a data
+                provider only offers that format.
               </p>
             </blockquote>
           </section>
           <section class="markdown-cell">
             <h3 id="section-7-7">1.2 Downloading Your Data</h3>
             <p>
-              We will work with two datasets. Follow the instructions below to download
-              them <strong>before</strong> running the code in this section.
+              We will work with two datasets. Follow the instructions below to
+              download them <strong>before</strong> running the code in this
+              section.
             </p>
             <hr />
             <p>
               <strong
-                >Dataset 1 — South African Provincial Boundaries (GADM v4.1)</strong
+                >Dataset 1 — South African Provincial Boundaries (GADM
+                v4.1)</strong
               >
             </p>
             <p>
               GADM (Global Administrative Areas,
-              <a href="https://gadm.org">gadm.org</a>) is the most authoritative source
-              of administrative boundaries. It is updated regularly, free to use for
-              academic purposes, and covers the entire world.
+              <a href="https://gadm.org">gadm.org</a>) is the most authoritative
+              source of administrative boundaries. It is updated regularly, free
+              to use for academic purposes, and covers the entire world.
             </p>
             <ol>
               <li>
@@ -434,28 +481,33 @@ options(
                 >
               </li>
               <li>
-                In the <em>Country</em> dropdown, select <strong>South Africa</strong>
+                In the <em>Country</em> dropdown, select
+                <strong>South Africa</strong>
               </li>
-              <li>Click <strong>Shapefile</strong> to download the full package</li>
               <li>
-                Unzip the archive. You will find files for Level 0 (country), Level 1
-                (provinces), and Level 2 (districts). We need
+                Click <strong>Shapefile</strong> to download the full package
+              </li>
+              <li>
+                Unzip the archive. You will find files for Level 0 (country),
+                Level 1 (provinces), and Level 2 (districts). We need
                 <strong>Level 1</strong> (<code>gadm41_ZAF_1.*</code>) and
                 <strong>Level 0</strong> (<code>gadm41_ZAF_0.*</code>)
               </li>
               <li>
-                Place these files in a folder called <code>data/</code> inside your
-                working directory
+                Place these files in a folder called <code>data/</code> inside
+                your working directory
               </li>
             </ol>
             <hr />
-            <p><strong>Dataset 2 — South African Protected Areas (WDPA)</strong></p>
+            <p>
+              <strong>Dataset 2 — South African Protected Areas (WDPA)</strong>
+            </p>
             <p>
               The World Database on Protected Areas (<a
                 href="https://www.protectedplanet.net"
                 >protectedplanet.net</a
-              >) is the global standard for protected area data, maintained by UNEP-WCMC
-              and IUCN.
+              >) is the global standard for protected area data, maintained by
+              UNEP-WCMC and IUCN.
             </p>
             <ol>
               <li>
@@ -469,9 +521,10 @@ options(
                 <strong>Shapefile</strong> format
               </li>
               <li>
-                Extract the archive. You will see multiple folders. We want the zip file
-                titled <code>WDPA_WDOECM_May2026_Public_ZAF_shp_0</code> (Month and year
-                displayed will change depending on the day of download).
+                Extract the archive. You will see multiple folders. We want the
+                zip file titled
+                <code>WDPA_WDOECM_May2026_Public_ZAF_shp_0</code> (Month and
+                year displayed will change depending on the day of download).
               </li>
               <li>
                 Extract the zip file and you will see the shapefile
@@ -485,8 +538,8 @@ options(
             </ol>
             <hr />
             <p>
-              Once downloaded, your <code>data/</code> folder should look something like
-              this:
+              Once downloaded, your <code>data/</code> folder should look
+              something like this:
             </p>
             <!-- prettier-ignore -->
             <pre><code>data/
@@ -497,29 +550,35 @@ options(
             <blockquote>
               <p>
                 <strong>Setting your working directory</strong>: In RStudio, use
-                <code>Session → Set Working Directory → To Source File Location</code>
-                to ensure R looks for the <code>data/</code> folder relative to where
-                this notebook is saved.
+                <code
+                  >Session → Set Working Directory → To Source File
+                  Location</code
+                >
+                to ensure R looks for the <code>data/</code> folder relative to
+                where this notebook is saved.
               </p>
             </blockquote>
             <p>
               <em
-                >For the purpose of this exercise, I will not be placing the data under
-                the <code>data/</code> folder, instead I will place them under
-                <code>Data/SA_boundaries/</code> and
-                <code>Data/SA_protected_areas</code> because I place every dataset under
-                a subfolder. You can also choose to do so, which will make your life
-                much easier.</em
+                >For the purpose of this exercise, I will not be placing the
+                data under the <code>data/</code> folder, instead I will place
+                them under <code>Data/SA_boundaries/</code> and
+                <code>Data/SA_protected_areas</code> because I place every
+                dataset under a subfolder. You can also choose to do so, which
+                will make your life much easier.</em
               >
             </p>
           </section>
           <section class="markdown-cell">
-            <h3 id="section-8-8">1.3 Reading Shapefiles with <code>st_read()</code></h3>
+            <h3 id="section-8-8">
+              1.3 Reading Shapefiles with <code>st_read()</code>
+            </h3>
             <p>
               The entry point for all vector data in <code>sf</code> is
-              <code>st_read()</code>. It reads shapefiles, GeoPackages, GeoJSON, KML,
-              and over 200 other formats through GDAL — the same library that powers
-              QGIS. You give it a file path; it gives you an <code>sf</code> object.
+              <code>st_read()</code>. It reads shapefiles, GeoPackages, GeoJSON,
+              KML, and over 200 other formats through GDAL — the same library
+              that powers QGIS. You give it a file path; it gives you an
+              <code>sf</code> object.
             </p>
           </section>
           <section class="code-cell" id="cell-9">
@@ -573,18 +632,20 @@ Geodetic CRS:  WGS 84
           </section>
           <section class="markdown-cell">
             <p>
-              When <code>st_read()</code> runs, it prints a brief summary: the driver it
-              used (ESRI Shapefile), the number of features, the number of fields, the
-              geometry type, and the bounding box. Get into the habit of reading this
-              output, it is your first sanity check that the data loaded correctly.
+              When <code>st_read()</code> runs, it prints a brief summary: the
+              driver it used (ESRI Shapefile), the number of features, the
+              number of fields, the geometry type, and the bounding box. Get
+              into the habit of reading this output, it is your first sanity
+              check that the data loaded correctly.
             </p>
             <h3 id="section-11-9">1.4 Exploring an <code>sf</code> Object</h3>
             <p>
               An <code>sf</code> object behaves almost exactly like a
-              <code>data.frame</code> or <code>tibble</code>, with one special addition:
-              a <strong>geometry column</strong> (usually named <code>geometry</code>)
-              that stores the spatial information. Every row is one feature; every
-              column is one attribute, except the geometry column which holds the shape.
+              <code>data.frame</code> or <code>tibble</code>, with one special
+              addition: a <strong>geometry column</strong> (usually named
+              <code>geometry</code>) that stores the spatial information. Every
+              row is one feature; every column is one attribute, except the
+              geometry column which holds the shape.
             </p>
           </section>
           <section class="code-cell" id="cell-12">
@@ -615,7 +676,7 @@ names(sa_provinces)</code></pre>
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -635,7 +696,7 @@ names(sa_provinces)</code></pre>
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -655,7 +716,7 @@ names(sa_provinces)</code></pre>
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -793,7 +854,7 @@ st_geometry_type(sa_provinces)</code></pre>
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -823,7 +884,7 @@ st_geometry_type(sa_provinces)</code></pre>
                         display: inline-block;
                       }
                       .list-inline > li:not(:last-child)::after {
-                        content: '\00b7';
+                        content: "\00b7";
                         padding: 0 0.5ex;
                       }
                     </style>
@@ -905,52 +966,58 @@ st_bbox(sa_provinces)</code></pre>
             <p>A few things to notice:</p>
             <ul>
               <li>
-                <code>st_geometry_type()</code> returns <code>MULTIPOLYGON</code>. Each
-                province is a multipolygon because some provinces include islands or
-                disconnected territories.
+                <code>st_geometry_type()</code> returns
+                <code>MULTIPOLYGON</code>. Each province is a multipolygon
+                because some provinces include islands or disconnected
+                territories.
               </li>
               <li>
                 <code>st_crs()</code> should report
-                <strong>WGS 84 (EPSG: 4326)</strong> — the geographic coordinate system
-                used by GPS and most global datasets, with coordinates in decimal
-                degrees of latitude and longitude.
+                <strong>WGS 84 (EPSG: 4326)</strong> — the geographic coordinate
+                system used by GPS and most global datasets, with coordinates in
+                decimal degrees of latitude and longitude.
               </li>
               <li>
-                <code>st_bbox()</code> gives you the bounding box: minimum and maximum x
-                (longitude) and y (latitude). For South Africa this should be roughly
-                16–33°E longitude and 22–35°S latitude — check this against a mental
-                map.
+                <code>st_bbox()</code> gives you the bounding box: minimum and
+                maximum x (longitude) and y (latitude). For South Africa this
+                should be roughly 16–33°E longitude and 22–35°S latitude — check
+                this against a mental map.
               </li>
             </ul>
             <p>
-              These three checks — geometry type, CRS, bounding box — are the first
-              things you should do with any new spatial dataset. They catch problems
-              before they propagate.
+              These three checks — geometry type, CRS, bounding box — are the
+              first things you should do with any new spatial dataset. They
+              catch problems before they propagate.
             </p>
           </section>
           <section class="markdown-cell">
-            <h3 id="section-18-10">1.5 Coordinate Reference Systems in Practice</h3>
+            <h3 id="section-18-10">
+              1.5 Coordinate Reference Systems in Practice
+            </h3>
             <p>
-              You have already encountered CRS theory in Part 1. Now you will use it.
-              The key function is <code>st_transform()</code>, which reprojects an
-              <code>sf</code> object from one CRS to another. It calls the PROJ library
-              internally and handles all the mathematics.
+              You have already encountered CRS theory in Part 1. Now you will
+              use it. The key function is <code>st_transform()</code>, which
+              reprojects an <code>sf</code> object from one CRS to another. It
+              calls the PROJ library internally and handles all the mathematics.
             </p>
             <p>
               For South Africa,
-              <strong>WGS84 geographic coordinates (EPSG: 4326)</strong> are fine for
-              visualisation, but <strong>projected coordinates</strong> are better for
-              any analysis involving area, distance, or buffer calculations. When you
-              work in geographic coordinates (degrees), distances and areas are
-              meaningless — a degree of longitude in Limpopo covers a different number
-              of metres than a degree of longitude in Cape Town. A projected CRS solves
-              this by converting coordinates to metres on a flat plane.
+              <strong>WGS84 geographic coordinates (EPSG: 4326)</strong> are
+              fine for visualisation, but
+              <strong>projected coordinates</strong> are better for any analysis
+              involving area, distance, or buffer calculations. When you work in
+              geographic coordinates (degrees), distances and areas are
+              meaningless — a degree of longitude in Limpopo covers a different
+              number of metres than a degree of longitude in Cape Town. A
+              projected CRS solves this by converting coordinates to metres on a
+              flat plane.
             </p>
             <p>
               A good choice for South Africa is an
               <strong>Albers Equal-Area Conic</strong> projection centred on the
-              country. This preserves area (critical for ecological and conservation
-              analyses) and minimises distortion across South Africa&#39;s extent.
+              country. This preserves area (critical for ecological and
+              conservation analyses) and minimises distortion across South
+              Africa&#39;s extent.
             </p>
           </section>
           <section class="code-cell" id="cell-19">
@@ -980,19 +1047,20 @@ st_bbox(sa_provinces_proj)</code></pre>
           </section>
           <section class="markdown-cell">
             <p>
-              The bounding box values are now in <strong>metres</strong> from the
-              projection origin — large numbers, but correct. Note that
-              <code>st_transform()</code> is non-destructive: it creates a new object
-              and leaves the original unchanged. Always preserve both the geographic and
-              projected versions of your data.
+              The bounding box values are now in <strong>metres</strong> from
+              the projection origin — large numbers, but correct. Note that
+              <code>st_transform()</code> is non-destructive: it creates a new
+              object and leaves the original unchanged. Always preserve both the
+              geographic and projected versions of your data.
             </p>
             <blockquote>
               <p>
                 <strong>A note on EPSG codes</strong>: You can also use
-                <code>st_transform(crs = 32735)</code> (WGS 84 / UTM Zone 35S), which is
-                another good choice for eastern South Africa. The Albers projection
-                above does not have its own EPSG code, so we supply the PROJ string
-                directly. This is a common pattern for country-specific projections.
+                <code>st_transform(crs = 32735)</code> (WGS 84 / UTM Zone 35S),
+                which is another good choice for eastern South Africa. The
+                Albers projection above does not have its own EPSG code, so we
+                supply the PROJ string directly. This is a common pattern for
+                country-specific projections.
               </p>
             </blockquote>
           </section>
@@ -1001,10 +1069,10 @@ st_bbox(sa_provinces_proj)</code></pre>
             <p>
               The <code>geom_sf()</code> function is <code>ggplot2</code>&#39;s
               interface to <code>sf</code> objects. It reads the geometry column
-              automatically and determines how to draw each feature — polygons as filled
-              shapes, lines as lines, points as points. You do not need to specify
-              <code>x</code> and <code>y</code> aesthetics; <code>sf</code> handles
-              that.
+              automatically and determines how to draw each feature — polygons
+              as filled shapes, lines as lines, points as points. You do not
+              need to specify <code>x</code> and <code>y</code> aesthetics;
+              <code>sf</code> handles that.
             </p>
           </section>
           <section class="code-cell" id="cell-22">
@@ -1031,8 +1099,8 @@ ggplot(sa_provinces_proj) +
           </section>
           <section class="markdown-cell">
             <p>
-              That is a recognisable map of South Africa in about 15 words of code. Now
-              let us style it properly.
+              That is a recognisable map of South Africa in about 15 words of
+              code. Now let us style it properly.
             </p>
           </section>
           <section class="code-cell" id="cell-24">
@@ -1083,35 +1151,37 @@ ggplot(sa_provinces_proj) +
             <ul>
               <li>
                 <code>fill</code> and <code>colour</code> inside
-                <code>geom_sf()</code> but <em>outside</em> <code>aes()</code> apply a
-                single value to all features. Move them inside <code>aes()</code> when
-                you want to vary by an attribute — we do this in the choropleth below.
+                <code>geom_sf()</code> but <em>outside</em>
+                <code>aes()</code> apply a single value to all features. Move
+                them inside <code>aes()</code> when you want to vary by an
+                attribute — we do this in the choropleth below.
               </li>
               <li>
-                <code>geom_sf_text()</code> places a label at the centroid of each
-                feature automatically.
+                <code>geom_sf_text()</code> places a label at the centroid of
+                each feature automatically.
               </li>
               <li>
-                <code>theme(panel.ontop = TRUE)</code> draws the grid lines (graticule)
-                <em>on top of</em> filled polygons rather than beneath them, preventing
-                fill from obscuring the grid.
+                <code>theme(panel.ontop = TRUE)</code> draws the grid lines
+                (graticule) <em>on top of</em> filled polygons rather than
+                beneath them, preventing fill from obscuring the grid.
               </li>
             </ul>
           </section>
           <section class="markdown-cell">
             <h3 id="section-26-12">1.7 Attribute Joins</h3>
             <p>
-              One of the most powerful features of <code>sf</code> is that, because it
-              is a data frame at heart, you can use the full
-              <code>tidyverse</code> toolkit on it, including <code>left_join()</code>.
-              Joining tabular data to spatial objects requires only a shared key column,
-              exactly as with non-spatial data.
+              One of the most powerful features of <code>sf</code> is that,
+              because it is a data frame at heart, you can use the full
+              <code>tidyverse</code> toolkit on it, including
+              <code>left_join()</code>. Joining tabular data to spatial objects
+              requires only a shared key column, exactly as with non-spatial
+              data.
             </p>
             <p>
-              We will join 2022 South African Census population figures to the province
-              polygons. The Census 2022 was the first conducted since 2011, providing
-              the most current demographic picture of the country (Statistics South
-              Africa, 2023).
+              We will join 2022 South African Census population figures to the
+              province polygons. The Census 2022 was the first conducted since
+              2011, providing the most current demographic picture of the
+              country (Statistics South Africa, 2023).
             </p>
           </section>
           <section class="code-cell" id="cell-27">
@@ -1326,18 +1396,18 @@ sa_provinces_data %&gt;%
           </section>
           <section class="markdown-cell">
             <p>
-              The contrast is striking: Gauteng, South Africa&#39;s smallest province,
-              has a population density more than 200 times that of the Northern Cape —
-              the country&#39;s largest province by area. This reflects South
-              Africa&#39;s highly uneven urbanisation, centred on the
-              Johannesburg–Pretoria metropolitan corridor.
+              The contrast is striking: Gauteng, South Africa&#39;s smallest
+              province, has a population density more than 200 times that of the
+              Northern Cape — the country&#39;s largest province by area. This
+              reflects South Africa&#39;s highly uneven urbanisation, centred on
+              the Johannesburg–Pretoria metropolitan corridor.
             </p>
             <h3 id="section-30-13">1.8 Choropleth Map</h3>
             <p>
-              A <strong>choropleth</strong> is a thematic map in which areas are shaded
-              in proportion to a statistical variable. Now that we have joined
-              population density to our polygons, we can map it by placing
-              <code>fill = pop_density</code> inside <code>aes()</code>.
+              A <strong>choropleth</strong> is a thematic map in which areas are
+              shaded in proportion to a statistical variable. Now that we have
+              joined population density to our polygons, we can map it by
+              placing <code>fill = pop_density</code> inside <code>aes()</code>.
             </p>
           </section>
           <section class="code-cell" id="cell-31">
@@ -1392,18 +1462,22 @@ sa_provinces_data %&gt;%
           </section>
           <section class="markdown-cell">
             <p>
-              Notice <code>trans = &quot;log10&quot;</code>. Gauteng&#39;s density is so
-              much higher than the rest that on a linear scale every other province
-              would appear indistinguishably pale. A log transform reveals the gradient
-              that would otherwise be invisible — this is a common challenge in
-              choropleth mapping, and a good reason to always inspect your data
-              distribution before choosing a colour scale.
+              Notice <code>trans = &quot;log10&quot;</code>. Gauteng&#39;s
+              density is so much higher than the rest that on a linear scale
+              every other province would appear indistinguishably pale. A log
+              transform reveals the gradient that would otherwise be invisible —
+              this is a common challenge in choropleth mapping, and a good
+              reason to always inspect your data distribution before choosing a
+              colour scale.
             </p>
-            <p>You can also save your dataset as a GeoPackage for future use:</p>
+            <p>
+              You can also save your dataset as a GeoPackage for future use:
+            </p>
           </section>
           <section class="code-cell" id="cell-33">
             <div class="code-toolbar">
-              <span>R · Cell 17</span><button class="copy-code">Copy code</button>
+              <span>R · Cell 17</span
+              ><button class="copy-code">Copy code</button>
             </div>
             <!-- prettier-ignore -->
             <pre class="source-code"><code># Save your work as a GeoPackage
@@ -1415,10 +1489,11 @@ sa_provinces_data %&gt;%
           <section class="markdown-cell">
             <h3 id="section-34-14">1.9 Loading Protected Areas</h3>
             <p>
-              Now we load the WDPA protected areas dataset downloaded from Protected
-              Planet. This is a much larger and more complex dataset. South Africa has
-              hundreds of protected areas ranging from small municipal reserves to the
-              vast Kgalagadi Transfrontier Park spanning South Africa and Botswana.
+              Now we load the WDPA protected areas dataset downloaded from
+              Protected Planet. This is a much larger and more complex dataset.
+              South Africa has hundreds of protected areas ranging from small
+              municipal reserves to the vast Kgalagadi Transfrontier Park
+              spanning South Africa and Botswana.
             </p>
           </section>
           <section class="code-cell" id="cell-35">
@@ -1617,7 +1692,9 @@ sa_protected_proj %&gt;%
                       </tr>
                       <tr>
                         <th scope="row">5</th>
-                        <td>Wetland of International Importance (Ramsar Site)</td>
+                        <td>
+                          Wetland of International Importance (Ramsar Site)
+                        </td>
                         <td>21</td>
                       </tr>
                       <tr>
@@ -1653,29 +1730,31 @@ sa_protected_proj %&gt;%
           </section>
           <section class="markdown-cell">
             <p>
-              The <code>DESIG_ENG</code> column contains the legal designation of each
-              area. National Parks managed by SANParks are the most iconic, but Nature
-              Reserves, Marine Protected Areas, World Heritage Sites, and Ramsar
-              Wetlands all contribute to the total conservation estate.
+              The <code>DESIG_ENG</code> column contains the legal designation
+              of each area. National Parks managed by SANParks are the most
+              iconic, but Nature Reserves, Marine Protected Areas, World
+              Heritage Sites, and Ramsar Wetlands all contribute to the total
+              conservation estate.
             </p>
           </section>
           <section class="markdown-cell">
             <h3 id="section-39-15">1.10 Geometry Operations</h3>
             <p>
-              This is where <code>sf</code> reveals its full power. The following four
-              operations: buffer, intersection, union, and distance — are the foundation
-              of almost all quantitative spatial analysis. They are implemented through
-              GEOS, the same geometry engine used by PostGIS, QGIS, and ArcGIS.
+              This is where <code>sf</code> reveals its full power. The
+              following four operations: buffer, intersection, union, and
+              distance — are the foundation of almost all quantitative spatial
+              analysis. They are implemented through GEOS, the same geometry
+              engine used by PostGIS, QGIS, and ArcGIS.
             </p>
             <hr />
             <h4 id="section-39-16">
               <code>st_buffer()</code> — Creating a Buffer Zone
             </h4>
             <p>
-              A <strong>buffer</strong> expands every feature by a specified distance.
-              Buffers answer questions such as: &quot;What land falls within 50 km of
-              Kruger National Park?&quot;, useful for assessing wildlife corridor
-              potential or human–wildlife conflict risk.
+              A <strong>buffer</strong> expands every feature by a specified
+              distance. Buffers answer questions such as: &quot;What land falls
+              within 50 km of Kruger National Park?&quot;, useful for assessing
+              wildlife corridor potential or human–wildlife conflict risk.
             </p>
           </section>
           <section class="code-cell" id="cell-40">
@@ -1770,18 +1849,19 @@ ggplot() +
           </section>
           <section class="markdown-cell">
             <h4 id="section-43-17">
-              <code>st_intersection()</code> — Clipping Features to an Area of Interest
+              <code>st_intersection()</code> — Clipping Features to an Area of
+              Interest
             </h4>
             <p>
-              <code>st_intersection()</code> returns the parts of one geometry that
-              overlap with another. It is the spatial equivalent of
-              <code>filter()</code>, but it clips geometries at the boundary of the
-              intersecting feature rather than simply dropping entire rows.
+              <code>st_intersection()</code> returns the parts of one geometry
+              that overlap with another. It is the spatial equivalent of
+              <code>filter()</code>, but it clips geometries at the boundary of
+              the intersecting feature rather than simply dropping entire rows.
             </p>
             <p>
-              A typical use case: &quot;Show me only the protected areas within Limpopo
-              province&quot; — essential when you need spatially bounded subsets of
-              national datasets for regional analysis.
+              A typical use case: &quot;Show me only the protected areas within
+              Limpopo province&quot; — essential when you need spatially bounded
+              subsets of national datasets for regional analysis.
             </p>
           </section>
           <section class="code-cell" id="cell-44">
@@ -1860,7 +1940,9 @@ Intersecting Limpopo:             134
                       </tr>
                       <tr>
                         <th scope="row">4</th>
-                        <td>Wetland of International Importance (Ramsar Site)</td>
+                        <td>
+                          Wetland of International Importance (Ramsar Site)
+                        </td>
                         <td>2</td>
                       </tr>
                       <tr>
@@ -1917,12 +1999,15 @@ Intersecting Limpopo:             134
             </details>
           </section>
           <section class="markdown-cell">
-            <h4 id="section-47-18"><code>st_union()</code> — Merging Geometries</h4>
+            <h4 id="section-47-18">
+              <code>st_union()</code> — Merging Geometries
+            </h4>
             <p>
-              <code>st_union()</code> dissolves boundaries between features to produce a
-              single merged geometry. Applied to all nine provinces, it reconstructs the
-              national boundary from its parts — a useful sanity check, and a technique
-              for aggregating geometries from finer to coarser scales.
+              <code>st_union()</code> dissolves boundaries between features to
+              produce a single merged geometry. Applied to all nine provinces,
+              it reconstructs the national boundary from its parts — a useful
+              sanity check, and a technique for aggregating geometries from
+              finer to coarser scales.
             </p>
           </section>
           <section class="code-cell" id="cell-48">
@@ -1989,14 +2074,17 @@ Area from country polygon (km²):  1219709
             </details>
           </section>
           <section class="markdown-cell">
-            <h4 id="section-51-19"><code>st_distance()</code> — Computing Distances</h4>
+            <h4 id="section-51-19">
+              <code>st_distance()</code> — Computing Distances
+            </h4>
             <p>
-              <code>st_distance()</code> computes pairwise distances between two sets of
-              features, returning a distance matrix. In a projected CRS the units are
-              metres. Applied to province centroids and national park polygons, it
-              answers: &quot;How far is each province&#39;s population centre from the
-              nearest national park?&quot; — a question with implications for
-              environmental justice and eco-tourism access.
+              <code>st_distance()</code> computes pairwise distances between two
+              sets of features, returning a distance matrix. In a projected CRS
+              the units are metres. Applied to province centroids and national
+              park polygons, it answers: &quot;How far is each province&#39;s
+              population centre from the nearest national park?&quot; — a
+              question with implications for environmental justice and
+              eco-tourism access.
             </p>
           </section>
           <section class="code-cell" id="cell-52">
@@ -2048,7 +2136,7 @@ dim(dist_matrix)</code></pre>
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -2183,12 +2271,12 @@ sa_provinces_data %&gt;%
           <section class="markdown-cell">
             <h3 id="section-56-20">1.11 Adding Cities as Point Features</h3>
             <p>
-              So far all our features have been polygons. Points are simpler: each
-              feature is a single x, y coordinate pair. We create a cities dataset from
-              a <code>tibble</code> using <code>st_as_sf()</code>, which converts a data
-              frame with coordinate columns into an <code>sf</code> object. This is the
-              standard pattern for any GPS-derived data or tabular data with
-              latitude/longitude columns.
+              So far all our features have been polygons. Points are simpler:
+              each feature is a single x, y coordinate pair. We create a cities
+              dataset from a <code>tibble</code> using <code>st_as_sf()</code>,
+              which converts a data frame with coordinate columns into an
+              <code>sf</code> object. This is the standard pattern for any
+              GPS-derived data or tabular data with latitude/longitude columns.
             </p>
           </section>
           <section class="code-cell" id="cell-57">
@@ -2304,16 +2392,22 @@ cities_sf</code></pre>
             </details>
           </section>
           <section class="markdown-cell">
-            <h3 id="section-58-21">1.12 The Final Map — Bringing It All Together</h3>
+            <h3 id="section-58-21">
+              1.12 The Final Map — Bringing It All Together
+            </h3>
             <p>We now have every ingredient for a publication-quality map:</p>
             <ul>
-              <li>Province polygons coloured by population density (choropleth)</li>
+              <li>
+                Province polygons coloured by population density (choropleth)
+              </li>
               <li>Protected areas as a semi-transparent overlay</li>
               <li>Major cities as labelled point features</li>
               <li>A projected CRS that preserves area</li>
               <li>Scale bar and north arrow from <code>ggspatial</code></li>
             </ul>
-            <p>The map below synthesises everything introduced in this section.</p>
+            <p>
+              The map below synthesises everything introduced in this section.
+            </p>
           </section>
           <section class="code-cell" id="cell-59">
             <div class="code-toolbar">
@@ -2420,10 +2514,10 @@ Scale on map varies by more than 10%, scale bar may be inaccurate
           </section>
           <section class="markdown-cell">
             <p>
-              On second thoughts, let us remove marine protected areas. Although the map
-              is good, personally, I do not like how the marine protected area below
-              makes the map look. Professionally, I would advice to keep it (only if it
-              is relevant to your research).
+              On second thoughts, let us remove marine protected areas. Although
+              the map is good, personally, I do not like how the marine
+              protected area below makes the map look. Professionally, I would
+              advice to keep it (only if it is relevant to your research).
             </p>
           </section>
           <section class="code-cell" id="cell-61">
@@ -2533,31 +2627,33 @@ sa_map_final2</code></pre>
               Section 2: The Programmatic Approach — No Downloads Required
             </h2>
             <p>
-              In Section 1, the workflow required you to navigate to websites, download
-              archives, unzip them, and manage files on your hard drive. For small
-              projects with infrequently updated data this is perfectly reasonable. But
-              it has real limitations:
+              In Section 1, the workflow required you to navigate to websites,
+              download archives, unzip them, and manage files on your hard
+              drive. For small projects with infrequently updated data this is
+              perfectly reasonable. But it has real limitations:
             </p>
             <ul>
               <li>
-                <strong>Reproducibility</strong>: A colleague running your script needs
-                all the same files in the same locations.
+                <strong>Reproducibility</strong>: A colleague running your
+                script needs all the same files in the same locations.
               </li>
               <li>
-                <strong>Version drift</strong>: When GADM or WDPA release updated data,
-                your cached files become stale.
+                <strong>Version drift</strong>: When GADM or WDPA release
+                updated data, your cached files become stale.
               </li>
               <li>
-                <strong>Automation</strong>: If you are producing the same analysis for
-                many countries or as a recurring report, manual downloads do not scale.
+                <strong>Automation</strong>: If you are producing the same
+                analysis for many countries or as a recurring report, manual
+                downloads do not scale.
               </li>
             </ul>
             <p>
-              The solution is R packages that fetch data <em>programmatically</em> —
-              using code, not mouse clicks. The data comes from the same authoritative
-              sources (GADM, WDPA, Natural Earth), but R handles downloading, caching,
-              and reading automatically. Your script becomes fully self-contained:
-              anyone can clone your repository and reproduce your results with a single
+              The solution is R packages that fetch data
+              <em>programmatically</em> — using code, not mouse clicks. The data
+              comes from the same authoritative sources (GADM, WDPA, Natural
+              Earth), but R handles downloading, caching, and reading
+              automatically. Your script becomes fully self-contained: anyone
+              can clone your repository and reproduce your results with a single
               <code>source()</code> call.
             </p>
             <hr />
@@ -2587,11 +2683,11 @@ suppressPackageStartupMessages({
               2.2 Getting Province Boundaries with <code>geodata</code>
             </h3>
             <p>
-              The <code>geodata</code> package provides a one-line interface to the same
-              GADM data you downloaded manually in Section 1. Downloaded files are
-              cached locally, so subsequent calls are fast. It returns a
-              <code>terra</code> <code>SpatVector</code>, which we convert to
-              <code>sf</code> with <code>st_as_sf()</code>.
+              The <code>geodata</code> package provides a one-line interface to
+              the same GADM data you downloaded manually in Section 1.
+              Downloaded files are cached locally, so subsequent calls are fast.
+              It returns a <code>terra</code> <code>SpatVector</code>, which we
+              convert to <code>sf</code> with <code>st_as_sf()</code>.
             </p>
           </section>
           <section class="code-cell" id="cell-65">
@@ -2666,13 +2762,14 @@ head(sa_provinces_auto_proj[&quot;NAME_1&quot;], 4)</code></pre>
           </section>
           <section class="markdown-cell">
             <p>
-              Column names are identical to the manually downloaded shapefile because
-              the underlying source is the same GADM database. The only difference is
-              <em>how</em> the data arrived.
+              Column names are identical to the manually downloaded shapefile
+              because the underlying source is the same GADM database. The only
+              difference is <em>how</em> the data arrived.
             </p>
             <p>
-              <code>rnaturalearth</code> provides a convenient alternative with slightly
-              lower resolution — sufficient for most regional mapping tasks:
+              <code>rnaturalearth</code> provides a convenient alternative with
+              slightly lower resolution — sufficient for most regional mapping
+              tasks:
             </p>
           </section>
           <section class="code-cell" id="cell-67">
@@ -2708,26 +2805,27 @@ $ geometry &lt;MULTIPOLYGON [°]&gt; MULTIPOLYGON (((16.48707 -2..., MULTIPOLYGO
               2.3 Getting Protected Areas with <code>wdpar</code>
             </h3>
             <p>
-              The <code>wdpar</code> package interfaces directly with the Protected
-              Planet API. <code>wdpa_fetch()</code> downloads the WDPA dataset for a
-              country; <code>wdpa_clean()</code> applies standard quality-control steps:
-              removing invalid geometries, duplicate records, and marine-only
-              designations.
+              The <code>wdpar</code> package interfaces directly with the
+              Protected Planet API. <code>wdpa_fetch()</code> downloads the WDPA
+              dataset for a country; <code>wdpa_clean()</code> applies standard
+              quality-control steps: removing invalid geometries, duplicate
+              records, and marine-only designations.
             </p>
             <blockquote>
               <p>
                 <strong>Note on download time</strong>:
-                <code>wdpa_fetch()</code> contacts the internet and may take several
-                minutes for South Africa. Data are cached between sessions — run this
-                cell once, and subsequent calls will be fast.
+                <code>wdpa_fetch()</code> contacts the internet and may take
+                several minutes for South Africa. Data are cached between
+                sessions — run this cell once, and subsequent calls will be
+                fast.
               </p>
             </blockquote>
             <p>
-              <strong>Note for Mac users</strong>: <code>wdpar</code> package uses the
-              chromote package to scrape download URLs from the Protected Planet
-              website, which requires a Chromium-based browser. Chrome needs to be
-              installed and placed under Applications. Run this line before running
-              <code>wdpa_fetch()</code>:
+              <strong>Note for Mac users</strong>: <code>wdpar</code> package
+              uses the chromote package to scrape download URLs from the
+              Protected Planet website, which requires a Chromium-based browser.
+              Chrome needs to be installed and placed under Applications. Run
+              this line before running <code>wdpa_fetch()</code>:
             </p>
             <!-- prettier-ignore -->
             <pre><code># Set the path to the Chrome executable on your Mac
@@ -2815,7 +2913,9 @@ cat(&quot;Protected area polygons (after cleaning):&quot;, nrow(sa_pa_auto_proj)
                         <td>42</td>
                       </tr>
                       <tr>
-                        <td>Wetland of International Importance (Ramsar Site)</td>
+                        <td>
+                          Wetland of International Importance (Ramsar Site)
+                        </td>
                         <td>31</td>
                       </tr>
                       <tr>
@@ -2838,19 +2938,20 @@ cat(&quot;Protected area polygons (after cleaning):&quot;, nrow(sa_pa_auto_proj)
           </section>
           <section class="markdown-cell">
             <p>
-              The cleaning step may return slightly fewer rows than the raw fetch
-              because it removes invalid geometries and duplicate records — exactly the
-              quality-control steps that the WDPA documentation recommends and that you
-              would otherwise apply manually.
+              The cleaning step may return slightly fewer rows than the raw
+              fetch because it removes invalid geometries and duplicate records
+              — exactly the quality-control steps that the WDPA documentation
+              recommends and that you would otherwise apply manually.
             </p>
             <h3 id="section-72-26">2.4 Preparing the Joined Data and Cities</h3>
             <p>
-              The attribute join and city creation are identical to Section 1. We reuse
-              the same <code>province_data</code> and <code>cities_df</code> objects we
-              created earlier. This illustrates an important principle:
+              The attribute join and city creation are identical to Section 1.
+              We reuse the same <code>province_data</code> and
+              <code>cities_df</code> objects we created earlier. This
+              illustrates an important principle:
               <strong
-                >data wrangling code does not change; only the data acquisition step
-                differs between workflows</strong
+                >data wrangling code does not change; only the data acquisition
+                step differs between workflows</strong
               >.
             </p>
           </section>
@@ -2892,10 +2993,12 @@ cat(&quot;Join complete. Province rows:&quot;, nrow(sa_provinces_auto_data), &qu
             </details>
           </section>
           <section class="markdown-cell">
-            <h3 id="section-74-27">2.5 Reproducing the Final Map — Programmatically</h3>
+            <h3 id="section-74-27">
+              2.5 Reproducing the Final Map — Programmatically
+            </h3>
             <p>
-              The map code below is essentially identical to the Section 1 final map.
-              Only the data objects differ. The visual result should be
+              The map code below is essentially identical to the Section 1 final
+              map. Only the data objects differ. The visual result should be
               indistinguishable — which is the whole point:
               <strong>reproducible code produces reproducible results</strong>,
               regardless of how the underlying data arrived.
@@ -2994,9 +3097,9 @@ sa_map_programmatic</code></pre>
             </h3>
             <p>
               <code>patchwork</code> lets us compose multiple
-              <code>ggplot2</code> objects into a single figure. Placing the two maps
-              side-by-side makes the equivalence of the two workflows immediately
-              visible.
+              <code>ggplot2</code> objects into a single figure. Placing the two
+              maps side-by-side makes the equivalence of the two workflows
+              immediately visible.
             </p>
           </section>
           <section class="code-cell" id="cell-77">
@@ -3052,14 +3155,14 @@ options(repr.plot.width = 10, repr.plot.height = 7, repr.plot.res = 200)</code><
             <hr />
             <h2 id="section-79-29">Summary</h2>
             <p>
-              This notebook has introduced the core workflow for vector spatial data in
-              R using the <code>sf</code> package.
+              This notebook has introduced the core workflow for vector spatial
+              data in R using the <code>sf</code> package.
             </p>
             <p><strong>Data I/O</strong></p>
             <ul>
               <li>
-                <code>st_read()</code> reads shapefiles, GeoPackages, and dozens of
-                other formats through GDAL
+                <code>st_read()</code> reads shapefiles, GeoPackages, and dozens
+                of other formats through GDAL
               </li>
               <li>
                 <code>st_write()</code> saves spatial objects; prefer GeoPackage
@@ -3069,16 +3172,17 @@ options(repr.plot.width = 10, repr.plot.height = 7, repr.plot.res = 200)</code><
             <p><strong>Exploration</strong></p>
             <ul>
               <li>
-                <code>sf</code> objects are data frames with a special geometry column —
-                all <code>dplyr</code> verbs apply
+                <code>sf</code> objects are data frames with a special geometry
+                column — all <code>dplyr</code> verbs apply
               </li>
               <li>
-                Always run <code>st_geometry_type()</code>, <code>st_crs()</code>, and
-                <code>st_bbox()</code> on any new dataset
+                Always run <code>st_geometry_type()</code>,
+                <code>st_crs()</code>, and <code>st_bbox()</code> on any new
+                dataset
               </li>
               <li>
-                <code>st_drop_geometry()</code> returns the attribute table as a plain
-                tibble
+                <code>st_drop_geometry()</code> returns the attribute table as a
+                plain tibble
               </li>
             </ul>
             <p><strong>Coordinate Reference Systems</strong></p>
@@ -3087,45 +3191,57 @@ options(repr.plot.width = 10, repr.plot.height = 7, repr.plot.res = 200)</code><
                 Check CRS with <code>st_crs()</code>; reproject with
                 <code>st_transform()</code>
               </li>
-              <li>Use a projected CRS (metres) for any distance or area calculation</li>
               <li>
-                The Albers Equal-Area Conic is a good default for South Africa-wide
-                analyses
+                Use a projected CRS (metres) for any distance or area
+                calculation
+              </li>
+              <li>
+                The Albers Equal-Area Conic is a good default for South
+                Africa-wide analyses
               </li>
             </ul>
             <p><strong>Attribute Joins</strong></p>
             <ul>
               <li>
-                <code>left_join()</code> attaches tabular data to spatial objects via a
-                shared key column
+                <code>left_join()</code> attaches tabular data to spatial
+                objects via a shared key column
               </li>
               <li>
-                The result is a spatially enriched <code>sf</code> object ready for
-                choropleth mapping
+                The result is a spatially enriched <code>sf</code> object ready
+                for choropleth mapping
               </li>
             </ul>
             <p><strong>Geometry Operations</strong> (GEOS-powered)</p>
             <ul>
               <li>
-                <code>st_buffer(dist)</code> — expand features outward by a distance
+                <code>st_buffer(dist)</code> — expand features outward by a
+                distance
               </li>
               <li>
                 <code>st_intersection(x, y)</code> — clip to the overlap of two
                 geometries
               </li>
-              <li><code>st_union()</code> — dissolve boundaries between features</li>
               <li>
-                <code>st_distance(x, y)</code> — compute pairwise distance matrix
-                (units: metres in projected CRS)
+                <code>st_union()</code> — dissolve boundaries between features
+              </li>
+              <li>
+                <code>st_distance(x, y)</code> — compute pairwise distance
+                matrix (units: metres in projected CRS)
               </li>
             </ul>
             <p><strong>Visualisation</strong></p>
             <ul>
               <li>
-                <code>geom_sf()</code> integrates directly with <code>ggplot2</code>
+                <code>geom_sf()</code> integrates directly with
+                <code>ggplot2</code>
               </li>
-              <li><code>geom_sf_text()</code> labels features at their centroids</li>
-              <li><code>ggrepel::geom_text_repel()</code> avoids overlapping labels</li>
+              <li>
+                <code>geom_sf_text()</code> labels features at their centroids
+              </li>
+              <li>
+                <code>ggrepel::geom_text_repel()</code> avoids overlapping
+                labels
+              </li>
               <li>
                 <code>ggspatial::annotation_scale()</code> and
                 <code>annotation_north_arrow()</code> add cartographic elements
@@ -3134,30 +3250,31 @@ options(repr.plot.width = 10, repr.plot.height = 7, repr.plot.res = 200)</code><
             <p><strong>Programmatic Data Access</strong></p>
             <ul>
               <li>
-                <code>geodata::gadm()</code> fetches GADM administrative boundaries
-              </li>
-              <li>
-                <code>rnaturalearth::ne_states()</code> provides Natural Earth province
+                <code>geodata::gadm()</code> fetches GADM administrative
                 boundaries
               </li>
               <li>
-                <code>wdpar::wdpa_fetch()</code> + <code>wdpa_clean()</code> provides
-                analysis-ready WDPA data
+                <code>rnaturalearth::ne_states()</code> provides Natural Earth
+                province boundaries
+              </li>
+              <li>
+                <code>wdpar::wdpa_fetch()</code> +
+                <code>wdpa_clean()</code> provides analysis-ready WDPA data
               </li>
             </ul>
             <hr />
             <h2 id="section-79-30">References</h2>
             <p>
-              Bivand, R. (2023). Progress in modernizing and replacing infrastructure
-              packages in R-spatial workflows.
+              Bivand, R. (2023). Progress in modernizing and replacing
+              infrastructure packages in R-spatial workflows.
               <em>R-Spatial Evolution Project Report</em>.
               <a href="https://r-spatial.github.io/evolution/"
                 >https://r-spatial.github.io/evolution/</a
               >
             </p>
             <p>
-              Hijmans, R. J. (2023). <em>geodata: Download Geographic Data</em>. R
-              package, version 0.5.10.
+              Hijmans, R. J. (2023). <em>geodata: Download Geographic Data</em>.
+              R package, version 0.5.10.
               <a href="https://CRAN.R-project.org/package=geodata"
                 >https://CRAN.R-project.org/package=geodata</a
               >
@@ -3168,30 +3285,34 @@ options(repr.plot.width = 10, repr.plot.height = 7, repr.plot.res = 200)</code><
               <a href="https://r.geocompx.org/">https://r.geocompx.org/</a>
             </p>
             <p>
-              Pebesma, E. (2018). Simple Features for R: standardized support for
-              spatial vector data. <em>The R Journal</em> 10(1): 439–446.
+              Pebesma, E. (2018). Simple Features for R: standardized support
+              for spatial vector data. <em>The R Journal</em> 10(1): 439–446.
             </p>
             <p>
               Pebesma, E. and Bivand, R. (2023).
               <em>Spatial Data Science: With Applications in R</em>. Chapman and
               Hall/CRC.
-              <a href="https://r-spatial.org/book/">https://r-spatial.org/book/</a>
+              <a href="https://r-spatial.org/book/"
+                >https://r-spatial.org/book/</a
+              >
             </p>
             <p>
               Slater, H. (2024).
-              <em>wdpar: Interface to the World Database on Protected Areas</em>. R
-              package.
+              <em>wdpar: Interface to the World Database on Protected Areas</em
+              >. R package.
               <a href="https://CRAN.R-project.org/package=wdpar"
                 >https://CRAN.R-project.org/package=wdpar</a
               >
             </p>
             <p>
-              South African National Parks (2024). <em>SANParks National Parks</em>.
+              South African National Parks (2024).
+              <em>SANParks National Parks</em>.
               <a href="https://www.sanparks.org">https://www.sanparks.org</a>
             </p>
             <p>
-              Statistics South Africa (2023). <em>Census 2022 Statistical Release</em>.
-              Statistics South Africa, Pretoria.
+              Statistics South Africa (2023).
+              <em>Census 2022 Statistical Release</em>. Statistics South Africa,
+              Pretoria.
             </p>
             <p>
               Tennekes, M. (2018). tmap: Thematic maps in R.
@@ -3200,22 +3321,27 @@ options(repr.plot.width = 10, repr.plot.height = 7, repr.plot.res = 200)</code><
             <p>
               Tuan, Y.-F. (1974).
               <em
-                >Topophilia: A Study of Environmental Perceptions, Attitudes, and
-                Values</em
+                >Topophilia: A Study of Environmental Perceptions, Attitudes,
+                and Values</em
               >. Prentice-Hall, Englewood Cliffs.
             </p>
             <p>
               UNEP-WCMC and IUCN (2024).
-              <em>Protected Planet: The World Database on Protected Areas (WDPA)</em>.
-              UNEP-WCMC and IUCN, Cambridge.
-              <a href="http://www.protectedplanet.net">www.protectedplanet.net</a>
+              <em
+                >Protected Planet: The World Database on Protected Areas
+                (WDPA)</em
+              >. UNEP-WCMC and IUCN, Cambridge.
+              <a href="http://www.protectedplanet.net"
+                >www.protectedplanet.net</a
+              >
             </p>
             <hr />
             <p>
               <em
                 >End of Part 2. Part 3 introduces raster data with
-                <code>terra</code> and <code>stars</code>: loading GeoTIFFs, computing
-                NDVI, and basic raster algebra over South African landscapes.</em
+                <code>terra</code> and <code>stars</code>: loading GeoTIFFs,
+                computing NDVI, and basic raster algebra over South African
+                landscapes.</em
               >
             </p>
           </section>
@@ -3242,7 +3368,10 @@ options(repr.plot.width = 10, repr.plot.height = 7, repr.plot.res = 200)</code><
     <footer class="site-footer">
       <div class="container">
         <div class="footer-main">
-          <a class="brand" href="../../index.html" aria-label="Les Hyperion — home"
+          <a
+            class="brand"
+            href="../../index.html"
+            aria-label="Les Hyperion — home"
             ><img
               class="brand-face"
               src="../../assets/brand/silvi-face.png"
@@ -3250,7 +3379,11 @@ options(repr.plot.width = 10, repr.plot.height = 7, repr.plot.res = 200)</code><
               width="55"
               height="59"
             /><span class="brand-name" aria-hidden="true"
-              >LES HYPERI<svg class="compass-o" viewBox="0 0 36 46" aria-hidden="true">
+              >LES HYPERI<svg
+                class="compass-o"
+                viewBox="0 0 36 46"
+                aria-hidden="true"
+              >
                 <circle
                   cx="18"
                   cy="23"
@@ -3266,9 +3399,12 @@ options(repr.plot.width = 10, repr.plot.height = 7, repr.plot.res = 200)</code><
               >N</span
             ></a
           >
-          <p class="footer-thought">Understanding nature.<br />Sharing the evidence.</p>
+          <p class="footer-thought">
+            Understanding nature.<br />Sharing the evidence.
+          </p>
           <nav class="footer-links" aria-label="Footer">
-            <a href="../../about.html">About Phemelo</a><a href="../../cv.html">CV</a
+            <a href="../../about.html">About Phemelo</a
+            ><a href="../../cv.html">CV</a
             ><a
               href="https://github.com/Phemelo-R"
               target="_blank"
@@ -3278,7 +3414,8 @@ options(repr.plot.width = 10, repr.plot.height = 7, repr.plot.res = 200)</code><
           </nav>
         </div>
         <div class="footer-bottom">
-          <span>© 2026 Phemelo Rutlokoane</span><span>Nature × Data × People</span
+          <span>© 2026 Phemelo Rutlokoane</span
+          ><span>Nature × Data × People</span
           ><span>Johannesburg, South Africa</span>
         </div>
       </div>

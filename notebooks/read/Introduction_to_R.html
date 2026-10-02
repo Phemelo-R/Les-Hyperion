@@ -15,8 +15,15 @@
       sizes="32x32"
       href="../../assets/brand/favicon-32.png"
     />
-    <link rel="icon" sizes="192x192" href="../../assets/brand/favicon-192.png" />
-    <link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png" />
+    <link
+      rel="icon"
+      sizes="192x192"
+      href="../../assets/brand/favicon-192.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="../../assets/brand/apple-touch-icon.png"
+    />
     <script src="../../js/theme-init.js"></script>
     <link rel="stylesheet" href="../../css/site.css" />
     <link rel="stylesheet" href="../../css/silvi.css" />
@@ -28,7 +35,10 @@
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href="../../index.html" aria-label="Les Hyperion — home"
+        <a
+          class="brand"
+          href="../../index.html"
+          aria-label="Les Hyperion — home"
           ><img
             class="brand-face"
             src="../../assets/brand/silvi-face.png"
@@ -36,7 +46,11 @@
             width="55"
             height="59"
           /><span class="brand-name" aria-hidden="true"
-            >LES HYPERI<svg class="compass-o" viewBox="0 0 36 46" aria-hidden="true">
+            >LES HYPERI<svg
+              class="compass-o"
+              viewBox="0 0 36 46"
+              aria-hidden="true"
+            >
               <circle
                 cx="18"
                 cy="23"
@@ -53,10 +67,11 @@
           ></a
         >
         <nav class="desktop-nav" aria-label="Main navigation">
-          <a href="../../index.html">Home</a><a href="../../research.html">Research</a
+          <a href="../../index.html">Home</a
+          ><a href="../../research.html">Research</a
           ><a href="../../notebooks.html" aria-current="page">Notebooks</a
-          ><a href="../../carbon.html">Carbon</a><a href="../../about.html">About</a
-          ><a href="../../cv.html">CV</a>
+          ><a href="../../carbon.html">Carbon</a
+          ><a href="../../about.html">About</a><a href="../../cv.html">CV</a>
         </nav>
         <div class="header-actions">
           <button
@@ -113,11 +128,17 @@
           </button>
         </div>
       </div>
-      <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" hidden>
-        <a href="../../index.html">Home</a><a href="../../research.html">Research</a
+      <nav
+        class="mobile-nav"
+        id="mobile-nav"
+        aria-label="Mobile navigation"
+        hidden
+      >
+        <a href="../../index.html">Home</a
+        ><a href="../../research.html">Research</a
         ><a href="../../notebooks.html" aria-current="page">Notebooks</a
-        ><a href="../../carbon.html">Carbon</a><a href="../../about.html">About</a
-        ><a href="../../cv.html">CV</a>
+        ><a href="../../carbon.html">Carbon</a
+        ><a href="../../about.html">About</a><a href="../../cv.html">CV</a>
       </nav>
     </header>
     <main id="main">
@@ -185,7 +206,8 @@
               ><a href="#section-12-27">Functions</a
               ><a href="#section-18-29">Data Types</a
               ><a href="#section-23-30">Data Structures</a
-              ><a href="#section-38-36">Indexing</a><a href="#section-43-37">Packages</a
+              ><a href="#section-38-36">Indexing</a
+              ><a href="#section-43-37">Packages</a
               ><a href="#section-47-40">Loading and Inspecting Real Data</a
               ><a href="#section-55-42">Getting Help</a
               ><a href="#section-58-45">A First Complete Example</a
@@ -194,7 +216,8 @@
             </nav>
           </details>
           <div class="reader-tools">
-            <button id="toggle-outputs" aria-pressed="false">Collapse outputs</button
+            <button id="toggle-outputs" aria-pressed="false">
+              Collapse outputs</button
             ><button class="print-button">Print notebook</button>
           </div>
           <p>Original code and saved outputs.<br />R · 64 cells</p>
@@ -212,9 +235,9 @@
             <blockquote>
               <p>
                 <em
-                  >&quot;The best thing about R is that it was written by statisticians.
-                  The worst thing about R is that it was written by
-                  statisticians.&quot;</em
+                  >&quot;The best thing about R is that it was written by
+                  statisticians. The worst thing about R is that it was written
+                  by statisticians.&quot;</em
                 >
                 — Bo Cowgill, Google
               </p>
@@ -223,40 +246,43 @@
             <h2 id="section-0-2">What is R?</h2>
             <p>
               <strong>R</strong> is a free, open-source programming language and
-              statistical computing environment, built for data analysis, statistical
-              modelling, and data visualisation. It is the <em>lingua franca</em> of
-              modern quantitative biology, ecology, epidemiology, and bioinformatics.
+              statistical computing environment, built for data analysis,
+              statistical modelling, and data visualisation. It is the
+              <em>lingua franca</em> of modern quantitative biology, ecology,
+              epidemiology, and bioinformatics.
             </p>
             <h3 id="section-0-3">A brief history</h3>
             <p>
               R was created in <strong>1993</strong> at the
-              <strong>University of Auckland, New Zealand</strong>, by statisticians
-              <strong>Ross Ihaka</strong> and <strong>Robert Gentleman</strong> — the
-              language is named after both creators (Ihaka &amp; Gentleman, 1996). It
-              was also a deliberate nod to <strong>S</strong>, its intellectual
+              <strong>University of Auckland, New Zealand</strong>, by
+              statisticians <strong>Ross Ihaka</strong> and
+              <strong>Robert Gentleman</strong> — the language is named after
+              both creators (Ihaka &amp; Gentleman, 1996). It was also a
+              deliberate nod to <strong>S</strong>, its intellectual
               predecessor: a statistical language developed at
-              <strong>Bell Laboratories</strong> in the 1970s by John Chambers and
-              colleagues. Where S was proprietary, Ihaka and Gentleman envisioned
-              something open, collaborative, and free.
+              <strong>Bell Laboratories</strong> in the 1970s by John Chambers
+              and colleagues. Where S was proprietary, Ihaka and Gentleman
+              envisioned something open, collaborative, and free.
             </p>
             <p>
               In <strong>1997</strong>, a group of volunteers formed the
-              <strong>R Core Team</strong> and the language was released under the
-              <strong>GNU General Public Licence (GPL)</strong>. Today, R is stewarded
-              by the <strong>R Foundation for Statistical Computing</strong> (Vienna,
+              <strong>R Core Team</strong> and the language was released under
+              the <strong>GNU General Public Licence (GPL)</strong>. Today, R is
+              stewarded by the
+              <strong>R Foundation for Statistical Computing</strong> (Vienna,
               Austria) and maintained by a global community of thousands of
               contributors.
             </p>
             <p><strong>Why R specifically for biology and ecology?</strong></p>
             <ul>
               <li>
-                Decades of ecological, statistical, and spatial packages have been
-                written in and for R (e.g., <code>vegan</code>, <code>ape</code>,
-                <code>terra</code>, <code>sdm</code>).
+                Decades of ecological, statistical, and spatial packages have
+                been written in and for R (e.g., <code>vegan</code>,
+                <code>ape</code>, <code>terra</code>, <code>sdm</code>).
               </li>
               <li>
-                The vast majority of peer-reviewed ecology journals accept or even
-                require R-based reproducible analyses.
+                The vast majority of peer-reviewed ecology journals accept or
+                even require R-based reproducible analyses.
               </li>
               <li>
                 R integrates seamlessly with LaTeX, Quarto, and R Markdown — the
@@ -264,7 +290,8 @@
               </li>
               <li>
                 The
-                <a href="https://cran.r-project.org/web/views/Environmetrics.html"
+                <a
+                  href="https://cran.r-project.org/web/views/Environmetrics.html"
                   >CRAN Task View for Ecology</a
                 >
                 lists over 80 curated packages for ecological and environmental
@@ -274,16 +301,18 @@
             <p><strong>References:</strong></p>
             <ul>
               <li>
-                Ihaka, R. &amp; Gentleman, R. (1996). R: A language for data analysis
-                and graphics.
-                <em>Journal of Computational and Graphical Statistics</em>, 5(3),
-                299–314.
+                Ihaka, R. &amp; Gentleman, R. (1996). R: A language for data
+                analysis and graphics.
+                <em>Journal of Computational and Graphical Statistics</em>,
+                5(3), 299–314.
               </li>
               <li>
                 R Core Team (2024).
-                <em>R: A language and environment for statistical computing</em>. R
-                Foundation for Statistical Computing, Vienna, Austria.
-                <a href="https://www.R-project.org/">https://www.R-project.org/</a>
+                <em>R: A language and environment for statistical computing</em
+                >. R Foundation for Statistical Computing, Vienna, Austria.
+                <a href="https://www.R-project.org/"
+                  >https://www.R-project.org/</a
+                >
               </li>
             </ul>
             <hr />
@@ -291,11 +320,13 @@
           <section class="markdown-cell">
             <h2 id="section-1-4">Graphical User Interfaces for R</h2>
             <p>
-              R itself is a command-line language — a bare console where you type
-              commands and receive output. Most users, however, interact with R through
-              a <strong>Graphical User Interface (GUI)</strong> or
-              <strong>Integrated Development Environment (IDE)</strong>, which provides
-              panels, syntax highlighting, package management, and much more.
+              R itself is a command-line language — a bare console where you
+              type commands and receive output. Most users, however, interact
+              with R through a
+              <strong>Graphical User Interface (GUI)</strong> or
+              <strong>Integrated Development Environment (IDE)</strong>, which
+              provides panels, syntax highlighting, package management, and much
+              more.
             </p>
             <h3 id="section-1-5">Available interfaces</h3>
             <table>
@@ -325,13 +356,16 @@
                 </tr>
                 <tr>
                   <td><strong>Positron</strong></td>
-                  <td>A new, next-generation IDE by Posit (in active development)</td>
+                  <td>
+                    A new, next-generation IDE by Posit (in active development)
+                  </td>
                   <td>Data scientists using both R and Python</td>
                 </tr>
                 <tr>
                   <td><strong>Jupyter Notebook</strong></td>
                   <td>
-                    Browser-based, cell-based interface (what you are reading now)
+                    Browser-based, cell-based interface (what you are reading
+                    now)
                   </td>
                   <td>Teaching, reproducible reports, sharing analyses</td>
                 </tr>
@@ -349,9 +383,10 @@
             </table>
             <h3 id="section-1-6">Our focus: RStudio</h3>
             <p>
-              <strong>RStudio</strong> is the gold standard for R development. It is
-              developed and maintained by <strong>Posit PBC</strong> (formerly RStudio,
-              Inc.) and is available free of charge as <strong>RStudio Desktop</strong>.
+              <strong>RStudio</strong> is the gold standard for R development.
+              It is developed and maintained by
+              <strong>Posit PBC</strong> (formerly RStudio, Inc.) and is
+              available free of charge as <strong>RStudio Desktop</strong>.
               RStudio provides:
             </p>
             <ul>
@@ -366,8 +401,8 @@
             <ul>
               <li>
                 Posit team (2024).
-                <em>RStudio: Integrated development environment for R</em>. Posit
-                Software, PBC, Boston, MA.
+                <em>RStudio: Integrated development environment for R</em>.
+                Posit Software, PBC, Boston, MA.
                 <a href="https://www.posit.co">https://www.posit.co</a>
               </li>
             </ul>
@@ -375,22 +410,30 @@
           <section class="markdown-cell">
             <hr />
             <h2 id="section-2-7">Installation</h2>
-            <p>Before you can use R with RStudio, you must install both — in order.</p>
+            <p>
+              Before you can use R with RStudio, you must install both — in
+              order.
+            </p>
             <h3 id="section-2-8">Step 1 — Install R</h3>
             <p>
-              Download the appropriate installer for your operating system from the
-              <strong>Comprehensive R Archive Network (CRAN)</strong>:
+              Download the appropriate installer for your operating system from
+              the <strong>Comprehensive R Archive Network (CRAN)</strong>:
             </p>
             <blockquote>
-              <p><a href="https://cran.r-project.org">https://cran.r-project.org</a></p>
+              <p>
+                <a href="https://cran.r-project.org"
+                  >https://cran.r-project.org</a
+                >
+              </p>
             </blockquote>
             <p>
-              Always download the <strong>latest stable release</strong> (R ≥ 4.3 is
-              recommended).
+              Always download the <strong>latest stable release</strong> (R ≥
+              4.3 is recommended).
             </p>
             <h3 id="section-2-9">Step 2 — Install RStudio Desktop</h3>
             <p>
-              Download the free <strong>RStudio Desktop</strong> installer from Posit:
+              Download the free <strong>RStudio Desktop</strong> installer from
+              Posit:
             </p>
             <blockquote>
               <p>
@@ -400,12 +443,13 @@
               </p>
             </blockquote>
             <p>
-              Install RStudio <em>after</em> R — RStudio detects your R installation
-              automatically.
+              Install RStudio <em>after</em> R — RStudio detects your R
+              installation automatically.
             </p>
             <h3 id="section-2-10">Step 3 — Verify the installation</h3>
             <p>
-              Open RStudio. In the <strong>Console</strong> panel (bottom-left), type:
+              Open RStudio. In the <strong>Console</strong> panel (bottom-left),
+              type:
             </p>
             <!-- prettier-ignore -->
             <pre><code class="language-r">R.version.string
@@ -416,10 +460,10 @@
             </p>
             <blockquote>
               <p>
-                💡 <strong>Tip:</strong> Keep both R and RStudio updated. Outdated
-                versions can cause package conflicts and security issues. Update R via
-                the <code>installr</code> package on Windows, or by reinstalling from
-                CRAN on macOS/Linux.
+                💡 <strong>Tip:</strong> Keep both R and RStudio updated.
+                Outdated versions can cause package conflicts and security
+                issues. Update R via the <code>installr</code> package on
+                Windows, or by reinstalling from CRAN on macOS/Linux.
               </p>
             </blockquote>
             <hr />
@@ -452,70 +496,73 @@
             </p>
             <h3 id="section-3-12">1. Source Editor (top-left)</h3>
             <p>
-              This is where you <strong>write and save your R scripts</strong> (<code
-                >.R</code
-              >
-              files). Think of it as your laboratory notebook — a persistent, editable
-              record of every analysis step.
+              This is where you
+              <strong>write and save your R scripts</strong> (<code>.R</code>
+              files). Think of it as your laboratory notebook — a persistent,
+              editable record of every analysis step.
             </p>
             <p>Key features:</p>
             <ul>
               <li>
-                <strong>Syntax highlighting</strong>: different colours for functions,
-                strings, numbers, and comments aid readability.
+                <strong>Syntax highlighting</strong>: different colours for
+                functions, strings, numbers, and comments aid readability.
               </li>
               <li>
-                <strong>Code completion</strong>: pressing <code>Tab</code> mid-word
-                suggests completions.
+                <strong>Code completion</strong>: pressing
+                <code>Tab</code> mid-word suggests completions.
               </li>
               <li>
                 <strong>Smart indentation</strong>: R code inside functions is
                 automatically indented.
               </li>
               <li>
-                <strong>Run code</strong>: place your cursor on a line (or select
-                multiple lines) and press <code>Ctrl+Enter</code> (Windows/Linux) or
+                <strong>Run code</strong>: place your cursor on a line (or
+                select multiple lines) and press
+                <code>Ctrl+Enter</code> (Windows/Linux) or
                 <code>Cmd+Enter</code> (macOS) to send code to the console.
               </li>
               <li>
-                <strong>Comments</strong>: the <code>#</code> symbol tells R to ignore
-                everything to its right on that line.
+                <strong>Comments</strong>: the <code>#</code> symbol tells R to
+                ignore everything to its right on that line.
               </li>
             </ul>
             <h3 id="section-3-13">2. Console (bottom-left)</h3>
             <p>
-              The console is the <strong>live R interpreter</strong> — the engine. Code
-              sent from the source editor, or typed directly here, is executed
-              immediately and output appears below.
+              The console is the <strong>live R interpreter</strong> — the
+              engine. Code sent from the source editor, or typed directly here,
+              is executed immediately and output appears below.
             </p>
             <ul>
-              <li>The <code>&gt;</code> prompt indicates R is ready for input.</li>
+              <li>
+                The <code>&gt;</code> prompt indicates R is ready for input.
+              </li>
               <li>
                 A <code>+</code> prompt means R is awaiting the completion of an
                 unfinished expression (e.g., an unclosed bracket).
               </li>
               <li>
-                Use the <strong>up/down arrow keys</strong> to navigate your command
-                history.
+                Use the <strong>up/down arrow keys</strong> to navigate your
+                command history.
               </li>
             </ul>
             <blockquote>
               <p>
-                ⚠️ Code typed directly into the console is <strong>not saved</strong> in
-                your script. Always write analyses in the Source Editor.
+                ⚠️ Code typed directly into the console is
+                <strong>not saved</strong> in your script. Always write analyses
+                in the Source Editor.
               </p>
             </blockquote>
             <h3 id="section-3-14">3. Environment / History (top-right)</h3>
             <p>
               The <strong>Environment</strong> tab lists every
-              <strong>object</strong> currently loaded into R&#39;s working memory (the
-              <em>global environment</em>). For each object you will see its name, type,
-              dimensions, and a preview of its contents.
+              <strong>object</strong> currently loaded into R&#39;s working
+              memory (the <em>global environment</em>). For each object you will
+              see its name, type, dimensions, and a preview of its contents.
             </p>
             <p>
-              The <strong>History</strong> tab records every command you have executed.
-              You can search, select, and resend commands to the console or source
-              editor.
+              The <strong>History</strong> tab records every command you have
+              executed. You can search, select, and resend commands to the
+              console or source editor.
             </p>
             <h3 id="section-3-15">
               4. Files / Plots / Packages / Help / Viewer (bottom-right)
@@ -539,7 +586,9 @@
                 </tr>
                 <tr>
                   <td><strong>Packages</strong></td>
-                  <td>Lists installed packages; allows installation and loading</td>
+                  <td>
+                    Lists installed packages; allows installation and loading
+                  </td>
                 </tr>
                 <tr>
                   <td><strong>Help</strong></td>
@@ -556,27 +605,29 @@
           <section class="markdown-cell">
             <h2 id="section-4-16">R Projects</h2>
             <p>
-              <strong>R Projects</strong> are one of RStudio&#39;s most important
-              features for reproducible science. A project is a self-contained working
-              directory — a folder that holds your scripts, data, and outputs, and
-              configures R&#39;s working directory automatically when opened.
+              <strong>R Projects</strong> are one of RStudio&#39;s most
+              important features for reproducible science. A project is a
+              self-contained working directory — a folder that holds your
+              scripts, data, and outputs, and configures R&#39;s working
+              directory automatically when opened.
             </p>
             <h3 id="section-4-17">Why use projects?</h3>
             <p>
               Without projects, file paths are <em>absolute</em> (e.g.,
-              <code>/Users/yourname/Desktop/analysis/data.csv</code>) and will break on
-              any other machine. With projects, paths are <em>relative</em> (e.g.,
-              <code>data/data.csv</code>) and your analysis is fully portable.
+              <code>/Users/yourname/Desktop/analysis/data.csv</code>) and will
+              break on any other machine. With projects, paths are
+              <em>relative</em> (e.g., <code>data/data.csv</code>) and your
+              analysis is fully portable.
             </p>
             <h3 id="section-4-18">Creating a new project</h3>
             <ol>
               <li>
-                Click <strong><code>Project: (None)</code></strong> in the top-right
-                corner of RStudio.
+                Click <strong><code>Project: (None)</code></strong> in the
+                top-right corner of RStudio.
               </li>
               <li>
-                Select <strong>New Project</strong> → <strong>New Directory</strong> →
-                <strong>New Project</strong>.
+                Select <strong>New Project</strong> →
+                <strong>New Directory</strong> → <strong>New Project</strong>.
               </li>
               <li>
                 Give the project a descriptive name (e.g.,
@@ -586,9 +637,9 @@
               <li>Click <strong>Create Project</strong>.</li>
             </ol>
             <p>
-              RStudio will restart and the project name will appear in the top-right
-              corner. A <code>.Rproj</code> file is created in your directory — this is
-              the project anchor.
+              RStudio will restart and the project name will appear in the
+              top-right corner. A <code>.Rproj</code> file is created in your
+              directory — this is the project anchor.
             </p>
             <h3 id="section-4-19">Recommended project structure</h3>
             <!-- prettier-ignore -->
@@ -600,8 +651,9 @@
 </code></pre>
             <blockquote>
               <p>
-                📌 <strong>Best practice:</strong> Treat raw data as sacred. Never
-                overwrite it. Keep all derived data and figures in separate folders.
+                📌 <strong>Best practice:</strong> Treat raw data as sacred.
+                Never overwrite it. Keep all derived data and figures in
+                separate folders.
               </p>
             </blockquote>
             <hr />
@@ -610,24 +662,26 @@
             <h2 id="section-5-20">Setting Up GitHub Copilot in RStudio</h2>
             <p>
               <strong>GitHub Copilot</strong> is an AI-powered coding assistant
-              developed by GitHub and OpenAI. It suggests code completions in real time,
-              explains functions, and can substantially accelerate your R workflow.
-              RStudio supports Copilot natively from
+              developed by GitHub and OpenAI. It suggests code completions in
+              real time, explains functions, and can substantially accelerate
+              your R workflow. RStudio supports Copilot natively from
               <strong>version 2023.09.0</strong> onwards.
             </p>
             <blockquote>
               <p>
-                ⚠️ <strong>Note:</strong> GitHub Copilot requires a GitHub account and
-                an active Copilot subscription (free for verified students and educators
-                via <a href="https://education.github.com/">GitHub Education</a>). All
-                code suggestions should be reviewed critically — Copilot can and does
-                produce incorrect code.
+                ⚠️ <strong>Note:</strong> GitHub Copilot requires a GitHub
+                account and an active Copilot subscription (free for verified
+                students and educators via
+                <a href="https://education.github.com/">GitHub Education</a>).
+                All code suggestions should be reviewed critically — Copilot can
+                and does produce incorrect code.
               </p>
             </blockquote>
             <h3 id="section-5-21">Setup steps</h3>
             <p>
-              <strong>1. Verify your RStudio version</strong> Copilot support requires
-              RStudio ≥ 2023.09.0. Check via <code>Help &gt; About RStudio</code>.
+              <strong>1. Verify your RStudio version</strong> Copilot support
+              requires RStudio ≥ 2023.09.0. Check via
+              <code>Help &gt; About RStudio</code>.
             </p>
             <p>
               <strong>2. Enable Copilot in RStudio</strong> Navigate to:
@@ -644,13 +698,15 @@
             <p>
               <strong>3. Sign in to GitHub</strong> A prompt will appear with an
               8-character device code. Visit
-              <a href="https://github.com/login/device">github.com/login/device</a>,
-              enter the code, and authorise RStudio.
+              <a href="https://github.com/login/device"
+                >github.com/login/device</a
+              >, enter the code, and authorise RStudio.
             </p>
             <p>
-              <strong>4. Start coding</strong> Open any <code>.R</code> script. Copilot
-              suggestions will appear as greyed-out text as you type. Press
-              <code>Tab</code> to accept a suggestion, or continue typing to dismiss it.
+              <strong>4. Start coding</strong> Open any <code>.R</code> script.
+              Copilot suggestions will appear as greyed-out text as you type.
+              Press <code>Tab</code> to accept a suggestion, or continue typing
+              to dismiss it.
             </p>
             <p>
               <img
@@ -661,16 +717,16 @@
             <h3 id="section-5-22">Using Copilot responsibly in science</h3>
             <ul>
               <li>
-                Always verify that suggested code produces biologically meaningful
-                results.
+                Always verify that suggested code produces biologically
+                meaningful results.
               </li>
               <li>
-                Do not submit AI-generated code as your own in assessments without
-                disclosure.
+                Do not submit AI-generated code as your own in assessments
+                without disclosure.
               </li>
               <li>
-                Use Copilot as a learning aid — read and understand every suggestion it
-                makes.
+                Use Copilot as a learning aid — read and understand every
+                suggestion it makes.
               </li>
             </ul>
             <hr />
@@ -721,10 +777,11 @@ pi             # π — a built-in constant</code></pre>
             </p>
             <h3 id="section-8-25">2. Assignment and Objects</h3>
             <p>
-              In R, we store values in <strong>objects</strong> using the assignment
-              operator <code>&lt;-</code> (keyboard shortcut: <code>Alt+-</code> on
-              Windows, <code>Option+-</code> on macOS). Objects persist in the
-              <strong>global environment</strong> for the duration of your session.
+              In R, we store values in <strong>objects</strong> using the
+              assignment operator <code>&lt;-</code> (keyboard shortcut:
+              <code>Alt+-</code> on Windows, <code>Option+-</code> on macOS).
+              Objects persist in the <strong>global environment</strong> for the
+              duration of your session.
             </p>
           </section>
           <section class="code-cell" id="cell-9">
@@ -741,7 +798,9 @@ adder_records    &lt;- 58     # count at a site
 krill_density * 100        # density per 100 m²</code></pre>
             <details class="cell-output" open>
               <summary>Output</summary>
-              <div class="output-content"><div class="notebook-table">1240</div></div>
+              <div class="output-content">
+                <div class="notebook-table">1240</div>
+              </div>
             </details>
           </section>
           <section class="code-cell" id="cell-10">
@@ -758,15 +817,17 @@ body_mass_kg           &lt;- 5.1     # example: Gentoo penguin in kg
 adder_records</code></pre>
             <details class="cell-output" open>
               <summary>Output</summary>
-              <div class="output-content"><div class="notebook-table">58</div></div>
+              <div class="output-content">
+                <div class="notebook-table">58</div>
+              </div>
             </details>
           </section>
           <section class="markdown-cell">
             <h3 id="section-11-26">3. The Comment (<code>#</code>)</h3>
             <p>
-              The <code>#</code> symbol tells R to ignore everything to its right. Use
-              comments <strong>liberally</strong> — well-commented code is a hallmark of
-              reproducible science.
+              The <code>#</code> symbol tells R to ignore everything to its
+              right. Use comments <strong>liberally</strong> — well-commented
+              code is a hallmark of reproducible science.
             </p>
             <!-- prettier-ignore -->
             <pre><code class="language-r"># This entire line is a comment
@@ -778,10 +839,11 @@ x &lt;- 5   # This is an inline comment — x stores the value 5
           <section class="markdown-cell">
             <h2 id="section-12-27">Functions</h2>
             <p>
-              <strong>Functions</strong> are pre-written blocks of code that perform
-              specific tasks. They accept <strong>arguments</strong> (inputs) and return
-              <strong>values</strong> (outputs). In R, functions are called with the
-              syntax <code>function_name(argument1, argument2, ...)</code>.
+              <strong>Functions</strong> are pre-written blocks of code that
+              perform specific tasks. They accept
+              <strong>arguments</strong> (inputs) and return
+              <strong>values</strong> (outputs). In R, functions are called with
+              the syntax <code>function_name(argument1, argument2, ...)</code>.
             </p>
           </section>
           <section class="code-cell" id="cell-13">
@@ -818,7 +880,7 @@ length(flipper_lengths)    # Number of elements</code></pre>
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -833,7 +895,8 @@ length(flipper_lengths)    # Number of elements</code></pre>
           </section>
           <section class="code-cell" id="cell-14">
             <div class="code-toolbar">
-              <span>R · Cell 5</span><button class="copy-code">Copy code</button>
+              <span>R · Cell 5</span
+              ><button class="copy-code">Copy code</button>
             </div>
             <!-- prettier-ignore -->
             <pre class="source-code"><code># Access documentation for any function with ?
@@ -848,8 +911,8 @@ help(sd)
           <section class="markdown-cell">
             <h3 id="section-15-28">Named arguments</h3>
             <p>
-              Many functions accept <strong>named arguments</strong> that control their
-              behaviour. For example, <code>mean()</code> has a
+              Many functions accept <strong>named arguments</strong> that
+              control their behaviour. For example, <code>mean()</code> has a
               <code>na.rm</code> argument to handle missing values:
             </p>
           </section>
@@ -879,15 +942,17 @@ mean(weights_with_missing)          # Returns NA</code></pre>
             <pre class="source-code"><code>mean(weights_with_missing, na.rm = TRUE)   # Removes NAs before calculating</code></pre>
             <details class="cell-output" open>
               <summary>Output</summary>
-              <div class="output-content"><div class="notebook-table">3750</div></div>
+              <div class="output-content">
+                <div class="notebook-table">3750</div>
+              </div>
             </details>
           </section>
           <section class="markdown-cell">
             <hr />
             <h2 id="section-18-29">Data Types</h2>
             <p>
-              R has six fundamental data types. Understanding them is essential for
-              avoiding type-related errors in analysis.
+              R has six fundamental data types. Understanding them is essential
+              for avoiding type-related errors in analysis.
             </p>
             <table>
               <thead>
@@ -901,7 +966,9 @@ mean(weights_with_missing)          # Returns NA</code></pre>
                 <tr>
                   <td><strong>Numeric</strong></td>
                   <td>Real numbers (doubles)</td>
-                  <td><code>3.14</code>, <code>200.9</code>, <code>-0.5</code></td>
+                  <td>
+                    <code>3.14</code>, <code>200.9</code>, <code>-0.5</code>
+                  </td>
                 </tr>
                 <tr>
                   <td><strong>Integer</strong></td>
@@ -912,7 +979,8 @@ mean(weights_with_missing)          # Returns NA</code></pre>
                   <td><strong>Character</strong></td>
                   <td>Text strings</td>
                   <td>
-                    <code>&quot;Adelie&quot;</code>, <code>&quot;Biscoe&quot;</code>
+                    <code>&quot;Adelie&quot;</code>,
+                    <code>&quot;Biscoe&quot;</code>
                   </td>
                 </tr>
                 <tr>
@@ -923,7 +991,9 @@ mean(weights_with_missing)          # Returns NA</code></pre>
                 <tr>
                   <td><strong>Factor</strong></td>
                   <td>Ordered or unordered categories</td>
-                  <td><code>factor(c(&quot;Low&quot;,&quot;High&quot;))</code></td>
+                  <td>
+                    <code>factor(c(&quot;Low&quot;,&quot;High&quot;))</code>
+                  </td>
                 </tr>
                 <tr>
                   <td><strong>Complex</strong></td>
@@ -1000,7 +1070,7 @@ class(mixed)       # Everything becomes character — the most general type</cod
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -1037,25 +1107,25 @@ as.logical(0)      # 0 is FALSE; any non-zero is TRUE</code></pre>
           <section class="markdown-cell">
             <blockquote>
               <p>
-                💡 <strong>Ecological relevance:</strong> Misidentified data types are a
-                common source of bugs. A species name coded as a factor when you
-                expected a character string, or a site ID stored as a number, can
-                silently corrupt analyses. Always inspect types with
-                <code>class()</code> after loading data.
+                💡 <strong>Ecological relevance:</strong> Misidentified data
+                types are a common source of bugs. A species name coded as a
+                factor when you expected a character string, or a site ID stored
+                as a number, can silently corrupt analyses. Always inspect types
+                with <code>class()</code> after loading data.
               </p>
             </blockquote>
             <hr />
             <h2 id="section-23-30">Data Structures</h2>
             <p>
-              R organises data in several structures. Each has specific properties and
-              use cases.
+              R organises data in several structures. Each has specific
+              properties and use cases.
             </p>
           </section>
           <section class="markdown-cell">
             <h3 id="section-24-31">1. Vectors</h3>
             <p>
-              The most fundamental structure in R — a one-dimensional sequence of values
-              of the <strong>same type</strong>.
+              The most fundamental structure in R — a one-dimensional sequence
+              of values of the <strong>same type</strong>.
             </p>
           </section>
           <section class="code-cell" id="cell-25">
@@ -1087,8 +1157,9 @@ summary(bill_lengths)</code></pre>
           <section class="markdown-cell">
             <h3 id="section-26-32">2. Matrices</h3>
             <p>
-              A two-dimensional array of values, all of the <strong>same type</strong>.
-              Useful for linear algebra and mathematical operations.
+              A two-dimensional array of values, all of the
+              <strong>same type</strong>. Useful for linear algebra and
+              mathematical operations.
             </p>
           </section>
           <section class="code-cell" id="cell-27">
@@ -1155,12 +1226,13 @@ morphology_matrix</code></pre>
           <section class="markdown-cell">
             <h3 id="section-28-33">3. Data Frames</h3>
             <p>
-              The <strong>workhorse of R data analysis</strong>. A data frame is a
-              rectangular table where:
+              The <strong>workhorse of R data analysis</strong>. A data frame is
+              a rectangular table where:
             </p>
             <ul>
               <li>
-                Each <strong>column</strong> is a variable (can be a different type).
+                Each <strong>column</strong> is a variable (can be a different
+                type).
               </li>
               <li>Each <strong>row</strong> is an observation.</li>
               <li>All columns have the same number of rows.</li>
@@ -1318,7 +1390,7 @@ penguin_sample$bill_length</code></pre>
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -1339,7 +1411,7 @@ penguin_sample$bill_length</code></pre>
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -1355,9 +1427,10 @@ penguin_sample$bill_length</code></pre>
           <section class="markdown-cell">
             <h3 id="section-34-34">4. Lists</h3>
             <p>
-              Lists are the most flexible data structure — they can contain objects of
-              <strong>any type and any length</strong>, including other lists. They are
-              commonly used as outputs of statistical models.
+              Lists are the most flexible data structure — they can contain
+              objects of <strong>any type and any length</strong>, including
+              other lists. They are commonly used as outputs of statistical
+              models.
             </p>
           </section>
           <section class="code-cell" id="cell-35">
@@ -1393,7 +1466,7 @@ ecology_list[[3]]      # Returns the data frame</code></pre>
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -1492,7 +1565,7 @@ spatial_array</code></pre>
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -1530,9 +1603,9 @@ spatial_array</code></pre>
             <hr />
             <h2 id="section-38-36">Indexing</h2>
             <p>
-              <strong>Indexing</strong> is the technique of extracting specific elements
-              from an object using square brackets <code>[]</code>. It is one of the
-              most frequently used operations in R.
+              <strong>Indexing</strong> is the technique of extracting specific
+              elements from an object using square brackets <code>[]</code>. It
+              is one of the most frequently used operations in R.
             </p>
           </section>
           <section class="code-cell" id="cell-39">
@@ -1565,7 +1638,7 @@ bill_lengths[bill_lengths &gt; 39]   # Logical indexing — elements &gt; 39</co
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -1585,7 +1658,7 @@ bill_lengths[bill_lengths &gt; 39]   # Logical indexing — elements &gt; 39</co
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -1608,7 +1681,7 @@ bill_lengths[bill_lengths &gt; 39]   # Logical indexing — elements &gt; 39</co
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -1683,7 +1756,7 @@ penguin_sample[2, 3]    # Row 2, column 3 (single value)</code></pre>
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -1720,7 +1793,7 @@ penguin_sample$body_mass_g</code></pre>
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -1741,7 +1814,7 @@ penguin_sample$body_mass_g</code></pre>
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -1807,9 +1880,10 @@ penguin_sample[penguin_sample$body_mass_g &gt; 4000, ]   # Large penguins only</
             <hr />
             <h2 id="section-43-37">Packages</h2>
             <p>
-              R&#39;s true power comes from its <strong>package ecosystem</strong>.
-              Packages are collections of functions, data, and documentation that extend
-              base R. As of 2024, CRAN hosts over <strong>21,000 packages</strong>.
+              R&#39;s true power comes from its
+              <strong>package ecosystem</strong>. Packages are collections of
+              functions, data, and documentation that extend base R. As of 2024,
+              CRAN hosts over <strong>21,000 packages</strong>.
             </p>
             <h3 id="section-43-38">Installing and loading packages</h3>
           </section>
@@ -1891,15 +1965,15 @@ packageVersion(&quot;tidyverse&quot;)
                 <tr>
                   <td><strong>Data wrangling</strong></td>
                   <td>
-                    <code>tidyverse</code>, <code>dplyr</code>, <code>tidyr</code>,
-                    <code>readr</code>
+                    <code>tidyverse</code>, <code>dplyr</code>,
+                    <code>tidyr</code>, <code>readr</code>
                   </td>
                 </tr>
                 <tr>
                   <td><strong>Visualisation</strong></td>
                   <td>
-                    <code>ggplot2</code>, <code>patchwork</code>, <code>ggrepel</code>,
-                    <code>viridis</code>
+                    <code>ggplot2</code>, <code>patchwork</code>,
+                    <code>ggrepel</code>, <code>viridis</code>
                   </td>
                 </tr>
                 <tr>
@@ -1926,7 +2000,9 @@ packageVersion(&quot;tidyverse&quot;)
                 </tr>
                 <tr>
                   <td><strong>Species distribution modelling</strong></td>
-                  <td><code>sdm</code>, <code>biomod2</code>, <code>ENMeval</code></td>
+                  <td>
+                    <code>sdm</code>, <code>biomod2</code>, <code>ENMeval</code>
+                  </td>
                 </tr>
                 <tr>
                   <td><strong>Bioinformatics</strong></td>
@@ -1945,8 +2021,8 @@ packageVersion(&quot;tidyverse&quot;)
           <section class="markdown-cell">
             <h2 id="section-47-40">Loading and Inspecting Real Data</h2>
             <p>
-              Most analyses begin with importing data from an external file. Always
-              inspect data immediately after loading —
+              Most analyses begin with importing data from an external file.
+              Always inspect data immediately after loading —
               <em>never analyse data you have not examined</em>.
             </p>
           </section>
@@ -2153,7 +2229,7 @@ dim(penguins)    # Both at once</code></pre>
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -2167,7 +2243,8 @@ dim(penguins)    # Both at once</code></pre>
           </section>
           <section class="code-cell" id="cell-53">
             <div class="code-toolbar">
-              <span>R · Cell 32</span><button class="copy-code">Copy code</button>
+              <span>R · Cell 32</span
+              ><button class="copy-code">Copy code</button>
             </div>
             <!-- prettier-ignore -->
             <pre class="source-code"><code># Reading data from files (the most common real-world case)
@@ -2215,13 +2292,15 @@ dim(penguins)    # Both at once</code></pre>
           <section class="markdown-cell">
             <h2 id="section-55-42">Getting Help</h2>
             <p>
-              R has an excellent built-in help system and a large, welcoming community.
+              R has an excellent built-in help system and a large, welcoming
+              community.
             </p>
             <h3 id="section-55-43">Built-in help</h3>
           </section>
           <section class="code-cell" id="cell-56">
             <div class="code-toolbar">
-              <span>R · Cell 33</span><button class="copy-code">Copy code</button>
+              <span>R · Cell 33</span
+              ><button class="copy-code">Copy code</button>
             </div>
             <!-- prettier-ignore -->
             <pre class="source-code"><code>?mean           # Opens the documentation for mean()
@@ -2258,18 +2337,25 @@ example(hist)   # Runs the examples from a function&#39;s documentation</code></
                 <tr>
                   <td><strong>CRAN Task Views</strong> (ecology)</td>
                   <td>
-                    <a href="https://cran.r-project.org/web/views/Environmetrics.html"
+                    <a
+                      href="https://cran.r-project.org/web/views/Environmetrics.html"
                       >https://cran.r-project.org/web/views/Environmetrics.html</a
                     >
                   </td>
                 </tr>
                 <tr>
                   <td><strong>R for Data Science</strong> (free book)</td>
-                  <td><a href="https://r4ds.hadley.nz">https://r4ds.hadley.nz</a></td>
+                  <td>
+                    <a href="https://r4ds.hadley.nz">https://r4ds.hadley.nz</a>
+                  </td>
                 </tr>
                 <tr>
                   <td><strong>Advanced R</strong> (free book)</td>
-                  <td><a href="https://adv-r.hadley.nz">https://adv-r.hadley.nz</a></td>
+                  <td>
+                    <a href="https://adv-r.hadley.nz"
+                      >https://adv-r.hadley.nz</a
+                    >
+                  </td>
                 </tr>
                 <tr>
                   <td><strong>Bioconductor</strong> (bioinformatics)</td>
@@ -2293,13 +2379,14 @@ example(hist)   # Runs the examples from a function&#39;s documentation</code></
           <section class="markdown-cell">
             <h2 id="section-58-45">A First Complete Example</h2>
             <p>
-              Let us put everything together with a brief but complete analysis using
-              the Palmer Penguins dataset.
+              Let us put everything together with a brief but complete analysis
+              using the Palmer Penguins dataset.
             </p>
           </section>
           <section class="code-cell" id="cell-59">
             <div class="code-toolbar">
-              <span>R · Cell 34</span><button class="copy-code">Copy code</button>
+              <span>R · Cell 34</span
+              ><button class="copy-code">Copy code</button>
             </div>
             <!-- prettier-ignore -->
             <pre class="source-code"><code>library(palmerpenguins)
@@ -2310,7 +2397,8 @@ summary(penguins)</code></pre>
           </section>
           <section class="code-cell" id="cell-60">
             <div class="code-toolbar">
-              <span>R · Cell 35</span><button class="copy-code">Copy code</button>
+              <span>R · Cell 35</span
+              ><button class="copy-code">Copy code</button>
             </div>
             <!-- prettier-ignore -->
             <pre class="source-code"><code># 2. Basic summary statistics by species
@@ -2319,7 +2407,8 @@ tapply(penguins$body_mass_g, penguins$species, mean, na.rm = TRUE)</code></pre>
           </section>
           <section class="code-cell" id="cell-61">
             <div class="code-toolbar">
-              <span>R · Cell 36</span><button class="copy-code">Copy code</button>
+              <span>R · Cell 36</span
+              ><button class="copy-code">Copy code</button>
             </div>
             <!-- prettier-ignore -->
             <pre class="source-code"><code># 3. A quick base-R visualisation (we cover ggplot2 in Notebook 3)
@@ -2333,7 +2422,8 @@ boxplot(body_mass_g ~ species,
           </section>
           <section class="code-cell" id="cell-62">
             <div class="code-toolbar">
-              <span>R · Cell 37</span><button class="copy-code">Copy code</button>
+              <span>R · Cell 37</span
+              ><button class="copy-code">Copy code</button>
             </div>
             <!-- prettier-ignore -->
             <pre class="source-code"><code># 4. Save your work — write a clean dataset to file
@@ -2357,23 +2447,27 @@ cat(&quot;Clean dataset has&quot;, nrow(penguins_clean), &quot;rows and&quot;,
                 open-source statistical language
               </li>
               <li>
-                The main <strong>GUIs and IDEs</strong> available for R, with RStudio as
-                the course standard
+                The main <strong>GUIs and IDEs</strong> available for R, with
+                RStudio as the course standard
               </li>
               <li>
-                How to navigate the <strong>four RStudio panels</strong> effectively
+                How to navigate the
+                <strong>four RStudio panels</strong> effectively
               </li>
               <li>
-                How to create and structure <strong>R Projects</strong> for reproducible
-                research
+                How to create and structure <strong>R Projects</strong> for
+                reproducible research
               </li>
               <li>How to set up <strong>GitHub Copilot</strong> in RStudio</li>
               <li>
-                The core <strong>data types</strong> (numeric, integer, character,
-                logical, factor) and <strong>data structures</strong> (vector, matrix,
-                data frame, list, array)
+                The core <strong>data types</strong> (numeric, integer,
+                character, logical, factor) and
+                <strong>data structures</strong> (vector, matrix, data frame,
+                list, array)
               </li>
-              <li>How to <strong>index</strong> objects to extract subsets of data</li>
+              <li>
+                How to <strong>index</strong> objects to extract subsets of data
+              </li>
               <li>How to <strong>install and load packages</strong></li>
               <li>How to <strong>load, inspect, and save</strong> data</li>
             </ul>
@@ -2381,36 +2475,41 @@ cat(&quot;Clean dataset has&quot;, nrow(penguins_clean), &quot;rows and&quot;,
             <h2 id="section-63-47">References</h2>
             <ul>
               <li>
-                Gorman, K.B., Williams, T.D. &amp; Fraser, W.R. (2014). Ecological
-                sexual dimorphism and environmental variability within a community of
-                Antarctic penguins. <em>PLOS ONE</em>, 9(3), e90081.
+                Gorman, K.B., Williams, T.D. &amp; Fraser, W.R. (2014).
+                Ecological sexual dimorphism and environmental variability
+                within a community of Antarctic penguins. <em>PLOS ONE</em>,
+                9(3), e90081.
                 <a href="https://doi.org/10.1371/journal.pone.0090081"
                   >https://doi.org/10.1371/journal.pone.0090081</a
                 >
               </li>
               <li>
                 Horst, A.M., Hill, A.P. &amp; Gorman, K.B. (2020).
-                <em>palmerpenguins: Palmer Archipelago (Antarctica) penguin data</em>. R
-                package version 0.1.0.
+                <em
+                  >palmerpenguins: Palmer Archipelago (Antarctica) penguin
+                  data</em
+                >. R package version 0.1.0.
                 <a href="https://doi.org/10.5281/zenodo.3960218"
                   >https://doi.org/10.5281/zenodo.3960218</a
                 >
               </li>
               <li>
-                Ihaka, R. &amp; Gentleman, R. (1996). R: A language for data analysis
-                and graphics.
-                <em>Journal of Computational and Graphical Statistics</em>, 5(3),
-                299–314.
+                Ihaka, R. &amp; Gentleman, R. (1996). R: A language for data
+                analysis and graphics.
+                <em>Journal of Computational and Graphical Statistics</em>,
+                5(3), 299–314.
               </li>
               <li>
                 R Core Team (2024).
-                <em>R: A language and environment for statistical computing</em>. R
-                Foundation for Statistical Computing, Vienna, Austria.
-                <a href="https://www.R-project.org/">https://www.R-project.org/</a>
+                <em>R: A language and environment for statistical computing</em
+                >. R Foundation for Statistical Computing, Vienna, Austria.
+                <a href="https://www.R-project.org/"
+                  >https://www.R-project.org/</a
+                >
               </li>
               <li>
-                Wickham, H. &amp; Grolemund, G. (2023). <em>R for Data Science</em> (2nd
-                ed.). O&#39;Reilly Media.
+                Wickham, H. &amp; Grolemund, G. (2023).
+                <em>R for Data Science</em> (2nd ed.). O&#39;Reilly Media.
                 <a href="https://r4ds.hadley.nz">https://r4ds.hadley.nz</a>
               </li>
             </ul>
@@ -2438,7 +2537,10 @@ cat(&quot;Clean dataset has&quot;, nrow(penguins_clean), &quot;rows and&quot;,
     <footer class="site-footer">
       <div class="container">
         <div class="footer-main">
-          <a class="brand" href="../../index.html" aria-label="Les Hyperion — home"
+          <a
+            class="brand"
+            href="../../index.html"
+            aria-label="Les Hyperion — home"
             ><img
               class="brand-face"
               src="../../assets/brand/silvi-face.png"
@@ -2446,7 +2548,11 @@ cat(&quot;Clean dataset has&quot;, nrow(penguins_clean), &quot;rows and&quot;,
               width="55"
               height="59"
             /><span class="brand-name" aria-hidden="true"
-              >LES HYPERI<svg class="compass-o" viewBox="0 0 36 46" aria-hidden="true">
+              >LES HYPERI<svg
+                class="compass-o"
+                viewBox="0 0 36 46"
+                aria-hidden="true"
+              >
                 <circle
                   cx="18"
                   cy="23"
@@ -2462,9 +2568,12 @@ cat(&quot;Clean dataset has&quot;, nrow(penguins_clean), &quot;rows and&quot;,
               >N</span
             ></a
           >
-          <p class="footer-thought">Understanding nature.<br />Sharing the evidence.</p>
+          <p class="footer-thought">
+            Understanding nature.<br />Sharing the evidence.
+          </p>
           <nav class="footer-links" aria-label="Footer">
-            <a href="../../about.html">About Phemelo</a><a href="../../cv.html">CV</a
+            <a href="../../about.html">About Phemelo</a
+            ><a href="../../cv.html">CV</a
             ><a
               href="https://github.com/Phemelo-R"
               target="_blank"
@@ -2474,7 +2583,8 @@ cat(&quot;Clean dataset has&quot;, nrow(penguins_clean), &quot;rows and&quot;,
           </nav>
         </div>
         <div class="footer-bottom">
-          <span>© 2026 Phemelo Rutlokoane</span><span>Nature × Data × People</span
+          <span>© 2026 Phemelo Rutlokoane</span
+          ><span>Nature × Data × People</span
           ><span>Johannesburg, South Africa</span>
         </div>
       </div>

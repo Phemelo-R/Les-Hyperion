@@ -15,8 +15,15 @@
       sizes="32x32"
       href="../../assets/brand/favicon-32.png"
     />
-    <link rel="icon" sizes="192x192" href="../../assets/brand/favicon-192.png" />
-    <link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png" />
+    <link
+      rel="icon"
+      sizes="192x192"
+      href="../../assets/brand/favicon-192.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="../../assets/brand/apple-touch-icon.png"
+    />
     <script src="../../js/theme-init.js"></script>
     <link rel="stylesheet" href="../../css/site.css" />
     <link rel="stylesheet" href="../../css/silvi.css" />
@@ -28,7 +35,10 @@
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href="../../index.html" aria-label="Les Hyperion — home"
+        <a
+          class="brand"
+          href="../../index.html"
+          aria-label="Les Hyperion — home"
           ><img
             class="brand-face"
             src="../../assets/brand/silvi-face.png"
@@ -36,7 +46,11 @@
             width="55"
             height="59"
           /><span class="brand-name" aria-hidden="true"
-            >LES HYPERI<svg class="compass-o" viewBox="0 0 36 46" aria-hidden="true">
+            >LES HYPERI<svg
+              class="compass-o"
+              viewBox="0 0 36 46"
+              aria-hidden="true"
+            >
               <circle
                 cx="18"
                 cy="23"
@@ -53,10 +67,11 @@
           ></a
         >
         <nav class="desktop-nav" aria-label="Main navigation">
-          <a href="../../index.html">Home</a><a href="../../research.html">Research</a
+          <a href="../../index.html">Home</a
+          ><a href="../../research.html">Research</a
           ><a href="../../notebooks.html" aria-current="page">Notebooks</a
-          ><a href="../../carbon.html">Carbon</a><a href="../../about.html">About</a
-          ><a href="../../cv.html">CV</a>
+          ><a href="../../carbon.html">Carbon</a
+          ><a href="../../about.html">About</a><a href="../../cv.html">CV</a>
         </nav>
         <div class="header-actions">
           <button
@@ -113,11 +128,17 @@
           </button>
         </div>
       </div>
-      <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" hidden>
-        <a href="../../index.html">Home</a><a href="../../research.html">Research</a
+      <nav
+        class="mobile-nav"
+        id="mobile-nav"
+        aria-label="Mobile navigation"
+        hidden
+      >
+        <a href="../../index.html">Home</a
+        ><a href="../../research.html">Research</a
         ><a href="../../notebooks.html" aria-current="page">Notebooks</a
-        ><a href="../../carbon.html">Carbon</a><a href="../../about.html">About</a
-        ><a href="../../cv.html">CV</a>
+        ><a href="../../carbon.html">Carbon</a
+        ><a href="../../about.html">About</a><a href="../../cv.html">CV</a>
       </nav>
     </header>
     <main id="main">
@@ -180,11 +201,13 @@
               ><a href="#section-7-7"
                 >The exponential family — why these four and not others?</a
               ><a href="#section-8-8"
-                >Poisson regression for count data — Faramea on Barro Colorado Island</a
+                >Poisson regression for count data — Faramea on Barro Colorado
+                Island</a
               ><a href="#section-15-10">Predicted abundance across habitats</a
               ><a href="#section-18-11"
                 >Overdispersion — the quiet killer of ecological counts</a
-              ><a href="#section-25-13">Gamma regression for positive continuous data</a
+              ><a href="#section-25-13"
+                >Gamma regression for positive continuous data</a
               ><a href="#section-33-14">Comparing GLMs with AIC</a
               ><a href="#section-37-15">Diagnostics for GLMs</a
               ><a href="#section-40-16">The ecological GLM cheat-sheet</a
@@ -192,7 +215,8 @@
             </nav>
           </details>
           <div class="reader-tools">
-            <button id="toggle-outputs" aria-pressed="false">Collapse outputs</button
+            <button id="toggle-outputs" aria-pressed="false">
+              Collapse outputs</button
             ><button class="print-button">Print notebook</button>
           </div>
           <p>Original code and saved outputs.<br />R · 42 cells</p>
@@ -204,78 +228,96 @@
           <section class="markdown-cell">
             <h1 id="section-0-0">Generalized Linear Models</h1>
             <h3 id="section-0-1">
-              When the straight line meets counts, probabilities, and positive skew
+              When the straight line meets counts, probabilities, and positive
+              skew
             </h3>
             <hr />
             <blockquote>
               <p>
                 <em
-                  >&quot;All models are wrong, but some are useful — and some are only
-                  useful once you generalise them.&quot;</em
+                  >&quot;All models are wrong, but some are useful — and some
+                  are only useful once you generalise them.&quot;</em
                 >
                 — after George E. P. Box
               </p>
             </blockquote>
             <hr />
             <p>
-              Linear regression, which we learned to love in Part 2, is a beautiful
-              instrument tuned to a specific kind of data: continuous, symmetric,
-              homoscedastic responses with approximately normal residuals. Most
-              ecological responses fail at least one of those requirements. Counts
-              cannot be negative and grow more variable as they grow larger. Binary
-              outcomes live on the interval $[0, 1]$ and have variance that depends
-              systematically on their mean. Biomass is strictly positive and
-              right-skewed. Force-fitting linear regression to any of these — as
-              generations of ecologists did, for want of better tools — produces models
-              that predict impossible values, underestimate uncertainty, and sometimes
-              draw the wrong conclusions entirely.
+              Linear regression, which we learned to love in Part 2, is a
+              beautiful instrument tuned to a specific kind of data: continuous,
+              symmetric, homoscedastic responses with approximately normal
+              residuals. Most ecological responses fail at least one of those
+              requirements. Counts cannot be negative and grow more variable as
+              they grow larger. Binary outcomes live on the interval $[0, 1]$
+              and have variance that depends systematically on their mean.
+              Biomass is strictly positive and right-skewed. Force-fitting
+              linear regression to any of these — as generations of ecologists
+              did, for want of better tools — produces models that predict
+              impossible values, underestimate uncertainty, and sometimes draw
+              the wrong conclusions entirely.
             </p>
             <p>
-              The <strong>generalised linear model</strong> (GLM), introduced by John
-              Nelder and Robert Wedderburn in a landmark 1972 paper, fixed all of this
-              at once. Their insight was almost unreasonably elegant. They noticed that
-              linear regression, logistic regression, Poisson regression, and gamma
-              regression — methods that had been developed independently for decades and
-              taught as four unrelated techniques — were actually four special cases of
-              a single mathematical framework. All four could be written as a
+              The <strong>generalised linear model</strong> (GLM), introduced by
+              John Nelder and Robert Wedderburn in a landmark 1972 paper, fixed
+              all of this at once. Their insight was almost unreasonably
+              elegant. They noticed that linear regression, logistic regression,
+              Poisson regression, and gamma regression — methods that had been
+              developed independently for decades and taught as four unrelated
+              techniques — were actually four special cases of a single
+              mathematical framework. All four could be written as a
               <em>linear predictor</em> ($\beta_0 + \beta_1 x_1 + \ldots$), a
-              <em>response distribution</em> from the exponential family (normal,
-              Bernoulli, Poisson, gamma), and a <em>link function</em> translating
-              between them. Nelder and Wedderburn&#39;s unified algorithm — iteratively
-              reweighted least squares — fit all four at once. Modern statistical
-              practice is unthinkable without this unification.
+              <em>response distribution</em> from the exponential family
+              (normal, Bernoulli, Poisson, gamma), and a
+              <em>link function</em> translating between them. Nelder and
+              Wedderburn&#39;s unified algorithm — iteratively reweighted least
+              squares — fit all four at once. Modern statistical practice is
+              unthinkable without this unification.
             </p>
             <p>
-              By the end of this section you will command the GLM toolkit with fluency.
-              You will know which family matches which ecological response, how to fit
-              and interpret each one, what an offset is and why count models need them,
-              how to diagnose the overdispersion that plagues ecological count data, and
-              when to reach for a gamma regression instead of log-transforming your
-              response. The techniques here — link functions, deviance, the exponential
-              family — will return throughout the Machine Learning topic: logistic
-              regression in Part 5 is the binomial GLM standing alone; MaxEnt in Part 12
-              is a Poisson GLM in disguise; random forests and gradient boosting inherit
-              their loss functions from GLM theory. Invest the time here and the rest of
-              the Machine Learning concepts become noticeably easier.
+              By the end of this section you will command the GLM toolkit with
+              fluency. You will know which family matches which ecological
+              response, how to fit and interpret each one, what an offset is and
+              why count models need them, how to diagnose the overdispersion
+              that plagues ecological count data, and when to reach for a gamma
+              regression instead of log-transforming your response. The
+              techniques here — link functions, deviance, the exponential family
+              — will return throughout the Machine Learning topic: logistic
+              regression in Part 5 is the binomial GLM standing alone; MaxEnt in
+              Part 12 is a Poisson GLM in disguise; random forests and gradient
+              boosting inherit their loss functions from GLM theory. Invest the
+              time here and the rest of the Machine Learning concepts become
+              noticeably easier.
             </p>
             <h4 id="section-0-2">Topics covered</h4>
             <ol>
-              <li>Why linear regression is not enough — ecological counter-examples</li>
               <li>
-                Nelder and Wedderburn&#39;s 1972 unification — the three components of a
-                GLM
+                Why linear regression is not enough — ecological
+                counter-examples
+              </li>
+              <li>
+                Nelder and Wedderburn&#39;s 1972 unification — the three
+                components of a GLM
               </li>
               <li>The exponential family and why it matters</li>
               <li>Link functions — what they do and how to choose one</li>
-              <li>Poisson regression for count data, with offsets for survey effort</li>
+              <li>
+                Poisson regression for count data, with offsets for survey
+                effort
+              </li>
               <li>Interpreting Poisson coefficients as rate ratios</li>
-              <li>Overdispersion — the quiet killer of ecological count models</li>
+              <li>
+                Overdispersion — the quiet killer of ecological count models
+              </li>
               <li>Negative binomial regression as the standard fix</li>
               <li>Gamma regression for strictly-positive continuous data</li>
-              <li>A preview of binomial regression (notebook 05 covers it in full)</li>
+              <li>
+                A preview of binomial regression (notebook 05 covers it in full)
+              </li>
               <li>Model comparison with AIC and the deviance</li>
               <li>Residual diagnostics for GLMs</li>
-              <li>A cheat-sheet mapping ecological responses to families and links</li>
+              <li>
+                A cheat-sheet mapping ecological responses to families and links
+              </li>
             </ol>
             <h4 id="section-0-3">R packages required</h4>
             <!-- prettier-ignore -->
@@ -286,35 +328,39 @@
             <ul>
               <li>
                 <p>
-                  <strong><code>vegan::BCI</code></strong> — A 50-plot tree census from
-                  Barro Colorado Island, Panama, part of the Smithsonian&#39;s ForestGEO
-                  global network of large tropical-forest dynamics plots. The full
-                  dataset records every tree ≥ 10 cm in diameter, by species, in 50
-                  one-hectare plots across the island. The BCI plot was established by
-                  Stephen Hubbell and colleagues in 1980 and is the most-studied
-                  tropical forest in the world. We use the per-plot counts of the
-                  abundant understorey tree <em>Faramea occidentalis</em> and the
-                  per-plot environmental variables.
+                  <strong><code>vegan::BCI</code></strong> — A 50-plot tree
+                  census from Barro Colorado Island, Panama, part of the
+                  Smithsonian&#39;s ForestGEO global network of large
+                  tropical-forest dynamics plots. The full dataset records every
+                  tree ≥ 10 cm in diameter, by species, in 50 one-hectare plots
+                  across the island. The BCI plot was established by Stephen
+                  Hubbell and colleagues in 1980 and is the most-studied
+                  tropical forest in the world. We use the per-plot counts of
+                  the abundant understorey tree
+                  <em>Faramea occidentalis</em> and the per-plot environmental
+                  variables.
                 </p>
               </li>
               <li>
                 <p>
-                  <strong><code>MASS::snails</code></strong> — A laboratory experiment
-                  on dehydration tolerance in two species of land snails,
-                  <em>Cepaea hortensis</em> and <em>Cepaea nemoralis</em>, conducted by
-                  P. M. Zonneveld in 1976. Twenty snails per group were exposed to
-                  combinations of relative humidity (60–95 %), temperature (10–20 °C),
-                  and exposure time (1–4 weeks); the response is the number of deaths.
+                  <strong><code>MASS::snails</code></strong> — A laboratory
+                  experiment on dehydration tolerance in two species of land
+                  snails, <em>Cepaea hortensis</em> and
+                  <em>Cepaea nemoralis</em>, conducted by P. M. Zonneveld in
+                  1976. Twenty snails per group were exposed to combinations of
+                  relative humidity (60–95 %), temperature (10–20 °C), and
+                  exposure time (1–4 weeks); the response is the number of
+                  deaths.
                 </p>
               </li>
               <li>
                 <p>
-                  <strong><code>datasets::trees</code></strong> — Volume, girth and
-                  height measurements for 31 felled black cherry (<em
+                  <strong><code>datasets::trees</code></strong> — Volume, girth
+                  and height measurements for 31 felled black cherry (<em
                     >Prunus serotina</em
-                  >) trees in the Allegheny National Forest, Pennsylvania. Reported in
-                  Ryan, Joiner and Ryan (1976) and packaged with R since its earliest
-                  releases. A canonical biomass dataset.
+                  >) trees in the Allegheny National Forest, Pennsylvania.
+                  Reported in Ryan, Joiner and Ryan (1976) and packaged with R
+                  since its earliest releases. A canonical biomass dataset.
                 </p>
               </li>
             </ul>
@@ -394,49 +440,51 @@ PalSequential &lt;- c(&quot;#fff9f0&quot;, &quot;#fdd49e&quot;, &quot;#fdbb84&qu
             <hr />
             <h2 id="section-4-5">Where the straight line breaks</h2>
             <p>
-              Three ecological scenarios will help us see, concretely, where ordinary
-              linear regression runs out of road. Each one is real in the sense that any
-              working ecologist will meet it within their first year in the field, and
-              each one requires a different generalisation of the linear framework.
+              Three ecological scenarios will help us see, concretely, where
+              ordinary linear regression runs out of road. Each one is real in
+              the sense that any working ecologist will meet it within their
+              first year in the field, and each one requires a different
+              generalisation of the linear framework.
             </p>
             <p>
               Imagine first a raptor-migration monitoring project. Each morning,
-              observers stand at viewpoints overlooking a ridge and count the birds
-              crossing overhead during a fixed window of time. The response variable is
-              a <strong>count</strong> — a non-negative integer. Linear regression fit
-              to such data will blithely predict negative counts at unfavourable
-              habitat, will assume the variance is the same whether you are counting two
-              birds or two hundred, and will have residuals that look nothing like a
-              normal distribution.
+              observers stand at viewpoints overlooking a ridge and count the
+              birds crossing overhead during a fixed window of time. The
+              response variable is a <strong>count</strong> — a non-negative
+              integer. Linear regression fit to such data will blithely predict
+              negative counts at unfavourable habitat, will assume the variance
+              is the same whether you are counting two birds or two hundred, and
+              will have residuals that look nothing like a normal distribution.
             </p>
             <p>
-              Imagine next a pond-occupancy survey for great crested newts. Each pond is
-              either occupied or not, a binary outcome. The response is a
-              <strong>probability</strong> — bounded in the interval $[0, 1]$. Linear
-              regression will happily predict probabilities of 1.3 at the lushest ponds
-              and of $-0.2$ at the poorest, neither of which means anything
-              biologically.
+              Imagine next a pond-occupancy survey for great crested newts. Each
+              pond is either occupied or not, a binary outcome. The response is
+              a <strong>probability</strong> — bounded in the interval $[0, 1]$.
+              Linear regression will happily predict probabilities of 1.3 at the
+              lushest ponds and of $-0.2$ at the poorest, neither of which means
+              anything biologically.
             </p>
             <p>
-              Imagine third an above-ground biomass inventory of tropical trees. Biomass
-              is <strong>strictly positive and right-skewed</strong> — a long tail of
-              emergent giants sits above a dense cluster of understorey saplings — and
-              its variance grows with the mean, because a ten-tonne tree has far more
-              room to vary than a one-kilogram sapling. Linear regression fit to raw
-              biomass will have residuals that are not normal and variance that is not
-              constant. Log-transforming the response helps, but introduces its own
-              problems with back-transformation bias.
+              Imagine third an above-ground biomass inventory of tropical trees.
+              Biomass is <strong>strictly positive and right-skewed</strong> — a
+              long tail of emergent giants sits above a dense cluster of
+              understorey saplings — and its variance grows with the mean,
+              because a ten-tonne tree has far more room to vary than a
+              one-kilogram sapling. Linear regression fit to raw biomass will
+              have residuals that are not normal and variance that is not
+              constant. Log-transforming the response helps, but introduces its
+              own problems with back-transformation bias.
             </p>
             <p>
               These three scenarios motivate three distinct GLM families:
-              <strong>Poisson</strong> for counts, <strong>binomial</strong> for binary
-              outcomes and proportions, and <strong>gamma</strong> for positive
-              continuous data. The figure below shows what goes wrong when we try to use
-              ordinary <code>lm()</code> on each.
+              <strong>Poisson</strong> for counts, <strong>binomial</strong> for
+              binary outcomes and proportions, and <strong>gamma</strong> for
+              positive continuous data. The figure below shows what goes wrong
+              when we try to use ordinary <code>lm()</code> on each.
               <em
-                >We use small synthetic datasets here purely to make the failure modes
-                visible — every other model in this notebook is fitted to real,
-                published ecological data.</em
+                >We use small synthetic datasets here purely to make the failure
+                modes visible — every other model in this notebook is fitted to
+                real, published ecological data.</em
               >
             </p>
             <p>
@@ -450,62 +498,67 @@ PalSequential &lt;- c(&quot;#fff9f0&quot;, &quot;#fdd49e&quot;, &quot;#fdbb84&qu
             <hr />
             <h2 id="section-5-6">Nelder and Wedderburn&#39;s unification</h2>
             <p>
-              In the late 1960s John Nelder — then at Rothamsted Experimental Station —
-              and his postdoctoral colleague Robert Wedderburn were staring at what
-              looked like a zoo of regression methods. Linear regression for continuous
-              responses. Probit and logistic regression for binary responses. Poisson
-              log-linear models for counts. Gamma regression for positive data. Each
-              method had its own fitting algorithm, its own convergence criteria, its
-              own definition of residuals, its own interpretation of goodness-of-fit.
-              Working statisticians had to learn a new toolkit for each new kind of
-              response.
+              In the late 1960s John Nelder — then at Rothamsted Experimental
+              Station — and his postdoctoral colleague Robert Wedderburn were
+              staring at what looked like a zoo of regression methods. Linear
+              regression for continuous responses. Probit and logistic
+              regression for binary responses. Poisson log-linear models for
+              counts. Gamma regression for positive data. Each method had its
+              own fitting algorithm, its own convergence criteria, its own
+              definition of residuals, its own interpretation of
+              goodness-of-fit. Working statisticians had to learn a new toolkit
+              for each new kind of response.
             </p>
             <p>
               Their 1972 paper in the
-              <em>Journal of the Royal Statistical Society</em> showed that these were
-              not separate methods at all. Every one of them could be written as the
-              same three-part structure:
+              <em>Journal of the Royal Statistical Society</em> showed that
+              these were not separate methods at all. Every one of them could be
+              written as the same three-part structure:
             </p>
             <ol>
               <li>
-                A <strong>random component</strong> — the conditional distribution of
-                the response, chosen from the <em>exponential family</em>.
+                A <strong>random component</strong> — the conditional
+                distribution of the response, chosen from the
+                <em>exponential family</em>.
               </li>
               <li>
-                A <strong>systematic component</strong> — a linear predictor $\eta_i =
-                \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + \ldots$, exactly the same
-                sum of products you already know from linear regression.
+                A <strong>systematic component</strong> — a linear predictor
+                $\eta_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + \ldots$,
+                exactly the same sum of products you already know from linear
+                regression.
               </li>
               <li>
-                A <strong>link function</strong> $g(\cdot)$ — a monotonic function that
-                translates between the mean of the response and the linear predictor:
+                A <strong>link function</strong> $g(\cdot)$ — a monotonic
+                function that translates between the mean of the response and
+                the linear predictor:
               </li>
             </ol>
             <p>$$ g(\mathbb{E}[y_i]) \;=\; \eta_i. $$</p>
             <p>
-              Change the random component and the link and you get a different member of
-              the family. Keep Gaussian with an identity link and you get
-              <code>lm()</code>. Switch to Bernoulli with a logit link and you get
-              logistic regression. Switch to Poisson with a log link and you get Poisson
-              regression for counts. Switch to gamma with a log link and you get gamma
-              regression for biomass. One framework, one algorithm, four (and more)
-              applications.
+              Change the random component and the link and you get a different
+              member of the family. Keep Gaussian with an identity link and you
+              get <code>lm()</code>. Switch to Bernoulli with a logit link and
+              you get logistic regression. Switch to Poisson with a log link and
+              you get Poisson regression for counts. Switch to gamma with a log
+              link and you get gamma regression for biomass. One framework, one
+              algorithm, four (and more) applications.
             </p>
             <p>
               The fitting algorithm Nelder and Wedderburn devised —
-              <strong>iteratively reweighted least squares</strong> (IRLS) — deserves a
-              mention because it explains why GLMs fit so fast in software even today.
-              IRLS repeatedly applies ordinary least squares to a transformed working
-              response, with observation-specific weights that are updated at each
-              iteration. Convergence is typically achieved in five to ten iterations.
-              When you type <code>glm()</code> in R, you are running an IRLS solver
+              <strong>iteratively reweighted least squares</strong> (IRLS) —
+              deserves a mention because it explains why GLMs fit so fast in
+              software even today. IRLS repeatedly applies ordinary least
+              squares to a transformed working response, with
+              observation-specific weights that are updated at each iteration.
+              Convergence is typically achieved in five to ten iterations. When
+              you type <code>glm()</code> in R, you are running an IRLS solver
               whose lineage goes directly back to that 1972 paper.
             </p>
             <p>
-              The figure below captures the unified structure visually. The linear
-              predictor — on the far left — is the same in every panel. The response
-              distribution — on the far right — is different in each. The link function
-              in the middle does the translation.
+              The figure below captures the unified structure visually. The
+              linear predictor — on the far left — is the same in every panel.
+              The response distribution — on the far right — is different in
+              each. The link function in the middle does the translation.
             </p>
             <p>
               <img
@@ -516,22 +569,23 @@ PalSequential &lt;- c(&quot;#fff9f0&quot;, &quot;#fdd49e&quot;, &quot;#fdbb84&qu
           </section>
           <section class="markdown-cell">
             <p>
-              The left column of each row shows the inverse-link function — what the
-              linear predictor $\eta$ gets mapped to in order to become a valid mean for
-              that distribution. For the Gaussian it is the identity function, a
-              straight line: any $\eta$ is a valid mean. For the Poisson it is the
-              exponential, which ensures the mean is always positive. For the binomial
-              it is the logistic function, which squashes any $\eta$ into the interval
-              $[0, 1]$. For the gamma, the log link gives strict positivity like the
-              Poisson, but now the response itself is continuous.
+              The left column of each row shows the inverse-link function — what
+              the linear predictor $\eta$ gets mapped to in order to become a
+              valid mean for that distribution. For the Gaussian it is the
+              identity function, a straight line: any $\eta$ is a valid mean.
+              For the Poisson it is the exponential, which ensures the mean is
+              always positive. For the binomial it is the logistic function,
+              which squashes any $\eta$ into the interval $[0, 1]$. For the
+              gamma, the log link gives strict positivity like the Poisson, but
+              now the response itself is continuous.
             </p>
             <p>
-              The right column shows, for the particular value $\eta = 0.5$, what
-              distribution the response is assumed to follow. A Gaussian bell. A Poisson
-              pmf clustered at small counts. A binomial pmf over ten trials. A
-              right-skewed gamma density. Changing the row changes
-              <em>everything on the right</em>, but the linear predictor on the far left
-              is the same in every case. That is the unification.
+              The right column shows, for the particular value $\eta = 0.5$,
+              what distribution the response is assumed to follow. A Gaussian
+              bell. A Poisson pmf clustered at small counts. A binomial pmf over
+              ten trials. A right-skewed gamma density. Changing the row changes
+              <em>everything on the right</em>, but the linear predictor on the
+              far left is the same in every case. That is the unification.
             </p>
           </section>
           <section class="markdown-cell">
@@ -540,79 +594,86 @@ PalSequential &lt;- c(&quot;#fff9f0&quot;, &quot;#fdd49e&quot;, &quot;#fdbb84&qu
               The exponential family — why these four and not others?
             </h2>
             <p>
-              You may reasonably wonder why Nelder and Wedderburn could unify these four
-              particular distributions and not some arbitrary collection you might dream
-              up. The answer is that all four belong to a mathematical club called the
-              <strong>exponential family</strong>, which shares a specific algebraic
-              structure:
+              You may reasonably wonder why Nelder and Wedderburn could unify
+              these four particular distributions and not some arbitrary
+              collection you might dream up. The answer is that all four belong
+              to a mathematical club called the
+              <strong>exponential family</strong>, which shares a specific
+              algebraic structure:
             </p>
             <p>
               $$ f(y \mid \theta, \phi) \;=\; \exp\!\left\{ \frac{y\theta -
               b(\theta)}{a(\phi)} \;+\; c(y, \phi) \right\}. $$
             </p>
             <p>
-              You do not need to memorise this formula. What matters is that every
-              distribution whose density can be written in this form inherits a package
-              of convenient properties. Its mean is $\mu = b&#39;(\theta)$ — the
-              derivative of the $b$ function. Its variance is $\text{Var}(y) = a(\phi)\,
-              b&#39;&#39;(\theta)$ — a function of the mean, with a dispersion scaling
-              $\phi$. And — crucially — the same iteratively reweighted least squares
-              algorithm fits any member of the family without modification, using only
-              the first and second derivatives of $b$.
+              You do not need to memorise this formula. What matters is that
+              every distribution whose density can be written in this form
+              inherits a package of convenient properties. Its mean is $\mu =
+              b&#39;(\theta)$ — the derivative of the $b$ function. Its variance
+              is $\text{Var}(y) = a(\phi)\, b&#39;&#39;(\theta)$ — a function of
+              the mean, with a dispersion scaling $\phi$. And — crucially — the
+              same iteratively reweighted least squares algorithm fits any
+              member of the family without modification, using only the first
+              and second derivatives of $b$.
             </p>
             <p>
               The practical consequence is that, for each family, we have a
-              characteristic <strong>mean-variance relationship</strong> that serves as
-              a sanity check when we decide which family to use. For the Gaussian, the
-              variance is constant and does not depend on the mean at all — this is what
-              the equal-variance assumption in linear regression says. For the Poisson,
-              the variance <em>equals</em> the mean: $\text{Var}(y) = \mu$. For the
-              binomial with denominator $n$, the variance is $n\mu(1 - \mu)$ — largest
-              at a probability of 0.5, smallest near 0 or 1. For the gamma, the variance
-              is proportional to the <em>square</em> of the mean: $\text{Var}(y) =
-              \phi\mu^2$, so the standard deviation grows linearly with the mean.
+              characteristic <strong>mean-variance relationship</strong> that
+              serves as a sanity check when we decide which family to use. For
+              the Gaussian, the variance is constant and does not depend on the
+              mean at all — this is what the equal-variance assumption in linear
+              regression says. For the Poisson, the variance <em>equals</em> the
+              mean: $\text{Var}(y) = \mu$. For the binomial with denominator
+              $n$, the variance is $n\mu(1 - \mu)$ — largest at a probability of
+              0.5, smallest near 0 or 1. For the gamma, the variance is
+              proportional to the <em>square</em> of the mean: $\text{Var}(y) =
+              \phi\mu^2$, so the standard deviation grows linearly with the
+              mean.
             </p>
             <p>
-              Knowing these relationships is the single most practical piece of GLM
-              intuition you can carry. When you see a scatter of counts whose spread
-              grows roughly with the mean, think Poisson. When you see proportions whose
-              variance peaks in the middle and shrinks at the edges, think binomial.
-              When you see positive values whose spread grows with the mean on a
-              multiplicative scale, think gamma. If none of these match, you may need a
-              quasi-likelihood, a negative binomial, or a Tweedie distribution —
-              extensions that live just beyond the GLM house but share the same
-              plumbing.
+              Knowing these relationships is the single most practical piece of
+              GLM intuition you can carry. When you see a scatter of counts
+              whose spread grows roughly with the mean, think Poisson. When you
+              see proportions whose variance peaks in the middle and shrinks at
+              the edges, think binomial. When you see positive values whose
+              spread grows with the mean on a multiplicative scale, think gamma.
+              If none of these match, you may need a quasi-likelihood, a
+              negative binomial, or a Tweedie distribution — extensions that
+              live just beyond the GLM house but share the same plumbing.
             </p>
           </section>
           <section class="markdown-cell">
             <hr />
             <h2 id="section-8-8">
-              Poisson regression for count data — <em>Faramea</em> on Barro Colorado
-              Island
+              Poisson regression for count data — <em>Faramea</em> on Barro
+              Colorado Island
             </h2>
             <p>
-              We turn now to the first and most common GLM application in ecology:
-              regression for count data. Our running example is a real published
-              dataset: the abundance of the understorey tree
-              <em><strong>Faramea occidentalis</strong></em> across 50 one-hectare plots
-              on <strong>Barro Colorado Island</strong> (BCI), Panama. BCI sits in the
-              middle of the Panama Canal — a forested island that became one when the
-              Chagres River was dammed to flood the canal corridor in the 1910s — and
-              since 1980 it has hosted what is now the most-studied tropical forest plot
-              in the world. The 50-plot grid covers a 1000 × 500 m rectangle with
-              measurements of every tree ≥ 10 cm in diameter. Each plot has been
-              classified by habitat type (<code>OldHigh</code>, <code>OldLow</code>,
-              <code>OldSlope</code>, <code>Swamp</code>, <code>Young</code>), proximity
-              to a stream (yes / no), and an environmental heterogeneity index. The data
-              ship with the <code>vegan</code> package as <code>BCI</code> (the species
-              × plot matrix) and <code>BCI.env</code> (the environmental covariates).
+              We turn now to the first and most common GLM application in
+              ecology: regression for count data. Our running example is a real
+              published dataset: the abundance of the understorey tree
+              <em><strong>Faramea occidentalis</strong></em> across 50
+              one-hectare plots on <strong>Barro Colorado Island</strong> (BCI),
+              Panama. BCI sits in the middle of the Panama Canal — a forested
+              island that became one when the Chagres River was dammed to flood
+              the canal corridor in the 1910s — and since 1980 it has hosted
+              what is now the most-studied tropical forest plot in the world.
+              The 50-plot grid covers a 1000 × 500 m rectangle with measurements
+              of every tree ≥ 10 cm in diameter. Each plot has been classified
+              by habitat type (<code>OldHigh</code>, <code>OldLow</code>,
+              <code>OldSlope</code>, <code>Swamp</code>, <code>Young</code>),
+              proximity to a stream (yes / no), and an environmental
+              heterogeneity index. The data ship with the
+              <code>vegan</code> package as <code>BCI</code> (the species × plot
+              matrix) and <code>BCI.env</code> (the environmental covariates).
             </p>
             <p>
-              <em>Faramea occidentalis</em> is a small, shade-tolerant Rubiaceae. It is
-              one of the most abundant trees in the understorey but its distribution is
-              uneven — concentrated on well-drained slopes and ridges, sparser on the
-              moister flats and swamps. Our question: can we model its per-plot
-              abundance as a function of habitat type and environmental heterogeneity?
+              <em>Faramea occidentalis</em> is a small, shade-tolerant
+              Rubiaceae. It is one of the most abundant trees in the understorey
+              but its distribution is uneven — concentrated on well-drained
+              slopes and ridges, sparser on the moister flats and swamps. Our
+              question: can we model its per-plot abundance as a function of
+              habitat type and environmental heterogeneity?
             </p>
             <p>The model we want is:</p>
             <p>
@@ -622,29 +683,29 @@ PalSequential &lt;- c(&quot;#fff9f0&quot;, &quot;#fdd49e&quot;, &quot;#fdbb84&qu
               \text{Poisson}(\mu_i), $$
             </p>
             <p>
-              where $y_i$ is the count of <em>Faramea</em> trees in plot $i$, the
-              habitat and stream coefficients are dummy-coded relative to the most
-              common levels, and EnvHet is a continuous heterogeneity index between 0
-              and 1.
+              where $y_i$ is the count of <em>Faramea</em> trees in plot $i$,
+              the habitat and stream coefficients are dummy-coded relative to
+              the most common levels, and EnvHet is a continuous heterogeneity
+              index between 0 and 1.
             </p>
             <p>
-              A note on <strong>offsets</strong>: the BCI plots are all 1 hectare, so
-              there is no need to account for variable effort. In studies where survey
-              effort varies — different transect lengths, different observation hours,
-              different bait-station deployment durations — the standard fix is to add
-              an <em>offset</em> term, $\log(\text{effort}_i)$, with its coefficient
-              fixed at 1. This forces the model to predict counts proportional to
-              effort:
+              A note on <strong>offsets</strong>: the BCI plots are all 1
+              hectare, so there is no need to account for variable effort. In
+              studies where survey effort varies — different transect lengths,
+              different observation hours, different bait-station deployment
+              durations — the standard fix is to add an <em>offset</em> term,
+              $\log(\text{effort}_i)$, with its coefficient fixed at 1. This
+              forces the model to predict counts proportional to effort:
             </p>
             <p>
-              $$ \log(\mathbb{E}[y_i]) \;=\; \log(\text{effort}_i) \;+\; \text{linear
-              predictor}, $$
+              $$ \log(\mathbb{E}[y_i]) \;=\; \log(\text{effort}_i) \;+\;
+              \text{linear predictor}, $$
             </p>
             <p>
               which rearranges to a model for the <em>rate</em> (counts per unit
               effort). In R you write
-              <code>glm(y ~ x + offset(log(effort)), ...)</code>. We will not need it
-              for BCI but you should know the syntax for when you do.
+              <code>glm(y ~ x + offset(log(effort)), ...)</code>. We will not
+              need it for BCI but you should know the syntax for when you do.
             </p>
           </section>
           <section class="code-cell" id="cell-9">
@@ -812,39 +873,45 @@ Number of Fisher Scoring iterations: 4
           </section>
           <section class="markdown-cell">
             <p>
-              The output mirrors the <code>lm()</code> summary we saw in Part 2 but with
-              three new features worth noting. First, the
-              <strong>Coefficients</strong> column no longer reports a <em>t</em>-value;
-              it reports a <strong>z-value</strong> computed against the normal
-              distribution, because for GLMs the sampling distribution of the estimator
-              is normal asymptotically rather than exactly-<em>t</em>. Second, two new
-              summary quantities appear near the bottom: the
-              <strong>null deviance</strong> and the <strong>residual deviance</strong>.
-              These are the GLM analogue of total sum of squares and residual sum of
-              squares, and the difference between them — analogous to the explained sum
-              of squares — is what the overall goodness-of-fit test evaluates. Third,
-              there is no $R^2$. Generalised linear models do not have a
+              The output mirrors the <code>lm()</code> summary we saw in Part 2
+              but with three new features worth noting. First, the
+              <strong>Coefficients</strong> column no longer reports a
+              <em>t</em>-value; it reports a <strong>z-value</strong> computed
+              against the normal distribution, because for GLMs the sampling
+              distribution of the estimator is normal asymptotically rather than
+              exactly-<em>t</em>. Second, two new summary quantities appear near
+              the bottom: the <strong>null deviance</strong> and the
+              <strong>residual deviance</strong>. These are the GLM analogue of
+              total sum of squares and residual sum of squares, and the
+              difference between them — analogous to the explained sum of
+              squares — is what the overall goodness-of-fit test evaluates.
+              Third, there is no $R^2$. Generalised linear models do not have a
               universally-agreed $R^2$, though several &quot;pseudo-$R^2$&quot;
               quantities exist and we will introduce them in Part 5.
             </p>
             <p>
-              The ecological reading is direct. The reference level for habitat is
-              <code>OldHigh</code> — old-growth forest on high ground — and the negative
-              coefficients on <code>OldLow</code>, <code>OldSlope</code>, and
-              <code>Swamp</code> mean <em>Faramea</em> is significantly less abundant in
-              those habitats than on the well-drained high ground, with the swamp
-              showing the strongest reduction. <code>Young</code> forest is
-              statistically indistinguishable from <code>OldHigh</code>, and proximity
-              to a stream does not predict abundance. Environmental heterogeneity
-              carries a small negative coefficient: more spatially heterogeneous plots
-              have slightly fewer <em>Faramea</em>, perhaps because the species fares
-              best in continuous matrix forest. We will see in §6, however, that the
-              standard errors reported here are too small — the data are overdispersed.
+              The ecological reading is direct. The reference level for habitat
+              is <code>OldHigh</code> — old-growth forest on high ground — and
+              the negative coefficients on <code>OldLow</code>,
+              <code>OldSlope</code>, and <code>Swamp</code> mean
+              <em>Faramea</em> is significantly less abundant in those habitats
+              than on the well-drained high ground, with the swamp showing the
+              strongest reduction. <code>Young</code> forest is statistically
+              indistinguishable from <code>OldHigh</code>, and proximity to a
+              stream does not predict abundance. Environmental heterogeneity
+              carries a small negative coefficient: more spatially heterogeneous
+              plots have slightly fewer <em>Faramea</em>, perhaps because the
+              species fares best in continuous matrix forest. We will see in §6,
+              however, that the standard errors reported here are too small —
+              the data are overdispersed.
             </p>
-            <h3 id="section-11-9">Interpreting coefficients — the exp() trick</h3>
+            <h3 id="section-11-9">
+              Interpreting coefficients — the exp() trick
+            </h3>
             <p>
-              Because the model uses a log link, the coefficients live on the log scale.
-              To put them on a scale we can actually talk about, we exponentiate:
+              Because the model uses a log link, the coefficients live on the
+              log scale. To put them on a scale we can actually talk about, we
+              exponentiate:
             </p>
           </section>
           <section class="code-cell" id="cell-12">
@@ -959,19 +1026,22 @@ rr_table</code></pre>
             <p>
               The exponentiated coefficients are called
               <strong>rate ratios</strong> (or, in medical statistics,
-              <em>incidence rate ratios</em>) and their interpretation is multiplicative
-              rather than additive. A rate ratio of $\exp(-1.01) \approx 0.36$ for
-              <code>OldSlope</code> means that an old-growth slope plot is expected to
-              have about 36 % of the <em>Faramea</em> count of an otherwise-similar
-              <code>OldHigh</code> plot — a 64 % reduction. A rate ratio of $\exp(-0.51)
-              \approx 0.60$ for <code>Swamp</code> means a 40 % reduction. A rate ratio
-              close to 1, like the one for <code>Young</code> or <code>Stream</code>,
-              means no detectable effect.
+              <em>incidence rate ratios</em>) and their interpretation is
+              multiplicative rather than additive. A rate ratio of $\exp(-1.01)
+              \approx 0.36$ for <code>OldSlope</code> means that an old-growth
+              slope plot is expected to have about 36 % of the
+              <em>Faramea</em> count of an otherwise-similar
+              <code>OldHigh</code> plot — a 64 % reduction. A rate ratio of
+              $\exp(-0.51) \approx 0.60$ for <code>Swamp</code> means a 40 %
+              reduction. A rate ratio close to 1, like the one for
+              <code>Young</code> or <code>Stream</code>, means no detectable
+              effect.
             </p>
             <p>
               The figure below presents these same estimates as a
-              <strong>forest plot</strong> (yes, the name is a pleasing coincidence) — a
-              clean visual summary that can go straight into any report.
+              <strong>forest plot</strong> (yes, the name is a pleasing
+              coincidence) — a clean visual summary that can go straight into
+              any report.
             </p>
           </section>
           <section class="code-cell" id="cell-14">
@@ -1042,18 +1112,20 @@ ggplot(rr_plot_df, aes(x = estimate, y = term)) +
             <hr />
             <h2 id="section-15-10">Predicted abundance across habitats</h2>
             <p>
-              Rate ratios are essential for communication, but the best way to check
-              that the model is saying something sensible is to plot predictions across
-              the predictor space. For a categorical predictor like habitat, that means
-              producing a predicted-count interval for each level. For our continuous
-              predictor <code>env_het</code>, it means showing how the predicted count
-              changes across its observed range while holding habitat fixed at its most
-              common level.
+              Rate ratios are essential for communication, but the best way to
+              check that the model is saying something sensible is to plot
+              predictions across the predictor space. For a categorical
+              predictor like habitat, that means producing a predicted-count
+              interval for each level. For our continuous predictor
+              <code>env_het</code>, it means showing how the predicted count
+              changes across its observed range while holding habitat fixed at
+              its most common level.
             </p>
             <p>
-              Because the log link makes the model multiplicative on the response scale,
-              the predicted curve as a function of <code>env_het</code> is an
-              <strong>exponential</strong> rather than a straight line.
+              Because the log link makes the model multiplicative on the
+              response scale, the predicted curve as a function of
+              <code>env_het</code> is an <strong>exponential</strong> rather
+              than a straight line.
             </p>
           </section>
           <section class="code-cell" id="cell-16">
@@ -1113,36 +1185,38 @@ ggplot(grid, aes(env_het, fit, colour = habitat, fill = habitat)) +
           </section>
           <section class="markdown-cell">
             <p>
-              Two features of this figure are worth dwelling on. First, the curves are
-              <strong>exponential</strong> in <code>env_het</code> — a fixed
-              <em>additive</em> change in heterogeneity produces a fixed
-              <em>multiplicative</em> change in the predicted <em>Faramea</em> count.
-              The log link makes every effect multiplicative on the response scale; a
-              unit change in <code>env_het</code> shifts the predicted count by the
-              factor $\exp(\hat\beta_{\text{EnvHet}})$ regardless of which habitat or
+              Two features of this figure are worth dwelling on. First, the
+              curves are <strong>exponential</strong> in <code>env_het</code> —
+              a fixed <em>additive</em> change in heterogeneity produces a fixed
+              <em>multiplicative</em> change in the predicted
+              <em>Faramea</em> count. The log link makes every effect
+              multiplicative on the response scale; a unit change in
+              <code>env_het</code> shifts the predicted count by the factor
+              $\exp(\hat\beta_{\text{EnvHet}})$ regardless of which habitat or
               starting value we started at.
             </p>
             <p>
-              Second, the confidence ribbons <strong>widen</strong> at the extremes of
-              the heterogeneity gradient. This is because, on the log scale, the
-              variance of the linear predictor is smallest near the centre of the data
-              and grows toward the edges — exactly as it did for linear regression.
-              Exponentiating back to the response scale amplifies this pattern
-              dramatically, because small uncertainty in the log of a small number blows
-              up into large uncertainty in a large number. If you intend to extrapolate
-              a Poisson GLM far beyond your observed range, the confidence ribbon is the
-              first thing you should look at, not the point estimate.
+              Second, the confidence ribbons <strong>widen</strong> at the
+              extremes of the heterogeneity gradient. This is because, on the
+              log scale, the variance of the linear predictor is smallest near
+              the centre of the data and grows toward the edges — exactly as it
+              did for linear regression. Exponentiating back to the response
+              scale amplifies this pattern dramatically, because small
+              uncertainty in the log of a small number blows up into large
+              uncertainty in a large number. If you intend to extrapolate a
+              Poisson GLM far beyond your observed range, the confidence ribbon
+              is the first thing you should look at, not the point estimate.
             </p>
             <p>
-              Third — and this is something a sharp-eyed reader will spot from the
-              figure — the difference in predicted abundance between
+              Third — and this is something a sharp-eyed reader will spot from
+              the figure — the difference in predicted abundance between
               <code>OldHigh</code> and <code>OldSlope</code> is larger than the
               difference between <code>OldLow</code> and <code>Swamp</code>.
               <em>Faramea</em> is fundamentally a tree of well-drained terrain.
-              Old-growth forest on flat moist ground or in seasonal swamps offers it
-              less than half the carrying capacity of old-growth forest on the higher
-              ridges. This is the kind of ecological insight a Poisson GLM was made to
-              deliver.
+              Old-growth forest on flat moist ground or in seasonal swamps
+              offers it less than half the carrying capacity of old-growth
+              forest on the higher ridges. This is the kind of ecological
+              insight a Poisson GLM was made to deliver.
             </p>
           </section>
           <section class="markdown-cell">
@@ -1151,34 +1225,36 @@ ggplot(grid, aes(env_het, fit, colour = habitat, fill = habitat)) +
               Overdispersion — the quiet killer of ecological counts
             </h2>
             <p>
-              The Poisson distribution has a striking and inconvenient property: its
-              variance equals its mean exactly. If the expected count is three, its
-              variance is three. If the expected count is three hundred, its variance is
-              three hundred. For any real ecological count data you are likely to meet,
-              this is optimistic to the point of delusion. Birds cluster because they
-              are territorial or because they flock. Plants cluster because they
-              disperse their seeds only a few metres. Parasites cluster because their
-              hosts aggregate. The upshot is <strong>overdispersion</strong> — the
-              variance of real counts is usually larger than the mean, sometimes by a
-              factor of ten or more.
+              The Poisson distribution has a striking and inconvenient property:
+              its variance equals its mean exactly. If the expected count is
+              three, its variance is three. If the expected count is three
+              hundred, its variance is three hundred. For any real ecological
+              count data you are likely to meet, this is optimistic to the point
+              of delusion. Birds cluster because they are territorial or because
+              they flock. Plants cluster because they disperse their seeds only
+              a few metres. Parasites cluster because their hosts aggregate. The
+              upshot is <strong>overdispersion</strong> — the variance of real
+              counts is usually larger than the mean, sometimes by a factor of
+              ten or more.
             </p>
             <p>
               Overdispersion rarely biases the Poisson point estimates — the
-              $\hat\beta$&#39;s remain approximately unbiased. What it ruins is the
-              <strong>standard errors</strong>, which are derived under the assumption
-              that the variance equals the mean. When the true variance is larger, the
-              standard errors are too small, the confidence intervals are too narrow,
-              and the p-values are too enthusiastic. This is a quiet failure mode: the
-              fitted line looks fine on a plot, but every statement of significance is
-              overconfident, and the resulting paper will make bolder claims than the
-              data can actually support.
+              $\hat\beta$&#39;s remain approximately unbiased. What it ruins is
+              the <strong>standard errors</strong>, which are derived under the
+              assumption that the variance equals the mean. When the true
+              variance is larger, the standard errors are too small, the
+              confidence intervals are too narrow, and the p-values are too
+              enthusiastic. This is a quiet failure mode: the fitted line looks
+              fine on a plot, but every statement of significance is
+              overconfident, and the resulting paper will make bolder claims
+              than the data can actually support.
             </p>
             <p>
-              A quick diagnostic: compute the ratio of the residual deviance to its
-              degrees of freedom. Under a well-specified Poisson model this ratio should
-              be close to 1. A ratio of 2 suggests mild overdispersion; a ratio of 5 or
-              more suggests a serious problem. R will compute this for you in a single
-              line.
+              A quick diagnostic: compute the ratio of the residual deviance to
+              its degrees of freedom. Under a well-specified Poisson model this
+              ratio should be close to 1. A ratio of 2 suggests mild
+              overdispersion; a ratio of 5 or more suggests a serious problem. R
+              will compute this for you in a single line.
             </p>
           </section>
           <section class="code-cell" id="cell-19">
@@ -1212,26 +1288,28 @@ Dispersion ratio  : 4.11
           </section>
           <section class="markdown-cell">
             <p>
-              The BCI Faramea data come back with a dispersion ratio of around 4 — a
-              textbook example of overdispersion. This is exactly what we should expect
-              from a clumped tropical tree species: <em>Faramea</em> recruits in cohorts
-              when light gaps open, propagates short distances by primate dispersal, and
-              clusters spatially around adult trees. None of this clustering is captured
-              by a Poisson model that assumes counts are independent draws from a
-              distribution where variance equals mean.
+              The BCI Faramea data come back with a dispersion ratio of around 4
+              — a textbook example of overdispersion. This is exactly what we
+              should expect from a clumped tropical tree species:
+              <em>Faramea</em> recruits in cohorts when light gaps open,
+              propagates short distances by primate dispersal, and clusters
+              spatially around adult trees. None of this clustering is captured
+              by a Poisson model that assumes counts are independent draws from
+              a distribution where variance equals mean.
             </p>
             <p>
-              The fix is the <strong>negative binomial</strong> distribution, which
-              generalises the Poisson by introducing one extra parameter — usually
-              called $\theta$ or the <em>dispersion parameter</em> — that allows the
-              variance to grow as a quadratic function of the mean:
+              The fix is the <strong>negative binomial</strong> distribution,
+              which generalises the Poisson by introducing one extra parameter —
+              usually called $\theta$ or the <em>dispersion parameter</em> —
+              that allows the variance to grow as a quadratic function of the
+              mean:
             </p>
             <p>$$ \text{Var}(y) \;=\; \mu + \frac{\mu^2}{\theta}. $$</p>
             <p>
-              When $\theta \to \infty$, the negative binomial collapses back to the
-              Poisson. When $\theta$ is small (e.g. 1 or less), the variance can be many
-              times the mean. We refit the same Faramea model under a negative binomial
-              assumption and compare.
+              When $\theta \to \infty$, the negative binomial collapses back to
+              the Poisson. When $\theta$ is small (e.g. 1 or less), the variance
+              can be many times the mean. We refit the same Faramea model under
+              a negative binomial assumption and compare.
             </p>
           </section>
           <section class="code-cell" id="cell-21">
@@ -1270,11 +1348,12 @@ AIC NB      : 395.1  (lower is better)
           </section>
           <section class="markdown-cell">
             <p>
-              The negative binomial fits dramatically better than the Poisson — the AIC
-              drops by tens of points, which is overwhelming evidence in favour of the
-              NB model. The estimated $\theta$ around 12 is well-defined (the CI does
-              not include very large values, which would indicate the Poisson is
-              adequate). What changes for the coefficients?
+              The negative binomial fits dramatically better than the Poisson —
+              the AIC drops by tens of points, which is overwhelming evidence in
+              favour of the NB model. The estimated $\theta$ around 12 is
+              well-defined (the CI does not include very large values, which
+              would indicate the Poisson is adequate). What changes for the
+              coefficients?
             </p>
           </section>
           <section class="code-cell" id="cell-23">
@@ -1384,99 +1463,109 @@ Warning message in annotate(&quot;label&quot;, x = ann_x, y = ann_y_mid, hjust =
           </section>
           <section class="markdown-cell">
             <p>
-              The right-hand panel is worth studying carefully. The dashed red line is
-              the Poisson prediction that the variance equals the mean — a straight
-              diagonal. The solid blue curve is the negative-binomial prediction that
-              the variance grows quadratically. The dots are the actual sample variances
-              of the observed counts, binned by their fitted means. The data sit clearly
-              on the blue curve and clearly above the red line, which is exactly the
-              signature of overdispersion. Any ecologist who fits a Poisson to count
-              data should produce something like this figure as a routine diagnostic.
-              Dispersion ratios summarise the problem in a single number; mean-variance
-              plots show you its shape.
+              The right-hand panel is worth studying carefully. The dashed red
+              line is the Poisson prediction that the variance equals the mean —
+              a straight diagonal. The solid blue curve is the negative-binomial
+              prediction that the variance grows quadratically. The dots are the
+              actual sample variances of the observed counts, binned by their
+              fitted means. The data sit clearly on the blue curve and clearly
+              above the red line, which is exactly the signature of
+              overdispersion. Any ecologist who fits a Poisson to count data
+              should produce something like this figure as a routine diagnostic.
+              Dispersion ratios summarise the problem in a single number;
+              mean-variance plots show you its shape.
             </p>
             <h3 id="section-24-12">Alternatives at a glance</h3>
             <p>
               The negative binomial is the standard first-line response to
-              overdispersion but it is not the only option. Three alternatives are worth
-              knowing the names of.
+              overdispersion but it is not the only option. Three alternatives
+              are worth knowing the names of.
             </p>
             <p>
-              <strong>Quasi-Poisson</strong> is the lazy statistician&#39;s fix. It
-              keeps the Poisson point estimates but inflates the standard errors by a
-              factor of $\sqrt{\hat\phi}$, where $\hat\phi$ is the empirical dispersion
-              ratio. It requires a single extra parameter and works well when
-              overdispersion is the only problem, but it is not a proper likelihood and
-              so it cannot be compared to other models using AIC or likelihood-ratio
-              tests. Use it when you need a quick fix; use the negative binomial when
-              you want a model you can stand behind.
+              <strong>Quasi-Poisson</strong> is the lazy statistician&#39;s fix.
+              It keeps the Poisson point estimates but inflates the standard
+              errors by a factor of $\sqrt{\hat\phi}$, where $\hat\phi$ is the
+              empirical dispersion ratio. It requires a single extra parameter
+              and works well when overdispersion is the only problem, but it is
+              not a proper likelihood and so it cannot be compared to other
+              models using AIC or likelihood-ratio tests. Use it when you need a
+              quick fix; use the negative binomial when you want a model you can
+              stand behind.
             </p>
             <p>
-              <strong>Zero-inflated Poisson or negative binomial</strong> models handle
-              a special form of overdispersion where the data contain far more zeros
-              than any Poisson-ish distribution can explain. The idea is a mixture: one
-              process decides whether an observation is a &quot;structural zero&quot;
-              (the species is simply not present), and a second process generates a
-              count (including the occasional zero) when the species is present. These
-              models are popular in occupancy-style studies but add interpretive
-              complexity.
+              <strong>Zero-inflated Poisson or negative binomial</strong> models
+              handle a special form of overdispersion where the data contain far
+              more zeros than any Poisson-ish distribution can explain. The idea
+              is a mixture: one process decides whether an observation is a
+              &quot;structural zero&quot; (the species is simply not present),
+              and a second process generates a count (including the occasional
+              zero) when the species is present. These models are popular in
+              occupancy-style studies but add interpretive complexity.
             </p>
             <p>
-              <strong>The Tweedie family</strong> handles continuous data with a spike
-              at exactly zero — biomass of a species that is absent from many plots,
-              catch-per-unit-effort in fisheries, rainfall totals. It is a one-parameter
-              family that smoothly bridges the gamma and the Poisson.
+              <strong>The Tweedie family</strong> handles continuous data with a
+              spike at exactly zero — biomass of a species that is absent from
+              many plots, catch-per-unit-effort in fisheries, rainfall totals.
+              It is a one-parameter family that smoothly bridges the gamma and
+              the Poisson.
             </p>
           </section>
           <section class="markdown-cell">
             <hr />
-            <h2 id="section-25-13">Gamma regression for positive continuous data</h2>
+            <h2 id="section-25-13">
+              Gamma regression for positive continuous data
+            </h2>
             <p>
-              We turn now from counts to a different kind of response: biomass. Tree
-              biomass is strictly positive, right-skewed, and displays variance that
-              grows with the mean — the classic signature of data well-described by a
-              <strong>gamma distribution</strong>. A gamma GLM with a log link is the
-              principled way to model such responses.
+              We turn now from counts to a different kind of response: biomass.
+              Tree biomass is strictly positive, right-skewed, and displays
+              variance that grows with the mean — the classic signature of data
+              well-described by a <strong>gamma distribution</strong>. A gamma
+              GLM with a log link is the principled way to model such responses.
             </p>
             <p>
-              There is a traditional ecological reflex of log-transforming biomass and
-              fitting <code>lm(log(biomass) ~ ...)</code>. This is sometimes adequate
-              but has two well-known problems. First, the coefficients describe the mean
-              of $\log(y)$, not the log of the mean of $y$ — a distinction that becomes
-              awkward when you want to back-transform predictions to the response scale,
-              where a correction factor (Sprugel 1983) is needed to avoid bias. Second,
-              you cannot log-transform zeros, which forces you to add an arbitrary
-              constant to the data. A gamma GLM with a log link avoids both problems: it
-              models $\log(\mathbb{E}[y])$ directly and it can in principle handle any
-              strictly positive response without transformation.
+              There is a traditional ecological reflex of log-transforming
+              biomass and fitting <code>lm(log(biomass) ~ ...)</code>. This is
+              sometimes adequate but has two well-known problems. First, the
+              coefficients describe the mean of $\log(y)$, not the log of the
+              mean of $y$ — a distinction that becomes awkward when you want to
+              back-transform predictions to the response scale, where a
+              correction factor (Sprugel 1983) is needed to avoid bias. Second,
+              you cannot log-transform zeros, which forces you to add an
+              arbitrary constant to the data. A gamma GLM with a log link avoids
+              both problems: it models $\log(\mathbb{E}[y])$ directly and it can
+              in principle handle any strictly positive response without
+              transformation.
             </p>
             <p>
               Our example uses one of the most-loved datasets in R:
               <strong><code>datasets::trees</code></strong
-              >, which records the volume (cubic feet), girth at breast height (inches),
-              and height (feet) of 31 felled black cherry (<em>Prunus serotina</em>)
-              trees from the Allegheny National Forest in Pennsylvania. The dataset was
-              first reported in Ryan, Joiner and Ryan&#39;s
-              <em>Minitab Handbook</em> (1976) and has been a teaching workhorse ever
-              since. Note that &quot;girth&quot; here means
-              <strong>circumference</strong>, not diameter — to convert to DBH you
-              divide by π — but for our purposes the units do not matter because we will
-              use $\log(\text{Girth})$ and the offset will go into the intercept.
+              >, which records the volume (cubic feet), girth at breast height
+              (inches), and height (feet) of 31 felled black cherry (<em
+                >Prunus serotina</em
+              >) trees from the Allegheny National Forest in Pennsylvania. The
+              dataset was first reported in Ryan, Joiner and Ryan&#39;s
+              <em>Minitab Handbook</em> (1976) and has been a teaching workhorse
+              ever since. Note that &quot;girth&quot; here means
+              <strong>circumference</strong>, not diameter — to convert to DBH
+              you divide by π — but for our purposes the units do not matter
+              because we will use $\log(\text{Girth})$ and the offset will go
+              into the intercept.
             </p>
             <p>
-              The basic geometric expectation is illuminating. If a tree trunk were a
-              perfect cylinder, its volume would be $V = \pi r^2 h$, where $r$ is the
-              radius and $h$ the height. Since girth scales linearly with diameter, we
-              expect $V \propto \text{Girth}^2 \times \text{Height}$, or equivalently:
+              The basic geometric expectation is illuminating. If a tree trunk
+              were a perfect cylinder, its volume would be $V = \pi r^2 h$,
+              where $r$ is the radius and $h$ the height. Since girth scales
+              linearly with diameter, we expect $V \propto \text{Girth}^2 \times
+              \text{Height}$, or equivalently:
             </p>
             <p>
-              $$ \log V \;=\; \beta_0 \;+\; 2 \cdot \log(\text{Girth}) \;+\; 1 \cdot
-              \log(\text{Height}). $$
+              $$ \log V \;=\; \beta_0 \;+\; 2 \cdot \log(\text{Girth}) \;+\; 1
+              \cdot \log(\text{Height}). $$
             </p>
             <p>
-              A real tree, of course, is not a cylinder — it tapers — so the empirical
-              exponents may deviate from these clean integers. The gamma GLM is the
-              right tool to find out.
+              A real tree, of course, is not a cylinder — it tapers — so the
+              empirical exponents may deviate from these clean integers. The
+              gamma GLM is the right tool to find out.
             </p>
           </section>
           <section class="code-cell" id="cell-26">
@@ -1592,24 +1681,26 @@ Number of Fisher Scoring iterations: 3
           </section>
           <section class="markdown-cell">
             <p>
-              The fitted exponents come back at 1.98 for $\log(\text{Girth})$ and 1.13
-              for $\log(\text{Height})$ — strikingly close to the geometric expectation
-              of $2.0$ and $1.0$ for a cylindrical trunk. The small departures are
-              biologically interpretable. The Girth exponent of 1.98 is essentially
-              indistinguishable from 2.0; black cherry trunks scale very nearly as
-              cylinders in their cross-section. The Height exponent of 1.13 is slightly
-              above 1.0, suggesting that tall trees are <em>not quite</em> simple
-              cylinders — they tend also to be slightly fatter at the base than short
-              trees, so volume grows a little faster than height alone. The residual
-              deviance (0.18 on 28 df) is tiny relative to the null deviance (8.32 on 30
-              df), and the dispersion parameter is about 0.006, implying a coefficient
-              of variation in volume of around 8 % at any given size. This is a
-              remarkably tight allometric fit — real ecological data behaving almost
-              like physics.
+              The fitted exponents come back at 1.98 for $\log(\text{Girth})$
+              and 1.13 for $\log(\text{Height})$ — strikingly close to the
+              geometric expectation of $2.0$ and $1.0$ for a cylindrical trunk.
+              The small departures are biologically interpretable. The Girth
+              exponent of 1.98 is essentially indistinguishable from 2.0; black
+              cherry trunks scale very nearly as cylinders in their
+              cross-section. The Height exponent of 1.13 is slightly above 1.0,
+              suggesting that tall trees are <em>not quite</em> simple cylinders
+              — they tend also to be slightly fatter at the base than short
+              trees, so volume grows a little faster than height alone. The
+              residual deviance (0.18 on 28 df) is tiny relative to the null
+              deviance (8.32 on 30 df), and the dispersion parameter is about
+              0.006, implying a coefficient of variation in volume of around 8 %
+              at any given size. This is a remarkably tight allometric fit —
+              real ecological data behaving almost like physics.
             </p>
             <p>
-              The figure below plots observed volume against girth on log-log axes and
-              overlays the fitted gamma curve for three height scenarios.
+              The figure below plots observed volume against girth on log-log
+              axes and overlays the fitted gamma curve for three height
+              scenarios.
             </p>
           </section>
           <section class="code-cell" id="cell-31">
@@ -1674,42 +1765,45 @@ ggplot() +
           </section>
           <section class="markdown-cell">
             <p>
-              On log-log axes the gamma fits come out as perfectly straight lines —
-              because the model is $\log(\mathbb{E}[y]) = \beta_0 + 2.3 \cdot
-              \log(\text{DBH}) + 0.0008 \cdot \text{rainfall}$, and on log axes that is
-              a straight line with slope 2.3. The three parallel lines correspond to the
-              three rainfall levels. This kind of figure — log-log axes, a gamma GLM
-              with $\log(\text{DBH})$ as predictor — is the workhorse plot of the entire
-              forest-biomass literature.
+              On log-log axes the gamma fits come out as perfectly straight
+              lines — because the model is $\log(\mathbb{E}[y]) = \beta_0 + 2.3
+              \cdot \log(\text{DBH}) + 0.0008 \cdot \text{rainfall}$, and on log
+              axes that is a straight line with slope 2.3. The three parallel
+              lines correspond to the three rainfall levels. This kind of figure
+              — log-log axes, a gamma GLM with $\log(\text{DBH})$ as predictor —
+              is the workhorse plot of the entire forest-biomass literature.
             </p>
           </section>
           <section class="markdown-cell">
             <hr />
             <h2 id="section-33-14">Comparing GLMs with AIC</h2>
             <p>
-              Most ecological analyses involve deciding between several plausible
-              models: is habitat quality alone enough, or do we also need forest cover?
-              Does an interaction between them improve the fit enough to justify the
-              extra parameter? The <strong>Akaike Information Criterion</strong> (AIC),
-              introduced by Hirotogu Akaike in 1974, provides a principled way to make
-              these comparisons. Its formula is short and its interpretation deep:
+              Most ecological analyses involve deciding between several
+              plausible models: is habitat quality alone enough, or do we also
+              need forest cover? Does an interaction between them improve the
+              fit enough to justify the extra parameter? The
+              <strong>Akaike Information Criterion</strong> (AIC), introduced by
+              Hirotogu Akaike in 1974, provides a principled way to make these
+              comparisons. Its formula is short and its interpretation deep:
             </p>
             <p>$$ \text{AIC} \;=\; -2 \ell(\hat\theta) \;+\; 2k, $$</p>
             <p>
-              where $\ell(\hat\theta)$ is the maximised log-likelihood of the model and
-              $k$ is the number of estimated parameters. The first term rewards fit to
-              the data; the second term penalises complexity. Lower AIC is better.
-              Differences in AIC between competing models — $\Delta\text{AIC}$ — are
-              what matter; absolute AIC values are not meaningful on their own.
+              where $\ell(\hat\theta)$ is the maximised log-likelihood of the
+              model and $k$ is the number of estimated parameters. The first
+              term rewards fit to the data; the second term penalises
+              complexity. Lower AIC is better. Differences in AIC between
+              competing models — $\Delta\text{AIC}$ — are what matter; absolute
+              AIC values are not meaningful on their own.
             </p>
             <p>
               Burnham and Anderson&#39;s widely-cited rule of thumb says that a
               $\Delta\text{AIC}$ below 2 means the models are essentially
-              indistinguishable; a $\Delta\text{AIC}$ between 4 and 7 indicates moderate
-              support for the better model; and a $\Delta\text{AIC}$ above 10 means the
-              worse model has essentially no support. These are guidelines, not hard
-              thresholds, and they should be paired with residual diagnostics and
-              ecological plausibility rather than used in isolation.
+              indistinguishable; a $\Delta\text{AIC}$ between 4 and 7 indicates
+              moderate support for the better model; and a $\Delta\text{AIC}$
+              above 10 means the worse model has essentially no support. These
+              are guidelines, not hard thresholds, and they should be paired
+              with residual diagnostics and ecological plausibility rather than
+              used in isolation.
             </p>
           </section>
           <section class="code-cell" id="cell-34">
@@ -1809,38 +1903,40 @@ ggplot(aic_plot_df, aes(x = dAIC, y = model, fill = dAIC)) +
           </section>
           <section class="markdown-cell">
             <p>
-              The <strong>Akaike weights</strong> $w$ in the table and figure are a
-              convenient re-expression of $\Delta\text{AIC}$ on a scale that sums to 1
-              across all models. A weight of 0.90 means the model is 90 % likely to be
-              the best of the set on Kullback-Leibler information grounds. Reporting
-              both $\Delta\text{AIC}$ and $w$ is now standard practice in ecology and
-              conservation.
+              The <strong>Akaike weights</strong> $w$ in the table and figure
+              are a convenient re-expression of $\Delta\text{AIC}$ on a scale
+              that sums to 1 across all models. A weight of 0.90 means the model
+              is 90 % likely to be the best of the set on Kullback-Leibler
+              information grounds. Reporting both $\Delta\text{AIC}$ and $w$ is
+              now standard practice in ecology and conservation.
             </p>
           </section>
           <section class="markdown-cell">
             <hr />
             <h2 id="section-37-15">Diagnostics for GLMs</h2>
             <p>
-              The four diagnostic plots we met for linear regression still apply to
-              GLMs, but with two adjustments. First, the residuals used should be
-              <strong>deviance residuals</strong> — a GLM-specific quantity that is
-              approximately normal under a correctly specified model, unlike the raw
-              residuals which are not. Second, because the fitted values live on the
-              response scale but the linear predictor lives on the link scale, it is
-              usually more informative to plot residuals against the
-              <strong>linear predictor</strong> rather than the fitted mean.
+              The four diagnostic plots we met for linear regression still apply
+              to GLMs, but with two adjustments. First, the residuals used
+              should be <strong>deviance residuals</strong> — a GLM-specific
+              quantity that is approximately normal under a correctly specified
+              model, unlike the raw residuals which are not. Second, because the
+              fitted values live on the response scale but the linear predictor
+              lives on the link scale, it is usually more informative to plot
+              residuals against the <strong>linear predictor</strong> rather
+              than the fitted mean.
             </p>
             <p>
-              Beyond these routine checks, GLMs admit simulation-based diagnostics that
-              are hard to beat. The <strong>DHARMa</strong> package implements these
-              through a simple idea: for each observation, simulate many replicates from
-              the fitted model, and compute the quantile of the observed value within
-              its simulated distribution. If the model is correctly specified, these
-              simulated quantiles should be uniform on $[0, 1]$. Heavy deviations from
-              uniformity reveal model misfit in ways that raw residuals often miss.
-              Unfortunately DHARMa is an extra dependency; to keep this page
-              lightweight, we stick to deviance-residual plots here, and note where
-              DHARMa would go.
+              Beyond these routine checks, GLMs admit simulation-based
+              diagnostics that are hard to beat. The
+              <strong>DHARMa</strong> package implements these through a simple
+              idea: for each observation, simulate many replicates from the
+              fitted model, and compute the quantile of the observed value
+              within its simulated distribution. If the model is correctly
+              specified, these simulated quantiles should be uniform on $[0,
+              1]$. Heavy deviations from uniformity reveal model misfit in ways
+              that raw residuals often miss. Unfortunately DHARMa is an extra
+              dependency; to keep this page lightweight, we stick to
+              deviance-residual plots here, and note where DHARMa would go.
             </p>
           </section>
           <section class="code-cell" id="cell-38">
@@ -1938,37 +2034,39 @@ options(repr.plot.width = 13, repr.plot.height = 8.5)
           </section>
           <section class="markdown-cell">
             <p>
-              For a model that suffers from overdispersion, the diagnostic quadrant
-              tells a story worth reading carefully. The
-              residuals-versus-linear-predictor panel may show a flat-ish loess smoother
-              but with residuals spreading more widely than they should under a Poisson
-              model: the heavy tails in the Q-Q plot are a signature of variance
-              exceeding the mean. The residuals-versus-EnvHet panel can reveal whether
-              the linear term we have used for that covariate is adequate or whether a
-              smooth would do better. The boxplot by habitat shows whether the
-              categorical effect has been well captured (boxes centred on zero) or
-              whether some habitat is systematically over- or under-predicted (a box
-              clearly off-zero).
+              For a model that suffers from overdispersion, the diagnostic
+              quadrant tells a story worth reading carefully. The
+              residuals-versus-linear-predictor panel may show a flat-ish loess
+              smoother but with residuals spreading more widely than they should
+              under a Poisson model: the heavy tails in the Q-Q plot are a
+              signature of variance exceeding the mean. The
+              residuals-versus-EnvHet panel can reveal whether the linear term
+              we have used for that covariate is adequate or whether a smooth
+              would do better. The boxplot by habitat shows whether the
+              categorical effect has been well captured (boxes centred on zero)
+              or whether some habitat is systematically over- or under-predicted
+              (a box clearly off-zero).
             </p>
             <p>
-              When you see an overdispersion signature in the Q-Q plot, the right next
-              step is to refit as a negative binomial — exactly as we did in §6.
-              Diagnostics for that NB refit will look noticeably tighter, particularly
-              in the tails of the Q-Q plot. A well-fitted GLM on well-behaved data
-              produces a quadrant where no panel shows systematic structure; when a
-              smoother curves, it is telling you that a non-linear term is needed — a
-              cue to reach for the generalised <em>additive</em> model of Part 4, where
-              each predictor enters as a flexible smooth rather than a rigid line.
+              When you see an overdispersion signature in the Q-Q plot, the
+              right next step is to refit as a negative binomial — exactly as we
+              did in §6. Diagnostics for that NB refit will look noticeably
+              tighter, particularly in the tails of the Q-Q plot. A well-fitted
+              GLM on well-behaved data produces a quadrant where no panel shows
+              systematic structure; when a smoother curves, it is telling you
+              that a non-linear term is needed — a cue to reach for the
+              generalised <em>additive</em> model of Part 4, where each
+              predictor enters as a flexible smooth rather than a rigid line.
             </p>
           </section>
           <section class="markdown-cell">
             <hr />
             <h2 id="section-40-16">The ecological GLM cheat-sheet</h2>
             <p>
-              Every working ecologist should be able to match a response variable to a
-              sensible GLM family within a few seconds. The table below summarises the
-              most common pairings. Pin it above your desk until the mapping becomes
-              second nature.
+              Every working ecologist should be able to match a response
+              variable to a sensible GLM family within a few seconds. The table
+              below summarises the most common pairings. Pin it above your desk
+              until the mapping becomes second nature.
             </p>
             <table>
               <thead>
@@ -1994,7 +2092,9 @@ options(repr.plot.width = 13, repr.plot.height = 8.5)
                   <td>Poisson → check dispersion</td>
                   <td>log</td>
                   <td>
-                    <code>glm(y ~ x + offset(log(effort)), family = poisson)</code>
+                    <code
+                      >glm(y ~ x + offset(log(effort)), family = poisson)</code
+                    >
                   </td>
                 </tr>
                 <tr>
@@ -2007,7 +2107,11 @@ options(repr.plot.width = 13, repr.plot.height = 8.5)
                   <td>Counts with excess zeros</td>
                   <td>Zero-inflated Poisson / NB</td>
                   <td>log</td>
-                  <td><code>pscl::zeroinfl(y ~ x, dist = &quot;negbin&quot;)</code></td>
+                  <td>
+                    <code
+                      >pscl::zeroinfl(y ~ x, dist = &quot;negbin&quot;)</code
+                    >
+                  </td>
                 </tr>
                 <tr>
                   <td>Presence / absence</td>
@@ -2019,14 +2123,18 @@ options(repr.plot.width = 13, repr.plot.height = 8.5)
                   <td>Proportion $k/n$ with known $n$</td>
                   <td>Binomial</td>
                   <td>logit</td>
-                  <td><code>glm(cbind(k, n-k) ~ x, family = binomial)</code></td>
+                  <td>
+                    <code>glm(cbind(k, n-k) ~ x, family = binomial)</code>
+                  </td>
                 </tr>
                 <tr>
                   <td>Strictly positive continuous (biomass, home range)</td>
                   <td>Gamma</td>
                   <td>log</td>
                   <td>
-                    <code>glm(y ~ x, family = Gamma(link = &quot;log&quot;))</code>
+                    <code
+                      >glm(y ~ x, family = Gamma(link = &quot;log&quot;))</code
+                    >
                   </td>
                 </tr>
                 <tr>
@@ -2036,7 +2144,9 @@ options(repr.plot.width = 13, repr.plot.height = 8.5)
                   <td><code>statmod::tweedie(var.power = 1.5)</code></td>
                 </tr>
                 <tr>
-                  <td>Continuous on $[0, 1]$ (proportions without denominator)</td>
+                  <td>
+                    Continuous on $[0, 1]$ (proportions without denominator)
+                  </td>
                   <td>Beta</td>
                   <td>logit</td>
                   <td><code>betareg::betareg(y ~ x)</code></td>
@@ -2044,30 +2154,33 @@ options(repr.plot.width = 13, repr.plot.height = 8.5)
               </tbody>
             </table>
             <p>
-              Two further points are worth internalising. First, GLMs are not the last
-              word — they assume independence of observations, and ecological data
-              rarely provide it. When observations are nested (tadpoles within ponds
-              within catchments) or spatially autocorrelated (plots along a transect),
-              you need a <strong>generalised linear mixed model</strong> (GLMM) or a
-              spatial extension. Packages like <code>lme4</code>, <code>glmmTMB</code>,
-              and <code>INLA</code> extend the GLM framework in exactly this direction.
-              Second, the assumption that the linear predictor is truly
-              <em>linear</em> in the covariates is often the first to fail in practice.
-              When a predictor&#39;s effect is humped or threshold-like, GAMs (notebook
-              04) are the principled generalisation.
+              Two further points are worth internalising. First, GLMs are not
+              the last word — they assume independence of observations, and
+              ecological data rarely provide it. When observations are nested
+              (tadpoles within ponds within catchments) or spatially
+              autocorrelated (plots along a transect), you need a
+              <strong>generalised linear mixed model</strong> (GLMM) or a
+              spatial extension. Packages like <code>lme4</code>,
+              <code>glmmTMB</code>, and <code>INLA</code> extend the GLM
+              framework in exactly this direction. Second, the assumption that
+              the linear predictor is truly <em>linear</em> in the covariates is
+              often the first to fail in practice. When a predictor&#39;s effect
+              is humped or threshold-like, GAMs (notebook 04) are the principled
+              generalisation.
             </p>
           </section>
           <section class="markdown-cell">
             <h2 id="section-41-17">Takeaways</h2>
             <p>
-              Nelder and Wedderburn&#39;s 1972 unification made it possible to treat
-              what looked like a zoo of regression methods as a single family, fit by a
-              single algorithm, interpreted through a small vocabulary of link functions
-              and response distributions. The core idea — linear predictor, response
-              distribution, link function — is a piece of mathematical architecture that
-              will repay you every week of your career. The Poisson and gamma GLMs you
-              fitted today are the workhorses of ecological count and biomass modelling,
-              and the overdispersion diagnostic you learned to run will catch silent
+              Nelder and Wedderburn&#39;s 1972 unification made it possible to
+              treat what looked like a zoo of regression methods as a single
+              family, fit by a single algorithm, interpreted through a small
+              vocabulary of link functions and response distributions. The core
+              idea — linear predictor, response distribution, link function — is
+              a piece of mathematical architecture that will repay you every
+              week of your career. The Poisson and gamma GLMs you fitted today
+              are the workhorses of ecological count and biomass modelling, and
+              the overdispersion diagnostic you learned to run will catch silent
               errors in more papers than you would like to imagine.
             </p>
             <hr />
@@ -2077,29 +2190,32 @@ options(repr.plot.width = 13, repr.plot.height = 8.5)
                 <p>
                   The BCI dataset has 224 other tree species besides
                   <em>Faramea occidentalis</em>. Pick another common one — try
-                  <code>Trichilia.tuberculata</code>, <code>Alseis.blackiana</code>, or
+                  <code>Trichilia.tuberculata</code>,
+                  <code>Alseis.blackiana</code>, or
                   <code>Beilschmiedia.pendula</code> — and refit the Poisson and
-                  negative-binomial models on its counts. Does the same habitat pattern
-                  emerge, or does this species prefer different conditions? What does
-                  that tell you ecologically?
+                  negative-binomial models on its counts. Does the same habitat
+                  pattern emerge, or does this species prefer different
+                  conditions? What does that tell you ecologically?
                 </p>
               </li>
               <li>
                 <p>
-                  The BCI environmental data include <code>Precipitation</code> and
-                  <code>Elevation</code>, but on the 50-ha plot these are essentially
-                  constant. Use <code>BCI.env$UTM.NS</code> (north-south position) as a
-                  continuous predictor of <em>Faramea</em> count instead — does the
-                  species show a north-south gradient across the 1-km plot?
+                  The BCI environmental data include
+                  <code>Precipitation</code> and <code>Elevation</code>, but on
+                  the 50-ha plot these are essentially constant. Use
+                  <code>BCI.env$UTM.NS</code> (north-south position) as a
+                  continuous predictor of <em>Faramea</em> count instead — does
+                  the species show a north-south gradient across the 1-km plot?
                 </p>
               </li>
               <li>
                 <p>
-                  Compute <em>species richness</em> (the number of species with at least
-                  one individual) for each of the 50 BCI plots:
+                  Compute <em>species richness</em> (the number of species with
+                  at least one individual) for each of the 50 BCI plots:
                   <code>rich &lt;- rowSums(BCI &gt; 0)</code>. Fit
                   <code
-                    >glm(rich ~ habitat + env_het, family = poisson, data = ...)</code
+                    >glm(rich ~ habitat + env_het, family = poisson, data =
+                    ...)</code
                   >. Is richness overdispersed? Compare the Poisson and
                   negative-binomial fits.
                 </p>
@@ -2107,33 +2223,35 @@ options(repr.plot.width = 13, repr.plot.height = 8.5)
               <li>
                 <p>
                   Refit the black-cherry tree volume model with
-                  <code>family = Gamma(link = &quot;inverse&quot;)</code> instead of
-                  <code>log</code>. Compare the two fits with AIC. The inverse link
-                  gives a model where $1/\mathbb{E}[V]$ is linear in
-                  $\log(\text{Girth})$ and $\log(\text{Height})$ — does this fit better
-                  or worse than the log link, and what is the geometric meaning of the
-                  difference?
+                  <code>family = Gamma(link = &quot;inverse&quot;)</code>
+                  instead of <code>log</code>. Compare the two fits with AIC.
+                  The inverse link gives a model where $1/\mathbb{E}[V]$ is
+                  linear in $\log(\text{Girth})$ and $\log(\text{Height})$ —
+                  does this fit better or worse than the log link, and what is
+                  the geometric meaning of the difference?
                 </p>
               </li>
               <li>
                 <p>
                   <em>Conceptual.</em> A colleague proposes to model
                   <strong>species richness</strong> using <code>lm()</code> with
-                  $\log(\text{richness})$ as the response. Give two reasons a Poisson
-                  GLM is preferable, and one scenario in which the log-lm approach might
-                  be defensible.
+                  $\log(\text{richness})$ as the response. Give two reasons a
+                  Poisson GLM is preferable, and one scenario in which the
+                  log-lm approach might be defensible.
                 </p>
               </li>
             </ol>
             <hr />
             <h3 id="section-41-19">Coming up in Part 4</h3>
             <p>
-              We relax the remaining assumption that each predictor&#39;s effect is a
-              straight line. The <strong>generalised additive model</strong> replaces
-              rigid slopes with data-adaptive smooth functions, giving us the
-              flexibility to capture humps, thresholds, and saturations without losing
-              the interpretability of classical regression. The Poisson framework you
-              just learned will carry over intact — only the linear-in-$x$ part changes.
+              We relax the remaining assumption that each predictor&#39;s effect
+              is a straight line. The
+              <strong>generalised additive model</strong> replaces rigid slopes
+              with data-adaptive smooth functions, giving us the flexibility to
+              capture humps, thresholds, and saturations without losing the
+              interpretability of classical regression. The Poisson framework
+              you just learned will carry over intact — only the linear-in-$x$
+              part changes.
             </p>
           </section>
           <div class="reader-end">
@@ -2159,7 +2277,10 @@ options(repr.plot.width = 13, repr.plot.height = 8.5)
     <footer class="site-footer">
       <div class="container">
         <div class="footer-main">
-          <a class="brand" href="../../index.html" aria-label="Les Hyperion — home"
+          <a
+            class="brand"
+            href="../../index.html"
+            aria-label="Les Hyperion — home"
             ><img
               class="brand-face"
               src="../../assets/brand/silvi-face.png"
@@ -2167,7 +2288,11 @@ options(repr.plot.width = 13, repr.plot.height = 8.5)
               width="55"
               height="59"
             /><span class="brand-name" aria-hidden="true"
-              >LES HYPERI<svg class="compass-o" viewBox="0 0 36 46" aria-hidden="true">
+              >LES HYPERI<svg
+                class="compass-o"
+                viewBox="0 0 36 46"
+                aria-hidden="true"
+              >
                 <circle
                   cx="18"
                   cy="23"
@@ -2183,9 +2308,12 @@ options(repr.plot.width = 13, repr.plot.height = 8.5)
               >N</span
             ></a
           >
-          <p class="footer-thought">Understanding nature.<br />Sharing the evidence.</p>
+          <p class="footer-thought">
+            Understanding nature.<br />Sharing the evidence.
+          </p>
           <nav class="footer-links" aria-label="Footer">
-            <a href="../../about.html">About Phemelo</a><a href="../../cv.html">CV</a
+            <a href="../../about.html">About Phemelo</a
+            ><a href="../../cv.html">CV</a
             ><a
               href="https://github.com/Phemelo-R"
               target="_blank"
@@ -2195,7 +2323,8 @@ options(repr.plot.width = 13, repr.plot.height = 8.5)
           </nav>
         </div>
         <div class="footer-bottom">
-          <span>© 2026 Phemelo Rutlokoane</span><span>Nature × Data × People</span
+          <span>© 2026 Phemelo Rutlokoane</span
+          ><span>Nature × Data × People</span
           ><span>Johannesburg, South Africa</span>
         </div>
       </div>

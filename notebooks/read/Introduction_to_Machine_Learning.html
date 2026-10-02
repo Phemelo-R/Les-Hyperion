@@ -15,8 +15,15 @@
       sizes="32x32"
       href="../../assets/brand/favicon-32.png"
     />
-    <link rel="icon" sizes="192x192" href="../../assets/brand/favicon-192.png" />
-    <link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png" />
+    <link
+      rel="icon"
+      sizes="192x192"
+      href="../../assets/brand/favicon-192.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="../../assets/brand/apple-touch-icon.png"
+    />
     <script src="../../js/theme-init.js"></script>
     <link rel="stylesheet" href="../../css/site.css" />
     <link rel="stylesheet" href="../../css/silvi.css" />
@@ -28,7 +35,10 @@
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href="../../index.html" aria-label="Les Hyperion — home"
+        <a
+          class="brand"
+          href="../../index.html"
+          aria-label="Les Hyperion — home"
           ><img
             class="brand-face"
             src="../../assets/brand/silvi-face.png"
@@ -36,7 +46,11 @@
             width="55"
             height="59"
           /><span class="brand-name" aria-hidden="true"
-            >LES HYPERI<svg class="compass-o" viewBox="0 0 36 46" aria-hidden="true">
+            >LES HYPERI<svg
+              class="compass-o"
+              viewBox="0 0 36 46"
+              aria-hidden="true"
+            >
               <circle
                 cx="18"
                 cy="23"
@@ -53,10 +67,11 @@
           ></a
         >
         <nav class="desktop-nav" aria-label="Main navigation">
-          <a href="../../index.html">Home</a><a href="../../research.html">Research</a
+          <a href="../../index.html">Home</a
+          ><a href="../../research.html">Research</a
           ><a href="../../notebooks.html" aria-current="page">Notebooks</a
-          ><a href="../../carbon.html">Carbon</a><a href="../../about.html">About</a
-          ><a href="../../cv.html">CV</a>
+          ><a href="../../carbon.html">Carbon</a
+          ><a href="../../about.html">About</a><a href="../../cv.html">CV</a>
         </nav>
         <div class="header-actions">
           <button
@@ -113,11 +128,17 @@
           </button>
         </div>
       </div>
-      <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" hidden>
-        <a href="../../index.html">Home</a><a href="../../research.html">Research</a
+      <nav
+        class="mobile-nav"
+        id="mobile-nav"
+        aria-label="Mobile navigation"
+        hidden
+      >
+        <a href="../../index.html">Home</a
+        ><a href="../../research.html">Research</a
         ><a href="../../notebooks.html" aria-current="page">Notebooks</a
-        ><a href="../../carbon.html">Carbon</a><a href="../../about.html">About</a
-        ><a href="../../cv.html">CV</a>
+        ><a href="../../carbon.html">Carbon</a
+        ><a href="../../about.html">About</a><a href="../../cv.html">CV</a>
       </nav>
     </header>
     <main id="main">
@@ -176,21 +197,24 @@
             <nav aria-label="Notebook contents">
               <a href="#section-0-0">Introduction to Machine Learning</a
               ><a href="#section-1-4">What is Machine Learning?</a
-              ><a href="#section-2-6">Traditional programming, flipped upside-down</a
+              ><a href="#section-2-6"
+                >Traditional programming, flipped upside-down</a
               ><a href="#section-3-7">Supervised and unsupervised learning</a
               ><a href="#section-5-10">The general machine-learning workflow</a
               ><a href="#section-6-11">Why data matters more than models</a
               ><a href="#section-7-12"
                 >The fundamental tension — underfitting and overfitting</a
               ><a href="#section-8-13">The vocabulary we will keep using</a
-              ><a href="#section-9-14">Machine learning in ecology and conservation</a
+              ><a href="#section-9-14"
+                >Machine learning in ecology and conservation</a
               ><a href="#section-10-15"
                 >A first hands-on glimpse — the Palmer penguins</a
               ><a href="#section-20-17">Where we go from here</a>
             </nav>
           </details>
           <div class="reader-tools">
-            <button id="toggle-outputs" aria-pressed="false">Collapse outputs</button
+            <button id="toggle-outputs" aria-pressed="false">
+              Collapse outputs</button
             ><button class="print-button">Print notebook</button>
           </div>
           <p>Original code and saved outputs.<br />R · 21 cells</p>
@@ -202,51 +226,57 @@
           <section class="markdown-cell">
             <h1 id="section-0-0">Introduction to Machine Learning</h1>
             <h3 id="section-0-1">
-              A practical guide for ecologists, conservation biologists, and spatial
-              scientists
+              A practical guide for ecologists, conservation biologists, and
+              spatial scientists
             </h3>
             <hr />
             <blockquote>
               <p>
                 <em
-                  >&quot;The greatest value of a picture is when it forces us to notice
-                  what we never expected to see.&quot;</em
+                  >&quot;The greatest value of a picture is when it forces us to
+                  notice what we never expected to see.&quot;</em
                 >
                 — John W. Tukey
               </p>
             </blockquote>
             <hr />
             <p>
-              Every science has its revolutions. Ecology&#39;s quiet one is happening
-              right now, and it is being driven by machine learning. In the last fifteen
-              years, the way we identify birds from their calls, map forests from space,
-              predict where a jaguar might roam, and decide which patch of savanna
-              should become a protected area has been transformed by a handful of
-              algorithms working on increasingly vast quantities of data. This section
-              will introduce you to those algorithms, one notebook at a time, and by the
-              end you will not only understand them, you will be using them to answer
-              ecological questions that genuinely matter.
+              Every science has its revolutions. Ecology&#39;s quiet one is
+              happening right now, and it is being driven by machine learning.
+              In the last fifteen years, the way we identify birds from their
+              calls, map forests from space, predict where a jaguar might roam,
+              and decide which patch of savanna should become a protected area
+              has been transformed by a handful of algorithms working on
+              increasingly vast quantities of data. This section will introduce
+              you to those algorithms, one notebook at a time, and by the end
+              you will not only understand them, you will be using them to
+              answer ecological questions that genuinely matter.
             </p>
             <p>
-              This first notebook is the start. We will not fit a model here, instead we
-              will build a shared vocabulary, look at what machine learning actually
-              <em>is</em>, and explore the fundamental ideas that will carry through the
-              remaining notebooks under Machine Learning. Every concept is grounded in
-              ecology.
+              This first notebook is the start. We will not fit a model here,
+              instead we will build a shared vocabulary, look at what machine
+              learning actually <em>is</em>, and explore the fundamental ideas
+              that will carry through the remaining notebooks under Machine
+              Learning. Every concept is grounded in ecology.
             </p>
             <h4 id="section-0-2">What this notebook covers</h4>
             <ol>
               <li>
-                What machine learning is, and how it differs from classical programming
+                What machine learning is, and how it differs from classical
+                programming
               </li>
-              <li>The three core tasks: classification, regression, and clustering</li>
+              <li>
+                The three core tasks: classification, regression, and clustering
+              </li>
               <li>Supervised versus unsupervised learning</li>
               <li>The general machine-learning workflow</li>
               <li>Why data matters more than algorithms</li>
-              <li>The fundamental tension between underfitting and overfitting</li>
               <li>
-                Ecological and conservation applications that are genuinely changing the
-                field
+                The fundamental tension between underfitting and overfitting
+              </li>
+              <li>
+                Ecological and conservation applications that are genuinely
+                changing the field
               </li>
               <li>A short hands-on preview with the Palmer penguins</li>
             </ol>
@@ -260,57 +290,64 @@
             <hr />
             <h2 id="section-1-4">What is Machine Learning?</h2>
             <p>
-              Every field has its origin story. Machine learning&#39;s story starts in
-              1959, when
+              Every field has its origin story. Machine learning&#39;s story
+              starts in 1959, when
               <a href="http://infolab.stanford.edu/pub/voy/museum/samuel.html"
                 >Arthur Samuel</a
               >
-              — an engineer at IBM — wrote a checkers-playing program that improved as
-              it played. Samuel described this enterprise, in a phrase that has outlived
-              his program by several technological revolutions, as
+              — an engineer at IBM — wrote a checkers-playing program that
+              improved as it played. Samuel described this enterprise, in a
+              phrase that has outlived his program by several technological
+              revolutions, as
               <em
-                >&quot;the field of study that gives computers the ability to learn
-                without being explicitly programmed&quot;</em
-              >. Nearly seventy years later, the essence of that definition still holds.
-              Before Samuel, the dominant paradigm was <em>rule-based programming</em>:
-              a human expert wrote a set of rules, the computer followed them
-              faithfully, and any weakness in the rules became a weakness in the system.
-              Samuel flipped the arrow. Instead of asking an expert to describe the
-              rules, he asked the computer to <strong>discover</strong> them by watching
+                >&quot;the field of study that gives computers the ability to
+                learn without being explicitly programmed&quot;</em
+              >. Nearly seventy years later, the essence of that definition
+              still holds. Before Samuel, the dominant paradigm was
+              <em>rule-based programming</em>: a human expert wrote a set of
+              rules, the computer followed them faithfully, and any weakness in
+              the rules became a weakness in the system. Samuel flipped the
+              arrow. Instead of asking an expert to describe the rules, he asked
+              the computer to <strong>discover</strong> them by watching
               thousands of games.
             </p>
             <p>
-              Think about how you, as an ecologist, are already learning to identify
-              plants. Nobody has handed you a 200-page book for separating Proteaceae
-              from Asphodelaceae. Instead, a mentor points at specimens, names them,
-              draws your attention to subtle cues, and corrects you when you get one
-              wrong. Over weeks and outings, your brain quietly constructs an internal
-              model of what makes a Proteaceae plant <em>look</em> like a Proteaceae
-              plant. That model generalises: when you see a Proteaceae plant you have
-              never seen before, you recognise it.
+              Think about how you, as an ecologist, are already learning to
+              identify plants. Nobody has handed you a 200-page book for
+              separating Proteaceae from Asphodelaceae. Instead, a mentor points
+              at specimens, names them, draws your attention to subtle cues, and
+              corrects you when you get one wrong. Over weeks and outings, your
+              brain quietly constructs an internal model of what makes a
+              Proteaceae plant <em>look</em> like a Proteaceae plant. That model
+              generalises: when you see a Proteaceae plant you have never seen
+              before, you recognise it.
             </p>
             <p>
-              Machine learning is the same process translated into silicon. We show a
-              computer many examples, tell it what each one is (sometimes), and it
-              learns a function that maps inputs to outputs. When a new, unseen
-              observation arrives, the model applies what it has learned and produces an
-              answer. The mentor&#39;s role is played by a
-              <strong>learning algorithm</strong> that tweaks the model&#39;s internal
-              parameters until its predictions start matching reality. Tom Mitchell, in
-              his 1997 textbook, gave the idea a more careful definition:
+              Machine learning is the same process translated into silicon. We
+              show a computer many examples, tell it what each one is
+              (sometimes), and it learns a function that maps inputs to outputs.
+              When a new, unseen observation arrives, the model applies what it
+              has learned and produces an answer. The mentor&#39;s role is
+              played by a <strong>learning algorithm</strong> that tweaks the
+              model&#39;s internal parameters until its predictions start
+              matching reality. Tom Mitchell, in his 1997 textbook, gave the
+              idea a more careful definition:
               <em
-                >a computer program is said to learn from experience E with respect to
-                some task T and performance measure P, if its performance on T, as
-                measured by P, improves with E</em
-              >. In the Proteaceae example, T is naming the species, E is each labelled
-              example you see, and P is the fraction of plants you get right next time.
-              If P rises as E grows, learning is happening.
+                >a computer program is said to learn from experience E with
+                respect to some task T and performance measure P, if its
+                performance on T, as measured by P, improves with E</em
+              >. In the Proteaceae example, T is naming the species, E is each
+              labelled example you see, and P is the fraction of plants you get
+              right next time. If P rises as E grows, learning is happening.
             </p>
-            <h3 id="section-1-5">The three questions machine learning answers</h3>
+            <h3 id="section-1-5">
+              The three questions machine learning answers
+            </h3>
             <p>
-              Almost every ecological problem that a machine-learning model can tackle
-              boils down to one of three questions, each corresponding to a family of
-              techniques you will meet later in other Machine Learning notebooks.
+              Almost every ecological problem that a machine-learning model can
+              tackle boils down to one of three questions, each corresponding to
+              a family of techniques you will meet later in other Machine
+              Learning notebooks.
             </p>
             <table>
               <thead>
@@ -329,125 +366,140 @@
                 <tr>
                   <td>What value will this observation take?</td>
                   <td><strong>Regression</strong></td>
-                  <td>How much above-ground biomass does this forest plot hold?</td>
+                  <td>
+                    How much above-ground biomass does this forest plot hold?
+                  </td>
                 </tr>
                 <tr>
                   <td>What natural groups live inside this dataset?</td>
                   <td><strong>Clustering</strong></td>
                   <td>
-                    What distinct vegetation communities exist along this gradient?
+                    What distinct vegetation communities exist along this
+                    gradient?
                   </td>
                 </tr>
               </tbody>
             </table>
             <p>
-              The figure below shows the three tasks in their simplest visual form. Each
-              panel tells a different story; together they frame everything that
-              follows.
+              The figure below shows the three tasks in their simplest visual
+              form. Each panel tells a different story; together they frame
+              everything that follows.
             </p>
             <p><img src="../media/816c1065817025241889.png" alt="01.png" /></p>
           </section>
           <section class="markdown-cell">
-            <h2 id="section-2-6">Traditional programming, flipped upside-down</h2>
+            <h2 id="section-2-6">
+              Traditional programming, flipped upside-down
+            </h2>
             <p>
-              A useful way to understand what machine learning actually <em>does</em> is
-              to place it beside traditional programming. In classical software
-              engineering, a programmer writes a set of rules; the computer takes those
-              rules, applies them to data, and produces answers. A biologist might write
+              A useful way to understand what machine learning actually
+              <em>does</em> is to place it beside traditional programming. In
+              classical software engineering, a programmer writes a set of
+              rules; the computer takes those rules, applies them to data, and
+              produces answers. A biologist might write
               <em
-                >&quot;if wingspan is greater than sixty centimetres and the beak is
-                hooked, then the bird is a raptor&quot;</em
+                >&quot;if wingspan is greater than sixty centimetres and the
+                beak is hooked, then the bird is a raptor&quot;</em
               >. The rule-writer is the expert; the computer is a faithful but
               uncreative clerk.
             </p>
             <p>
               Machine learning reverses two of those boxes. We feed the computer
               <strong>data and answers</strong>, and it produces the
-              <strong>rules</strong> — or rather a model that behaves as if rules had
-              been written. The expertise no longer lives in someone&#39;s head; it is
-              distilled from labelled examples. This is why we talk about a model having
-              been <em>&quot;trained&quot;</em> rather than
-              <em>&quot;written&quot;</em>, and it is why adding more data to a trained
-              model often makes it smarter in a way that adding more lines of code to a
-              traditional program almost never does.
+              <strong>rules</strong> — or rather a model that behaves as if
+              rules had been written. The expertise no longer lives in
+              someone&#39;s head; it is distilled from labelled examples. This
+              is why we talk about a model having been
+              <em>&quot;trained&quot;</em> rather than
+              <em>&quot;written&quot;</em>, and it is why adding more data to a
+              trained model often makes it smarter in a way that adding more
+              lines of code to a traditional program almost never does.
             </p>
             <p><img src="../media/dfe4c904510a00f878d8.png" alt="02.png" /></p>
             <p>
-              The ecological implications are profound. Rule-based approaches scale
-              poorly: a single person can only describe so many rules, and every edge
-              case needs a new clause. Machine-learning approaches scale with data
-              availability. Tell a convolutional neural network the species of a
-              thousand camera-trap images and it will learn features that no human would
-              have thought to write down. Give it a million images and it will
-              outperform almost any human expert on speed and consistency, though not
-              always on judgement.
+              The ecological implications are profound. Rule-based approaches
+              scale poorly: a single person can only describe so many rules, and
+              every edge case needs a new clause. Machine-learning approaches
+              scale with data availability. Tell a convolutional neural network
+              the species of a thousand camera-trap images and it will learn
+              features that no human would have thought to write down. Give it a
+              million images and it will outperform almost any human expert on
+              speed and consistency, though not always on judgement.
             </p>
           </section>
           <section class="markdown-cell">
             <h2 id="section-3-7">Supervised and unsupervised learning</h2>
             <p>
-              The most fundamental division in machine learning is whether your data
-              have labels. If they do, you are working in the world of
-              <strong>supervised learning</strong>; if they do not, you have stepped
-              into <strong>unsupervised learning</strong>. The distinction matters
-              because it determines which algorithms you can use, which questions you
-              can ask, and how you evaluate whether your model is any good.
+              The most fundamental division in machine learning is whether your
+              data have labels. If they do, you are working in the world of
+              <strong>supervised learning</strong>; if they do not, you have
+              stepped into <strong>unsupervised learning</strong>. The
+              distinction matters because it determines which algorithms you can
+              use, which questions you can ask, and how you evaluate whether
+              your model is any good.
             </p>
-            <h3 id="section-3-8">Supervised learning — guided by ground truth</h3>
+            <h3 id="section-3-8">
+              Supervised learning — guided by ground truth
+            </h3>
             <p>
-              Supervised learning is what happens when you have both the inputs (often
-              called <strong>features</strong> or <strong>predictors</strong>) and the
-              correct outputs (called <strong>labels</strong> or
-              <strong>targets</strong>). The learning algorithm&#39;s job is to find a
-              function that maps inputs to outputs well enough to generalise to new,
-              unseen observations. A supervised model is trained on a collection of
-              examples for which the truth is known, and is then asked to predict the
-              truth for examples it has never seen. This is the flavour of learning
-              behind most of the ecological machine-learning victories of the last
-              decade: land-cover maps are produced by supervised classifiers trained on
-              digitised training polygons; biomass predictions come from supervised
-              regressors trained on field plots paired with LiDAR; species
-              identifications in camera-trap images come from supervised neural networks
-              trained on millions of labelled photographs.
+              Supervised learning is what happens when you have both the inputs
+              (often called <strong>features</strong> or
+              <strong>predictors</strong>) and the correct outputs (called
+              <strong>labels</strong> or <strong>targets</strong>). The learning
+              algorithm&#39;s job is to find a function that maps inputs to
+              outputs well enough to generalise to new, unseen observations. A
+              supervised model is trained on a collection of examples for which
+              the truth is known, and is then asked to predict the truth for
+              examples it has never seen. This is the flavour of learning behind
+              most of the ecological machine-learning victories of the last
+              decade: land-cover maps are produced by supervised classifiers
+              trained on digitised training polygons; biomass predictions come
+              from supervised regressors trained on field plots paired with
+              LiDAR; species identifications in camera-trap images come from
+              supervised neural networks trained on millions of labelled
+              photographs.
             </p>
             <p>
               The central challenge of supervised learning is getting enough
               good-quality labels. Labels usually come from fieldwork, expert
-              annotation, or digitisation, all of which are expensive, slow, and prone
-              to error. When people complain that
-              <em>&quot;AI is bottlenecked by data, not compute&quot;</em>, this is what
-              they mean: the limiting reagent is almost always a biologist with
-              binoculars.
+              annotation, or digitisation, all of which are expensive, slow, and
+              prone to error. When people complain that
+              <em>&quot;AI is bottlenecked by data, not compute&quot;</em>, this
+              is what they mean: the limiting reagent is almost always a
+              biologist with binoculars.
             </p>
             <h3 id="section-3-9">
               Unsupervised learning — finding structure in the dark
             </h3>
             <p>
-              Unsupervised learning begins with the same inputs but without any labels.
-              There is no ground truth; the algorithm&#39;s job is to discover structure
-              on its own. Does this spectral dataset naturally split into three classes
-              or seven? Are there hidden behavioural modes in the movement trajectories
-              of these sea turtles? Which plots along the transect form recognisable
-              vegetation communities? These are unsupervised questions, and they are
-              often the first thing you should ask of an unfamiliar dataset.
+              Unsupervised learning begins with the same inputs but without any
+              labels. There is no ground truth; the algorithm&#39;s job is to
+              discover structure on its own. Does this spectral dataset
+              naturally split into three classes or seven? Are there hidden
+              behavioural modes in the movement trajectories of these sea
+              turtles? Which plots along the transect form recognisable
+              vegetation communities? These are unsupervised questions, and they
+              are often the first thing you should ask of an unfamiliar dataset.
             </p>
             <p>
-              Unsupervised methods are cheaper to deploy (no labels required) but they
-              come with a catch. An algorithm will <em>always</em> find some structure,
-              even in pure noise. It is your job, as an ecologist, to decide whether the
-              structure it finds is ecologically meaningful or simply an artefact of the
-              algorithm&#39;s assumptions. This is why unsupervised learning is often
-              described as exploratory: it generates hypotheses rather than confirming
-              them.
+              Unsupervised methods are cheaper to deploy (no labels required)
+              but they come with a catch. An algorithm will <em>always</em> find
+              some structure, even in pure noise. It is your job, as an
+              ecologist, to decide whether the structure it finds is
+              ecologically meaningful or simply an artefact of the
+              algorithm&#39;s assumptions. This is why unsupervised learning is
+              often described as exploratory: it generates hypotheses rather
+              than confirming them.
             </p>
             <p>
-              The figure below shows the same underlying data viewed through both
-              lenses. On the left, we supply labels and let a classifier learn a
-              <strong>decision boundary</strong> — the invisible line separating one
-              class from another. On the right, we hide the labels and ask the computer
-              to find groups on its own. Notice that the groups it discovers are not
-              identical to the true labels: unsupervised learning finds what separates
-              the data <em>geometrically</em>, which may or may not correspond to the
+              The figure below shows the same underlying data viewed through
+              both lenses. On the left, we supply labels and let a classifier
+              learn a <strong>decision boundary</strong> — the invisible line
+              separating one class from another. On the right, we hide the
+              labels and ask the computer to find groups on its own. Notice that
+              the groups it discovers are not identical to the true labels:
+              unsupervised learning finds what separates the data
+              <em>geometrically</em>, which may or may not correspond to the
               ecological categories we care about.
             </p>
             <p><img src="../media/ed86fa411e87d69c57d2.png" alt="03.png" /></p>
@@ -455,78 +507,86 @@
           <section class="markdown-cell">
             <p>
               There is also a smaller third branch,
-              <strong>reinforcement learning</strong>, where an <em>agent</em> learns by
-              trial and error, receiving rewards for good actions and penalties for bad
-              ones. It is the machinery behind
-              <a href="https://deepmind.google/research/alphago/">AlphaGo</a> and
-              self-driving cars, and there is growing interest in using it for adaptive
-              patrol scheduling in anti-poaching. We will not be covering it because I
-              have not made much research on it, but you should recognise the name when
-              you meet it in a seminar.
+              <strong>reinforcement learning</strong>, where an
+              <em>agent</em> learns by trial and error, receiving rewards for
+              good actions and penalties for bad ones. It is the machinery
+              behind
+              <a href="https://deepmind.google/research/alphago/">AlphaGo</a>
+              and self-driving cars, and there is growing interest in using it
+              for adaptive patrol scheduling in anti-poaching. We will not be
+              covering it because I have not made much research on it, but you
+              should recognise the name when you meet it in a seminar.
             </p>
           </section>
           <section class="markdown-cell">
             <h2 id="section-5-10">The general machine-learning workflow</h2>
             <p>
-              Whatever algorithm you eventually reach for, the scaffolding around it is
-              almost always the same. A machine-learning project is a loop with seven
-              stations, and although experienced practitioners may spend 90% of their
-              time on station three, none of the seven can be skipped without
-              consequences. The rest of this section will move through these stations
-              repeatedly; it helps to have a mental image of the whole journey before we
-              start the first leg.
+              Whatever algorithm you eventually reach for, the scaffolding
+              around it is almost always the same. A machine-learning project is
+              a loop with seven stations, and although experienced practitioners
+              may spend 90% of their time on station three, none of the seven
+              can be skipped without consequences. The rest of this section will
+              move through these stations repeatedly; it helps to have a mental
+              image of the whole journey before we start the first leg.
             </p>
             <p>
-              The loop begins when you <strong>ask a question</strong> that is specific
-              enough to answer with data.
-              <em>&quot;Are African penguin populations declining?&quot;</em> is a
-              research question;
+              The loop begins when you <strong>ask a question</strong> that is
+              specific enough to answer with data.
+              <em>&quot;Are African penguin populations declining?&quot;</em> is
+              a research question;
               <em
-                >&quot;Given these measurements of colony size over the last forty
-                years, can we forecast colony size five years from now?&quot;</em
+                >&quot;Given these measurements of colony size over the last
+                forty years, can we forecast colony size five years from
+                now?&quot;</em
               >
               is a machine-learning question. The next step is to
-              <strong>collect or assemble the data</strong> — field surveys, satellite
-              images, sensor networks, museum records, public data portals like GBIF and
-              Copernicus. Then comes the single most important station:
-              <strong>cleaning and exploring the data</strong>. Mislabelled points,
-              missing values, sensor drift, positional inaccuracies in GPS collars — all
-              of these must be found and dealt with before a single model is fit.
-              Professional machine-learning engineers often say they spend eighty
-              percent of their time on data preparation, and they are not exaggerating.
+              <strong>collect or assemble the data</strong> — field surveys,
+              satellite images, sensor networks, museum records, public data
+              portals like GBIF and Copernicus. Then comes the single most
+              important station:
+              <strong>cleaning and exploring the data</strong>. Mislabelled
+              points, missing values, sensor drift, positional inaccuracies in
+              GPS collars — all of these must be found and dealt with before a
+              single model is fit. Professional machine-learning engineers often
+              say they spend eighty percent of their time on data preparation,
+              and they are not exaggerating.
             </p>
             <p>
-              Once the data are clean, you move to <strong>feature engineering</strong>,
-              where you transform the raw measurements into inputs a model can actually
-              learn from. Log-transforming skewed variables, creating derived indices
-              like NDVI, turning categorical variables into dummies, handling missing
-              values thoughtfully — this is where ecological knowledge gives you a
-              decisive edge over someone coming in cold. You then
-              <strong>split the data</strong> into a training set (for fitting the
-              model), a validation set (for tuning it), and a test set (for honest
-              evaluation). <strong>Training</strong> the model comes next;
-              <strong>validation</strong> — often using cross-validation — helps you
-              pick the best hyperparameters without peeking at the test set; and
-              finally, one and only one time, you
-              <strong>evaluate on the test set</strong>. That number is your honest
-              estimate of how the model will behave in the real world. The loop closes
-              with <strong>interpretation and deployment</strong>, which for ecologists
-              usually means turning the model into a map, a risk score, or a
-              recommendation for a manager.
+              Once the data are clean, you move to
+              <strong>feature engineering</strong>, where you transform the raw
+              measurements into inputs a model can actually learn from.
+              Log-transforming skewed variables, creating derived indices like
+              NDVI, turning categorical variables into dummies, handling missing
+              values thoughtfully — this is where ecological knowledge gives you
+              a decisive edge over someone coming in cold. You then
+              <strong>split the data</strong> into a training set (for fitting
+              the model), a validation set (for tuning it), and a test set (for
+              honest evaluation). <strong>Training</strong> the model comes
+              next; <strong>validation</strong> — often using cross-validation —
+              helps you pick the best hyperparameters without peeking at the
+              test set; and finally, one and only one time, you
+              <strong>evaluate on the test set</strong>. That number is your
+              honest estimate of how the model will behave in the real world.
+              The loop closes with
+              <strong>interpretation and deployment</strong>, which for
+              ecologists usually means turning the model into a map, a risk
+              score, or a recommendation for a manager.
             </p>
             <p>
-              The figure below visualises the split of data into training, validation,
-              and test sets, together with a reminder of what each split is used for.
+              The figure below visualises the split of data into training,
+              validation, and test sets, together with a reminder of what each
+              split is used for.
             </p>
             <p><img src="../media/17a82e1ad748fa671229.png" alt="04.png" /></p>
           </section>
           <section class="markdown-cell">
             <h2 id="section-6-11">Why data matters more than models</h2>
             <p>
-              If there is one lesson that separates an experienced machine-learning
-              practitioner from a beginner, it is this: the choice of algorithm matters
-              much less than beginners expect, and the quality of the data matters much
-              more. Peter Norvig, research director at Google, put it memorably:
+              If there is one lesson that separates an experienced
+              machine-learning practitioner from a beginner, it is this: the
+              choice of algorithm matters much less than beginners expect, and
+              the quality of the data matters much more. Peter Norvig, research
+              director at Google, put it memorably:
               <em
                 >&quot;More data beats clever algorithms. Better data beats more
                 data.&quot;</em
@@ -534,48 +594,52 @@
               A well-prepared dataset fed to a simple model will almost always
               outperform a messy dataset fed to a sophisticated one, and the few
               exceptions to that rule tend to be found in domains (like image
-              recognition) where someone has already done the hard data work at enormous
-              expense.
+              recognition) where someone has already done the hard data work at
+              enormous expense.
             </p>
             <p>
-              For ecological machine learning in particular, there is a short hierarchy
-              of things worth obsessing over, in order of importance. First is
-              <strong>data quality</strong>: mislabelled training pixels, positional
-              inaccuracies in GPS collars, sensor drift in cameras, inconsistent calling
-              conventions between field teams — every single one of these will corrupt a
-              downstream model in ways that no fancy algorithm can fix. Second is
-              <strong>representativeness</strong>: are the samples you trained on
-              covering the full range of conditions in which the model will be deployed?
-              A land-cover classifier trained entirely on summer imagery will fail on
-              winter scenes; a species-distribution model trained on occurrences from
-              trail-accessible areas will predict poorly for roadless wilderness. Third
-              is <strong>class balance</strong>: most conservation problems involve rare
-              classes of interest — wetlands, threatened species, illegal activities —
-              and machine-learning algorithms, left to their own devices, will learn to
-              ignore rare classes because always guessing &quot;common&quot; gets most
-              of their predictions right. Fourth, and often overlooked in spatial
-              ecology, is <strong>independence</strong>: nearby pixels and neighbouring
+              For ecological machine learning in particular, there is a short
+              hierarchy of things worth obsessing over, in order of importance.
+              First is <strong>data quality</strong>: mislabelled training
+              pixels, positional inaccuracies in GPS collars, sensor drift in
+              cameras, inconsistent calling conventions between field teams —
+              every single one of these will corrupt a downstream model in ways
+              that no fancy algorithm can fix. Second is
+              <strong>representativeness</strong>: are the samples you trained
+              on covering the full range of conditions in which the model will
+              be deployed? A land-cover classifier trained entirely on summer
+              imagery will fail on winter scenes; a species-distribution model
+              trained on occurrences from trail-accessible areas will predict
+              poorly for roadless wilderness. Third is
+              <strong>class balance</strong>: most conservation problems involve
+              rare classes of interest — wetlands, threatened species, illegal
+              activities — and machine-learning algorithms, left to their own
+              devices, will learn to ignore rare classes because always guessing
+              &quot;common&quot; gets most of their predictions right. Fourth,
+              and often overlooked in spatial ecology, is
+              <strong>independence</strong>: nearby pixels and neighbouring
               field plots are not independent observations, and a naive random
-              train/test split can wildly inflate your accuracy estimates. Only after
-              all of these have been handled does the choice of algorithm really start
-              to matter, and by then the field of plausible models has usually shrunk to
-              two or three.
+              train/test split can wildly inflate your accuracy estimates. Only
+              after all of these have been handled does the choice of algorithm
+              really start to matter, and by then the field of plausible models
+              has usually shrunk to two or three.
             </p>
             <p><img src="../media/5a1f3a846d46f2b51bd5.png" alt="05.png" /></p>
             <p>
-              The three panels above all show a notional problem — distinguishing fynbos
-              from renosterveld using just two spectral bands — but with data of
-              dramatically different quality. The first panel shows what we wish every
-              dataset looked like: a clear gap between the two classes, balanced sample
-              sizes, and the full range of natural variability represented. The second
-              panel shows the effect of twenty percent label noise, a plausible level of
-              error for hand-digitised training polygons; the classes now overlap near
-              the boundary in a way that no model, however sophisticated, can fully
-              undo. The third panel shows sampling bias: we have only collected data
-              from the extreme ends of the gradient, which means any model trained on
-              this data will have no idea what to do with the messy middle that
-              dominates the real landscape. The moral: before you pick an algorithm,
-              look hard at your data.
+              The three panels above all show a notional problem —
+              distinguishing fynbos from renosterveld using just two spectral
+              bands — but with data of dramatically different quality. The first
+              panel shows what we wish every dataset looked like: a clear gap
+              between the two classes, balanced sample sizes, and the full range
+              of natural variability represented. The second panel shows the
+              effect of twenty percent label noise, a plausible level of error
+              for hand-digitised training polygons; the classes now overlap near
+              the boundary in a way that no model, however sophisticated, can
+              fully undo. The third panel shows sampling bias: we have only
+              collected data from the extreme ends of the gradient, which means
+              any model trained on this data will have no idea what to do with
+              the messy middle that dominates the real landscape. The moral:
+              before you pick an algorithm, look hard at your data.
             </p>
           </section>
           <section class="markdown-cell">
@@ -583,64 +647,70 @@
               The fundamental tension — underfitting and overfitting
             </h2>
             <p>
-              If you were to remember only one concept from this notebook, make it this
-              one. Every machine-learning algorithm you will meet in this section is, in
-              some sense, a different answer to the same question:
-              <em>how flexible should my model be?</em> Too little flexibility and the
-              model fails to capture the pattern that is actually there, a failure mode
-              called <strong>underfitting</strong>. Too much flexibility and the model
-              starts memorising the noise in your training data, producing predictions
-              that look brilliant on the data it has already seen and fall apart the
-              moment it meets anything new, a failure mode called
-              <strong>overfitting</strong>. The art of machine learning is finding the
-              sweet spot between these two extremes, and every technique for doing so —
-              regularisation, cross-validation, early stopping, ensembling — is
-              ultimately some version of the same dance.
+              If you were to remember only one concept from this notebook, make
+              it this one. Every machine-learning algorithm you will meet in
+              this section is, in some sense, a different answer to the same
+              question: <em>how flexible should my model be?</em> Too little
+              flexibility and the model fails to capture the pattern that is
+              actually there, a failure mode called
+              <strong>underfitting</strong>. Too much flexibility and the model
+              starts memorising the noise in your training data, producing
+              predictions that look brilliant on the data it has already seen
+              and fall apart the moment it meets anything new, a failure mode
+              called <strong>overfitting</strong>. The art of machine learning
+              is finding the sweet spot between these two extremes, and every
+              technique for doing so — regularisation, cross-validation, early
+              stopping, ensembling — is ultimately some version of the same
+              dance.
             </p>
             <p>
-              An analogy that I found useful: imagine three students preparing for an
-              ecology exam. The first has barely opened the textbook; they will fail
-              because they have not learned enough, their mental model is too simple.
-              The second has memorised last year&#39;s exam paper word-for-word; they
-              will also fail, because the real exam is slightly different, and their
-              mental model does not generalise. The third has studied the underlying
-              principles; they will pass, because they can apply what they have learned
-              to questions they have never seen. Underfitting is the first student,
-              overfitting is the second, and every model we fit in this section is
-              trying to be the third.
+              An analogy that I found useful: imagine three students preparing
+              for an ecology exam. The first has barely opened the textbook;
+              they will fail because they have not learned enough, their mental
+              model is too simple. The second has memorised last year&#39;s exam
+              paper word-for-word; they will also fail, because the real exam is
+              slightly different, and their mental model does not generalise.
+              The third has studied the underlying principles; they will pass,
+              because they can apply what they have learned to questions they
+              have never seen. Underfitting is the first student, overfitting is
+              the second, and every model we fit in this section is trying to be
+              the third.
             </p>
             <p>
-              The figure below shows three polynomial fits to the same noisy dataset.
-              The dashed grey line is the true underlying pattern — a smooth hump that
-              no observer can see directly because all they have are the noisy dots. The
-              first fit is a straight line, which is too rigid to capture the curve and
-              so underfits. The second fit is a modest polynomial that correctly finds
-              the hump. The third fit is a fifteenth-degree polynomial, which zigzags
-              through every data point and looks impressive but has almost no predictive
-              value on new data.
+              The figure below shows three polynomial fits to the same noisy
+              dataset. The dashed grey line is the true underlying pattern — a
+              smooth hump that no observer can see directly because all they
+              have are the noisy dots. The first fit is a straight line, which
+              is too rigid to capture the curve and so underfits. The second fit
+              is a modest polynomial that correctly finds the hump. The third
+              fit is a fifteenth-degree polynomial, which zigzags through every
+              data point and looks impressive but has almost no predictive value
+              on new data.
             </p>
             <p><img src="../media/4e9ba7cdf37ce538c8b6.png" alt="06.png" /></p>
             <p>
-              The statistical vocabulary for this trade-off is <strong>bias</strong> and
-              <strong>variance</strong>. A model with high bias makes strong simplifying
-              assumptions and is consistent but wrong — it underfits. A model with high
-              variance makes very few assumptions and shifts dramatically with each new
-              dataset — it overfits. The skill of machine learning is picking a model
-              whose bias and variance are balanced for the problem at hand, and the
-              standard technique for measuring that balance honestly is to hold out data
-              the model never saw during training. We will meet cross-validation
-              properly in Part 17 of Machine Learning, but you will see held-out
-              evaluation in every notebook from Part 2 onwards.
+              The statistical vocabulary for this trade-off is
+              <strong>bias</strong> and <strong>variance</strong>. A model with
+              high bias makes strong simplifying assumptions and is consistent
+              but wrong — it underfits. A model with high variance makes very
+              few assumptions and shifts dramatically with each new dataset — it
+              overfits. The skill of machine learning is picking a model whose
+              bias and variance are balanced for the problem at hand, and the
+              standard technique for measuring that balance honestly is to hold
+              out data the model never saw during training. We will meet
+              cross-validation properly in Part 17 of Machine Learning, but you
+              will see held-out evaluation in every notebook from Part 2
+              onwards.
             </p>
           </section>
           <section class="markdown-cell">
             <h2 id="section-8-13">The vocabulary we will keep using</h2>
             <p>
-              Like any field, machine learning has developed its own dialect. Here is
-              the minimum vocabulary you will need for the rest of the Machine Learning
-              section. You do not need to memorise these terms in one sitting; they will
-              settle in through use, and you can return to this table whenever a word
-              feels strange.
+              Like any field, machine learning has developed its own dialect.
+              Here is the minimum vocabulary you will need for the rest of the
+              Machine Learning section. You do not need to memorise these terms
+              in one sitting; they will settle in through use, and you can
+              return to this table whenever a word feels strange.
             </p>
             <table>
               <thead>
@@ -715,84 +785,96 @@
             </table>
           </section>
           <section class="markdown-cell">
-            <h2 id="section-9-14">Machine learning in ecology and conservation</h2>
+            <h2 id="section-9-14">
+              Machine learning in ecology and conservation
+            </h2>
             <p>
               Machine learning has already transformed large parts of modern
-              conservation science, and the pace is accelerating. It is worth taking a
-              moment to look at a few of the flagship applications, not because any
-              single one is going to feature in your next assignment, but because they
-              collectively illustrate how the abstract ideas of this notebook become
-              real-world tools.
+              conservation science, and the pace is accelerating. It is worth
+              taking a moment to look at a few of the flagship applications, not
+              because any single one is going to feature in your next
+              assignment, but because they collectively illustrate how the
+              abstract ideas of this notebook become real-world tools.
             </p>
             <p>
-              <strong>Camera-trap image classification</strong> may be the single most
-              visible success story. Conservation projects now deploy tens of thousands
-              of camera traps in networks spanning entire continents, and a single
-              night&#39;s footage can generate more images than a human team could
-              reasonably review in a month. Platforms like
+              <strong>Camera-trap image classification</strong> may be the
+              single most visible success story. Conservation projects now
+              deploy tens of thousands of camera traps in networks spanning
+              entire continents, and a single night&#39;s footage can generate
+              more images than a human team could reasonably review in a month.
+              Platforms like
               <a href="https://www.wildlifeinsights.org">Wildlife Insights</a>,
               <a href="https://www.wildme.org">Wild Me</a>, and
-              <a href="https://www.zambacloud.com">Zamba Cloud</a> use convolutional
-              neural networks — deep supervised classifiers — to process this flood of
-              imagery in near-real time, flagging species and filtering out the empty
-              frames that make up most of the dataset. What once took a ranger three
-              months now takes three hours, and the time saved is reinvested in the
-              harder questions that still need human judgement.
+              <a href="https://www.zambacloud.com">Zamba Cloud</a> use
+              convolutional neural networks — deep supervised classifiers — to
+              process this flood of imagery in near-real time, flagging species
+              and filtering out the empty frames that make up most of the
+              dataset. What once took a ranger three months now takes three
+              hours, and the time saved is reinvested in the harder questions
+              that still need human judgement.
             </p>
             <p>
-              <strong>Bioacoustic monitoring</strong> follows the same logic with sound
-              instead of images. <a href="https://birdnet.cornell.edu">BirdNET</a>,
-              developed by the Cornell Lab of Ornithology, can identify more than three
-              thousand bird species from their calls using audio recorded by cheap
-              automatic recorders left in the field for weeks at a time. Similar systems
-              now exist for bats, frogs, cetaceans, and even insect choruses. The
-              combination of cheap hardware and machine-learning software is quietly
-              enabling a kind of permanent, passive biodiversity monitoring that would
-              have been unthinkable a decade ago.
+              <strong>Bioacoustic monitoring</strong> follows the same logic
+              with sound instead of images.
+              <a href="https://birdnet.cornell.edu">BirdNET</a>, developed by
+              the Cornell Lab of Ornithology, can identify more than three
+              thousand bird species from their calls using audio recorded by
+              cheap automatic recorders left in the field for weeks at a time.
+              Similar systems now exist for bats, frogs, cetaceans, and even
+              insect choruses. The combination of cheap hardware and
+              machine-learning software is quietly enabling a kind of permanent,
+              passive biodiversity monitoring that would have been unthinkable a
+              decade ago.
             </p>
             <p>
-              <strong>Species distribution modelling</strong> — predicting where species
-              occur from environmental variables — is the area of ecology where machine
-              learning arguably arrived earliest. MaxEnt, a maximum-entropy approach
-              developed by Steven Phillips and colleagues in the mid-2000s, rapidly
-              became one of the most cited tools in the field; you will meet it in Part
-              12. More recently, random forests, boosted trees, and deep learning have
-              joined the toolkit, and the rise of GBIF and other open occurrence
-              databases has given every ecologist free access to millions of training
+              <strong>Species distribution modelling</strong> — predicting where
+              species occur from environmental variables — is the area of
+              ecology where machine learning arguably arrived earliest. MaxEnt,
+              a maximum-entropy approach developed by Steven Phillips and
+              colleagues in the mid-2000s, rapidly became one of the most cited
+              tools in the field; you will meet it in Part 12. More recently,
+              random forests, boosted trees, and deep learning have joined the
+              toolkit, and the rise of GBIF and other open occurrence databases
+              has given every ecologist free access to millions of training
               examples.
             </p>
             <p>
-              <strong>Global land-cover mapping</strong> has been reinvented by machine
-              learning. The European Space Agency&#39;s WorldCover product and
-              Google&#39;s Dynamic World product both use supervised classifiers trained
-              on curated reference datasets to produce global maps at ten-metre
-              resolution. A decade ago, producing a single-year global land-cover map
-              was a multi-year, multi-million-dollar endeavour; Dynamic World now
-              produces a new map every few days.
+              <strong>Global land-cover mapping</strong> has been reinvented by
+              machine learning. The European Space Agency&#39;s WorldCover
+              product and Google&#39;s Dynamic World product both use supervised
+              classifiers trained on curated reference datasets to produce
+              global maps at ten-metre resolution. A decade ago, producing a
+              single-year global land-cover map was a multi-year,
+              multi-million-dollar endeavour; Dynamic World now produces a new
+              map every few days.
             </p>
             <p>
               <strong>Whale detection from satellite imagery</strong>,
-              <strong>illegal-fishing detection</strong> in the Global Fishing Watch
-              system, <strong>movement-state inference</strong> from GPS tracks,
-              <strong>connectivity modelling</strong> for corridor design,
-              <strong>smart patrol planning</strong> with the PAWS system — the list
-              goes on, and every entry is a machine-learning pipeline at its core. The
-              common thread is this: wherever conservation has access to a lot of data
-              and not enough human hours to process it, machine learning has found a
-              role.
+              <strong>illegal-fishing detection</strong> in the Global Fishing
+              Watch system, <strong>movement-state inference</strong> from GPS
+              tracks, <strong>connectivity modelling</strong> for corridor
+              design, <strong>smart patrol planning</strong> with the PAWS
+              system — the list goes on, and every entry is a machine-learning
+              pipeline at its core. The common thread is this: wherever
+              conservation has access to a lot of data and not enough human
+              hours to process it, machine learning has found a role.
             </p>
           </section>
           <section class="markdown-cell">
-            <h2 id="section-10-15">A first hands-on glimpse — the Palmer penguins</h2>
+            <h2 id="section-10-15">
+              A first hands-on glimpse — the Palmer penguins
+            </h2>
             <p>
-              To end Part 1 of Machine Learning, let us look at a real ecological
-              dataset with the eyes of someone about to build a classifier. The
-              <strong>Palmer penguins</strong> dataset, curated by Kristen Gorman and
-              colleagues at the Palmer Station Long-Term Ecological Research programme
-              in Antarctica, contains body measurements for three penguin species —
-              <em>Adélie</em>, <em>Chinstrap</em>, and <em>Gentoo</em> — sampled across
-              three islands. It has become the go-to teaching dataset for modern
-              statistical ecology, and we will meet it repeatedly in this section.
+              To end Part 1 of Machine Learning, let us look at a real
+              ecological dataset with the eyes of someone about to build a
+              classifier. The <strong>Palmer penguins</strong> dataset, curated
+              by Kristen Gorman and colleagues at the Palmer Station Long-Term
+              Ecological Research programme in Antarctica, contains body
+              measurements for three penguin species — <em>Adélie</em>,
+              <em>Chinstrap</em>, and <em>Gentoo</em> — sampled across three
+              islands. It has become the go-to teaching dataset for modern
+              statistical ecology, and we will meet it repeatedly in this
+              section.
             </p>
             <p>
               <img src="../media/09b8d656b7e432aff84e.png" alt="08.png" />
@@ -801,20 +883,21 @@
             <p>
               We are not going to build a model here. Instead we are going to do
               something more subtle but equally important: we are going to
-              <em>see</em> the structure in the data. One of the joys of classification
-              in ecology is that many interesting problems are already clearly separable
-              by eye in two dimensions, which means anyone can build an intuition for
-              what a classifier does before ever fitting one.
+              <em>see</em> the structure in the data. One of the joys of
+              classification in ecology is that many interesting problems are
+              already clearly separable by eye in two dimensions, which means
+              anyone can build an intuition for what a classifier does before
+              ever fitting one.
             </p>
           </section>
           <section class="markdown-cell">
             <h3 id="section-11-16">Libraries and visual theme</h3>
             <p>
-              We begin by loading the packages we will need and defining a consistent
-              visual theme that will be used across every notebook under Machine
-              Learning. The theme below gives us Playfair Display for titles, Montserrat
-              for body text, and a vibrant palette that is inspired by modern scientific
-              publication standards.
+              We begin by loading the packages we will need and defining a
+              consistent visual theme that will be used across every notebook
+              under Machine Learning. The theme below gives us Playfair Display
+              for titles, Montserrat for body text, and a vibrant palette that
+              is inspired by modern scientific publication standards.
             </p>
           </section>
           <section class="code-cell" id="cell-12">
@@ -1050,29 +1133,32 @@ ggplot(peng, aes(flipper_length_mm, bill_length_mm,
           </section>
           <section class="markdown-cell">
             <p>
-              The figure above plots flipper length against bill length, coloured by
-              species. Notice that the three clouds of points are almost completely
-              distinct. A classifier is simply a formalisation of the lines your eye is
-              already drawing between them. The ellipses are ninety-five percent
-              confidence regions for each species, drawn under the assumption of a
-              bivariate normal distribution. They do not perfectly capture the shape of
-              each cloud, but they make a useful point: every classifier you will meet
-              in this section — logistic regression, k-nearest-neighbours, random
-              forests, support vector machines — is ultimately drawing some version of a
-              boundary between these clouds. The differences between algorithms comes
-              down to the assumptions they make about where the boundaries should be and
-              how much they should wiggle. A linear classifier draws straight lines; a
-              random forest draws staircases; a neural network draws whatever shape the
-              data suggest. Understanding those differences is what Parts 05 through 11
-              are about.
+              The figure above plots flipper length against bill length,
+              coloured by species. Notice that the three clouds of points are
+              almost completely distinct. A classifier is simply a formalisation
+              of the lines your eye is already drawing between them. The
+              ellipses are ninety-five percent confidence regions for each
+              species, drawn under the assumption of a bivariate normal
+              distribution. They do not perfectly capture the shape of each
+              cloud, but they make a useful point: every classifier you will
+              meet in this section — logistic regression, k-nearest-neighbours,
+              random forests, support vector machines — is ultimately drawing
+              some version of a boundary between these clouds. The differences
+              between algorithms comes down to the assumptions they make about
+              where the boundaries should be and how much they should wiggle. A
+              linear classifier draws straight lines; a random forest draws
+              staircases; a neural network draws whatever shape the data
+              suggest. Understanding those differences is what Parts 05 through
+              11 are about.
             </p>
             <p>
-              It is worth looking at one more view of these data before we close. The
-              ridgeline plot below shows the full distribution of each measurement,
-              broken down by species. It gives a very quick answer to the question
+              It is worth looking at one more view of these data before we
+              close. The ridgeline plot below shows the full distribution of
+              each measurement, broken down by species. It gives a very quick
+              answer to the question
               <em
-                >&quot;which of my features actually matter for telling these species
-                apart?&quot;</em
+                >&quot;which of my features actually matter for telling these
+                species apart?&quot;</em
               >
               — the more separated the ridges, the more informative the feature.
             </p>
@@ -1133,88 +1219,92 @@ Picking joint bandwidth of 2.4
               The ridges tell a clear story. <strong>Body mass</strong> almost
               completely separates Gentoo penguins from the other two.
               <strong>Flipper length</strong> does nearly the same job.
-              <strong>Bill depth</strong> too. <strong>Bill length</strong> separates
-              Adélie from the other two. This kind of exploration, what machine-learning
-              practitioners call <em>feature inspection</em>, is a routine part of step
-              three in the workflow, and if you can read a figure like this at a glance,
+              <strong>Bill depth</strong> too.
+              <strong>Bill length</strong> separates Adélie from the other two.
+              This kind of exploration, what machine-learning practitioners call
+              <em>feature inspection</em>, is a routine part of step three in
+              the workflow, and if you can read a figure like this at a glance,
               you are already thinking like a quantitative ecologist.
             </p>
           </section>
           <section class="markdown-cell">
             <h2 id="section-20-17">Where we go from here</h2>
             <p>
-              Introduction to Machine Learning, above all, a conceptual one. We have
-              framed machine learning as the science of learning rules from examples,
-              distinguished the three tasks (classification, regression, clustering) and
-              two main paradigms (supervised and unsupervised), walked through the
-              workflow that every project follows, and confronted the fundamental
-              tension between underfitting and overfitting that shapes every algorithm
-              you will meet. We have also spent time insisting, as seriously as we can,
-              that the quality of your data matters much more than the sophistication of
-              your model — a lesson that the field learns and then re-learns with each
-              new generation of practitioners.
+              Introduction to Machine Learning, above all, a conceptual one. We
+              have framed machine learning as the science of learning rules from
+              examples, distinguished the three tasks (classification,
+              regression, clustering) and two main paradigms (supervised and
+              unsupervised), walked through the workflow that every project
+              follows, and confronted the fundamental tension between
+              underfitting and overfitting that shapes every algorithm you will
+              meet. We have also spent time insisting, as seriously as we can,
+              that the quality of your data matters much more than the
+              sophistication of your model — a lesson that the field learns and
+              then re-learns with each new generation of practitioners.
             </p>
             <p>
-              The remaining sixteen parts in this section will each introduce one
-              algorithm and use it to answer an ecological question. Part 02 begins with
-              the oldest tool in the supervised-learning toolbox,
-              <strong>linear regression</strong> — a method that has been quietly
-              carrying ecology on its shoulders for nearly two hundred years, and which
-              remains one of the most useful things in your kit. From there we will
-              generalise linear regression to the richer family of generalised linear
-              models in part 03, meet the flexible generalised additive models of part
-              04, and then step into modern classifiers beginning with logistic
-              regression in part 05.
+              The remaining sixteen parts in this section will each introduce
+              one algorithm and use it to answer an ecological question. Part 02
+              begins with the oldest tool in the supervised-learning toolbox,
+              <strong>linear regression</strong> — a method that has been
+              quietly carrying ecology on its shoulders for nearly two hundred
+              years, and which remains one of the most useful things in your
+              kit. From there we will generalise linear regression to the richer
+              family of generalised linear models in part 03, meet the flexible
+              generalised additive models of part 04, and then step into modern
+              classifiers beginning with logistic regression in part 05.
             </p>
             <p>
-              By the end of the Machine Learning section you will have fit models that
-              predict where species occur, classify pixels from satellite imagery,
-              cluster animal movement behaviours, and forecast population trajectories.
-              But all of those applications rest on the ideas we have laid down today.
-              The machinery will get more elaborate; the principles will not change.
+              By the end of the Machine Learning section you will have fit
+              models that predict where species occur, classify pixels from
+              satellite imagery, cluster animal movement behaviours, and
+              forecast population trajectories. But all of those applications
+              rest on the ideas we have laid down today. The machinery will get
+              more elaborate; the principles will not change.
             </p>
             <hr />
             <h3 id="section-20-18">Short exercises for reflection</h3>
             <p>
-              Before you move to part 02, take a moment to test your intuition. These do
-              not require any code.
+              Before you move to part 02, take a moment to test your intuition.
+              These do not require any code.
             </p>
             <ol>
               <li>
                 A colleague gives you ten thousand unlabelled recordings of bat
                 echolocation calls and asks
-                <em>&quot;how many call types are in here?&quot;</em> — is this a
-                supervised or an unsupervised problem, and why?
+                <em>&quot;how many call types are in here?&quot;</em> — is this
+                a supervised or an unsupervised problem, and why?
               </li>
               <li>
-                You want to predict tomorrow&#39;s stream temperature from today&#39;s
-                air temperature, flow rate, and upstream canopy cover. Is this a
-                regression or a classification problem?
+                You want to predict tomorrow&#39;s stream temperature from
+                today&#39;s air temperature, flow rate, and upstream canopy
+                cover. Is this a regression or a classification problem?
               </li>
               <li>
-                Your model achieves ninety-nine percent accuracy on its training set and
-                fifty-four percent accuracy on its held-out test set. In one word, what
-                has gone wrong?
+                Your model achieves ninety-nine percent accuracy on its training
+                set and fifty-four percent accuracy on its held-out test set. In
+                one word, what has gone wrong?
               </li>
               <li>
-                Name one ecological feature you might derive from a Sentinel-2 satellite
-                image over a tropical forest plot. Why would that feature be useful for
-                distinguishing forest from agriculture?
+                Name one ecological feature you might derive from a Sentinel-2
+                satellite image over a tropical forest plot. Why would that
+                feature be useful for distinguishing forest from agriculture?
               </li>
               <li>
-                Why should a conservation biologist worry about biased training data
-                when building a camera-trap classifier? Think about where cameras tend
-                to get placed, and which species might be over- or under-represented as
-                a result.
+                Why should a conservation biologist worry about biased training
+                data when building a camera-trap classifier? Think about where
+                cameras tend to get placed, and which species might be over- or
+                under-represented as a result.
               </li>
             </ol>
             <hr />
             <p>
-              If you can answer these with confidence, you are ready for part 02. If any
-              of them feel uncertain, the best cure is to scroll back through the
-              relevant section of this notebook and re-read it slowly. You are not
-              expected to have everything at your fingertips yet, this is the first of
-              seventeen chapters, and every idea here will return.
+              If you can answer these with confidence, you are ready for part
+              02. If any of them feel uncertain, the best cure is to scroll back
+              through the relevant section of this notebook and re-read it
+              slowly. You are not expected to have everything at your fingertips
+              yet, this is the first of seventeen chapters, and every idea here
+              will return.
             </p>
             <p>See you in part 02, where we fit our first real model.🐧</p>
           </section>
@@ -1241,7 +1331,10 @@ Picking joint bandwidth of 2.4
     <footer class="site-footer">
       <div class="container">
         <div class="footer-main">
-          <a class="brand" href="../../index.html" aria-label="Les Hyperion — home"
+          <a
+            class="brand"
+            href="../../index.html"
+            aria-label="Les Hyperion — home"
             ><img
               class="brand-face"
               src="../../assets/brand/silvi-face.png"
@@ -1249,7 +1342,11 @@ Picking joint bandwidth of 2.4
               width="55"
               height="59"
             /><span class="brand-name" aria-hidden="true"
-              >LES HYPERI<svg class="compass-o" viewBox="0 0 36 46" aria-hidden="true">
+              >LES HYPERI<svg
+                class="compass-o"
+                viewBox="0 0 36 46"
+                aria-hidden="true"
+              >
                 <circle
                   cx="18"
                   cy="23"
@@ -1265,9 +1362,12 @@ Picking joint bandwidth of 2.4
               >N</span
             ></a
           >
-          <p class="footer-thought">Understanding nature.<br />Sharing the evidence.</p>
+          <p class="footer-thought">
+            Understanding nature.<br />Sharing the evidence.
+          </p>
           <nav class="footer-links" aria-label="Footer">
-            <a href="../../about.html">About Phemelo</a><a href="../../cv.html">CV</a
+            <a href="../../about.html">About Phemelo</a
+            ><a href="../../cv.html">CV</a
             ><a
               href="https://github.com/Phemelo-R"
               target="_blank"
@@ -1277,7 +1377,8 @@ Picking joint bandwidth of 2.4
           </nav>
         </div>
         <div class="footer-bottom">
-          <span>© 2026 Phemelo Rutlokoane</span><span>Nature × Data × People</span
+          <span>© 2026 Phemelo Rutlokoane</span
+          ><span>Nature × Data × People</span
           ><span>Johannesburg, South Africa</span>
         </div>
       </div>

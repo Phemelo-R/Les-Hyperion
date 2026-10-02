@@ -15,8 +15,15 @@
       sizes="32x32"
       href="../../assets/brand/favicon-32.png"
     />
-    <link rel="icon" sizes="192x192" href="../../assets/brand/favicon-192.png" />
-    <link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png" />
+    <link
+      rel="icon"
+      sizes="192x192"
+      href="../../assets/brand/favicon-192.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="../../assets/brand/apple-touch-icon.png"
+    />
     <script src="../../js/theme-init.js"></script>
     <link rel="stylesheet" href="../../css/site.css" />
     <link rel="stylesheet" href="../../css/silvi.css" />
@@ -28,7 +35,10 @@
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href="../../index.html" aria-label="Les Hyperion — home"
+        <a
+          class="brand"
+          href="../../index.html"
+          aria-label="Les Hyperion — home"
           ><img
             class="brand-face"
             src="../../assets/brand/silvi-face.png"
@@ -36,7 +46,11 @@
             width="55"
             height="59"
           /><span class="brand-name" aria-hidden="true"
-            >LES HYPERI<svg class="compass-o" viewBox="0 0 36 46" aria-hidden="true">
+            >LES HYPERI<svg
+              class="compass-o"
+              viewBox="0 0 36 46"
+              aria-hidden="true"
+            >
               <circle
                 cx="18"
                 cy="23"
@@ -53,10 +67,11 @@
           ></a
         >
         <nav class="desktop-nav" aria-label="Main navigation">
-          <a href="../../index.html">Home</a><a href="../../research.html">Research</a
+          <a href="../../index.html">Home</a
+          ><a href="../../research.html">Research</a
           ><a href="../../notebooks.html" aria-current="page">Notebooks</a
-          ><a href="../../carbon.html">Carbon</a><a href="../../about.html">About</a
-          ><a href="../../cv.html">CV</a>
+          ><a href="../../carbon.html">Carbon</a
+          ><a href="../../about.html">About</a><a href="../../cv.html">CV</a>
         </nav>
         <div class="header-actions">
           <button
@@ -113,11 +128,17 @@
           </button>
         </div>
       </div>
-      <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" hidden>
-        <a href="../../index.html">Home</a><a href="../../research.html">Research</a
+      <nav
+        class="mobile-nav"
+        id="mobile-nav"
+        aria-label="Mobile navigation"
+        hidden
+      >
+        <a href="../../index.html">Home</a
+        ><a href="../../research.html">Research</a
         ><a href="../../notebooks.html" aria-current="page">Notebooks</a
-        ><a href="../../carbon.html">Carbon</a><a href="../../about.html">About</a
-        ><a href="../../cv.html">CV</a>
+        ><a href="../../carbon.html">Carbon</a
+        ><a href="../../about.html">About</a><a href="../../cv.html">CV</a>
       </nav>
     </header>
     <main id="main">
@@ -186,8 +207,10 @@
               ><a href="#section-20-14"
                 >Visualising the fit — and two kinds of interval</a
               ><a href="#section-27-15">Diagnostics — a custom quadrant</a
-              ><a href="#section-35-16">Influence, leverage, and Cook&#39;s distance</a
-              ><a href="#section-41-17">Multiple regression — adding predictors</a
+              ><a href="#section-35-16"
+                >Influence, leverage, and Cook&#39;s distance</a
+              ><a href="#section-41-17"
+                >Multiple regression — adding predictors</a
               ><a href="#section-50-19">Uncertainty via the bootstrap</a
               ><a href="#section-62-20"
                 >Predictive evaluation — honest assessment on held-out data</a
@@ -196,7 +219,8 @@
             </nav>
           </details>
           <div class="reader-tools">
-            <button id="toggle-outputs" aria-pressed="false">Collapse outputs</button
+            <button id="toggle-outputs" aria-pressed="false">
+              Collapse outputs</button
             ><button class="print-button">Print notebook</button>
           </div>
           <p>Original code and saved outputs.<br />R · 68 cells</p>
@@ -213,38 +237,43 @@
             <hr />
             <blockquote>
               <p>
-                <em>&quot;Regression to mediocrity in hereditary stature.&quot;</em> —
-                Francis Galton, Journal of the Anthropological Institute, 1886
+                <em
+                  >&quot;Regression to mediocrity in hereditary
+                  stature.&quot;</em
+                >
+                — Francis Galton, Journal of the Anthropological Institute, 1886
               </p>
             </blockquote>
             <hr />
             <p>
-              Linear regression is the method that made all the others possible. When
-              Adrien-Marie Legendre published the least-squares principle in 1805, and
-              Carl Friedrich Gauss formalised its probabilistic foundation four years
-              later, they were not thinking about machine learning, they were trying to
-              fit orbits to the wandering asteroid Ceres. Eighty years later, Francis
-              Galton was measuring the heights of parents and children and noticed that
-              tall parents tended to have slightly shorter children, and short parents
+              Linear regression is the method that made all the others possible.
+              When Adrien-Marie Legendre published the least-squares principle
+              in 1805, and Carl Friedrich Gauss formalised its probabilistic
+              foundation four years later, they were not thinking about machine
+              learning, they were trying to fit orbits to the wandering asteroid
+              Ceres. Eighty years later, Francis Galton was measuring the
+              heights of parents and children and noticed that tall parents
+              tended to have slightly shorter children, and short parents
               slightly taller — an effect he called
-              <em>&quot;regression towards mediocrity&quot;</em>, and a word that still
-              names the entire discipline two centuries later. Every supervised-learning
-              algorithm you will meet later in this section — random forests, gradient
-              boosting, neural networks — is, in a meaningful mathematical sense, a
-              generalisation of or a reaction to the humble straight line Legendre and
-              Gauss wrote down.
+              <em>&quot;regression towards mediocrity&quot;</em>, and a word
+              that still names the entire discipline two centuries later. Every
+              supervised-learning algorithm you will meet later in this section
+              — random forests, gradient boosting, neural networks — is, in a
+              meaningful mathematical sense, a generalisation of or a reaction
+              to the humble straight line Legendre and Gauss wrote down.
             </p>
             <p>
               This notebook focuses on linear regression — we will treat it as a
-              complete, self-contained statistical method. By the end you will know not
-              just how to type <code>lm()</code>, but what the function is actually
-              doing, why it does it that way, what its four assumptions mean in
-              biological terms, how to diagnose it when it fails, how to quantify
-              uncertainty in its output through the bootstrap, and how to tell whether
-              the model you have built will generalise to new data. The ideas here —
-              loss functions, parameter estimation, bias and variance, diagnostics,
-              uncertainty — will return in every subsequent parts of Machine Learning.
-              Master them once and you will save yourself years of confusion.
+              complete, self-contained statistical method. By the end you will
+              know not just how to type <code>lm()</code>, but what the function
+              is actually doing, why it does it that way, what its four
+              assumptions mean in biological terms, how to diagnose it when it
+              fails, how to quantify uncertainty in its output through the
+              bootstrap, and how to tell whether the model you have built will
+              generalise to new data. The ideas here — loss functions, parameter
+              estimation, bias and variance, diagnostics, uncertainty — will
+              return in every subsequent parts of Machine Learning. Master them
+              once and you will save yourself years of confusion.
             </p>
             <h4 id="section-0-2">Topics covered</h4>
             <ol>
@@ -253,30 +282,35 @@
                 <em>&quot;regression&quot;</em> is called that
               </li>
               <li>
-                The simple linear model as equation, geometry, and probability statement
-              </li>
-              <li>The least-squares principle, visualised from first principles</li>
-              <li>
-                The Gauss-Markov theorem and what it promises (and does not promise)
+                The simple linear model as equation, geometry, and probability
+                statement
               </li>
               <li>
-                The four assumptions — <strong>LINE</strong> — and how to read each one
-                from a diagnostic plot
+                The least-squares principle, visualised from first principles
+              </li>
+              <li>
+                The Gauss-Markov theorem and what it promises (and does not
+                promise)
+              </li>
+              <li>
+                The four assumptions — <strong>LINE</strong> — and how to read
+                each one from a diagnostic plot
               </li>
               <li>
                 Fitting in R, with a full walk-through of the
                 <code>summary()</code> output
               </li>
               <li>
-                Confidence intervals versus prediction intervals — a distinction that
-                matters
+                Confidence intervals versus prediction intervals — a distinction
+                that matters
               </li>
               <li>
-                Residual diagnostics redesigned as a single publication-ready quadrant
+                Residual diagnostics redesigned as a single publication-ready
+                quadrant
               </li>
               <li>
-                Influence, leverage, and Cook&#39;s distance — detecting high-impact
-                observations
+                Influence, leverage, and Cook&#39;s distance — detecting
+                high-impact observations
               </li>
               <li>
                 Multiple regression, and the interpretation of
@@ -285,7 +319,8 @@
               <li>Interactions — different slopes for different subgroups</li>
               <li>Uncertainty via the nonparametric bootstrap</li>
               <li>
-                Evaluating prediction on held-out data: RMSE, MAE, out-of-sample R²
+                Evaluating prediction on held-out data: RMSE, MAE, out-of-sample
+                R²
               </li>
               <li>Where linear regression breaks, and why part 03 exists</li>
             </ol>
@@ -298,9 +333,9 @@
           <section class="markdown-cell">
             <h3 id="section-1-4">Libraries and visual theme</h3>
             <p>
-              Every notebook in Machine Learning shares a common visual identity so that
-              figures from different chapters sit comfortably alongside one another. Run
-              this block once at the top of every session.
+              Every notebook in Machine Learning shares a common visual identity
+              so that figures from different chapters sit comfortably alongside
+              one another. Run this block once at the top of every session.
             </p>
           </section>
           <section class="code-cell" id="cell-2">
@@ -370,146 +405,161 @@ PalRedGreen   &lt;- c(&quot;#2a9d8f&quot;, &quot;#88c999&quot;, &quot;#e9c46a&qu
           <section class="markdown-cell">
             <h2 id="section-4-5">A short history</h2>
             <p>
-              The story begins in astronomy, not biology. In 1801 the Italian astronomer
-              <a href="https://mathshistory.st-andrews.ac.uk/Biographies/Piazzi/"
+              The story begins in astronomy, not biology. In 1801 the Italian
+              astronomer
+              <a
+                href="https://mathshistory.st-andrews.ac.uk/Biographies/Piazzi/"
                 >Giuseppe Piazzi</a
               >
-              observed a moving speck he took to be a new planet and named Ceres; weeks
-              later, before anyone had enough observations to pin down its orbit, Ceres
-              slipped behind the sun and was lost. Across Europe, astronomers scrambled
-              to predict where it would re-emerge. The young
+              observed a moving speck he took to be a new planet and named
+              Ceres; weeks later, before anyone had enough observations to pin
+              down its orbit, Ceres slipped behind the sun and was lost. Across
+              Europe, astronomers scrambled to predict where it would re-emerge.
+              The young
               <a href="https://mathshistory.st-andrews.ac.uk/Biographies/Gauss/"
                 >Carl Friedrich Gauss</a
               >
               won this race using a method he had developed privately but never
-              published: given a handful of noisy measurements of the asteroid&#39;s
-              position, find the orbital parameters that minimise the sum of squared
-              deviations between the orbit&#39;s predicted positions and the
-              observations. When Ceres reappeared almost exactly where Gauss had
-              predicted, least squares became overnight famous.
-              <a href="https://mathshistory.st-andrews.ac.uk/Biographies/Legendre/"
+              published: given a handful of noisy measurements of the
+              asteroid&#39;s position, find the orbital parameters that minimise
+              the sum of squared deviations between the orbit&#39;s predicted
+              positions and the observations. When Ceres reappeared almost
+              exactly where Gauss had predicted, least squares became overnight
+              famous.
+              <a
+                href="https://mathshistory.st-andrews.ac.uk/Biographies/Legendre/"
                 >Adrien-Marie Legendre</a
               >
-              had in fact published the same idea four years earlier, in 1805, and the
-              ensuing priority dispute between the two men occupied much of their
-              correspondence for the next decade.
+              had in fact published the same idea four years earlier, in 1805,
+              and the ensuing priority dispute between the two men occupied much
+              of their correspondence for the next decade.
             </p>
             <p>
               The move from astronomy to biology came through
               <a
                 href="https://collections.countway.harvard.edu/onview/exhibits/show/galtonschildren/sir-francis-galton"
                 >Francis Galton</a
-              >. In the 1880s, Galton, a cousin of Charles Darwin, and a man whose
-              legacy includes both genuine statistical innovation and deeply troubling
-              contributions to eugenics, was measuring the heights of parents and
-              children in an attempt to understand heredity. He noticed that very tall
-              parents tended to have children who were taller than average but
-              <em>less</em> tall than themselves, and very short parents had children
-              who were shorter than average but less short than themselves. He called
-              this phenomenon <em>&quot;regression towards mediocrity&quot;</em>. The
-              specific biological interpretation has long since been replaced by our
-              understanding of genetics, but the word <em>regression</em> stuck, and
-              from Galton&#39;s scatter-plot of parent and child heights the modern
-              field of applied regression analysis can be said to have emerged. Karl
-              Pearson, Galton&#39;s most influential student, formalised the
-              mathematics; Ronald Fisher, a generation later, embedded it in the
-              maximum-likelihood framework that still underpins how we teach the subject
-              today.
+              >. In the 1880s, Galton, a cousin of Charles Darwin, and a man
+              whose legacy includes both genuine statistical innovation and
+              deeply troubling contributions to eugenics, was measuring the
+              heights of parents and children in an attempt to understand
+              heredity. He noticed that very tall parents tended to have
+              children who were taller than average but <em>less</em> tall than
+              themselves, and very short parents had children who were shorter
+              than average but less short than themselves. He called this
+              phenomenon <em>&quot;regression towards mediocrity&quot;</em>. The
+              specific biological interpretation has long since been replaced by
+              our understanding of genetics, but the word
+              <em>regression</em> stuck, and from Galton&#39;s scatter-plot of
+              parent and child heights the modern field of applied regression
+              analysis can be said to have emerged. Karl Pearson, Galton&#39;s
+              most influential student, formalised the mathematics; Ronald
+              Fisher, a generation later, embedded it in the maximum-likelihood
+              framework that still underpins how we teach the subject today.
             </p>
             <p>
               The practical upshot for us, in 2026, is that when you type
-              <code>lm()</code> in R you are invoking a method that has been refined
-              continuously for two hundred and twenty years, whose mathematical
-              properties are understood in extraordinary depth, and whose interpretation
-              is built into the daily vocabulary of every quantitative science.
+              <code>lm()</code> in R you are invoking a method that has been
+              refined continuously for two hundred and twenty years, whose
+              mathematical properties are understood in extraordinary depth, and
+              whose interpretation is built into the daily vocabulary of every
+              quantitative science.
             </p>
           </section>
           <section class="markdown-cell">
             <h2 id="section-5-6">The simple linear model</h2>
             <p>
-              The simple linear regression model writes the response variable $y$ as a
-              straight-line function of a single predictor $x$ plus random noise:
+              The simple linear regression model writes the response variable
+              $y$ as a straight-line function of a single predictor $x$ plus
+              random noise:
             </p>
             <p>
-              $$ y_i \;=\; \beta_0 \;+\; \beta_1\, x_i \;+\; \varepsilon_i, \qquad
-              \varepsilon_i \sim \mathcal{N}(0,\sigma^2),\quad i = 1,\dots,n. $$
+              $$ y_i \;=\; \beta_0 \;+\; \beta_1\, x_i \;+\; \varepsilon_i,
+              \qquad \varepsilon_i \sim \mathcal{N}(0,\sigma^2),\quad i =
+              1,\dots,n. $$
             </p>
             <p>
-              There is a great deal packed into this single line and it is worth slowing
-              down to unpack every piece. The quantity $y_i$ is the response or outcome
-              for the $i$-th observation — the body mass of the $i$-th penguin, for
-              instance. The quantity $x_i$ is the predictor for that same observation —
-              the penguin&#39;s flipper length. The coefficient $\beta_0$ is the
-              <strong>intercept</strong>: the value we would predict for $y$ when $x =
-              0$. In many ecological applications this corresponds to a biologically
-              impossible situation (no penguin has a zero-millimetre flipper), but it
-              remains a necessary mathematical anchor for the line. The coefficient
-              $\beta_1$ is the <strong>slope</strong>: the change in the expected value
-              of $y$ associated with a one-unit increase in $x$. When someone asks
+              There is a great deal packed into this single line and it is worth
+              slowing down to unpack every piece. The quantity $y_i$ is the
+              response or outcome for the $i$-th observation — the body mass of
+              the $i$-th penguin, for instance. The quantity $x_i$ is the
+              predictor for that same observation — the penguin&#39;s flipper
+              length. The coefficient $\beta_0$ is the
+              <strong>intercept</strong>: the value we would predict for $y$
+              when $x = 0$. In many ecological applications this corresponds to
+              a biologically impossible situation (no penguin has a
+              zero-millimetre flipper), but it remains a necessary mathematical
+              anchor for the line. The coefficient $\beta_1$ is the
+              <strong>slope</strong>: the change in the expected value of $y$
+              associated with a one-unit increase in $x$. When someone asks
               <em
-                >&quot;what does regression tell me about how flipper length relates to
-                body mass?&quot;</em
+                >&quot;what does regression tell me about how flipper length
+                relates to body mass?&quot;</em
               >, they are asking about $\beta_1$.
             </p>
             <p>
-              The final piece, $\varepsilon_i$, is the <strong>error term</strong>. It
-              is the part of $y_i$ that the model cannot explain, and we assume it is
-              drawn independently for each observation from a normal distribution with
-              mean zero and variance $\sigma^2$. That assumption has real content: it
-              says the scatter of points around the line is symmetric, is the same at
-              every $x$, and does not carry memory from one observation to the next.
-              When we talk about the assumptions of linear regression, we are talking
-              about what this single line implies.
+              The final piece, $\varepsilon_i$, is the
+              <strong>error term</strong>. It is the part of $y_i$ that the
+              model cannot explain, and we assume it is drawn independently for
+              each observation from a normal distribution with mean zero and
+              variance $\sigma^2$. That assumption has real content: it says the
+              scatter of points around the line is symmetric, is the same at
+              every $x$, and does not carry memory from one observation to the
+              next. When we talk about the assumptions of linear regression, we
+              are talking about what this single line implies.
             </p>
             <p>
               There are at least three complementary ways to visualise the same
-              equation. The <strong>geometric</strong> view sees the model as the line
-              that best passes through a cloud of points. The
-              <strong>probabilistic</strong> view sees it as a family of conditional
-              normal distributions, one at each value of $x$, whose means march up and
-              down the line. The <strong>optimisation</strong> view sees it as the
-              solution to a minimisation problem — find the line that makes the sum of
-              squared vertical distances from the points to the line as small as
-              possible. All three views are correct and the best practitioners keep all
-              three in mind simultaneously.
+              equation. The <strong>geometric</strong> view sees the model as
+              the line that best passes through a cloud of points. The
+              <strong>probabilistic</strong> view sees it as a family of
+              conditional normal distributions, one at each value of $x$, whose
+              means march up and down the line. The
+              <strong>optimisation</strong> view sees it as the solution to a
+              minimisation problem — find the line that makes the sum of squared
+              vertical distances from the points to the line as small as
+              possible. All three views are correct and the best practitioners
+              keep all three in mind simultaneously.
             </p>
           </section>
           <section class="markdown-cell">
             <h2 id="section-6-7">The least-squares principle</h2>
             <p>
-              The task of fitting the line is a problem of <em>estimation</em>: we have
-              the data but we do not know $\beta_0$ and $\beta_1$; we must choose values
-              $\hat\beta_0$ and $\hat\beta_1$ that best summarise the relationship in
-              the data. The least-squares principle, due to Legendre and Gauss, proposes
-              a specific answer: choose the values that minimise the
+              The task of fitting the line is a problem of <em>estimation</em>:
+              we have the data but we do not know $\beta_0$ and $\beta_1$; we
+              must choose values $\hat\beta_0$ and $\hat\beta_1$ that best
+              summarise the relationship in the data. The least-squares
+              principle, due to Legendre and Gauss, proposes a specific answer:
+              choose the values that minimise the
               <strong>residual sum of squares</strong>,
             </p>
             <p>
-              $$ \mathrm{RSS}(\beta_0, \beta_1) \;=\; \sum_{i=1}^{n} \bigl( y_i -
-              \beta_0 - \beta_1 x_i \bigr)^2. $$
+              $$ \mathrm{RSS}(\beta_0, \beta_1) \;=\; \sum_{i=1}^{n} \bigl( y_i
+              - \beta_0 - \beta_1 x_i \bigr)^2. $$
             </p>
             <p>
-              There are two common justifications for squaring. The first is geometric:
-              squaring turns negative and positive residuals into contributions of the
-              same sign, preventing cancellation, while also penalising large residuals
-              more than small ones — the line works harder to avoid disasters than it
-              does to split hairs. The second is probabilistic: if the errors really are
-              normally distributed with constant variance, then the least-squares
-              estimator is exactly the maximum-likelihood estimator, and it inherits all
-              the optimality properties of that broader framework. You do not need to
-              follow the maximum-likelihood argument yet to use regression well, but it
-              is useful to know that two quite different starting points lead to the
-              same algorithm.
+              There are two common justifications for squaring. The first is
+              geometric: squaring turns negative and positive residuals into
+              contributions of the same sign, preventing cancellation, while
+              also penalising large residuals more than small ones — the line
+              works harder to avoid disasters than it does to split hairs. The
+              second is probabilistic: if the errors really are normally
+              distributed with constant variance, then the least-squares
+              estimator is exactly the maximum-likelihood estimator, and it
+              inherits all the optimality properties of that broader framework.
+              You do not need to follow the maximum-likelihood argument yet to
+              use regression well, but it is useful to know that two quite
+              different starting points lead to the same algorithm.
             </p>
             <p>
               The figure below shows this principle at work on a small simulated
-              dataset. We have drawn three candidate lines through the data. For each
-              line we have coloured the residual segments, the vertical drops from each
-              point to the line, using a heat scale where small residuals appear cool
-              and large residuals appear hot. The sum of squared residuals is shown as
-              an annotation in the corner of each panel. The least-squares fit, in the
-              rightmost panel, is the line for which that number is as small as it can
-              possibly be.
+              dataset. We have drawn three candidate lines through the data. For
+              each line we have coloured the residual segments, the vertical
+              drops from each point to the line, using a heat scale where small
+              residuals appear cool and large residuals appear hot. The sum of
+              squared residuals is shown as an annotation in the corner of each
+              panel. The least-squares fit, in the rightmost panel, is the line
+              for which that number is as small as it can possibly be.
             </p>
             <p><img src="../media/f88a3b7bcc7083a2cc92.png" alt="01.png" /></p>
           </section>
@@ -518,64 +568,69 @@ PalRedGreen   &lt;- c(&quot;#2a9d8f&quot;, &quot;#88c999&quot;, &quot;#e9c46a&qu
               The loss surface — where the three candidate lines really live
             </h3>
             <p>
-              A scatter-plot with three lines on it is only half the story. Every
-              candidate line $(\beta_0, \beta_1)$ corresponds to a single point in a
-              two-dimensional <strong>parameter space</strong>, and the function
-              $\mathrm{RSS}(\beta_0, \beta_1)$ defines a
-              <strong>loss surface</strong> over that space — a landscape of hills and
-              valleys whose lowest point is the least-squares solution. When you type
-              <code>lm()</code>, what R returns is the coordinates of that minimum.
+              A scatter-plot with three lines on it is only half the story.
+              Every candidate line $(\beta_0, \beta_1)$ corresponds to a single
+              point in a two-dimensional <strong>parameter space</strong>, and
+              the function $\mathrm{RSS}(\beta_0, \beta_1)$ defines a
+              <strong>loss surface</strong> over that space — a landscape of
+              hills and valleys whose lowest point is the least-squares
+              solution. When you type <code>lm()</code>, what R returns is the
+              coordinates of that minimum.
             </p>
             <p>
-              The figure below plots this landscape directly. The background is a
-              contour map of $\log\mathrm{RSS}$ across a generous grid of $(\beta_0,
-              \beta_1)$ values, coloured from dark (low loss, the valley floor) to light
-              (high loss, the hillsides). The three candidate lines from the previous
-              figure are marked as points on this map. Notice that the least-squares
-              solution sits at the bottom of the valley, while the too-steep and
-              too-flat candidates live up on the slopes — not catastrophically far from
-              the minimum, but measurably worse. This surface happens to be a perfect
+              The figure below plots this landscape directly. The background is
+              a contour map of $\log\mathrm{RSS}$ across a generous grid of
+              $(\beta_0, \beta_1)$ values, coloured from dark (low loss, the
+              valley floor) to light (high loss, the hillsides). The three
+              candidate lines from the previous figure are marked as points on
+              this map. Notice that the least-squares solution sits at the
+              bottom of the valley, while the too-steep and too-flat candidates
+              live up on the slopes — not catastrophically far from the minimum,
+              but measurably worse. This surface happens to be a perfect
               elliptical bowl, which is why the problem has a clean closed-form
-              solution; for GLMs (Part 03) and beyond, the surface is more irregular and
-              we need iterative algorithms to find the bottom.
+              solution; for GLMs (Part 03) and beyond, the surface is more
+              irregular and we need iterative algorithms to find the bottom.
             </p>
             <p><img src="../media/072eb5e8564ccc596bd1.png" alt="02.png" /></p>
           </section>
           <section class="markdown-cell">
             <p>
-              The white trail on the surface is the path a simple optimisation algorithm
-              — gradient descent — would take from a deliberately poor starting point
-              down to the minimum. For a linear regression we never actually need to
-              walk the surface, because calculus gives us the answer in closed form, but
-              the picture matters because almost every later algorithm
-              <em>does</em> need to walk a loss surface. Logistic regression, GLMs,
-              GAMs, neural networks, gradient boosting — all of them are, at their core,
-              iterative searches on a multi-dimensional landscape exactly like this one.
-              Linear regression is the easy case because its landscape is perfectly
-              convex, with one global minimum and no local traps. Later Parts will show
-              you what happens when the landscape becomes more interesting.
+              The white trail on the surface is the path a simple optimisation
+              algorithm — gradient descent — would take from a deliberately poor
+              starting point down to the minimum. For a linear regression we
+              never actually need to walk the surface, because calculus gives us
+              the answer in closed form, but the picture matters because almost
+              every later algorithm <em>does</em> need to walk a loss surface.
+              Logistic regression, GLMs, GAMs, neural networks, gradient
+              boosting — all of them are, at their core, iterative searches on a
+              multi-dimensional landscape exactly like this one. Linear
+              regression is the easy case because its landscape is perfectly
+              convex, with one global minimum and no local traps. Later Parts
+              will show you what happens when the landscape becomes more
+              interesting.
             </p>
             <h3 id="section-8-9">The closed-form solution</h3>
             <p>
-              For the simple (one-predictor) case, the least-squares problem has a
-              closed-form solution that can be derived with ordinary calculus. Setting
-              the partial derivatives of RSS with respect to $\beta_0$ and $\beta_1$
-              equal to zero and solving yields
+              For the simple (one-predictor) case, the least-squares problem has
+              a closed-form solution that can be derived with ordinary calculus.
+              Setting the partial derivatives of RSS with respect to $\beta_0$
+              and $\beta_1$ equal to zero and solving yields
             </p>
             <p>
-              $$ \hat\beta_1 \;=\; \frac{\sum_i (x_i - \bar x)(y_i - \bar y)}{\sum_i
-              (x_i - \bar x)^2}, \qquad \hat\beta_0 \;=\; \bar y - \hat\beta_1 \bar x,
-              $$
+              $$ \hat\beta_1 \;=\; \frac{\sum_i (x_i - \bar x)(y_i - \bar
+              y)}{\sum_i (x_i - \bar x)^2}, \qquad \hat\beta_0 \;=\; \bar y -
+              \hat\beta_1 \bar x, $$
             </p>
             <p>
-              where $\bar x$ and $\bar y$ are the sample means. You do not need to
-              commit these formulae to memory — <code>lm()</code> will happily compute
-              them for you — but it is worth noticing that the slope estimator is a
-              ratio of the sample covariance between $x$ and $y$ to the sample variance
-              of $x$. This exposes a fundamental fact about regression: no variation in
-              $x$ means no estimable slope. If you survey every pond at exactly the same
-              pH, no amount of clever mathematics will tell you anything about the
-              effect of pH on, say, newt abundance.
+              where $\bar x$ and $\bar y$ are the sample means. You do not need
+              to commit these formulae to memory — <code>lm()</code> will
+              happily compute them for you — but it is worth noticing that the
+              slope estimator is a ratio of the sample covariance between $x$
+              and $y$ to the sample variance of $x$. This exposes a fundamental
+              fact about regression: no variation in $x$ means no estimable
+              slope. If you survey every pond at exactly the same pH, no amount
+              of clever mathematics will tell you anything about the effect of
+              pH on, say, newt abundance.
             </p>
           </section>
           <section class="markdown-cell">
@@ -583,105 +638,114 @@ PalRedGreen   &lt;- c(&quot;#2a9d8f&quot;, &quot;#88c999&quot;, &quot;#e9c46a&qu
               What least squares guarantees — the Gauss-Markov theorem
             </h2>
             <p>
-              The least-squares estimator has a property so famous it has its own
-              theorem, named after the two men who independently discovered it. The
-              <strong>Gauss-Markov theorem</strong> states that, under a specific set of
-              assumptions we will introduce in the next section, the ordinary
-              least-squares estimator is the
-              <strong>best linear unbiased estimator</strong> of $\beta$ — abbreviated
-              BLUE. <em>Unbiased</em> means that, on average across many hypothetical
-              repeated samples, the estimator hits the true value. <em>Best</em> means
-              it has the smallest variance among all unbiased estimators that are linear
-              functions of $y$. In other words, if your data really do satisfy the
-              standard assumptions, no other linear method can do better on average than
-              OLS. This is a remarkable promise and it explains why least squares
-              remained unchallenged as <em>the</em> default method for over a century
-              and a half.
+              The least-squares estimator has a property so famous it has its
+              own theorem, named after the two men who independently discovered
+              it. The <strong>Gauss-Markov theorem</strong> states that, under a
+              specific set of assumptions we will introduce in the next section,
+              the ordinary least-squares estimator is the
+              <strong>best linear unbiased estimator</strong> of $\beta$ —
+              abbreviated BLUE. <em>Unbiased</em> means that, on average across
+              many hypothetical repeated samples, the estimator hits the true
+              value. <em>Best</em> means it has the smallest variance among all
+              unbiased estimators that are linear functions of $y$. In other
+              words, if your data really do satisfy the standard assumptions, no
+              other linear method can do better on average than OLS. This is a
+              remarkable promise and it explains why least squares remained
+              unchallenged as <em>the</em> default method for over a century and
+              a half.
             </p>
             <p>
               The theorem is also a cautionary tale. It promises optimality
-              <em>if and only if</em> the assumptions hold. When they do not, and in
-              ecology they often do not, the OLS estimator is still unbiased in most
-              cases, but its standard errors become unreliable, its confidence intervals
-              become miscalibrated, and its p-values stop meaning what you think they
-              mean. The techniques we will meet in Parts 03, 04, and 17 are all, in
-              various ways, responses to this warning. Before we break the assumptions,
-              however, we need to state them clearly.
+              <em>if and only if</em> the assumptions hold. When they do not,
+              and in ecology they often do not, the OLS estimator is still
+              unbiased in most cases, but its standard errors become unreliable,
+              its confidence intervals become miscalibrated, and its p-values
+              stop meaning what you think they mean. The techniques we will meet
+              in Parts 03, 04, and 17 are all, in various ways, responses to
+              this warning. Before we break the assumptions, however, we need to
+              state them clearly.
             </p>
           </section>
           <section class="markdown-cell">
             <h2 id="section-10-11">The four assumptions — LINE</h2>
             <p>
-              The assumptions of linear regression are traditionally taught with the
-              acronym <strong>LINE</strong>, which is slightly unfair because only the
-              first letter concerns linearity, but the mnemonic has stuck and it does
-              the job.
+              The assumptions of linear regression are traditionally taught with
+              the acronym <strong>LINE</strong>, which is slightly unfair
+              because only the first letter concerns linearity, but the mnemonic
+              has stuck and it does the job.
             </p>
             <p>
-              The <strong>L</strong>inearity assumption says that the conditional mean
-              of $y$ given $x$ is a straight-line function of $x$. It does
-              <em>not</em> say that $y$ itself is distributed linearly — that would not
-              even make sense — and it does not say that $y$ and $x$ are deterministic.
-              It says only that if you took every observation at a given value of $x$
-              and averaged their $y$ values, those averages would fall on a straight
-              line as $x$ varies. If the true relationship curves, bends, plateaus, or
-              wiggles, OLS can still be fit but its interpretation is badly corrupted.
+              The <strong>L</strong>inearity assumption says that the
+              conditional mean of $y$ given $x$ is a straight-line function of
+              $x$. It does <em>not</em> say that $y$ itself is distributed
+              linearly — that would not even make sense — and it does not say
+              that $y$ and $x$ are deterministic. It says only that if you took
+              every observation at a given value of $x$ and averaged their $y$
+              values, those averages would fall on a straight line as $x$
+              varies. If the true relationship curves, bends, plateaus, or
+              wiggles, OLS can still be fit but its interpretation is badly
+              corrupted.
             </p>
             <p>
-              The <strong>I</strong>ndependence assumption says that, conditional on the
-              predictors, the errors do not carry information from one observation to
-              the next. Spatially nearby pixels, temporally close measurements, and
-              repeated measurements on the same individual all violate this assumption,
-              often severely. Violations inflate the apparent precision of our estimates
-              because the effective sample size is smaller than we pretend. Dealing
-              properly with non-independence requires mixed-effects models, spatial
-              regression, or time-series methods — topics beyond this notebook but
-              essential in practice.
+              The <strong>I</strong>ndependence assumption says that,
+              conditional on the predictors, the errors do not carry information
+              from one observation to the next. Spatially nearby pixels,
+              temporally close measurements, and repeated measurements on the
+              same individual all violate this assumption, often severely.
+              Violations inflate the apparent precision of our estimates because
+              the effective sample size is smaller than we pretend. Dealing
+              properly with non-independence requires mixed-effects models,
+              spatial regression, or time-series methods — topics beyond this
+              notebook but essential in practice.
             </p>
             <p>
-              The <strong>N</strong>ormality assumption concerns the distribution of the
-              residuals, not of $y$ itself. We assume that, around the fitted line, the
-              residuals follow a normal distribution with mean zero. Mild departures
-              from normality are surprisingly harmless thanks to the central limit
-              theorem operating on the distribution of the estimators, but heavy tails
-              and strong skew can distort inference, and they usually indicate that a
-              different response distribution (Poisson, binomial, gamma) would fit
-              better.
+              The <strong>N</strong>ormality assumption concerns the
+              distribution of the residuals, not of $y$ itself. We assume that,
+              around the fitted line, the residuals follow a normal distribution
+              with mean zero. Mild departures from normality are surprisingly
+              harmless thanks to the central limit theorem operating on the
+              distribution of the estimators, but heavy tails and strong skew
+              can distort inference, and they usually indicate that a different
+              response distribution (Poisson, binomial, gamma) would fit better.
             </p>
             <p>
               The <strong>E</strong>qual-variance assumption — also called
-              homoscedasticity — says that the variance of the residuals is constant
-              across all values of $x$. Violations, where variance grows or shrinks with
-              the mean, are called heteroscedasticity and are extraordinarily common in
-              ecological data. Count data typically have variance that grows with the
-              mean; concentrations and biomasses have variance that grows roughly with
-              the square of the mean. Ignoring heteroscedasticity rarely biases
-              $\hat\beta$ but nearly always ruins the standard errors.
+              homoscedasticity — says that the variance of the residuals is
+              constant across all values of $x$. Violations, where variance
+              grows or shrinks with the mean, are called heteroscedasticity and
+              are extraordinarily common in ecological data. Count data
+              typically have variance that grows with the mean; concentrations
+              and biomasses have variance that grows roughly with the square of
+              the mean. Ignoring heteroscedasticity rarely biases $\hat\beta$
+              but nearly always ruins the standard errors.
             </p>
             <p>
-              The figure below shows, in four columns, what each assumption looks like
-              when it is satisfied (top row) and what a classic violation looks like
-              (bottom row). Keep this figure mentally bookmarked — you will be looking
-              for these patterns in your own diagnostic plots for the rest of your
-              scientific career.
+              The figure below shows, in four columns, what each assumption
+              looks like when it is satisfied (top row) and what a classic
+              violation looks like (bottom row). Keep this figure mentally
+              bookmarked — you will be looking for these patterns in your own
+              diagnostic plots for the rest of your scientific career.
             </p>
             <p><img src="../media/262a5520421a2e3ac077.png" alt="03.png" /></p>
           </section>
           <section class="markdown-cell">
-            <h2 id="section-11-12">Fitting a real model — Gentoo penguin body mass</h2>
+            <h2 id="section-11-12">
+              Fitting a real model — Gentoo penguin body mass
+            </h2>
             <p>
               We return to the Palmer penguins. Our question:
               <strong
-                >across Gentoo penguins at Biscoe Island, how does body mass scale with
-                flipper length?</strong
+                >across Gentoo penguins at Biscoe Island, how does body mass
+                scale with flipper length?</strong
               >
-              This is a straightforward allometric question of the kind ecologists ask
-              constantly, and Gentoo penguins are a good choice because they are the
-              largest of the three species in the dataset, with the widest range of
-              flipper lengths — which, as we have just seen, is what allows us to
-              estimate a slope in the first place. We will restrict ourselves to one
-              species at this stage to keep the model simple and interpretable; we will
-              add species and sex later in the notebook.
+              This is a straightforward allometric question of the kind
+              ecologists ask constantly, and Gentoo penguins are a good choice
+              because they are the largest of the three species in the dataset,
+              with the widest range of flipper lengths — which, as we have just
+              seen, is what allows us to estimate a slope in the first place. We
+              will restrict ourselves to one species at this stage to keep the
+              model simple and interpretable; we will add species and sex later
+              in the notebook.
             </p>
           </section>
           <section class="code-cell" id="cell-12">
@@ -739,9 +803,9 @@ Coefficients:
           </section>
           <section class="markdown-cell">
             <p>
-              That is a complete and working linear regression. But the output printed
-              to the console is only the tip of the iceberg. Almost everything you will
-              want to know about the model is hidden in the
+              That is a complete and working linear regression. But the output
+              printed to the console is only the tip of the iceberg. Almost
+              everything you will want to know about the model is hidden in the
               <code>summary()</code> function.
             </p>
           </section>
@@ -784,57 +848,60 @@ F-statistic: 119.8 on 1 and 117 DF,  p-value: &lt; 2.2e-16
             </h3>
             <p>
               The <code>summary()</code> output contains roughly five blocks of
-              information and they are worth learning to read fluently. We will walk
-              through each in turn.
+              information and they are worth learning to read fluently. We will
+              walk through each in turn.
             </p>
             <p>
-              The <strong>Call</strong> block simply repeats the formula you fitted. It
-              is easy to overlook but it is your one immediate defence against
-              accidentally interpreting the summary of the wrong model — a mistake that
-              is astonishingly easy to make when you have ten <code>lm</code> objects in
-              your environment.
+              The <strong>Call</strong> block simply repeats the formula you
+              fitted. It is easy to overlook but it is your one immediate
+              defence against accidentally interpreting the summary of the wrong
+              model — a mistake that is astonishingly easy to make when you have
+              ten <code>lm</code> objects in your environment.
             </p>
             <p>
-              The <strong>Residuals</strong> block reports the five-number summary of
-              the residuals $y_i - \hat y_i$. The minimum and maximum tell you how badly
-              wrong the worst-fitted observation is. The median should be approximately
-              zero; a median noticeably far from zero suggests the residuals are
-              systematically biased. The first and third quartiles give you a rough
-              sense of spread. For a well-behaved model, the residuals should look like
-              a symmetric distribution centred on zero.
+              The <strong>Residuals</strong> block reports the five-number
+              summary of the residuals $y_i - \hat y_i$. The minimum and maximum
+              tell you how badly wrong the worst-fitted observation is. The
+              median should be approximately zero; a median noticeably far from
+              zero suggests the residuals are systematically biased. The first
+              and third quartiles give you a rough sense of spread. For a
+              well-behaved model, the residuals should look like a symmetric
+              distribution centred on zero.
             </p>
             <p>
-              The <strong>Coefficients</strong> block is the heart of the output. Each
-              row corresponds to one term in the model. The first column, labelled
-              <code>Estimate</code>, is the point estimate of the coefficient. The
-              second column, <code>Std. Error</code>, is an estimate of the standard
-              deviation of the sampling distribution of that estimate — informally, the
-              uncertainty. The third column, <code>t value</code>, is just the ratio of
-              estimate to standard error; under the null hypothesis that the true
-              coefficient equals zero, this ratio follows a Student&#39;s
-              <em>t</em>-distribution with $n - p$ degrees of freedom (where $p$ is the
-              number of coefficients). The fourth column, <code>Pr(&gt;|t|)</code>, is
-              the two-sided p-value: the probability of observing a <em>t</em>-statistic
-              at least this extreme under the null. The stars on the right are a visual
-              shorthand for significance thresholds and should be ignored in polite
-              company.
+              The <strong>Coefficients</strong> block is the heart of the
+              output. Each row corresponds to one term in the model. The first
+              column, labelled <code>Estimate</code>, is the point estimate of
+              the coefficient. The second column, <code>Std. Error</code>, is an
+              estimate of the standard deviation of the sampling distribution of
+              that estimate — informally, the uncertainty. The third column,
+              <code>t value</code>, is just the ratio of estimate to standard
+              error; under the null hypothesis that the true coefficient equals
+              zero, this ratio follows a Student&#39;s <em>t</em>-distribution
+              with $n - p$ degrees of freedom (where $p$ is the number of
+              coefficients). The fourth column, <code>Pr(&gt;|t|)</code>, is the
+              two-sided p-value: the probability of observing a
+              <em>t</em>-statistic at least this extreme under the null. The
+              stars on the right are a visual shorthand for significance
+              thresholds and should be ignored in polite company.
             </p>
             <p>
-              Below the coefficients are three summary statistics that describe the
-              model as a whole. <strong>Residual standard error</strong> is an estimate
-              of $\sigma$, the standard deviation of the error term. In our Gentoo model
-              it is reported in grams, the same units as the response — a typical
-              prediction error is roughly that many grams off.
-              <strong>Multiple R-squared</strong>, the famous $R^2$, is the proportion
-              of variation in $y$ that the model has explained; it ranges from 0 (the
-              model explains nothing) to 1 (the model explains everything).
-              <strong>Adjusted R-squared</strong> applies a small penalty for the number
-              of predictors and is the better number to compare between models with
-              different numbers of terms. Finally, the <strong>F-statistic</strong> with
-              its p-value tests the global null hypothesis that none of the
-              non-intercept coefficients differ from zero — in a single-predictor model,
-              this is redundant with the <em>t</em>-test for the slope, but in multiple
-              regression it becomes more interesting.
+              Below the coefficients are three summary statistics that describe
+              the model as a whole. <strong>Residual standard error</strong> is
+              an estimate of $\sigma$, the standard deviation of the error term.
+              In our Gentoo model it is reported in grams, the same units as the
+              response — a typical prediction error is roughly that many grams
+              off. <strong>Multiple R-squared</strong>, the famous $R^2$, is the
+              proportion of variation in $y$ that the model has explained; it
+              ranges from 0 (the model explains nothing) to 1 (the model
+              explains everything). <strong>Adjusted R-squared</strong> applies
+              a small penalty for the number of predictors and is the better
+              number to compare between models with different numbers of terms.
+              Finally, the <strong>F-statistic</strong> with its p-value tests
+              the global null hypothesis that none of the non-intercept
+              coefficients differ from zero — in a single-predictor model, this
+              is redundant with the <em>t</em>-test for the slope, but in
+              multiple regression it becomes more interesting.
             </p>
             <p>
               Let us extract the key numbers in a tidier form using the
@@ -959,59 +1026,66 @@ tidy(fit, conf.int = TRUE) %&gt;%
           </section>
           <section class="markdown-cell">
             <p>
-              The interpretation, in plain ecological English: across Gentoo penguins,
-              each additional millimetre of flipper length is associated with 54.17
-              grams of additional body mass, and we are 95% confident that the true
-              population value lies between about 45 and 64 grams per millimetre.
-              Flipper length alone accounts for approximately 50% of the variation in
-              body mass — a respectable figure for a single ecological predictor, though
-              it leaves half the variation on the table for other variables like sex,
-              age, reproductive state, and seasonal condition. The typical prediction is
-              off by several hundred grams, which gives you an honest sense of how tight
-              the relationship really is.
+              The interpretation, in plain ecological English: across Gentoo
+              penguins, each additional millimetre of flipper length is
+              associated with 54.17 grams of additional body mass, and we are
+              95% confident that the true population value lies between about 45
+              and 64 grams per millimetre. Flipper length alone accounts for
+              approximately 50% of the variation in body mass — a respectable
+              figure for a single ecological predictor, though it leaves half
+              the variation on the table for other variables like sex, age,
+              reproductive state, and seasonal condition. The typical prediction
+              is off by several hundred grams, which gives you an honest sense
+              of how tight the relationship really is.
             </p>
             <p>
-              Notice what we have <em>not</em> said. We have not said that flipper
-              length <em>causes</em> increased body mass, nor the reverse. Regression is
-              a tool for quantifying association, not causation. Causal inference
-              requires either a controlled experiment or a carefully constructed causal
-              diagram plus a lot of additional assumptions, and it is one of the most
-              active areas of modern statistics in its own right.
+              Notice what we have <em>not</em> said. We have not said that
+              flipper length <em>causes</em> increased body mass, nor the
+              reverse. Regression is a tool for quantifying association, not
+              causation. Causal inference requires either a controlled
+              experiment or a carefully constructed causal diagram plus a lot of
+              additional assumptions, and it is one of the most active areas of
+              modern statistics in its own right.
             </p>
           </section>
           <section class="markdown-cell">
-            <h2 id="section-20-14">Visualising the fit — and two kinds of interval</h2>
+            <h2 id="section-20-14">
+              Visualising the fit — and two kinds of interval
+            </h2>
             <p>
-              Every report of a linear regression should be accompanied by the figure of
-              the data with the fitted line overlaid. This is not optional. A
-              model&#39;s point estimate can be misleading in ways that a single
-              well-made figure makes immediately obvious — a lurking non-linearity, an
-              outlier dragging the line, a gap in the data where we have no information.
-              If you cannot picture a regression, you do not really understand it.
+              Every report of a linear regression should be accompanied by the
+              figure of the data with the fitted line overlaid. This is not
+              optional. A model&#39;s point estimate can be misleading in ways
+              that a single well-made figure makes immediately obvious — a
+              lurking non-linearity, an outlier dragging the line, a gap in the
+              data where we have no information. If you cannot picture a
+              regression, you do not really understand it.
             </p>
             <p>
-              There are, however, two distinct kinds of uncertainty band that can be
-              drawn around the fitted line, and confusing the two is one of the most
-              common mistakes in applied regression. The
-              <strong>confidence interval</strong> around the line quantifies our
-              uncertainty about <em>the mean of $y$ at a given $x$</em>. It answers the
-              question,
+              There are, however, two distinct kinds of uncertainty band that
+              can be drawn around the fitted line, and confusing the two is one
+              of the most common mistakes in applied regression. The
+              <strong>confidence interval</strong> around the line quantifies
+              our uncertainty about <em>the mean of $y$ at a given $x$</em>. It
+              answers the question,
               <em
-                >&quot;If I took a huge population of Gentoo penguins all with 220-mm
-                flippers, what would their average body mass be?&quot;</em
+                >&quot;If I took a huge population of Gentoo penguins all with
+                220-mm flippers, what would their average body mass
+                be?&quot;</em
               >
-              The interval is narrow near the centre of the data and widens at the
-              extremes because we have less information out there. The
-              <strong>prediction interval</strong> quantifies our uncertainty about
-              <em>a single new observation of $y$</em>. It answers a different question:
+              The interval is narrow near the centre of the data and widens at
+              the extremes because we have less information out there. The
+              <strong>prediction interval</strong> quantifies our uncertainty
+              about <em>a single new observation of $y$</em>. It answers a
+              different question:
               <em
-                >&quot;If I catch one more Gentoo penguin with a 220-mm flipper, what is
-                its body mass likely to be?&quot;</em
+                >&quot;If I catch one more Gentoo penguin with a 220-mm flipper,
+                what is its body mass likely to be?&quot;</em
               >
-              Since a single new observation contains both the uncertainty about the
-              mean <em>and</em> the irreducible noise $\sigma^2$, the prediction
-              interval is always wider than the confidence interval. The figure below
-              shows both simultaneously.
+              Since a single new observation contains both the uncertainty about
+              the mean <em>and</em> the irreducible noise $\sigma^2$, the
+              prediction interval is always wider than the confidence interval.
+              The figure below shows both simultaneously.
             </p>
           </section>
           <section class="code-cell" id="cell-21">
@@ -1159,40 +1233,44 @@ P_right &lt;- ggplot(gentoo, aes(y = body_mass_g)) +
           </section>
           <section class="markdown-cell">
             <p>
-              Notice how much wider the prediction interval is than the confidence
-              interval. The typical scatter of individual penguins around the mean is
-              several hundred grams; the uncertainty about the mean itself, averaged
-              over many birds, is only a few tens of grams. Reporting a CI where you
-              needed a PI (or vice versa) can lead to dramatically wrong conclusions. If
-              a marine biologist asks you to forecast the body mass of a single captured
-              penguin, you must use the PI; if they ask you about the average body mass
-              in a colony of a thousand, the CI will do.
+              Notice how much wider the prediction interval is than the
+              confidence interval. The typical scatter of individual penguins
+              around the mean is several hundred grams; the uncertainty about
+              the mean itself, averaged over many birds, is only a few tens of
+              grams. Reporting a CI where you needed a PI (or vice versa) can
+              lead to dramatically wrong conclusions. If a marine biologist asks
+              you to forecast the body mass of a single captured penguin, you
+              must use the PI; if they ask you about the average body mass in a
+              colony of a thousand, the CI will do.
             </p>
           </section>
           <section class="markdown-cell">
             <h2 id="section-27-15">Diagnostics — a custom quadrant</h2>
             <p>
               Base R gives you four diagnostic plots for free through
-              <code>plot(fit)</code>, and they are genuinely useful. They are also
-              unspeakably ugly. We rebuild them here as a single polished quadrant in
-              the house style. Every time you fit a linear model you should stare at
-              these four panels for at least a minute before interpreting a single
-              coefficient. Regression fails quietly: the numbers always come back, and
-              only the diagnostics will tell you when they are meaningless.
+              <code>plot(fit)</code>, and they are genuinely useful. They are
+              also unspeakably ugly. We rebuild them here as a single polished
+              quadrant in the house style. Every time you fit a linear model you
+              should stare at these four panels for at least a minute before
+              interpreting a single coefficient. Regression fails quietly: the
+              numbers always come back, and only the diagnostics will tell you
+              when they are meaningless.
             </p>
             <p>
-              The four panels are designed to expose different kinds of failure. The
-              <strong>residuals-versus-fitted</strong> plot tests linearity and reveals
-              nonlinearity as a systematic curve in the LOESS line. The
-              <strong>Q-Q plot of standardised residuals</strong> tests normality;
-              systematic departures from the diagonal suggest heavy tails, skew, or
-              outliers. The <strong>scale-location plot</strong> tests equal variance;
-              the square-root of the absolute standardised residuals should, on average,
-              be flat across fitted values. The
-              <strong>residuals-versus-leverage</strong> plot is the most subtle: it
-              shows which observations are unusual both in <em>x</em> and in residual
-              magnitude, with Cook&#39;s-distance contours marking the territory where a
-              single point could meaningfully change the fit if it were removed.
+              The four panels are designed to expose different kinds of failure.
+              The <strong>residuals-versus-fitted</strong> plot tests linearity
+              and reveals nonlinearity as a systematic curve in the LOESS line.
+              The <strong>Q-Q plot of standardised residuals</strong> tests
+              normality; systematic departures from the diagonal suggest heavy
+              tails, skew, or outliers. The
+              <strong>scale-location plot</strong> tests equal variance; the
+              square-root of the absolute standardised residuals should, on
+              average, be flat across fitted values. The
+              <strong>residuals-versus-leverage</strong> plot is the most
+              subtle: it shows which observations are unusual both in
+              <em>x</em> and in residual magnitude, with Cook&#39;s-distance
+              contours marking the territory where a single point could
+              meaningfully change the fit if it were removed.
             </p>
           </section>
           <section class="code-cell" id="cell-28">
@@ -1324,38 +1402,44 @@ D4 &lt;- ggplot(aug, aes(.hat, std_resid)) +
           </section>
           <section class="markdown-cell">
             <p>
-              For this Gentoo model the diagnostics are genuinely reassuring. The
-              residuals scatter around zero without a systematic trend, the Q-Q plot
-              hugs the diagonal except for one or two points in the tails, the
-              scale-location plot is roughly flat, and no observation approaches a
-              Cook&#39;s distance of one. The model is behaving itself. This is, in my
-              experience, rarer than you would hope, and when you do get a clean
-              diagnostic quadrant like this on real data you should enjoy it.
+              For this Gentoo model the diagnostics are genuinely reassuring.
+              The residuals scatter around zero without a systematic trend, the
+              Q-Q plot hugs the diagonal except for one or two points in the
+              tails, the scale-location plot is roughly flat, and no observation
+              approaches a Cook&#39;s distance of one. The model is behaving
+              itself. This is, in my experience, rarer than you would hope, and
+              when you do get a clean diagnostic quadrant like this on real data
+              you should enjoy it.
             </p>
           </section>
           <section class="markdown-cell">
-            <h2 id="section-35-16">Influence, leverage, and Cook&#39;s distance</h2>
+            <h2 id="section-35-16">
+              Influence, leverage, and Cook&#39;s distance
+            </h2>
             <p>
-              The residuals-versus-leverage panel deserves its own section because the
-              concepts it illustrates — leverage and influence — are among the most
-              conceptually important in all of regression diagnostics.
-              <strong>Leverage</strong> measures how unusual an observation&#39;s
-              predictor values are, regardless of its response. A penguin with a 250-mm
-              flipper in a sample where everyone else has flippers between 200 and 230
-              mm has high leverage even if its body mass is exactly what the model would
-              predict. Leverage is purely a property of $x$. <strong>Influence</strong>,
-              in contrast, measures how much the fitted line would change if that
-              observation were removed. An observation can have high leverage but low
-              influence (it sits far out in $x$ but right on the line), low leverage but
-              high influence (it sits near the centre of $x$ but far off the line), or
-              both. Cook&#39;s distance $D_i$ combines leverage and residual size into a
-              single scalar measure of influence, and it is the standard diagnostic for
-              identifying observations that might be unduly driving the fit.
+              The residuals-versus-leverage panel deserves its own section
+              because the concepts it illustrates — leverage and influence — are
+              among the most conceptually important in all of regression
+              diagnostics. <strong>Leverage</strong> measures how unusual an
+              observation&#39;s predictor values are, regardless of its
+              response. A penguin with a 250-mm flipper in a sample where
+              everyone else has flippers between 200 and 230 mm has high
+              leverage even if its body mass is exactly what the model would
+              predict. Leverage is purely a property of $x$.
+              <strong>Influence</strong>, in contrast, measures how much the
+              fitted line would change if that observation were removed. An
+              observation can have high leverage but low influence (it sits far
+              out in $x$ but right on the line), low leverage but high influence
+              (it sits near the centre of $x$ but far off the line), or both.
+              Cook&#39;s distance $D_i$ combines leverage and residual size into
+              a single scalar measure of influence, and it is the standard
+              diagnostic for identifying observations that might be unduly
+              driving the fit.
             </p>
             <p>
-              The figure below amplifies the residuals-versus-leverage panel and adds a
-              panel showing what happens to the fitted line when we remove the single
-              most influential observation.
+              The figure below amplifies the residuals-versus-leverage panel and
+              adds a panel showing what happens to the fitted line when we
+              remove the single most influential observation.
             </p>
           </section>
           <section class="code-cell" id="cell-36">
@@ -1463,47 +1547,52 @@ new_x2$without  &lt;- predict(fit_without, newdata = new_x2)</code></pre>
           </section>
           <section class="markdown-cell">
             <p>
-              In this case, removing the most-influential observation shifts the fitted
-              line by almost nothing — which is exactly the outcome we want. A commonly
-              cited rule of thumb is that observations with Cook&#39;s distance greater
-              than one deserve a closer look, and observations with $D_i &gt; 4/n$
-              deserve at least a glance. Neither threshold is magic. The correct
-              response to an influential observation is almost never to delete it, but
-              to investigate: was it mis-measured? mis-identified? from a different
-              population? If the data point is legitimate, it is telling you something
-              real about the tail of the distribution and deleting it would be
+              In this case, removing the most-influential observation shifts the
+              fitted line by almost nothing — which is exactly the outcome we
+              want. A commonly cited rule of thumb is that observations with
+              Cook&#39;s distance greater than one deserve a closer look, and
+              observations with $D_i &gt; 4/n$ deserve at least a glance.
+              Neither threshold is magic. The correct response to an influential
+              observation is almost never to delete it, but to investigate: was
+              it mis-measured? mis-identified? from a different population? If
+              the data point is legitimate, it is telling you something real
+              about the tail of the distribution and deleting it would be
               dishonest.
             </p>
           </section>
           <section class="markdown-cell">
             <h2 id="section-41-17">Multiple regression — adding predictors</h2>
             <p>
-              In practice, one predictor is rarely enough. We know from Part 01 that
-              Gentoo penguin body mass varies with sex, and probably with season and
-              island. The <strong>multiple linear regression</strong> model generalises
-              the simple regression equation to any number of predictors:
+              In practice, one predictor is rarely enough. We know from Part 01
+              that Gentoo penguin body mass varies with sex, and probably with
+              season and island. The
+              <strong>multiple linear regression</strong> model generalises the
+              simple regression equation to any number of predictors:
             </p>
             <p>
-              $$ y_i \;=\; \beta_0 \;+\; \beta_1 x_{1i} \;+\; \beta_2 x_{2i} \;+\;
-              \ldots \;+\; \beta_p x_{pi} \;+\; \varepsilon_i. $$
+              $$ y_i \;=\; \beta_0 \;+\; \beta_1 x_{1i} \;+\; \beta_2 x_{2i}
+              \;+\; \ldots \;+\; \beta_p x_{pi} \;+\; \varepsilon_i. $$
             </p>
             <p>
-              Each coefficient $\beta_j$ now has a subtly different interpretation from
-              the one-predictor case: it is the expected change in $y$ associated with a
-              one-unit increase in $x_j$, <em>holding all other predictors fixed</em>.
-              The phrase <em>&quot;holding all other predictors fixed&quot;</em> does a
-              lot of work and is worth pausing on. It is what allows us to talk about
-              the effect of flipper length while <em>controlling for</em> the effect of
-              sex. But it is also what lets confounding and multicollinearity do their
-              mischief: if two predictors are so tightly correlated that you cannot, in
-              your sample, find two observations that differ in one without also
-              differing in the other, then you cannot estimate their effects separately.
+              Each coefficient $\beta_j$ now has a subtly different
+              interpretation from the one-predictor case: it is the expected
+              change in $y$ associated with a one-unit increase in $x_j$,
+              <em>holding all other predictors fixed</em>. The phrase
+              <em>&quot;holding all other predictors fixed&quot;</em> does a lot
+              of work and is worth pausing on. It is what allows us to talk
+              about the effect of flipper length while
+              <em>controlling for</em> the effect of sex. But it is also what
+              lets confounding and multicollinearity do their mischief: if two
+              predictors are so tightly correlated that you cannot, in your
+              sample, find two observations that differ in one without also
+              differing in the other, then you cannot estimate their effects
+              separately.
             </p>
             <p>
-              Let us add sex to our Gentoo model. Since <code>sex</code> is categorical,
-              R will encode it as a dummy variable — <code>0</code> for one level and
-              <code>1</code> for the other — and the coefficient will represent the
-              difference between levels.
+              Let us add sex to our Gentoo model. Since <code>sex</code> is
+              categorical, R will encode it as a dummy variable —
+              <code>0</code> for one level and <code>1</code> for the other —
+              and the coefficient will represent the difference between levels.
             </p>
           </section>
           <section class="code-cell" id="cell-42">
@@ -1626,14 +1715,15 @@ tidy(fit2, conf.int = TRUE) %&gt;%
           </section>
           <section class="markdown-cell">
             <p>
-              Two things have changed. The coefficient for flipper length has shifted
-              slightly — it is now the within-sex slope, controlling for the fact that
-              males tend both to have longer flippers and to be heavier. The sex
-              coefficient tells us that, holding flipper length constant, male Gentoos
-              are on average about five hundred grams heavier than females. And the
-              model&#39;s R² has jumped dramatically: adding sex has nearly doubled the
-              fraction of variation we can explain. Visually, the model corresponds to
-              two parallel lines, one per sex, sharing the same slope but offset
+              Two things have changed. The coefficient for flipper length has
+              shifted slightly — it is now the within-sex slope, controlling for
+              the fact that males tend both to have longer flippers and to be
+              heavier. The sex coefficient tells us that, holding flipper length
+              constant, male Gentoos are on average about five hundred grams
+              heavier than females. And the model&#39;s R² has jumped
+              dramatically: adding sex has nearly doubled the fraction of
+              variation we can explain. Visually, the model corresponds to two
+              parallel lines, one per sex, sharing the same slope but offset
               vertically.
             </p>
           </section>
@@ -1676,15 +1766,18 @@ ggplot(gentoo, aes(flipper_length_mm, body_mass_g, colour = sex, fill = sex)) +
             </details>
           </section>
           <section class="markdown-cell">
-            <h3 id="section-46-18">Interactions — when slopes differ between groups</h3>
+            <h3 id="section-46-18">
+              Interactions — when slopes differ between groups
+            </h3>
             <p>
-              The parallel-slopes assumption we just imposed is a testable one. Perhaps
-              male Gentoos not only have different intercepts from females, but a
-              genuinely different rate of increase of mass with flipper length. To test
-              this, we add an <strong>interaction term</strong> to the model, written in
-              R with a colon (<code>flipper_length_mm:sex</code>) or, more conveniently,
-              using the <code>*</code> operator, which expands to the main effects plus
-              the interaction:
+              The parallel-slopes assumption we just imposed is a testable one.
+              Perhaps male Gentoos not only have different intercepts from
+              females, but a genuinely different rate of increase of mass with
+              flipper length. To test this, we add an
+              <strong>interaction term</strong> to the model, written in R with
+              a colon (<code>flipper_length_mm:sex</code>) or, more
+              conveniently, using the <code>*</code> operator, which expands to
+              the main effects plus the interaction:
             </p>
           </section>
           <section class="code-cell" id="cell-47">
@@ -1807,50 +1900,53 @@ ggplot(gentoo, aes(flipper_length_mm, body_mass_g, colour = sex, fill = sex)) +
           </section>
           <section class="markdown-cell">
             <p>
-              The interaction coefficient tests whether the two slopes differ. If it is
-              small and non-significant — as it is in this case — we have no evidence
-              against the parallel-slopes model and should usually prefer the simpler
-              <code>fit2</code>. If it had been large and significant, we would conclude
-              that the relationship between flipper length and mass genuinely differs
-              between the sexes, which would itself be a biologically interesting
-              finding. The general principle here, often called the
-              <em>principle of parsimony</em> or <strong>Occam&#39;s razor</strong> in
-              statistics, is to prefer the simpler model when the data do not support
-              the more complex one.
+              The interaction coefficient tests whether the two slopes differ.
+              If it is small and non-significant — as it is in this case — we
+              have no evidence against the parallel-slopes model and should
+              usually prefer the simpler <code>fit2</code>. If it had been large
+              and significant, we would conclude that the relationship between
+              flipper length and mass genuinely differs between the sexes, which
+              would itself be a biologically interesting finding. The general
+              principle here, often called the
+              <em>principle of parsimony</em> or
+              <strong>Occam&#39;s razor</strong> in statistics, is to prefer the
+              simpler model when the data do not support the more complex one.
             </p>
           </section>
           <section class="markdown-cell">
             <h2 id="section-50-19">Uncertainty via the bootstrap</h2>
             <p>
-              Every coefficient we have estimated comes with a standard error, and those
-              standard errors are constructed under specific distributional assumptions.
-              When the assumptions hold, the standard errors are exact and the
-              confidence intervals are correctly calibrated. When they do not — when
-              residuals are skewed, or heteroscedastic, or heavy-tailed — the parametric
-              standard errors can be systematically wrong. One elegant and remarkably
-              robust alternative is the <strong>nonparametric bootstrap</strong>, a
-              method introduced by Bradley Efron in 1979 that changed applied statistics
-              permanently.
+              Every coefficient we have estimated comes with a standard error,
+              and those standard errors are constructed under specific
+              distributional assumptions. When the assumptions hold, the
+              standard errors are exact and the confidence intervals are
+              correctly calibrated. When they do not — when residuals are
+              skewed, or heteroscedastic, or heavy-tailed — the parametric
+              standard errors can be systematically wrong. One elegant and
+              remarkably robust alternative is the
+              <strong>nonparametric bootstrap</strong>, a method introduced by
+              Bradley Efron in 1979 that changed applied statistics permanently.
             </p>
             <p>
-              The bootstrap&#39;s core idea is this: if we had the luxury of drawing
-              many independent samples from the population, we could estimate the
-              coefficient in each sample and the spread of those estimates would
-              <em>be</em> the sampling distribution. We do not have that luxury — we
-              have just one sample. But we can simulate the procedure by resampling
-              <em>with replacement</em> from our observed data: draw $n$ observations,
-              with replacement, from the $n$ we have; fit the model to the resampled
-              data; record the coefficient. Repeat several thousand times and the spread
-              of the recorded coefficients gives a direct, nonparametric estimate of
-              their sampling distribution. No assumptions about residual distribution
-              needed, no algebra required.
+              The bootstrap&#39;s core idea is this: if we had the luxury of
+              drawing many independent samples from the population, we could
+              estimate the coefficient in each sample and the spread of those
+              estimates would <em>be</em> the sampling distribution. We do not
+              have that luxury — we have just one sample. But we can simulate
+              the procedure by resampling <em>with replacement</em> from our
+              observed data: draw $n$ observations, with replacement, from the
+              $n$ we have; fit the model to the resampled data; record the
+              coefficient. Repeat several thousand times and the spread of the
+              recorded coefficients gives a direct, nonparametric estimate of
+              their sampling distribution. No assumptions about residual
+              distribution needed, no algebra required.
             </p>
             <p>
-              The figure below visualises the full bootstrap distribution of the fitted
-              line — five hundred bootstrap fits overlaid, with the point-estimate fit
-              drawn in bold over the top. The resulting &quot;fan&quot; gives a direct
-              visual sense of how much the line could have varied had we drawn a
-              slightly different sample.
+              The figure below visualises the full bootstrap distribution of the
+              fitted line — five hundred bootstrap fits overlaid, with the
+              point-estimate fit drawn in bold over the top. The resulting
+              &quot;fan&quot; gives a direct visual sense of how much the line
+              could have varied had we drawn a slightly different sample.
             </p>
           </section>
           <section class="code-cell" id="cell-51">
@@ -2093,12 +2189,13 @@ P_fan / (P_joint | P_slope | P_int) +
           </section>
           <section class="markdown-cell">
             <p>
-              Compare these percentile intervals to the parametric ones reported by
-              <code>confint(fit)</code>. For this well-behaved Gentoo dataset they agree
-              closely, which is the expected outcome when the assumptions hold. When
-              they disagree — as they often do on skewed or heteroscedastic data — the
-              bootstrap intervals are usually the ones worth trusting, because they
-              carry no parametric assumptions that could be violated.
+              Compare these percentile intervals to the parametric ones reported
+              by <code>confint(fit)</code>. For this well-behaved Gentoo dataset
+              they agree closely, which is the expected outcome when the
+              assumptions hold. When they disagree — as they often do on skewed
+              or heteroscedastic data — the bootstrap intervals are usually the
+              ones worth trusting, because they carry no parametric assumptions
+              that could be violated.
             </p>
           </section>
           <section class="markdown-cell">
@@ -2106,19 +2203,21 @@ P_fan / (P_joint | P_slope | P_int) +
               Predictive evaluation — honest assessment on held-out data
             </h2>
             <p>
-              Every measure of fit we have computed so far has been calculated on the
-              same data used to fit the model. This is <em>in-sample</em> performance,
-              and it is systematically optimistic: a flexible model can always achieve
-              perfect in-sample fit by memorising the training data, but such a model
-              generalises appallingly. To estimate how well the model will behave on new
-              data, we must evaluate it on data it has never seen. The simplest version
-              of this is a single <strong>train/test split</strong>.
+              Every measure of fit we have computed so far has been calculated
+              on the same data used to fit the model. This is
+              <em>in-sample</em> performance, and it is systematically
+              optimistic: a flexible model can always achieve perfect in-sample
+              fit by memorising the training data, but such a model generalises
+              appallingly. To estimate how well the model will behave on new
+              data, we must evaluate it on data it has never seen. The simplest
+              version of this is a single <strong>train/test split</strong>.
             </p>
             <p>
-              We split the Gentoo dataset into a training portion (roughly 70 %) and a
-              test portion (roughly 30 %), fit the model on the training data only, and
-              evaluate its predictions against the test data&#39;s known values using
-              metrics that live on the response scale.
+              We split the Gentoo dataset into a training portion (roughly 70 %)
+              and a test portion (roughly 30 %), fit the model on the training
+              data only, and evaluate its predictions against the test
+              data&#39;s known values using metrics that live on the response
+              scale.
             </p>
           </section>
           <section class="code-cell" id="cell-63">
@@ -2205,146 +2304,157 @@ values.”
           <section class="markdown-cell">
             <p>
               Three metrics deserve a moment of attention.
-              <strong>Root mean squared error</strong> (RMSE) is the square root of the
-              mean squared prediction error, and its units match the response — it tells
-              you roughly how many grams off a typical prediction is.
-              <strong>Mean absolute error</strong> (MAE) is the average of the absolute
-              residuals; it is more robust to outliers than RMSE because it does not
-              square them. <strong>Out-of-sample R²</strong> is the natural
-              generalisation of the usual R² to the test set, and it quantifies the
-              fraction of variation in the test data that our model explains; unlike its
-              in-sample cousin, it can be negative if the model predicts worse than the
-              test-set mean.
+              <strong>Root mean squared error</strong> (RMSE) is the square root
+              of the mean squared prediction error, and its units match the
+              response — it tells you roughly how many grams off a typical
+              prediction is. <strong>Mean absolute error</strong> (MAE) is the
+              average of the absolute residuals; it is more robust to outliers
+              than RMSE because it does not square them.
+              <strong>Out-of-sample R²</strong> is the natural generalisation of
+              the usual R² to the test set, and it quantifies the fraction of
+              variation in the test data that our model explains; unlike its
+              in-sample cousin, it can be negative if the model predicts worse
+              than the test-set mean.
             </p>
             <p>
-              In our Gentoo example the in-sample and out-of-sample R² are very close,
-              because linear regression with two predictors is too simple to overfit.
-              This will not be true of the random forests, gradient boosting, and neural
-              networks we will meet later. For those, the gap between in-sample and
-              out-of-sample performance will be large, and policing that gap will be a
-              central preoccupation of Parts 09, 11, and 17.
+              In our Gentoo example the in-sample and out-of-sample R² are very
+              close, because linear regression with two predictors is too simple
+              to overfit. This will not be true of the random forests, gradient
+              boosting, and neural networks we will meet later. For those, the
+              gap between in-sample and out-of-sample performance will be large,
+              and policing that gap will be a central preoccupation of Parts 09,
+              11, and 17.
             </p>
           </section>
           <section class="markdown-cell">
             <h2 id="section-66-21">Where linear regression breaks</h2>
             <p>
-              Linear regression is a magnificent default, but it is emphatically not
-              universal. It fails, sometimes subtly and sometimes dramatically, in at
-              least four recurring ecological scenarios.
+              Linear regression is a magnificent default, but it is emphatically
+              not universal. It fails, sometimes subtly and sometimes
+              dramatically, in at least four recurring ecological scenarios.
             </p>
             <p>
-              When the response is a <strong>count</strong> — the number of individuals
-              in a quadrat, the number of species on an island — linear regression is
-              both philosophically and statistically inadequate. Counts cannot be
-              negative, but a linear fit will happily predict negative values near the
-              lower end of the predictor range. Counts also exhibit variance that grows
-              with the mean, which breaks the equal-variance assumption. The remedy is
+              When the response is a <strong>count</strong> — the number of
+              individuals in a quadrat, the number of species on an island —
+              linear regression is both philosophically and statistically
+              inadequate. Counts cannot be negative, but a linear fit will
+              happily predict negative values near the lower end of the
+              predictor range. Counts also exhibit variance that grows with the
+              mean, which breaks the equal-variance assumption. The remedy is
               the Poisson generalised linear model of Part 03.
             </p>
             <p>
-              When the response is a <strong>binary outcome</strong> — present or
-              absent, alive or dead, detected or not — linear regression is even more
-              broken. The response is a probability bounded in $[0, 1]$, but a linear
-              fit will predict probabilities above one or below zero; the variance
-              depends systematically on the mean; and the residuals follow a Bernoulli
-              rather than a normal distribution. The remedy is logistic regression, the
-              central topic of Part 05.
+              When the response is a <strong>binary outcome</strong> — present
+              or absent, alive or dead, detected or not — linear regression is
+              even more broken. The response is a probability bounded in $[0,
+              1]$, but a linear fit will predict probabilities above one or
+              below zero; the variance depends systematically on the mean; and
+              the residuals follow a Bernoulli rather than a normal
+              distribution. The remedy is logistic regression, the central topic
+              of Part 05.
             </p>
             <p>
-              When the response is <strong>strictly positive and right-skewed</strong> —
-              biomass, concentration, home-range area — linear regression often does
-              surprisingly well, but it makes the wrong assumption about variance. A
-              gamma GLM with a log link is a better-principled choice and usually gives
-              tighter confidence intervals.
+              When the response is
+              <strong>strictly positive and right-skewed</strong> — biomass,
+              concentration, home-range area — linear regression often does
+              surprisingly well, but it makes the wrong assumption about
+              variance. A gamma GLM with a log link is a better-principled
+              choice and usually gives tighter confidence intervals.
             </p>
             <p>
               When the relationship between predictor and response is
-              <strong>genuinely non-linear</strong> — a hump, a threshold, a saturation
-              — adding polynomial terms to a linear model is a crude fix that rapidly
-              runs into problems with extrapolation and interpretation. The principled
-              solution is the generalised additive model of Part 04, which lets each
-              predictor enter as a smooth function whose shape is learned from the data.
+              <strong>genuinely non-linear</strong> — a hump, a threshold, a
+              saturation — adding polynomial terms to a linear model is a crude
+              fix that rapidly runs into problems with extrapolation and
+              interpretation. The principled solution is the generalised
+              additive model of Part 04, which lets each predictor enter as a
+              smooth function whose shape is learned from the data.
             </p>
             <p>
-              These four failure modes — counts, probabilities, positive skew, and
-              non-linearity — motivate the next two parts of Machine Learning and,
-              indirectly, much of the rest.
+              These four failure modes — counts, probabilities, positive skew,
+              and non-linearity — motivate the next two parts of Machine
+              Learning and, indirectly, much of the rest.
             </p>
           </section>
           <section class="markdown-cell">
             <h2 id="section-67-22">Takeaways</h2>
             <p>
               Linear regression is old, deep, and still the single most useful
-              quantitative tool in an ecologist&#39;s kit. The least-squares principle
-              is two hundred and twenty years old; the <code>lm()</code> function is the
-              product of decades of careful software engineering; and the interpretation
-              of a slope, an intercept, and an R² is so widespread that it has become
-              part of the common language of quantitative science. A clear understanding
-              of linear regression — not just how to run it, but what it assumes, how to
-              check it, and when it fails — is the foundation on which almost every
-              later technique will be built.
+              quantitative tool in an ecologist&#39;s kit. The least-squares
+              principle is two hundred and twenty years old; the
+              <code>lm()</code> function is the product of decades of careful
+              software engineering; and the interpretation of a slope, an
+              intercept, and an R² is so widespread that it has become part of
+              the common language of quantitative science. A clear understanding
+              of linear regression — not just how to run it, but what it
+              assumes, how to check it, and when it fails — is the foundation on
+              which almost every later technique will be built.
             </p>
             <hr />
             <h3 id="section-67-23">Short exercises for reflection</h3>
             <p>
-              Before you move to part 03, check your intuition against the following
-              exercises. None require code you have not already seen in this notebook.
+              Before you move to part 03, check your intuition against the
+              following exercises. None require code you have not already seen
+              in this notebook.
             </p>
             <ol>
               <li>
                 <p>
-                  Refit the Gentoo body-mass model using <strong>bill length</strong> as
-                  a predictor instead of flipper length. Is the slope larger or smaller?
-                  Is $R^2$ higher or lower? What does the diagnostic quadrant look like?
+                  Refit the Gentoo body-mass model using
+                  <strong>bill length</strong> as a predictor instead of flipper
+                  length. Is the slope larger or smaller? Is $R^2$ higher or
+                  lower? What does the diagnostic quadrant look like?
                 </p>
               </li>
               <li>
                 <p>
                   Fit a full multiple regression
                   <code
-                    >body_mass_g ~ flipper_length_mm + bill_length_mm + bill_depth_mm +
-                    sex</code
+                    >body_mass_g ~ flipper_length_mm + bill_length_mm +
+                    bill_depth_mm + sex</code
                   >
                   on the Gentoo data. Which coefficients change sign or shrink
-                  substantially when you add the others? What does this tell you about
-                  correlations among predictors?
+                  substantially when you add the others? What does this tell you
+                  about correlations among predictors?
                 </p>
               </li>
               <li>
                 <p>
                   Repeat the bootstrap fan exercise with only fifty bootstrap
-                  replicates. Do the percentile confidence intervals agree with the
-                  500-replicate values? At what number of replicates do the intervals
-                  appear to stabilise?
+                  replicates. Do the percentile confidence intervals agree with
+                  the 500-replicate values? At what number of replicates do the
+                  intervals appear to stabilise?
                 </p>
               </li>
               <li>
                 <p>
-                  Construct an artificial dataset with one deliberately outlying point
-                  placed far from the main cloud in $x$ but consistent with the trend.
-                  Does this point have high leverage? Does it have high Cook&#39;s
-                  distance? Explain the difference.
+                  Construct an artificial dataset with one deliberately outlying
+                  point placed far from the main cloud in $x$ but consistent
+                  with the trend. Does this point have high leverage? Does it
+                  have high Cook&#39;s distance? Explain the difference.
                 </p>
               </li>
               <li>
                 <p>
-                  <em>Conceptual.</em> A colleague reports a regression with $R^2 =
-                  0.98$ and a p-value below $10^{-12}$. They claim this demonstrates
-                  that their predictor &quot;causes&quot; the response. Give three
-                  reasons why this claim does not follow from the regression alone.
+                  <em>Conceptual.</em> A colleague reports a regression with
+                  $R^2 = 0.98$ and a p-value below $10^{-12}$. They claim this
+                  demonstrates that their predictor &quot;causes&quot; the
+                  response. Give three reasons why this claim does not follow
+                  from the regression alone.
                 </p>
               </li>
             </ol>
             <hr />
             <h3 id="section-67-24">Coming up in part 03</h3>
             <p>
-              In part 03 we generalise the linear regression model to handle counts,
-              probabilities, and strictly-positive continuous responses. The linear
-              predictor stays; we add a link function and a distribution from the
-              exponential family; and <code>lm()</code> becomes a single special case of
-              a much richer framework called the
-              <strong>generalised linear model</strong>. It is one of the most important
-              conceptual jumps you will make in mach.
+              In part 03 we generalise the linear regression model to handle
+              counts, probabilities, and strictly-positive continuous responses.
+              The linear predictor stays; we add a link function and a
+              distribution from the exponential family; and
+              <code>lm()</code> becomes a single special case of a much richer
+              framework called the <strong>generalised linear model</strong>. It
+              is one of the most important conceptual jumps you will make in
+              mach.
             </p>
           </section>
           <div class="reader-end">
@@ -2370,7 +2480,10 @@ values.”
     <footer class="site-footer">
       <div class="container">
         <div class="footer-main">
-          <a class="brand" href="../../index.html" aria-label="Les Hyperion — home"
+          <a
+            class="brand"
+            href="../../index.html"
+            aria-label="Les Hyperion — home"
             ><img
               class="brand-face"
               src="../../assets/brand/silvi-face.png"
@@ -2378,7 +2491,11 @@ values.”
               width="55"
               height="59"
             /><span class="brand-name" aria-hidden="true"
-              >LES HYPERI<svg class="compass-o" viewBox="0 0 36 46" aria-hidden="true">
+              >LES HYPERI<svg
+                class="compass-o"
+                viewBox="0 0 36 46"
+                aria-hidden="true"
+              >
                 <circle
                   cx="18"
                   cy="23"
@@ -2394,9 +2511,12 @@ values.”
               >N</span
             ></a
           >
-          <p class="footer-thought">Understanding nature.<br />Sharing the evidence.</p>
+          <p class="footer-thought">
+            Understanding nature.<br />Sharing the evidence.
+          </p>
           <nav class="footer-links" aria-label="Footer">
-            <a href="../../about.html">About Phemelo</a><a href="../../cv.html">CV</a
+            <a href="../../about.html">About Phemelo</a
+            ><a href="../../cv.html">CV</a
             ><a
               href="https://github.com/Phemelo-R"
               target="_blank"
@@ -2406,7 +2526,8 @@ values.”
           </nav>
         </div>
         <div class="footer-bottom">
-          <span>© 2026 Phemelo Rutlokoane</span><span>Nature × Data × People</span
+          <span>© 2026 Phemelo Rutlokoane</span
+          ><span>Nature × Data × People</span
           ><span>Johannesburg, South Africa</span>
         </div>
       </div>

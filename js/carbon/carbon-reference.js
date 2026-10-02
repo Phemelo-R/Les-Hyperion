@@ -1,3 +1,4 @@
+/* Generated from data/json by npm run build. */
 window.CARBON_REFERENCE = {
   "airports": [
     {

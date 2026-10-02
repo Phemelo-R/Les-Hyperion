@@ -15,8 +15,15 @@
       sizes="32x32"
       href="../../assets/brand/favicon-32.png"
     />
-    <link rel="icon" sizes="192x192" href="../../assets/brand/favicon-192.png" />
-    <link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png" />
+    <link
+      rel="icon"
+      sizes="192x192"
+      href="../../assets/brand/favicon-192.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="../../assets/brand/apple-touch-icon.png"
+    />
     <script src="../../js/theme-init.js"></script>
     <link rel="stylesheet" href="../../css/site.css" />
     <link rel="stylesheet" href="../../css/silvi.css" />
@@ -28,7 +35,10 @@
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href="../../index.html" aria-label="Les Hyperion — home"
+        <a
+          class="brand"
+          href="../../index.html"
+          aria-label="Les Hyperion — home"
           ><img
             class="brand-face"
             src="../../assets/brand/silvi-face.png"
@@ -36,7 +46,11 @@
             width="55"
             height="59"
           /><span class="brand-name" aria-hidden="true"
-            >LES HYPERI<svg class="compass-o" viewBox="0 0 36 46" aria-hidden="true">
+            >LES HYPERI<svg
+              class="compass-o"
+              viewBox="0 0 36 46"
+              aria-hidden="true"
+            >
               <circle
                 cx="18"
                 cy="23"
@@ -53,10 +67,11 @@
           ></a
         >
         <nav class="desktop-nav" aria-label="Main navigation">
-          <a href="../../index.html">Home</a><a href="../../research.html">Research</a
+          <a href="../../index.html">Home</a
+          ><a href="../../research.html">Research</a
           ><a href="../../notebooks.html" aria-current="page">Notebooks</a
-          ><a href="../../carbon.html">Carbon</a><a href="../../about.html">About</a
-          ><a href="../../cv.html">CV</a>
+          ><a href="../../carbon.html">Carbon</a
+          ><a href="../../about.html">About</a><a href="../../cv.html">CV</a>
         </nav>
         <div class="header-actions">
           <button
@@ -113,11 +128,17 @@
           </button>
         </div>
       </div>
-      <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" hidden>
-        <a href="../../index.html">Home</a><a href="../../research.html">Research</a
+      <nav
+        class="mobile-nav"
+        id="mobile-nav"
+        aria-label="Mobile navigation"
+        hidden
+      >
+        <a href="../../index.html">Home</a
+        ><a href="../../research.html">Research</a
         ><a href="../../notebooks.html" aria-current="page">Notebooks</a
-        ><a href="../../carbon.html">Carbon</a><a href="../../about.html">About</a
-        ><a href="../../cv.html">CV</a>
+        ><a href="../../carbon.html">Carbon</a
+        ><a href="../../about.html">About</a><a href="../../cv.html">CV</a>
       </nav>
     </header>
     <main id="main">
@@ -184,15 +205,18 @@
               ><a href="#section-43-15">tidyr — Data Reshaping</a
               ><a href="#section-54-19">stringr — String Manipulation</a
               ><a href="#section-61-20">forcats — Factor Manipulation</a
-              ><a href="#section-67-21">lubridate — Date and Time Manipulation</a
+              ><a href="#section-67-21"
+                >lubridate — Date and Time Manipulation</a
               ><a href="#section-72-22">purrr — Functional Programming</a
-              ><a href="#section-76-23">Putting It All Together — A Complete Workflow</a
+              ><a href="#section-76-23"
+                >Putting It All Together — A Complete Workflow</a
               ><a href="#section-78-24">Summary</a
               ><a href="#section-78-25">References</a>
             </nav>
           </details>
           <div class="reader-tools">
-            <button id="toggle-outputs" aria-pressed="false">Collapse outputs</button
+            <button id="toggle-outputs" aria-pressed="false">
+              Collapse outputs</button
             ><button class="print-button">Print notebook</button>
           </div>
           <p>Original code and saved outputs.<br />R · 79 cells</p>
@@ -210,15 +234,15 @@
             <blockquote>
               <p>
                 <em
-                  >&quot;Happy families are all alike; every unhappy family is unhappy
-                  in its own way.&quot;</em
+                  >&quot;Happy families are all alike; every unhappy family is
+                  unhappy in its own way.&quot;</em
                 >
                 — Leo Tolstoy, <em>Anna Karenina</em> (1878)
               </p>
               <p>
                 <em
-                  >&quot;Tidy datasets are all alike, but every messy dataset is messy
-                  in its own way.&quot;</em
+                  >&quot;Tidy datasets are all alike, but every messy dataset is
+                  messy in its own way.&quot;</em
                 >
                 — Hadley Wickham (2014)
               </p>
@@ -226,18 +250,20 @@
             <hr />
             <h2 id="section-0-2">Introduction</h2>
             <p>
-              In Part 1, we laid the foundations of R — objects, data types, structures,
-              and packages — working entirely in <strong>base R</strong>. In this
-              section, we move to the <strong>Tidyverse</strong>: a curated collection
-              of R packages that share a common design philosophy, grammar, and data
+              In Part 1, we laid the foundations of R — objects, data types,
+              structures, and packages — working entirely in
+              <strong>base R</strong>. In this section, we move to the
+              <strong>Tidyverse</strong>: a curated collection of R packages
+              that share a common design philosophy, grammar, and data
               structure, making data manipulation more intuitive, readable, and
               reproducible.
             </p>
             <p>
               Throughout this page, we will work exclusively with the
-              <strong>Palmer Penguins</strong> dataset (<code>palmerpenguins</code>;
-              Horst, Hill &amp; Gorman, 2020) — a real ecological dataset from the
-              Palmer Long-Term Ecological Research (LTER) site in Antarctica.
+              <strong>Palmer Penguins</strong> dataset
+              (<code>palmerpenguins</code>; Horst, Hill &amp; Gorman, 2020) — a
+              real ecological dataset from the Palmer Long-Term Ecological
+              Research (LTER) site in Antarctica.
             </p>
             <p>
               <img
@@ -248,8 +274,8 @@
             <p><strong>References:</strong></p>
             <ul>
               <li>
-                Wickham, H. (2014). Tidy data. <em>Journal of Statistical Software</em>,
-                59(10), 1–23.
+                Wickham, H. (2014). Tidy data.
+                <em>Journal of Statistical Software</em>, 59(10), 1–23.
                 <a href="https://doi.org/10.18637/jss.v059.i10"
                   >https://doi.org/10.18637/jss.v059.i10</a
                 >
@@ -274,10 +300,11 @@
           <section class="markdown-cell">
             <h2 id="section-1-3">The Tidyverse</h2>
             <p>
-              The <strong>Tidyverse</strong> is an opinionated collection of R packages
-              created by <strong>Hadley Wickham</strong> (now at Posit, formerly
-              RStudio) and maintained by a growing team of contributors. Installing
-              <code>tidyverse</code> installs eight core packages at once:
+              The <strong>Tidyverse</strong> is an opinionated collection of R
+              packages created by <strong>Hadley Wickham</strong> (now at Posit,
+              formerly RStudio) and maintained by a growing team of
+              contributors. Installing <code>tidyverse</code> installs eight
+              core packages at once:
             </p>
             <table>
               <thead>
@@ -324,16 +351,16 @@
             <p>All tidyverse functions share:</p>
             <ol>
               <li>
-                <strong>Consistent syntax</strong>: the first argument is always the
-                data.
+                <strong>Consistent syntax</strong>: the first argument is always
+                the data.
               </li>
               <li>
-                <strong>Tidy data expectations</strong>: rows are observations, columns
-                are variables.
+                <strong>Tidy data expectations</strong>: rows are observations,
+                columns are variables.
               </li>
               <li>
-                <strong>Pipe compatibility</strong>: designed to be chained with the
-                pipe operator.
+                <strong>Pipe compatibility</strong>: designed to be chained with
+                the pipe operator.
               </li>
             </ol>
             <p>
@@ -392,7 +419,7 @@ The following objects are masked from ‘package:datasets’:
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -437,24 +464,26 @@ The following objects are masked from ‘package:datasets’:
             <hr />
             <h2 id="section-3-4">Tidy Data</h2>
             <p>
-              <strong>Tidy data</strong> is a standardised way of organising tabular
-              data that makes downstream analysis straightforward (Wickham, 2014). A
-              dataset is tidy when:
+              <strong>Tidy data</strong> is a standardised way of organising
+              tabular data that makes downstream analysis straightforward
+              (Wickham, 2014). A dataset is tidy when:
             </p>
             <ol>
               <li>
-                <strong>Every column is a variable</strong> — a single attribute of the
-                observations.
+                <strong>Every column is a variable</strong> — a single attribute
+                of the observations.
               </li>
-              <li><strong>Every row is an observation</strong> — a single record.</li>
               <li>
-                <strong>Every cell contains a single value</strong> — no multiple values
-                crammed into one cell.
+                <strong>Every row is an observation</strong> — a single record.
+              </li>
+              <li>
+                <strong>Every cell contains a single value</strong> — no
+                multiple values crammed into one cell.
               </li>
             </ol>
             <p>
-              The <code>penguins</code> dataset is already tidy — we can verify this
-              immediately:
+              The <code>penguins</code> dataset is already tidy — we can verify
+              this immediately:
             </p>
           </section>
           <section class="code-cell" id="cell-4">
@@ -582,9 +611,10 @@ $ Comments              &lt;chr&gt; &quot;Not enough blood for isotopes.&quot;, 
             <hr />
             <h2 id="section-7-5">The Pipe Operator</h2>
             <p>
-              The <strong>pipe operator</strong> passes the output of one function
-              directly as the first argument of the next, enabling a readable,
-              left-to-right chain of operations. Two pipes are in common use:
+              The <strong>pipe operator</strong> passes the output of one
+              function directly as the first argument of the next, enabling a
+              readable, left-to-right chain of operations. Two pipes are in
+              common use:
             </p>
             <table>
               <thead>
@@ -628,7 +658,9 @@ result_piped &lt;- penguins |&gt;
 all.equal(result_nested, result_piped)</code></pre>
             <details class="cell-output" open>
               <summary>Output</summary>
-              <div class="output-content"><div class="notebook-table">TRUE</div></div>
+              <div class="output-content">
+                <div class="notebook-table">TRUE</div>
+              </div>
             </details>
           </section>
           <section class="code-cell" id="cell-9">
@@ -698,23 +730,32 @@ Supply arguments directly to `.fns` through an anonymous function instead.
           </section>
           <section class="markdown-cell">
             <hr />
-            <h2 id="section-10-6"><code>readr</code> — Reading and Writing Data</h2>
-            <img src="../media/55c089683ce5aa885dce.png" align="right" width="130" />
+            <h2 id="section-10-6">
+              <code>readr</code> — Reading and Writing Data
+            </h2>
+            <img
+              src="../media/55c089683ce5aa885dce.png"
+              align="right"
+              width="130"
+            />
 
             <p>
-              <code>readr</code> provides fast, consistent functions for importing and
-              exporting rectangular data. It is the tidyverse replacement for base
-              R&#39;s <code>read.csv()</code>.
+              <code>readr</code> provides fast, consistent functions for
+              importing and exporting rectangular data. It is the tidyverse
+              replacement for base R&#39;s <code>read.csv()</code>.
             </p>
             <h3 id="section-10-7">Key advantages over base R</h3>
             <ul>
-              <li>Automatically guesses column types (but allows manual override)</li>
+              <li>
+                Automatically guesses column types (but allows manual override)
+              </li>
               <li>
                 Never converts strings to factors by default (unlike
                 <code>read.csv</code>)
               </li>
               <li>
-                Produces a tibble (a modern data frame) rather than a base data frame
+                Produces a tibble (a modern data frame) rather than a base data
+                frame
               </li>
               <li>Clearly reports any parsing problems</li>
             </ul>
@@ -804,7 +845,8 @@ $ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 
           </section>
           <section class="code-cell" id="cell-13">
             <div class="code-toolbar">
-              <span>R · Cell 9</span><button class="copy-code">Copy code</button>
+              <span>R · Cell 9</span
+              ><button class="copy-code">Copy code</button>
             </div>
             <!-- prettier-ignore -->
             <pre class="source-code"><code># Other read_* functions
@@ -820,12 +862,17 @@ $ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 
           <section class="markdown-cell">
             <hr />
             <h2 id="section-14-8"><code>dplyr</code> — Data Manipulation</h2>
-            <img src="../media/2bc5bcd6d36c2c264711.png" align="right" width="130" />
+            <img
+              src="../media/2bc5bcd6d36c2c264711.png"
+              align="right"
+              width="130"
+            />
 
             <p>
-              <code>dplyr</code> is the core data manipulation package of the tidyverse.
-              It provides six <strong>primary verbs</strong> that cover the vast
-              majority of data manipulation needs (Wickham et al., 2023):
+              <code>dplyr</code> is the core data manipulation package of the
+              tidyverse. It provides six <strong>primary verbs</strong> that
+              cover the vast majority of data manipulation needs (Wickham et
+              al., 2023):
             </p>
             <table>
               <thead>
@@ -862,22 +909,26 @@ $ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 
               </tbody>
             </table>
             <p>
-              These verbs are almost always combined with <code>group_by()</code>, which
-              applies any operation separately within groups.
+              These verbs are almost always combined with
+              <code>group_by()</code>, which applies any operation separately
+              within groups.
             </p>
             <p>
-              <strong>Reference:</strong> Wickham, H., François, R., Henry, L., Müller,
-              K. &amp; Vaughan, D. (2023).
+              <strong>Reference:</strong> Wickham, H., François, R., Henry, L.,
+              Müller, K. &amp; Vaughan, D. (2023).
               <em>dplyr: A Grammar of Data Manipulation</em>.
-              <a href="https://dplyr.tidyverse.org">https://dplyr.tidyverse.org</a>
+              <a href="https://dplyr.tidyverse.org"
+                >https://dplyr.tidyverse.org</a
+              >
             </p>
           </section>
           <section class="markdown-cell">
             <h3 id="section-15-9">1. <code>filter()</code> — Row subsetting</h3>
             <p>
-              <code>filter()</code> retains rows that satisfy one or more logical
-              conditions. The double-equals <code>==</code> tests equality; a single
-              <code>=</code> inside filter would cause an error.
+              <code>filter()</code> retains rows that satisfy one or more
+              logical conditions. The double-equals <code>==</code> tests
+              equality; a single <code>=</code> inside filter would cause an
+              error.
             </p>
             <table>
               <thead>
@@ -939,7 +990,9 @@ female_penguins &lt;- penguins |&gt;
 nrow(female_penguins)   # 165 females</code></pre>
             <details class="cell-output" open>
               <summary>Output</summary>
-              <div class="output-content"><div class="notebook-table">165</div></div>
+              <div class="output-content">
+                <div class="notebook-table">165</div>
+              </div>
             </details>
           </section>
           <section class="code-cell" id="cell-17">
@@ -1455,7 +1508,9 @@ penguins_no_na_flipper &lt;- penguins |&gt;
 nrow(penguins) - nrow(penguins_no_na_flipper)  # How many rows removed?</code></pre>
             <details class="cell-output" open>
               <summary>Output</summary>
-              <div class="output-content"><div class="notebook-table">2</div></div>
+              <div class="output-content">
+                <div class="notebook-table">2</div>
+              </div>
             </details>
           </section>
           <section class="code-cell" id="cell-20">
@@ -1471,11 +1526,15 @@ penguins_complete &lt;- penguins |&gt;
 nrow(penguins_complete)   # 333 complete cases</code></pre>
             <details class="cell-output" open>
               <summary>Output</summary>
-              <div class="output-content"><div class="notebook-table">333</div></div>
+              <div class="output-content">
+                <div class="notebook-table">333</div>
+              </div>
             </details>
           </section>
           <section class="markdown-cell">
-            <h3 id="section-21-10">2. <code>select()</code> — Column subsetting</h3>
+            <h3 id="section-21-10">
+              2. <code>select()</code> — Column subsetting
+            </h3>
             <p>
               <code>select()</code> chooses columns by name, position, or helper
               functions.
@@ -1506,7 +1565,7 @@ names(morphology)</code></pre>
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -1547,7 +1606,7 @@ names(no_year_sex)</code></pre>
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -1591,7 +1650,7 @@ names(mm_columns)</code></pre>
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -1630,7 +1689,7 @@ names(numeric_only)</code></pre>
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -1671,7 +1730,7 @@ names(penguins_reordered)</code></pre>
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -1694,9 +1753,9 @@ names(penguins_reordered)</code></pre>
               3. <code>mutate()</code> — Adding and transforming columns
             </h3>
             <p>
-              <code>mutate()</code> adds new columns or modifies existing ones. It
-              operates <strong>row-wise</strong> — each new value is computed from the
-              values in that row.
+              <code>mutate()</code> adds new columns or modifies existing ones.
+              It operates <strong>row-wise</strong> — each new value is computed
+              from the values in that row.
             </p>
           </section>
           <section class="code-cell" id="cell-28">
@@ -1903,7 +1962,7 @@ unique(penguins_labelled$individual_label)</code></pre>
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -1927,7 +1986,7 @@ unique(penguins_labelled$individual_label)</code></pre>
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -1949,9 +2008,9 @@ unique(penguins_labelled$individual_label)</code></pre>
               statistics
             </h3>
             <p>
-              <code>summarise()</code> collapses a data frame (or groups within it) to a
-              single row per group. Almost always used in combination with
-              <code>group_by()</code>.
+              <code>summarise()</code> collapses a data frame (or groups within
+              it) to a single row per group. Almost always used in combination
+              with <code>group_by()</code>.
             </p>
           </section>
           <section class="code-cell" id="cell-34">
@@ -2362,7 +2421,7 @@ names(penguins_renamed)</code></pre>
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -2383,10 +2442,10 @@ names(penguins_renamed)</code></pre>
           <section class="markdown-cell">
             <h3 id="section-41-14">6. Joins — combining data frames</h3>
             <p>
-              Real ecological studies often generate multiple related tables (e.g.,
-              species measurements, site metadata, climate data).
-              <code>dplyr</code> join functions combine them by matching on shared
-              columns.
+              Real ecological studies often generate multiple related tables
+              (e.g., species measurements, site metadata, climate data).
+              <code>dplyr</code> join functions combine them by matching on
+              shared columns.
             </p>
             <table>
               <thead>
@@ -2504,7 +2563,11 @@ select(penguins_geo, species, island, latitude, longitude) |&gt;
           <section class="markdown-cell">
             <hr />
             <h2 id="section-43-15"><code>tidyr</code> — Data Reshaping</h2>
-            <img src="../media/c6800c94af722603d1d6.png" align="right" width="130" />
+            <img
+              src="../media/c6800c94af722603d1d6.png"
+              align="right"
+              width="130"
+            />
 
             <p>
               <code>tidyr</code> provides tools for transforming data between
@@ -2514,7 +2577,9 @@ select(penguins_geo, species, island, latitude, longitude) |&gt;
             <p>
               <strong>Reference:</strong> Wickham, H. &amp; Vaughan, D. (2023).
               <em>tidyr: Tidy Messy Data</em>.
-              <a href="https://tidyr.tidyverse.org">https://tidyr.tidyverse.org</a>
+              <a href="https://tidyr.tidyverse.org"
+                >https://tidyr.tidyverse.org</a
+              >
             </p>
           </section>
           <section class="markdown-cell">
@@ -2522,10 +2587,10 @@ select(penguins_geo, species, island, latitude, longitude) |&gt;
               1. <code>pivot_longer()</code> and <code>pivot_wider()</code>
             </h3>
             <p>
-              Ecological community data is often <strong>wide</strong> — one column per
-              species, one row per site. Most analyses (and all tidyverse
-              visualisations) require <strong>long</strong> format — one row per
-              observation.
+              Ecological community data is often <strong>wide</strong> — one
+              column per species, one row per site. Most analyses (and all
+              tidyverse visualisations) require <strong>long</strong> format —
+              one row per observation.
             </p>
           </section>
           <section class="code-cell" id="cell-45">
@@ -3122,20 +3187,30 @@ penguins |&gt;
           </section>
           <section class="markdown-cell">
             <hr />
-            <h2 id="section-54-19"><code>stringr</code> — String Manipulation</h2>
-            <img src="../media/a346af8c681cef57e315.png" align="right" width="130" />
+            <h2 id="section-54-19">
+              <code>stringr</code> — String Manipulation
+            </h2>
+            <img
+              src="../media/a346af8c681cef57e315.png"
+              align="right"
+              width="130"
+            />
 
             <p>
-              <code>stringr</code> provides consistent, readable functions for working
-              with character strings. All functions begin with <code>str_</code> for
-              easy discovery. Useful for cleaning species names, site codes, or any text
-              data.
+              <code>stringr</code> provides consistent, readable functions for
+              working with character strings. All functions begin with
+              <code>str_</code> for easy discovery. Useful for cleaning species
+              names, site codes, or any text data.
             </p>
             <p>
               <strong>Reference:</strong> Wickham, H. (2023).
-              <em>stringr: Simple, Consistent Wrappers for Common String Operations</em
+              <em
+                >stringr: Simple, Consistent Wrappers for Common String
+                Operations</em
               >.
-              <a href="https://stringr.tidyverse.org">https://stringr.tidyverse.org</a>
+              <a href="https://stringr.tidyverse.org"
+                >https://stringr.tidyverse.org</a
+              >
             </p>
           </section>
           <section class="code-cell" id="cell-55">
@@ -3161,7 +3236,7 @@ species_vec</code></pre>
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -3198,7 +3273,7 @@ str_to_title(species_vec)    # Title Case</code></pre>
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -3219,7 +3294,7 @@ str_to_title(species_vec)    # Title Case</code></pre>
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -3240,7 +3315,7 @@ str_to_title(species_vec)    # Title Case</code></pre>
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -3276,7 +3351,7 @@ str_detect(species_vec, &quot;^A&quot;)          # Which start with &quot;A&quot
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -3297,7 +3372,7 @@ str_detect(species_vec, &quot;^A&quot;)          # Which start with &quot;A&quot
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -3333,7 +3408,7 @@ str_replace_all(&quot;Adelie_Penguin_female&quot;, &quot;_&quot;, &quot; &quot;)
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -3376,7 +3451,7 @@ str_trim(&quot;  Adelie  &quot;)                               # Remove whitespa
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -3397,7 +3472,7 @@ str_trim(&quot;  Adelie  &quot;)                               # Remove whitespa
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -3466,19 +3541,30 @@ penguins_raw |&gt;
           </section>
           <section class="markdown-cell">
             <hr />
-            <h2 id="section-61-20"><code>forcats</code> — Factor Manipulation</h2>
-            <img src="../media/5289d3bdf04fca4752c9.png" align="right" width="130" />
+            <h2 id="section-61-20">
+              <code>forcats</code> — Factor Manipulation
+            </h2>
+            <img
+              src="../media/5289d3bdf04fca4752c9.png"
+              align="right"
+              width="130"
+            />
 
             <p>
               Factors are how R represents categorical variables.
               <code>forcats</code> provides tools for reordering, recoding, and
-              collapsing factor levels — essential for producing meaningful plots and
-              tables.
+              collapsing factor levels — essential for producing meaningful
+              plots and tables.
             </p>
             <p>
               <strong>Reference:</strong> Wickham, H. (2023).
-              <em>forcats: Tools for Working with Categorical Variables (Factors)</em>.
-              <a href="https://forcats.tidyverse.org">https://forcats.tidyverse.org</a>
+              <em
+                >forcats: Tools for Working with Categorical Variables
+                (Factors)</em
+              >.
+              <a href="https://forcats.tidyverse.org"
+                >https://forcats.tidyverse.org</a
+              >
             </p>
           </section>
           <section class="code-cell" id="cell-62">
@@ -3505,7 +3591,7 @@ levels(penguins$sex)</code></pre>
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -3526,7 +3612,7 @@ levels(penguins$sex)</code></pre>
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -3547,7 +3633,7 @@ levels(penguins$sex)</code></pre>
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -3634,7 +3720,7 @@ levels(penguins_relevelled$species)</code></pre>
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -3676,7 +3762,7 @@ levels(penguins_recoded$species)</code></pre>
                       display: inline-block;
                     }
                     .list-inline > li:not(:last-child)::after {
-                      content: '\00b7';
+                      content: "\00b7";
                       padding: 0 0.5ex;
                     }
                   </style>
@@ -3742,16 +3828,21 @@ penguins |&gt;
             <h2 id="section-67-21">
               <code>lubridate</code> — Date and Time Manipulation
             </h2>
-            <img src="../media/25aeb4743bb6a14bdfef.png" align="right" width="130" />
+            <img
+              src="../media/25aeb4743bb6a14bdfef.png"
+              align="right"
+              width="130"
+            />
 
             <p>
-              Ecological monitoring data almost always has temporal components: survey
-              dates, seasons, phenological events. <code>lubridate</code> makes
-              date-time objects easy to create, parse, and manipulate.
+              Ecological monitoring data almost always has temporal components:
+              survey dates, seasons, phenological events.
+              <code>lubridate</code> makes date-time objects easy to create,
+              parse, and manipulate.
             </p>
             <p>
-              <strong>Reference:</strong> Grolemund, G. &amp; Wickham, H. (2011). Dates
-              and times made easy with lubridate.
+              <strong>Reference:</strong> Grolemund, G. &amp; Wickham, H.
+              (2011). Dates and times made easy with lubridate.
               <em>Journal of Statistical Software</em>, 40(3).
               <a href="https://doi.org/10.18637/jss.v040.i03"
                 >https://doi.org/10.18637/jss.v040.i03</a
@@ -3865,7 +3956,9 @@ class(parsed_dates)
 # Other parsers: dmy(), mdy(), ymd_hms()</code></pre>
             <details class="cell-output" open>
               <summary>Output</summary>
-              <div class="output-content"><div class="notebook-table">'Date'</div></div>
+              <div class="output-content">
+                <div class="notebook-table">'Date'</div>
+              </div>
             </details>
           </section>
           <section class="code-cell" id="cell-70">
@@ -3904,7 +3997,7 @@ wday(today_date, label = TRUE)  # Day of week</code></pre>
                         display: inline-block;
                       }
                       .list-inline > li:not(:last-child)::after {
-                        content: '\00b7';
+                        content: "\00b7";
                         padding: 0 0.5ex;
                       }
                     </style>
@@ -3944,20 +4037,29 @@ interval_duration   # in days</code></pre>
           </section>
           <section class="markdown-cell">
             <hr />
-            <h2 id="section-72-22"><code>purrr</code> — Functional Programming</h2>
-            <img src="../media/f6d69231dd5e927cc4e3.png" align="right" width="130" />
+            <h2 id="section-72-22">
+              <code>purrr</code> — Functional Programming
+            </h2>
+            <img
+              src="../media/f6d69231dd5e927cc4e3.png"
+              align="right"
+              width="130"
+            />
 
             <p>
               <code>purrr</code> provides tools for working with
-              <strong>functions</strong> and <strong>lists</strong> systematically,
-              replacing explicit <code>for</code> loops with concise, readable code. The
-              <code>map</code> family of functions applies a function to each element of
-              a list or vector.
+              <strong>functions</strong> and
+              <strong>lists</strong> systematically, replacing explicit
+              <code>for</code> loops with concise, readable code. The
+              <code>map</code> family of functions applies a function to each
+              element of a list or vector.
             </p>
             <p>
               <strong>Reference:</strong> Henry, L. &amp; Wickham, H. (2023).
               <em>purrr: Functional Programming Tools</em>.
-              <a href="https://purrr.tidyverse.org">https://purrr.tidyverse.org</a>
+              <a href="https://purrr.tidyverse.org"
+                >https://purrr.tidyverse.org</a
+              >
             </p>
           </section>
           <section class="code-cell" id="cell-73">
@@ -3990,7 +4092,7 @@ penguins |&gt;
                       display: inline-block;
                     }
                     .dl-inline > dt::after {
-                      content: ':\0020';
+                      content: ":\0020";
                       padding-right: 0.5ex;
                     }
                     .dl-inline > dt:not(:first-of-type) {
@@ -4045,7 +4147,7 @@ map_dbl(models, ~ summary(.x)$r.squared)</code></pre>
                       display: inline-block;
                     }
                     .dl-inline > dt::after {
-                      content: ':\0020';
+                      content: ":\0020";
                       padding-right: 0.5ex;
                     }
                     .dl-inline > dt:not(:first-of-type) {
@@ -4093,7 +4195,7 @@ models |&gt;
                           display: inline-block;
                         }
                         .dl-inline > dt::after {
-                          content: ':\0020';
+                          content: ":\0020";
                           padding-right: 0.5ex;
                         }
                         .dl-inline > dt:not(:first-of-type) {
@@ -4122,7 +4224,7 @@ models |&gt;
                           display: inline-block;
                         }
                         .dl-inline > dt::after {
-                          content: ':\0020';
+                          content: ":\0020";
                           padding-right: 0.5ex;
                         }
                         .dl-inline > dt:not(:first-of-type) {
@@ -4151,7 +4253,7 @@ models |&gt;
                           display: inline-block;
                         }
                         .dl-inline > dt::after {
-                          content: ':\0020';
+                          content: ":\0020";
                           padding-right: 0.5ex;
                         }
                         .dl-inline > dt:not(:first-of-type) {
@@ -4172,10 +4274,12 @@ models |&gt;
           </section>
           <section class="markdown-cell">
             <hr />
-            <h2 id="section-76-23">Putting It All Together — A Complete Workflow</h2>
+            <h2 id="section-76-23">
+              Putting It All Together — A Complete Workflow
+            </h2>
             <p>
-              Here we demonstrate a complete data manipulation pipeline: from raw data
-              to a clean, summarised, analysis-ready table.
+              Here we demonstrate a complete data manipulation pipeline: from
+              raw data to a clean, summarised, analysis-ready table.
             </p>
           </section>
           <section class="code-cell" id="cell-77">
@@ -4310,8 +4414,9 @@ penguin_summary</code></pre>
             <hr />
             <h2 id="section-78-24">Summary</h2>
             <p>
-              In this notebook, you have learned to use all core tidyverse packages
-              (excluding <code>ggplot2</code>, which is covered in Part 3):
+              In this notebook, you have learned to use all core tidyverse
+              packages (excluding <code>ggplot2</code>, which is covered in Part
+              3):
             </p>
             <ul>
               <li>
@@ -4320,14 +4425,15 @@ penguin_summary</code></pre>
               </li>
               <li>
                 <strong><code>dplyr</code></strong
-                >: the six primary verbs (<code>filter</code>, <code>select</code>,
-                <code>mutate</code>, <code>summarise</code>, <code>arrange</code>,
+                >: the six primary verbs (<code>filter</code>,
+                <code>select</code>, <code>mutate</code>,
+                <code>summarise</code>, <code>arrange</code>,
                 <code>rename</code>) and joins
               </li>
               <li>
                 <strong><code>tidyr</code></strong
-                >: pivoting between wide and long formats, separating/uniting columns,
-                handling missingness
+                >: pivoting between wide and long formats, separating/uniting
+                columns, handling missingness
               </li>
               <li>
                 <strong><code>stringr</code></strong
@@ -4350,17 +4456,20 @@ penguin_summary</code></pre>
             <h2 id="section-78-25">References</h2>
             <ul>
               <li>
-                Gorman, K.B., Williams, T.D. &amp; Fraser, W.R. (2014). Ecological
-                sexual dimorphism and environmental variability within a community of
-                Antarctic penguins. <em>PLOS ONE</em>, 9(3), e90081.
+                Gorman, K.B., Williams, T.D. &amp; Fraser, W.R. (2014).
+                Ecological sexual dimorphism and environmental variability
+                within a community of Antarctic penguins. <em>PLOS ONE</em>,
+                9(3), e90081.
               </li>
               <li>
-                Grolemund, G. &amp; Wickham, H. (2011). Dates and times made easy with
-                lubridate. <em>Journal of Statistical Software</em>, 40(3).
+                Grolemund, G. &amp; Wickham, H. (2011). Dates and times made
+                easy with lubridate. <em>Journal of Statistical Software</em>,
+                40(3).
               </li>
               <li>
                 Henry, L. &amp; Wickham, H. (2023).
-                <em>purrr: Functional Programming Tools</em>. R package version 1.0.2.
+                <em>purrr: Functional Programming Tools</em>. R package version
+                1.0.2.
               </li>
               <li>
                 Horst, A.M., Hill, A.P. &amp; Gorman, K.B. (2020).
@@ -4370,21 +4479,21 @@ penguin_summary</code></pre>
                 >
               </li>
               <li>
-                Wickham, H. (2014). Tidy data. <em>Journal of Statistical Software</em>,
-                59(10), 1–23.
+                Wickham, H. (2014). Tidy data.
+                <em>Journal of Statistical Software</em>, 59(10), 1–23.
               </li>
               <li>
                 Wickham, H. et al. (2019). Welcome to the tidyverse.
                 <em>Journal of Open Source Software</em>, 4(43), 1686.
               </li>
               <li>
-                Wickham, H., François, R., Henry, L., Müller, K. &amp; Vaughan, D.
-                (2023). <em>dplyr: A Grammar of Data Manipulation</em>. R package
-                version 1.1.4.
+                Wickham, H., François, R., Henry, L., Müller, K. &amp; Vaughan,
+                D. (2023). <em>dplyr: A Grammar of Data Manipulation</em>. R
+                package version 1.1.4.
               </li>
               <li>
-                Wickham, H. &amp; Vaughan, D. (2023). <em>tidyr: Tidy Messy Data</em>. R
-                package version 1.3.0.
+                Wickham, H. &amp; Vaughan, D. (2023).
+                <em>tidyr: Tidy Messy Data</em>. R package version 1.3.0.
               </li>
             </ul>
           </section>
@@ -4411,7 +4520,10 @@ penguin_summary</code></pre>
     <footer class="site-footer">
       <div class="container">
         <div class="footer-main">
-          <a class="brand" href="../../index.html" aria-label="Les Hyperion — home"
+          <a
+            class="brand"
+            href="../../index.html"
+            aria-label="Les Hyperion — home"
             ><img
               class="brand-face"
               src="../../assets/brand/silvi-face.png"
@@ -4419,7 +4531,11 @@ penguin_summary</code></pre>
               width="55"
               height="59"
             /><span class="brand-name" aria-hidden="true"
-              >LES HYPERI<svg class="compass-o" viewBox="0 0 36 46" aria-hidden="true">
+              >LES HYPERI<svg
+                class="compass-o"
+                viewBox="0 0 36 46"
+                aria-hidden="true"
+              >
                 <circle
                   cx="18"
                   cy="23"
@@ -4435,9 +4551,12 @@ penguin_summary</code></pre>
               >N</span
             ></a
           >
-          <p class="footer-thought">Understanding nature.<br />Sharing the evidence.</p>
+          <p class="footer-thought">
+            Understanding nature.<br />Sharing the evidence.
+          </p>
           <nav class="footer-links" aria-label="Footer">
-            <a href="../../about.html">About Phemelo</a><a href="../../cv.html">CV</a
+            <a href="../../about.html">About Phemelo</a
+            ><a href="../../cv.html">CV</a
             ><a
               href="https://github.com/Phemelo-R"
               target="_blank"
@@ -4447,7 +4566,8 @@ penguin_summary</code></pre>
           </nav>
         </div>
         <div class="footer-bottom">
-          <span>© 2026 Phemelo Rutlokoane</span><span>Nature × Data × People</span
+          <span>© 2026 Phemelo Rutlokoane</span
+          ><span>Nature × Data × People</span
           ><span>Johannesburg, South Africa</span>
         </div>
       </div>
