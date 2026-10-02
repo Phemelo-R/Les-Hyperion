@@ -62,5 +62,13 @@ window.LH_LANDSCAPES = [
       32.55,
       -27.8389
     ]
+  },
+  {
+    "name": "Fiji Islands",
+    "country": "Fiji",
+    "coordinates": [
+      178.065,
+      -17.7134
+    ]
   }
 ];

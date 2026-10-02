@@ -141804,6 +141804,8 @@ window.CarbonAllocation = (() => {
       aircraft.seats < 60
         ? { economy: 1 }
         : reference.configurations.weights[weightGroup];
+    // Existing model-level values are retained as indicative seat equivalents.
+    // They are never presented as an independently verified airline cabin map.
     const fallback = {
       id: 'reference',
       label: 'Aircraft-type estimate · airline layout unverified',

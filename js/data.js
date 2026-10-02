@@ -1,8 +1,11 @@
-/* Les Hyperion — Site Data */
+/* ============================================================
+   Les Hyperion — Site Data
+   Edit NOTEBOOKS and RESEARCH to add/update content.
+   ============================================================ */
 
 const NOTEBOOK_BASE_PATH = './notebooks/';
 
-// Category configuration
+// ---- Category configuration ----
 const CATEGORIES = {
   'R Fundamentals': {
     color: 'var(--accent)',
@@ -26,7 +29,10 @@ const CATEGORIES = {
   },
 };
 
-// Notebooks (Add notebooks)
+// ---- Notebooks ----
+// To add a notebook:
+//   1. Drop the .ipynb file into the /notebooks/ folder in your repo.
+//   2. Add an entry below. The `file` field must match the filename (without .ipynb).
 const NOTEBOOKS = [
   // R Fundamentals
   {
@@ -74,7 +80,7 @@ const NOTEBOOKS = [
     noPreview: true,
     series: 'Spatial & Remote Sensing',
     part: 1,
-    desc: 'An introductory guide and conceptual overview of spatial data handling, mapping, and remote sensing in R.',
+    desc: 'An introduction to working with vector and raster spatialdata, and visualising spatial patterns in R. Showcases the type of spatial maps and analyses that can be done with the sf and raster packages.',
     date: '2026-03-24',
     category: 'Spatial & Remote Sensing',
     keywords: ['Spatial Analysis', 'Remote Sensing', 'Raster', 'Vector', 'Projections'],
@@ -145,7 +151,7 @@ const NOTEBOOKS = [
     part: null,
     noPreview: true,
     desc: 'Vertical distribution and life-stage composition of Euphausia lucens at inshore and offshore stations in St Helena Bay over a 48-hour MOCNESS survey.',
-    date: '2025-03-20',
+    date: '2024-10-01',
     category: 'Marine & Environmental',
     keywords: ['DVM', 'Euphausiids', 'St Helena Bay', 'MOCNESS'],
     lang: 'R',
@@ -158,7 +164,7 @@ const NOTEBOOKS = [
     featured: true,
     series: 'Machine Learning',
     part: 1,
-    desc: 'A practical introduction to machine learning for ecologists — core concepts, model types, and your first end-to-end workflow in R.',
+    desc: 'A practical introduction to machine learning for ecologists — core concepts, model types, and the first end-to-end workflow in R.',
     date: '2026-04-20',
     category: 'Machine Learning',
     keywords: ['Machine Learning', 'Ecology', 'Palmerpenguins', 'Modelling'],
@@ -188,7 +194,7 @@ const NOTEBOOKS = [
   },
 ];
 
-// Research
+// ---- Research ----
 // date controls newest-first ordering; use YYYY, YYYY-MM or YYYY-MM-DD.
 // Status: in-progress (writing), under-review, published, or complete (project).
 // year remains the original project year; date may describe a later manuscript milestone.
@@ -224,7 +230,7 @@ const RESEARCH = [
     scene: 'ocean',
     title: 'Marine Heatwave Dynamics in the Benguela Current System',
     year: '2026',
-    venue: 'University of the Western Cape',
+    venue: 'Quantitative Ecology Module — University of the Western Cape',
     authors: 'Phemelo Rutlokoane',
     status: 'complete',
     desc: 'An analysis of marine heatwave frequency, intensity, and duration trends in the Benguela Current upwelling system using 40 years of NOAA OISST data and the heatwaveR detection framework.',
@@ -289,8 +295,8 @@ const RESEARCH = [
   },
   {
     id: 'science-pseudoscience',
-    date: 2025,
-    year: 2025,
+    date: '2025',
+    year: '2025',
     scene: 'soap',
     title: 'Evaluating Protex Deep Clean Bar Soap: Science or Pseudoscience?',
     venue: 'University coursework · Written evaluation',
@@ -306,7 +312,10 @@ const RESEARCH = [
   // Add more research entries here following the same structure.
 ];
 
-/* Shared notebook card builder */
+/* ============================================================
+   Shared notebook card builder
+   Defined here so it is available on every page that loads data.js.
+   ============================================================ */
 function buildNbCard(nb, color) {
   const card = document.createElement('div');
   card.className = 'nb-card fade-up';
