@@ -1,52 +1,66 @@
 window.LH_LANDSCAPES = [
   {
-    name: 'Johannesburg',
-    country: 'South Africa',
-    coordinates: [28.0473, -26.2041],
+    "name": "Johannesburg",
+    "country": "South Africa",
+    "coordinates": [
+      28.0473,
+      -26.2041
+    ]
   },
   {
-    name: 'Cape Town',
-    country: 'South Africa',
-    coordinates: [18.4241, -33.9249],
+    "name": "Cape Town",
+    "country": "South Africa",
+    "coordinates": [
+      18.4241,
+      -33.9249
+    ]
   },
   {
-    name: 'Serengeti',
-    country: 'Tanzania',
-    coordinates: [34.859, -2.74],
+    "name": "Serengeti",
+    "country": "Tanzania",
+    "coordinates": [
+      34.859,
+      -2.74
+    ]
   },
   {
-    name: 'Maasai Mara',
-    country: 'Kenya',
-    coordinates: [35.17, -1.53],
+    "name": "Maasai Mara",
+    "country": "Kenya",
+    "coordinates": [
+      35.17,
+      -1.53
+    ]
   },
   {
-    name: 'Okavango Delta',
-    country: 'Botswana',
-    coordinates: [22.9, -19.2833],
+    "name": "Okavango Delta",
+    "country": "Botswana",
+    "coordinates": [
+      22.9,
+      -19.2833
+    ]
   },
   {
-    name: 'Bazaruto Island',
-    country: 'Mozambique',
-    coordinates: [35.4725, -21.655],
+    "name": "Bazaruto Island",
+    "country": "Mozambique",
+    "coordinates": [
+      35.4725,
+      -21.655
+    ]
   },
   {
-    name: 'Mnemba Island',
-    country: 'Zanzibar, Tanzania',
-    coordinates: [39.3835, -5.8205],
+    "name": "Mnemba Island",
+    "country": "Zanzibar, Tanzania",
+    "coordinates": [
+      39.3835,
+      -5.8205
+    ]
   },
   {
-    name: 'iSimangaliso',
-    country: 'South Africa',
-    coordinates: [32.55, -27.8389],
-  },
-  {
-    name: 'Sossusvlei',
-    country: 'Namibia',
-    coordinates: [15.342391, -24.727390],
-  },
-  {
-    name: 'Fiji Islands',
-    country: 'Fiji',
-    coordinates: [178.04, 17.42],
-  },
+    "name": "iSimangaliso",
+    "country": "South Africa",
+    "coordinates": [
+      32.55,
+      -27.8389
+    ]
+  }
 ];
