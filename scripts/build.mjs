@@ -3,18 +3,15 @@ import prettier from 'prettier';
 import path from 'node:path';
 import vm from 'node:vm';
 import crypto from 'node:crypto';
+import { parse as parseHtml, serialize as serializeHtml } from 'parse5';
 import { fileURLToPath } from 'node:url';
-import { Marked } from 'marked';
-import { htmlText } from './html-text.mjs';
 import { sortResearch, researchStatus } from './research-utils.mjs';
 import { renderWriting } from './research-writing.mjs';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const read = (name) => fs.readFileSync(path.join(root, name), 'utf8');
 // Format generated pages before saving, so rebuilding keeps the HTML readable.
 const pendingPages = [];
-const formatOptions = await prettier.resolveConfig(
-  path.join(root, 'index.html'),
-);
+const formatOptions = await prettier.resolveConfig(path.join(root, 'index.html'));
 const pageLocations = {
   'protocol.html': 'pages/protocol.html',
   'krill-research.html': 'pages/research/krill-research.html',
@@ -51,9 +48,7 @@ const escape = (value) =>
   String(value).replace(
     /[&<>"']/g,
     (letter) =>
-      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[
-        letter
-      ],
+      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[letter],
   );
 const context = { window: {} };
 vm.createContext(context);
@@ -69,12 +64,15 @@ fs.writeFileSync(
   path.join(root, 'js/landscapes.js'),
   'window.LH_LANDSCAPES = ' + JSON.stringify(landscapes, null, 2) + ';\n',
 );
-const available = new Set(
-  fs
-    .readdirSync(path.join(root, 'notebooks'))
-    .filter((name) => name.endsWith('.ipynb'))
-    .map((name) => name.slice(0, -6)),
-);
+const notebookSources = new Map();
+for (const name of fs.readdirSync(path.join(root, 'notebooks'))) {
+  const extension = path.extname(name).toLowerCase();
+  if (!['.ipynb', '.html'].includes(extension)) continue;
+  const file = path.basename(name, extension);
+  if (!notebookSources.has(file) || extension === '.html')
+    notebookSources.set(file, extension);
+}
+const available = new Set(notebookSources.keys());
 fs.mkdirSync(path.join(root, 'notebooks/read'), { recursive: true });
 fs.mkdirSync(path.join(root, 'notebooks/media'), { recursive: true });
 const galleries = sortResearch(
@@ -168,7 +166,8 @@ const icons = {
   search: '<circle cx="10" cy="10" r="6"/><path d="m15 15 5 5"/>',
   download: '<path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/>',
 };
-const icon = (name, css = '') => /* HTML */ `<svg
+const icon = (name, css = '') =>
+  /* HTML */ `<svg
     class="${css}"
     viewBox="0 0 24 24"
     fill="none"
@@ -182,9 +181,11 @@ const icon = (name, css = '') => /* HTML */ `<svg
   </svg>`;
 const compass =
   '<svg class="compass-o" viewBox="0 0 36 46" aria-hidden="true"><circle cx="18" cy="23" r="14.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="m18 1 4 17 14 5-14 4-4 18-4-18L0 23l14-5Z" fill="currentColor"/></svg>';
-const logo = (
-  prefix = '',
-) => /* HTML */ `<a class="brand" href="${prefix}index.html" aria-label="Les Hyperion — home"
+const logo = (prefix = '') =>
+  /* HTML */ `<a
+    class="brand"
+    href="${prefix}index.html"
+    aria-label="Les Hyperion — home"
     ><img
       class="brand-face"
       src="${prefix}assets/brand/silvi-face.png"
@@ -204,10 +205,10 @@ const navItems = [
 const navigation = (current, prefix) =>
   navItems
     .map(
-      ([
-        url,
-        label,
-      ]) => /* HTML */ `<a href="${prefix}${url}.html" ${current === url ? ' aria-current="page"' : ''}
+      ([url, label]) =>
+        /* HTML */ `<a
+          href="${prefix}${url}.html"
+          ${current === url ? ' aria-current="page"' : ''}
           >${label}</a
         >`,
     )
@@ -239,7 +240,10 @@ function shell(
           href="${prefix}assets/brand/favicon-32.png"
         />
         <link rel="icon" sizes="192x192" href="${prefix}assets/brand/favicon-192.png" />
-        <link rel="apple-touch-icon" href="${prefix}assets/brand/apple-touch-icon.png" />
+        <link
+          rel="apple-touch-icon"
+          href="${prefix}assets/brand/apple-touch-icon.png"
+        />
         <script src="${prefix}js/theme-init.js"></script>
         <link rel="stylesheet" href="${prefix}css/site.css" />
         <link rel="stylesheet" href="${prefix}css/silvi.css" />
@@ -252,7 +256,9 @@ function shell(
         <header class="site-header">
           <div class="container header-inner">
             ${logo(prefix)}
-            <nav class="desktop-nav" aria-label="Main navigation">${navigation(nav, prefix)}</nav>
+            <nav class="desktop-nav" aria-label="Main navigation">
+              ${navigation(nav, prefix)}
+            </nav>
             <div class="header-actions">
               <button
                 class="icon-button theme-toggle"
@@ -279,17 +285,24 @@ function shell(
           <div class="container">
             <div class="footer-main">
               ${logo(prefix)}
-              <p class="footer-thought">Understanding nature.<br />Sharing the evidence.</p>
+              <p class="footer-thought">
+                Understanding nature.<br />Sharing the evidence.
+              </p>
               <nav class="footer-links" aria-label="Footer">
-                <a href="${prefix}about.html">About Phemelo</a><a href="${prefix}cv.html">CV</a
-                ><a href="https://github.com/Phemelo-R" target="_blank" rel="noopener noreferrer"
+                <a href="${prefix}about.html">About Me</a
+                ><a href="${prefix}cv.html">CV</a
+                ><a
+                  href="https://github.com/Phemelo-R"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   >GitHub ↗</a
                 ><a href="#main">Back to top ↑</a>
               </nav>
             </div>
             <div class="footer-bottom">
               <span>© ${new Date().getFullYear()} Phemelo Rutlokoane</span
-              ><span>Nature × Data × People</span><span>Johannesburg, South Africa</span>
+              ><span>Nature × Data × People</span
+              ><span>Johannesburg, South Africa</span>
             </div>
           </div>
         </footer>
@@ -303,27 +316,26 @@ function shell(
 function notebookRow(notebook, index, short = false) {
   const exists = available.has(notebook.file),
     href = `notebooks/read/${notebook.file}.html`;
-  const date = new Date(notebook.date + 'T00:00:00').toLocaleDateString(
-    'en-GB',
-    {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric',
-    },
-  );
+  const date = new Date(notebook.date + 'T00:00:00').toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  });
   return /* HTML */ `<article
     class="notebook-row"
     data-notebook
     data-category="${escape(notebook.category)}"
     data-search="${escape([notebook.title, notebook.desc, ...notebook.keywords].join(' ').toLowerCase())}"
   >
-    <span class="notebook-index">${String(notebook.part || index + 1).padStart(2, '0')}</span>
+    <span class="notebook-index"
+      >${String(notebook.part || index + 1).padStart(2, '0')}</span
+    >
     <div>
       <h3 class="notebook-title">
         ${exists ? /* HTML */ `<a href="${href}">${escape(notebook.title)}</a>` : escape(notebook.title)}
       </h3>
       <p>${escape(notebook.desc)}</p>
-      ${short ? '' : /* HTML */ `<div class="notebook-bottom"><span>${escape(notebook.keywords.join(' · '))}</span>${exists ? /* HTML */ `<a href="notebooks/${notebook.file}.ipynb" download>Download .ipynb</a>` : '<span class="unavailable">Notebook file not yet supplied</span>'}</div>`}
+      ${short ? '' : /* HTML */ `<div class="notebook-bottom"><span>${escape(notebook.keywords.join(' · '))}</span>${exists ? /* HTML */ `<a href="notebooks/${notebook.file}${notebookSources.get(notebook.file)}" download>Download notebook</a>` : '<span class="unavailable">Notebook file not yet supplied</span>'}</div>`}
     </div>
     <div class="notebook-meta">
       <span>${short ? escape(notebook.category) : date}</span
@@ -381,18 +393,19 @@ const welcome = /* HTML */ `<section
   class="container silvi-introduction"
   aria-labelledby="silvi-introduction-title"
 >
-  ${scene('welcome', 'Silvi, the silvertree-inspired companion of Les Hyperion, waves hello.')}
+  ${scene('welcome', 'Silvi, the silvertree explorer, waves hello.')}
   <div>
-    <p class="eyebrow">A companion for the curious</p>
+    <p class="eyebrow">My research companion</p>
     <h2 id="silvi-introduction-title">Meet Silvi.</h2>
     <p>
-      Inspired by the silvertree at the heart of my Honours research, Silvi is the companion I
-      created for Les Hyperion. Her leaf crown and compass bring together nature, discovery and a
-      sense of direction.
+      Silvi is my conservation companion. She was inspired by the silvertree I did my my
+      Honours research on. Her star compass are inspired by the nature of this site –
+      Hyperion, the Greek Titan of heavenly light, and the compass that guides explorers.
     </p>
     <p>
-      She helps introduce the ideas behind the work: following krill, watching wildlife and
-      exploring the tools of ecology. A familiar face, with a different role in each project.
+      "Silvi is there to introduce the ideas behind the work I have done: following krill,
+      watching wildlife and exploring the tools of ecology. She isa familiar face, with a
+      different role in each project."
     </p>
   </div>
 </section>`;
@@ -401,29 +414,39 @@ const home = /* HTML */ `<div class="container">
     <section class="hero" aria-labelledby="hero-title">
       <div>
         <p class="eyebrow">Nature × Data × People</p>
-        <h1 class="hero-title" id="hero-title">Explore.<br /><em>Analyse.</em><br />Conserve.</h1>
+        <h1 class="hero-title" id="hero-title">
+          Explore.<br /><em>Analyse.</em><br />Conserve.
+        </h1>
         <p class="hero-description">
-          From field observations to a wider view of our planet. I use geospatial data, ecological
-          research and reproducible code to understand the living world.
+          Welcome to my site! My name is Phemelo Rutlokoane, an MSc student at the
+          University of the Western Cape currently researching climate change linked
+          extreme events in coastal marine environments. My interests lie in using
+          geospatial data to understand the living world, from marine ecosystems to
+          terrestrial landscapes.
         </p>
         <div class="hero-actions">
-          <a class="button" href="research.html">Explore my work ${icon('arrow')}</a
-          ><a class="text-link" href="notebooks.html">Open the notebooks ${icon('external')}</a>
+          <a class="button" href="research.html"
+            >View my work ${icon('arrow')}</a
+          ><a class="text-link" href="notebooks.html"
+            >Open notebooks ${icon('external')}</a
+          >
         </div>
         <div class="hero-signoff">
-          <p class="hero-person">Phemelo Rutlokoane · Quantitative ecology &amp; remote sensing</p>
+          <p class="hero-person">
+            Phemelo Rutlokoane · Ecologist &amp; Remote sensing specialist
+          </p>
         </div>
       </div>
       <div class="globe-panel">
         <div class="globe-topline">
-          <span>Where my work spans</span><span>Southern &amp; East Africa</span>
+          <span>Where my work spans</span><span>Southern &amp; East Africa · South Pacific</span>
         </div>
         <div class="globe-wrap" id="globe-wrap" data-pulse-city="Johannesburg">
           <canvas
             id="globe"
             tabindex="0"
             role="img"
-            aria-label="Interactive globe showing eight places covered by my work. Select a place below, drag, or use arrow keys to rotate."
+            aria-label="Interactive globe showing ${landscapes.length} places covered by my work. Select a place below, drag, or use arrow keys to rotate."
           ></canvas>
           <div class="globe-label">
             <span>Work &amp; research connections</span
@@ -437,10 +460,16 @@ const home = /* HTML */ `<div class="container">
           </p>
           <div>
             <button class="globe-control" id="globe-reset">Re-centre</button
-            ><button class="globe-control" id="globe-motion" aria-pressed="false">Pause</button>
+            ><button class="globe-control" id="globe-motion" aria-pressed="false">
+              Pause
+            </button>
           </div>
         </div>
-        <div class="landscape-selector" role="group" aria-label="Places covered by my work">
+        <div
+          class="landscape-selector"
+          role="group"
+          aria-label="Places covered by my work"
+        >
           ${landscapes.map((place, index) => `<button type="button" data-landscape="${index}" aria-pressed="${index === 0}">${escape(place.name)}<small>${escape(place.country)}</small></button>`).join('')}
         </div>
       </div>
@@ -448,17 +477,23 @@ const home = /* HTML */ `<div class="container">
   </div>
   <div class="discipline-strip">
     <div class="container discipline-inner">
-      ${['Spatial ecology', 'Remote sensing', 'Biostatistics', 'Conservation', 'Open knowledge'].map(escape).join('<span class="small-star">✦</span>')}
+      Spatial ecology<span class="small-star">✦</span>Remote sensing<span
+        class="small-star"
+        >✦</span
+      >Biostatistics<span class="small-star">✦</span>Landscape conservation<span
+        class="small-star"
+        >✦</span
+      >Marine ecology
     </div>
   </div>
   ${welcome}
-  <section class="section container">
+  <section class="section container feature-section">
     <div class="section-top">
       <div>
-        <p class="eyebrow">Selected research / 2025</p>
-        <h2>From the field to the canopy.</h2>
+        <p class="eyebrow">Research scope / 2025</p>
+        <h2>Monitoring endemic species</h2>
       </div>
-      <a class="text-link" href="research.html">All research ${icon('arrow')}</a>
+      <a class="text-link" href="research.html">All my research ${icon('arrow')}</a>
     </div>
     <div class="feature-story">
       <figure class="feature-photo">
@@ -470,19 +505,27 @@ const home = /* HTML */ `<div class="container">
           loading="lazy"
         />
         <figcaption class="image-note">
-          <span>Table Mountain National Park</span><span>Honours research · 2025</span>
+          <span>📍Table Mountain National Park</span><span>Honours research · 2025</span>
         </figcaption>
       </figure>
       <div class="feature-copy">
         <p class="eyebrow">BioSCape · Hyperspectral · LiDAR</p>
-        <h2>A closer look at<br />the <em>silvertree.</em></h2>
+        <h2>A closer look at <em>silvertrees.</em></h2>
         <p>
-          Monitoring <em>Leucadendron argenteum</em> populations with NASA’s AVIRIS-NG imagery and
-          LVIS LiDAR. My Honours research connects field observations with machine learning to map
-          this endemic species across Table Mountain.
+          Monitoring <em>Leucadendron argenteum</em> populations: exploring opportunities
+          offered by emerging technologies. This research project used NASA’s AVIRIS-NG
+          imaging spectroscopy and LVIS LiDAR to identify and map out the remaining
+          populations of this endemic species across Table Mountain. This research forms
+          part of the BioSCape project, which aims to understand the ecology of the Cape
+          Floristic. I collected field data on silvertree populations and co-occurring
+          vegetation and used this information to train machine learning models to predict
+          the distribution of silvertrees across the National Park. The results of this
+          research will inform conservation strategies for monitoring this iconic species
+          and contribute to our understanding of the biodiversity of the Cape Floristic
+          Region.
         </p>
         <a class="text-link" href="research.html#bioscape-sdm"
-          >Explore the research ${icon('arrow')}</a
+          >Read the paper ${icon('arrow')}</a
         >
         <div class="feature-meta">
           <span>University of the Western Cape</span><span>Honours research</span>
@@ -494,10 +537,10 @@ const home = /* HTML */ `<div class="container">
     <div class="container">
       <div class="section-top">
         <div>
-          <p class="eyebrow">Ways of seeing</p>
+          <p class="eyebrow">What I do</p>
           <h2>Ecology, across scales.</h2>
         </div>
-        <p>Connecting the detail of a field plot to the patterns visible from above.</p>
+        <p>These mark the fields I have worked in and am comfortable to tackle in future research.</p>
       </div>
       <div class="expertise-list">
         ${[
@@ -507,7 +550,7 @@ const home = /* HTML */ `<div class="container">
           ],
           [
             'GIS & spatial analysis',
-            'Vector and raster workflows, cartographic design and spatial statistics in R and QGIS.',
+            'Vector and raster workflows, cartographic design and spatial statistics in R, QGIS adn ArcGIS.',
           ],
           [
             'Biodiversity informatics',
@@ -519,15 +562,16 @@ const home = /* HTML */ `<div class="container">
           ],
           [
             'Ocean climatology',
-            'Sea surface temperature, marine heatwaves and oceanographic patterns in NOAA datasets.',
+            'Sea surface temperature, marine heatwaves and marine coldwaves, and oceanographic patterns in NOAA datasets.',
           ],
           [
-            'Field research',
-            'Biodiversity monitoring, vegetation sampling and the observations behind the models.',
+            'Wildlife monitoring',
+            'Camera trap analysis, animal movement and behaviour, and population monitoring in terrestrial and marine ecosystems using Bushnell camera traps and BRUVS.',
           ],
         ]
           .map(
-            ([title, desc], index) => /* HTML */ `<div class="expertise-item">
+            ([title, desc], index) =>
+              /* HTML */ `<div class="expertise-item">
                 <span class="number">0${index + 1}</span>
                 <div>
                   <h3>${title}</h3>
@@ -542,12 +586,14 @@ const home = /* HTML */ `<div class="container">
   <section class="section container">
     <div class="section-top">
       <div>
-        <p class="eyebrow">The open notebook</p>
+        <p class="eyebrow">Reproductive work</p>
         <h2>Knowledge you can build on.</h2>
       </div>
-      <a class="text-link" href="notebooks.html">Browse all notebooks ${icon('arrow')}</a>
+      <a class="text-link" href="notebooks.html"
+        >Browse all notebooks ${icon('arrow')}</a
+      >
     </div>
-    ${[NOTEBOOKS[0], NOTEBOOKS[4], NOTEBOOKS[10]].map((notebook, index) => notebookRow(notebook, index, true)).join('')}
+    ${[NOTEBOOKS[0], NOTEBOOKS[3], NOTEBOOKS[10]].map((notebook, index) => notebookRow(notebook, index, true)).join('')}
   </section>
   <section class="container portrait-band">
     <img
@@ -561,10 +607,11 @@ const home = /* HTML */ `<div class="container">
       <p class="eyebrow">The person behind the work</p>
       <h2>Hi, I’m Phemelo.</h2>
       <p>
-        An Honours graduate in Biodiversity and Conservation at the University of the Western Cape.
-        I work where geospatial data meets ecology, and share the methods along the way.
+        An MSc student in Biodiversity and Conservation at the University of the Western
+        Cape. I work where geospatial data meets ecology, and share the methods along the
+        way.
       </p>
-      <a class="text-link" href="about.html">A little about me ${icon('arrow')}</a>
+      <a class="text-link" href="about.html">More about me ${icon('arrow')}</a>
     </div>
   </section>`;
 write(
@@ -585,18 +632,24 @@ const archive = /* HTML */ `<div class="container">
       <p class="eyebrow">Learn · Reproduce · Adapt</p>
       <h1>The open notebook.</h1>
       <p>
-        R workflows for ecology, spatial analysis and machine learning. Read the methods, inspect
-        the outputs and download the original notebooks.
+        R workflows for ecology, spatial analysis and machine learning. Read the
+        methods, inspect the outputs and download the original notebooks.
       </p>
     </div>
     ${scene('data', 'Making sense of the data')}
   </header>
   <div class="archive-toolbar">
-    <div class="filter-options" role="group" aria-label="Filter notebooks by collection">
-      <button class="filter-option" data-filter="all" aria-pressed="true">All collections</button
+    <div
+      class="filter-options"
+      role="group"
+      aria-label="Filter notebooks by collection"
+    >
+      <button class="filter-option" data-filter="all" aria-pressed="true">
+        All collections</button
       >${Object.keys(CATEGORIES)
         .map(
-          (category) => /* HTML */ `<button
+          (category) =>
+            /* HTML */ `<button
               class="filter-option"
               data-filter="${escape(category)}"
               aria-pressed="false"
@@ -612,15 +665,14 @@ const archive = /* HTML */ `<div class="container">
     /></label>
   </div>
   <p class="archive-count" id="archive-count" role="status">
-    ${NOTEBOOKS.filter((notebook) => available.has(notebook.file)).length} notebooks available ·
-    ${NOTEBOOKS.length} listed across ${Object.keys(CATEGORIES).length} collections
+    ${NOTEBOOKS.filter((notebook) => available.has(notebook.file)).length} notebooks
+    available · ${NOTEBOOKS.length} listed across ${Object.keys(CATEGORIES).length}
+    collections
   </p>
   ${Object.entries(CATEGORIES)
     .map(
-      ([
-        category,
-        config,
-      ]) => /* HTML */ `<section class="notebook-group" data-group="${escape(category)}">
+      ([category, config]) =>
+        /* HTML */ `<section class="notebook-group" data-group="${escape(category)}">
           <div class="group-heading">
             <h2>${escape(category)}</h2>
             <p>${escape(config.blurb)}</p>
@@ -651,8 +703,7 @@ const researchEntries = sortResearch(RESEARCH)
           NOTEBOOKS.find((notebook) => notebook.file === file)?.title ||
           file.replaceAll('_', ' ');
         const linked =
-          available.has(file) &&
-          NOTEBOOKS.some((notebook) => notebook.file === file);
+          available.has(file) && NOTEBOOKS.some((notebook) => notebook.file === file);
         return /* HTML */ `<li>
           ${linked ? /* HTML */ `<a href="notebooks/read/${file}.html">${escape(title)}</a>` : available.has(file) ? /* HTML */ `<a href="notebooks/${file}.ipynb" download>${escape(title)} · Download</a>` : `${escape(title)} <span class="unavailable">File not yet supplied</span>`}
         </li>`;
@@ -665,7 +716,9 @@ const researchEntries = sortResearch(RESEARCH)
       id="${project.id}"
       data-research-date="${escape(project.date || project.year || '')}"
     >
-      <div class="research-year">${escape(project.date || project.year || 'Undated')}</div>
+      <div class="research-year">
+        ${escape(project.date || project.year || 'Undated')}
+      </div>
       <div>
         <h2>${escape(project.title.replace(/\.$/, ''))}</h2>
         <p>${escape(project.desc)}</p>
@@ -713,12 +766,12 @@ write(
           <p class="eyebrow">Field observations → Ecological inference</p>
           <h1>Research with a wider view.</h1>
           <p>
-            From silvertree canopies to the Benguela Current: biodiversity monitoring, remote
-            sensing and quantitative ecology.
+            From silvertree canopies to the Benguela Current: biodiversity monitoring,
+            remote sensing and quantitative ecology.
           </p>
           <p class="research-order">
-            Dated work appears newest first. Status labels distinguish completed work, manuscripts
-            under review and published research.
+            Dated work appears newest first. Status labels distinguish completed work,
+            manuscripts under review and published research.
           </p>
         </div>
         ${scene('research-overview', 'Curiosity, from the ground up')}
@@ -749,24 +802,31 @@ write(
 const about = /* HTML */ `<div class="container">
     <section class="about-intro">
       <figure class="about-portrait">
-        <img src="assets/web/portrait.jpg" alt="Phemelo Rutlokoane" width="700" height="850" />
+        <img
+          src="assets/web/portrait.jpg"
+          alt="Phemelo Rutlokoane"
+          width="700"
+          height="850"
+        />
         <figcaption>B.Sc (Hons) Biodiversity and Conservation</figcaption>
       </figure>
       <div class="about-copy">
         <p class="eyebrow">Ecologist · Researcher · Explorer</p>
         <h1>Phemelo<br />Rutlokoane.</h1>
         <p>
-          I am an Honours graduate in Biodiversity and Conservation at the University of the Western
-          Cape, with a focus on remote sensing and spatial ecology.
+          I am an Honours graduate in Biodiversity and Conservation at the University of
+          the Western Cape, with a focus on remote sensing and spatial ecology.
         </p>
         <p>
-          My Honours research used NASA BioSCape’s AVIRIS-NG hyperspectral imagery and LVIS LiDAR to
-          monitor <em>Leucadendron argenteum</em> on Table Mountain. I developed a probability map
-          of silvertree presence using machine learning and field-validated observations.
+          My Honours research used NASA BioSCape’s AVIRIS-NG hyperspectral imagery and
+          LVIS LiDAR to monitor <em>Leucadendron argenteum</em> on Table Mountain. I
+          developed a probability map of silvertree presence using machine learning and
+          field-validated observations.
         </p>
         <p>
-          I build reproducible workflows that connect imagery and field data to ecological
-          inference, documenting my work in R and Python notebooks that others can follow and adapt.
+          I build reproducible workflows that connect imagery and field data to
+          ecological inference, documenting my work in R and Python notebooks that
+          others can follow and adapt.
         </p>
         <dl class="about-facts">
           <div>
@@ -792,8 +852,8 @@ const about = /* HTML */ `<div class="container">
     <div class="interests-row">
       <h2>Research interests</h2>
       <p>
-        Remote sensing · Species distribution modelling · Ocean climatology · Biodiversity
-        informatics · Landscape ecology · Fynbos ecology
+        Remote sensing · Species distribution modelling · Ocean climatology ·
+        Biodiversity informatics · Landscape ecology · Fynbos ecology
       </p>
     </div>
     <section class="about-silvi-band">
@@ -801,8 +861,8 @@ const about = /* HTML */ `<div class="container">
         <p class="eyebrow">Behind the work</p>
         <h2>Data, monitoring &amp; communication.</h2>
         <p>
-          I work across wildlife analysis, monitoring tools, education and visual communication,
-          connecting conservation evidence with the people who use it.
+          I work across wildlife analysis, monitoring tools, education and visual
+          communication, connecting conservation evidence with the people who use it.
         </p>
       </div>
       ${scene('about', 'Silvi gestures towards Phemelo’s introduction.')}
@@ -817,7 +877,8 @@ const about = /* HTML */ `<div class="container">
       </div>
       ${galleries
         .map(
-          (gallery, index) => /* HTML */ `<section
+          (gallery, index) =>
+            /* HTML */ `<section
               class="gallery-section"
               data-gallery="${index}"
               data-gallery-date="${escape(gallery.date)}"
@@ -903,10 +964,7 @@ write(
     'Carbon tracker',
     'carbon',
     read('content/carbon-tracker.html')
-      .replace(
-        '{{SILVI}}',
-        scene('travel', 'Silvi tracks carbon on her computer'),
-      )
+      .replace('{{SILVI}}', scene('travel', 'Silvi tracks carbon on her computer'))
       .replace(
         '{{MOTORCYCLE}}',
         scene('motorcycle', 'Silvi rides an electric motorcycle'),
@@ -930,21 +988,23 @@ write(
     'research',
     /* HTML */ `<div class="container protocol-top">
         <a class="text-link" href="research.html">${icon('back')} Back to research</a
-        ><button class="text-link print-button">Print protocol ${icon('external')}</button>
+        ><button class="text-link print-button">
+          Print protocol ${icon('external')}
+        </button>
       </div>
       <section class="container protocol-silvi">
         <div>
           <p class="eyebrow">Saldanha Bay · Monitoring methods</p>
           <h2>Observe. Record. Return.</h2>
-          <p>A consistent field record helps us understand how biodiversity changes over time.</p>
+          <p>
+            A consistent field record helps us understand how biodiversity changes over
+            time.
+          </p>
         </div>
         ${scene('protocol', 'Checking the biodiversity field sheet')}
       </section>
       ${read('content/protocol.html')}`,
-    {
-      styles: ['css/protocol.css', 'css/reader.css'],
-      bodyClass: 'protocol-page',
-    },
+    { styles: ['css/protocol.css', 'css/reader.css'], bodyClass: 'protocol-page' },
   ),
 );
 write(
@@ -964,13 +1024,10 @@ write(
   ),
 );
 // Pre-render original notebook cells and saved outputs. No scientific code is executed.
-const marked = new Marked({
-  renderer: {
-    html({ text }) {
-      return escape(text);
-    },
-  },
-});
+const markedContext = { exports: {} };
+vm.createContext(markedContext);
+vm.runInContext(read('assets/vendor/marked.umd.js'), markedContext);
+const marked = markedContext.marked || markedContext.exports.marked;
 for (const writing of JSON.parse(read('data/json/research-writings.json'))) {
   const rendered = renderWriting({ root, writing, marked, escape });
   const body = `<div class="container writing-top"><a class="text-link" href="research.html#${writing.project}">${icon('back')} Research</a><button class="text-link print-button">Print / save PDF ${icon('external')}</button></div>
@@ -988,24 +1045,19 @@ for (const writing of JSON.parse(read('data/json/research-writings.json'))) {
     }),
   );
 }
-for (const notebook of NOTEBOOKS.filter((notebook) =>
-  available.has(notebook.file),
-)) {
-  const original = JSON.parse(read(`notebooks/${notebook.file}.ipynb`));
+for (const notebook of NOTEBOOKS.filter((notebook) => available.has(notebook.file))) {
+  const sourceExtension = notebookSources.get(notebook.file);
   const headings = [];
-  let cellNumber = 0;
-  let headingNumber = 0;
+  let original = null;
+  let rendered = '';
+  let cellCount = 0;
   const materialiseImages = (text) =>
     text.replace(
       /data:image\/(png|jpe?g|webp);base64,([a-zA-Z0-9+/=\r\n]+)/g,
       (_, extension, encoded) => {
         const bytes = Buffer.from(encoded, 'base64'),
           name =
-            crypto
-              .createHash('sha256')
-              .update(bytes)
-              .digest('hex')
-              .slice(0, 20) +
+            crypto.createHash('sha256').update(bytes).digest('hex').slice(0, 20) +
             '.' +
             extension.replace('jpeg', 'jpg');
         const destination = path.join(root, 'notebooks/media', name);
@@ -1030,15 +1082,64 @@ for (const notebook of NOTEBOOKS.filter((notebook) =>
         ),
     );
   };
-  const rendered = original.cells
+  if (sourceExtension === '.html') {
+    const document = parseHtml(read(`notebooks/${notebook.file}.html`));
+    const findNotebook = (node) => {
+      if (
+        node.nodeName === 'div' &&
+        (node.attrs?.some((attribute) => attribute.name === 'id' && attribute.value === 'notebook-container') ||
+          node.attrs?.some((attribute) => attribute.name === 'class' && /(?:^|\s)jp-Notebook(?:\s|$)/.test(attribute.value)))
+      )
+        return node;
+      for (const child of node.childNodes || []) {
+        const match = findNotebook(child);
+        if (match) return match;
+      }
+      return null;
+    };
+    const notebookContainer = findNotebook(document) || document.childNodes.find((node) => node.nodeName === 'html')?.childNodes.find((node) => node.nodeName === 'body');
+    if (!notebookContainer) throw new Error(`No notebook content found in ${notebook.file}.html`);
+    let headingNumber = 0;
+    const textContent = (node) =>
+      node.nodeName === '#text'
+        ? node.value
+        : (node.childNodes || []).map(textContent).join('');
+    const processNode = (node) => {
+      if (node.tagName === 'script') return false;
+      for (const attribute of node.attrs || []) {
+        if (['src', 'href'].includes(attribute.name) && attribute.value &&
+          !/^(?:[a-z]+:|\/\/|#)/i.test(attribute.value))
+          attribute.value = '../' + attribute.value.replace(/^\.\//, '');
+        if (attribute.name === 'style')
+          attribute.value = attribute.value.replace(/url\((['"]?)(?!data:|[a-z]+:|\/)(?!\.\.\/)/gi, 'url($1../');
+      }
+      if (node.tagName === 'h1' || node.tagName === 'h2') {
+        const label = textContent(node).replace(/\s+/g, ' ').trim();
+        if (label) {
+          const existingId = node.attrs?.find((attribute) => attribute.name === 'id');
+          const id = existingId?.value || `section-html-${headingNumber++}`;
+          if (!existingId) node.attrs.push({ name: 'id', value: id });
+          headings.push({ id, label });
+        }
+      }
+      if (node.childNodes)
+        node.childNodes = node.childNodes.filter(processNode);
+      return true;
+    };
+    processNode(notebookContainer);
+    rendered = (notebookContainer.childNodes || []).map(serializeHtml).join('');
+    cellCount = (rendered.match(/class="[^"]*(?:jp-CodeCell|code_cell)[^"]*"/g) || []).length;
+  } else {
+    original = JSON.parse(read(`notebooks/${notebook.file}.ipynb`));
+    let cellNumber = 0;
+    let headingNumber = 0;
+    rendered = original.cells
     .map((cell, index) => {
       let source = Array.isArray(cell.source)
         ? cell.source.join('')
         : cell.source || '';
       if (cell.cell_type === 'markdown') {
-        for (const [name, attachment] of Object.entries(
-          cell.attachments || {},
-        )) {
+        for (const [name, attachment] of Object.entries(cell.attachments || {})) {
           const mime = Object.keys(attachment).find((type) =>
             type.startsWith('image/'),
           );
@@ -1054,7 +1155,22 @@ for (const notebook of NOTEBOOKS.filter((notebook) =>
         let output = renderMarkdown(source).replace(
           /<h([1-4])([^>]*)>([\s\S]*?)<\/h\1>/g,
           (_, level, attributes, content) => {
-            const label = htmlText(content);
+            const label = content
+              .replace(/<[^>]+>/g, '')
+              .replace(/&#(x[0-9a-f]+|[0-9]+);/gi, (_, number) =>
+                String.fromCodePoint(
+                  number[0].toLowerCase() === 'x'
+                    ? parseInt(number.slice(1), 16)
+                    : Number(number),
+                ),
+              )
+              .replace(
+                /&(amp|quot|apos|lt|gt|nbsp);/g,
+                (_, entity) =>
+                  ({ amp: '&', quot: '"', apos: "'", lt: '<', gt: '>', nbsp: ' ' })[
+                    entity
+                  ],
+              );
             const id = `section-${index}-${headingNumber++}`;
             if (Number(level) <= 2) headings.push({ id, label });
             return /* HTML */ `<h${level} id="${id}">${content}</h${level}>`;
@@ -1072,19 +1188,20 @@ for (const notebook of NOTEBOOKS.filter((notebook) =>
             value = (type) =>
               Array.isArray(data[type]) ? data[type].join('') : data[type];
           if (data['image/png'])
-            return materialiseImages(/* HTML */ `<figure class="notebook-figure">
+            return materialiseImages(
+              /* HTML */ `<figure class="notebook-figure">
                 <img
                   loading="lazy"
                   src="data:image/png;base64,${value('image/png')}"
                   alt="Original figure output from code cell ${cellNumber}"
                 />
-              </figure>`);
+              </figure>`,
+            );
           if (data['text/html'])
             return /* HTML */ `<div class="notebook-table">
               ${materialiseImages(value('text/html'))}
             </div>`;
-          if (data['text/markdown'])
-            return renderMarkdown(value('text/markdown'));
+          if (data['text/markdown']) return renderMarkdown(value('text/markdown'));
           const text =
             value('text/plain') ||
             (Array.isArray(item.text) ? item.text.join('') : item.text) ||
@@ -1115,12 +1232,16 @@ for (const notebook of NOTEBOOKS.filter((notebook) =>
       </section>`;
     })
     .join('\n');
+    cellCount = original.cells.length;
+  }
   const body = /* HTML */ `<div class="reader-bar">
       <div class="reader-bar-inner">
         <a href="../../notebooks.html">${icon('back')} Notebooks</a
         ><span class="reader-crumb"
           >${escape(notebook.category)} / Part ${notebook.part || '—'}</span
-        ><a href="../${notebook.file}.ipynb" download>${icon('download')} Download .ipynb</a>
+        ><a href="../${notebook.file}${sourceExtension}" download
+          >${icon('download')} Download notebook</a
+        >
       </div>
     </div>
     <div class="reader-layout">
@@ -1136,7 +1257,7 @@ for (const notebook of NOTEBOOKS.filter((notebook) =>
           <button id="toggle-outputs" aria-pressed="false">Collapse outputs</button
           ><button class="print-button">Print notebook</button>
         </div>
-        <p>Original code and saved outputs.<br />R · ${original.cells.length} cells</p>
+        <p>${sourceExtension === '.html' ? 'Jupyter HTML export' : 'Original code and saved outputs.'}<br />${cellCount} ${sourceExtension === '.html' ? 'code cells' : 'cells'}</p>
       </aside>
       <article class="notebook-document">
         <div class="reader-intro">

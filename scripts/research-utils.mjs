@@ -1,4 +1,4 @@
-// Dates may be YYYY, YYYY-MM or YYYY-MM-DD.
+// Dates may be YYYY, YYYY-MM or YYYY-MM-DD. Never invent missing precision.
 export function researchDateKey(project) {
   for (const value of [project.date, project.year]) {
     const match = String(value ?? '').match(/^(\d{4})(?:-(\d{2})(?:-(\d{2}))?)?$/);
