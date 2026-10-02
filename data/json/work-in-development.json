@@ -1,0 +1,62 @@
+[
+  {
+    "id": "isimangaliso-wildlife",
+    "title": "Wildlife in iSimangaliso",
+    "location": "iSimangaliso, South Africa",
+    "status": "Analysis complete · Write-up pending",
+    "summary": "Wildlife data have been analysed. The research narrative and shareable outputs are still to be added.",
+    "next": "Add the existing analysis notebook, methods and selected outputs before preparing the write-up.",
+    "date": null,
+    "notebook": "",
+    "scene": "isimangaliso",
+    "sceneAlt": "Silvi monitors a leopard in coastal woodland."
+  },
+  {
+    "id": "botswana-wildlife",
+    "title": "Wildlife around the Okavango Delta",
+    "location": "Tsutsubega & Gogomoga, Botswana",
+    "status": "Planned study",
+    "summary": "A space for future wildlife analysis covering Tsutsubega and Gogomoga.",
+    "next": "Add the study scope, available data and analysis notebook when ready.",
+    "date": null,
+    "notebook": "",
+    "scene": "okavango",
+    "sceneAlt": "Silvi observes African elephants beside an Okavango floodplain."
+  },
+  {
+    "id": "maasai-mara-electric-motorcycles",
+    "title": "Electric motorcycle carbon savings",
+    "location": "Maasai Mara, Kenya",
+    "status": "Planned study",
+    "summary": "A planned assessment of carbon savings from electric motorcycles used in conservation work.",
+    "next": "Compare recorded electric-motorcycle use with a petrol-motorcycle baseline, accounting for energy use and emission factors.",
+    "date": null,
+    "notebook": "",
+    "scene": "motorcycle",
+    "sceneAlt": "Silvi rides an electric motorcycle beside a carbon-reduction symbol."
+  },
+  {
+    "id": "mnemba-bruvs",
+    "title": "Underwater wildlife around Mnemba",
+    "location": "Mnemba Island, Zanzibar, Tanzania",
+    "status": "Awaiting data",
+    "summary": "A planned BRUVS study of marine wildlife around Mnemba Island.",
+    "next": "Add the BRUVS data and sampling information when available; analysis has not yet been added.",
+    "date": null,
+    "notebook": "",
+    "scene": "mnemba",
+    "sceneAlt": "Silvi dives near a grey reef shark."
+  },
+  {
+    "id": "bazaruto-bruvs",
+    "title": "Underwater wildlife around Bazaruto",
+    "location": "Bazaruto Island, Mozambique",
+    "status": "Awaiting data",
+    "summary": "A space for future BRUVS analysis around Bazaruto Island.",
+    "next": "Add the BRUVS data and sampling information when available; analysis has not yet been added.",
+    "date": null,
+    "notebook": "",
+    "scene": "bazaruto",
+    "sceneAlt": "Silvi photographs a manta ray underwater."
+  }
+]
