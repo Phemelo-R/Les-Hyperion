@@ -1,5 +1,5 @@
 <p align="center">
-	<img src="assets/brand/les-hyperion-dark.svg" alt="Les Hyperion" width="420" />
+	<img src="assets/brand/les-hyperion-light.svg" alt="Les Hyperion" width="420" />
 </p>
 
 # Les Hyperion
