@@ -8,7 +8,7 @@ Les Hyperion is a static portfolio and research website for Phemelo Rutlokoane. 
 
 ## Run locally
 
-Requirements: Node.js 18 or newer.
+Requirements: Node.js 20 or newer.
 
 ```sh
 npm install
@@ -66,21 +66,12 @@ Stylesheets for the site and its individual pages/features.
 
 | File or folder                                | Purpose                                                     |
 | --------------------------------------------- | ----------------------------------------------------------- |
-| `tokens.css`                                  | Shared design tokens such as colours and spacing.           |
-| `base.css`                                    | Base typography, layout, and element styles.                |
-| `site.css`                                    | Shared site shell and global styles.                        |
-| `nav.css`                                     | Navigation styles.                                          |
-| `home.css`                                    | Home page styles.                                           |
-| `about.css`                                   | About and portfolio page styles.                            |
-| `research.css`                                | Research page styles.                                       |
-| `notebooks.css`                               | Notebook catalogue styles.                                  |
+| `site.css`                                    | Shared site shell, typography, and global styles.           |
 | `reader.css`                                  | Notebook and research reader styles.                        |
 | `cv.css`                                      | CV page styles.                                             |
 | `cv-screen.css`                               | CV screen-specific layout and presentation.                 |
 | `carbon-tracker.css`                          | Carbon tracker interface styles.                            |
 | `carbon-redesign.css`                         | Carbon page redesign styles.                                |
-| `carbon/`                                     | Additional carbon tracker styling in `carbon.css`.          |
-| `modal.css`                                   | Shared modal/dialog styles.                                 |
 | `protocol.css`                                | Research protocol page styles.                              |
 | `refinement.css`, `revision.css`, `silvi.css` | Shared visual refinements and Silvi character presentation. |
 
@@ -88,22 +79,17 @@ Stylesheets for the site and its individual pages/features.
 
 Browser-side site behavior and source JavaScript modules.
 
-| File or folder              | Purpose                                                                                                                                                                                                                                                                                                                                                                                                          |
-| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `data.js`                   | Source catalogue data for notebooks and research.                                                                                                                                                                                                                                                                                                                                                                |
-| `site.js`                   | Shared site interactions.                                                                                                                                                                                                                                                                                                                                                                                        |
-| `nav.js`                    | Responsive navigation behavior.                                                                                                                                                                                                                                                                                                                                                                                  |
-| `theme-init.js`, `theme.js` | Early theme setup and theme switching.                                                                                                                                                                                                                                                                                                                                                                           |
-| `home.js`                   | Home page interactions.                                                                                                                                                                                                                                                                                                                                                                                          |
-| `about.js`                  | About and portfolio interactions.                                                                                                                                                                                                                                                                                                                                                                                |
-| `research.js`               | Research listing and article interactions.                                                                                                                                                                                                                                                                                                                                                                       |
-| `notebooks.js`              | Notebook catalogue behavior.                                                                                                                                                                                                                                                                                                                                                                                     |
-| `reader.js`                 | Notebook/research reader behavior.                                                                                                                                                                                                                                                                                                                                                                               |
-| `globe.js`                  | Interactive globe visualization.                                                                                                                                                                                                                                                                                                                                                                                 |
-| `math-config.js`            | MathJax configuration.                                                                                                                                                                                                                                                                                                                                                                                           |
-| `silvi.js`                  | Silvi character presentation and related behavior.                                                                                                                                                                                                                                                                                                                                                               |
-| `landscapes.js`             | Generated browser data for landscape visualizations; source data is in `data/json/landscapes.json`.                                                                                                                                                                                                                                                                                                              |
-| `carbon/`                   | Carbon tracker source modules: `carbon-math.js` calculates emissions; `carbon-allocation.js` assigns emissions; `carbon-store.js` persists records; `carbon-export.js` exports and backs up records; `carbon-workspace.js` coordinates tracker state and views; `carbon-controls.js` handles interface controls; `carbon-reference.js` and `carbon-runtime.js` are generated reference data and bundled runtime. |
+| File or folder   | Purpose                                                                                             |
+| ---------------- | --------------------------------------------------------------------------------------------------- |
+| `data.js`        | Source catalogue data for notebooks and research, consumed by the build.                            |
+| `site.js`        | Shared site interactions, including navigation and theme controls.                                  |
+| `theme-init.js`  | Applies the saved or preferred theme before first paint.                                            |
+| `reader.js`      | Notebook/research reader behavior.                                                                  |
+| `globe.js`       | Interactive globe visualization.                                                                    |
+| `math-config.js` | MathJax configuration.                                                                              |
+| `silvi.js`       | Silvi character presentation and related behavior.                                                  |
+| `landscapes.js`  | Generated browser data for landscape visualizations; source data is in `data/json/landscapes.json`. |
+| `carbon/`        | Carbon tracker source modules and the generated carbon reference data and bundled runtime.          |
 
 ### `data/json/`
 
@@ -149,16 +135,16 @@ R teaching and analysis notebooks, along with their generated web-readable versi
 
 Branding, fonts, images, research illustrations, and locally bundled browser dependencies.
 
-| File or folder         | Purpose                                                                                                                                                                                                                                                                  |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `LesHyperion_logo.png` | Raster logo asset.                                                                                                                                                                                                                                                       |
-| `brand/`               | Brand marks, icons, and Silvi illustrations; `masters/` contains image masters.                                                                                                                                                                                          |
-| `fonts/`               | Local font files and `fonts.css`, which declares them for the site.                                                                                                                                                                                                      |
-| `images/`              | Contains images; its `berg-river/`, `cape-flats/`, `fieldwork/`, `grootbos/`, and `practicals/` folders also contain images.                                                                                                                                             |
-| `web/`                 | Contains images used on site pages.                                                                                                                                                                                                                                      |
-| `research/`            | Contains research images.                                                                                                                                                                                                                                                |
-| `papers/`              | Contains paper assets; `protocol/` contains images for the protocol document.                                                                                                                                                                                            |
-| `vendor/`              | Locally bundled browser libraries: Chart.js, D3, Marked, TopoJSON, World Atlas data, and MathJax. `licenses/` contains their licence texts; `mathjax/` contains MathJax components, including accessibility (`a11y/`), input (`input/`), and output (`output/`) modules. |
+| File or folder         | Purpose                                                                                                                                                                                                                                                                                       |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `LesHyperion_logo.png` | Raster logo asset.                                                                                                                                                                                                                                                                            |
+| `brand/`               | Brand marks, icons, and Silvi illustrations; `masters/` contains image masters.                                                                                                                                                                                                               |
+| `fonts/`               | Local font files and `fonts.css`, which declares them for the site.                                                                                                                                                                                                                           |
+| `images/`              | Contains images; its `berg-river/`, `cape-flats/`, `fieldwork/`, `grootbos/`, and `practicals/` folders also contain images.                                                                                                                                                                  |
+| `web/`                 | Contains images used on site pages.                                                                                                                                                                                                                                                           |
+| `research/`            | Contains research images.                                                                                                                                                                                                                                                                     |
+| `papers/`              | Contains paper assets; `protocol/` contains images for the protocol document.                                                                                                                                                                                                                 |
+| `vendor/`              | Locally bundled browser libraries: Chart.js, D3, TopoJSON, World Atlas data, and MathJax. Marked is an npm build dependency. `licenses/` contains licence texts; `mathjax/` contains MathJax components, including accessibility (`a11y/`), input (`input/`), and output (`output/`) modules. |
 
 ### `scripts/`
 
@@ -170,5 +156,6 @@ Node.js tooling for local development and generation.
 | `build.mjs`            | Generates assembled pages, notebook reader outputs, carbon runtime/reference data, and other derived files. |
 | `research-utils.mjs`   | Shared research sorting and status utilities used by the build.                                             |
 | `research-writing.mjs` | Renders research writing for generated pages.                                                               |
+| `html-text.mjs`        | Extracts decoded text from generated HTML fragments.                                                        |
 
 `node_modules/` is created by `npm install`; it contains installed development dependencies and is not project source.
