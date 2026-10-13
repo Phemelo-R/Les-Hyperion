@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en-GB" data-theme="light">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Flight carbon calculations — Les Hyperion</title>
+<meta name="description" content="A presentation explaining how the Wild Impact Tracker estimates aircraft-related carbon dioxide emissions.">
+<link rel="icon" type="image/png" href="../assets/brand/favicon-32.png">
+<script src="../js/theme-init.js"></script>
+<link rel="stylesheet" href="../css/site.css">
+<link rel="stylesheet" href="../css/silvi.css">
+<link rel="stylesheet" href="../css/revision.css">
+<link rel="stylesheet" href="../css/refinement.css">
+<style>
+:root{--flight-accent:#4e91a6;--flight-accent-soft:rgba(78,145,166,.13)}
+.presentation{max-width:1100px;margin:0 auto;padding:2.4rem 1.25rem 5rem}
+.presentation .eyebrow{letter-spacing:.14em;text-transform:uppercase;font-size:.75rem;font-weight:700;color:var(--flight-accent)}
+.presentation h1{font-size:clamp(2.4rem,6vw,4.6rem);line-height:1.02;max-width:850px;margin:.7rem 0 1.2rem;letter-spacing:-.045em}
+.presentation h2{font-size:clamp(1.65rem,3.3vw,2.4rem);line-height:1.15;letter-spacing:-.025em;margin:.25rem 0 1rem}
+.presentation h3{font-size:1.1rem;margin:.1rem 0 .6rem}
+.lead{font-size:clamp(1.08rem,2vw,1.28rem);line-height:1.7;max-width:780px;color:var(--text-muted,var(--text-secondary))}
+.hero-panel{padding:clamp(1.5rem,4vw,3.2rem);border:1px solid var(--border);border-radius:24px;background:linear-gradient(135deg,var(--flight-accent-soft),transparent 70%)}
+.hero-meta{display:flex;gap:.65rem;flex-wrap:wrap;margin-top:1.6rem}
+.pill{display:inline-flex;padding:.38rem .7rem;border:1px solid var(--border);border-radius:999px;font-size:.82rem}
+.section{padding:3.1rem 0;border-bottom:1px solid var(--border)}
+.section-intro{max-width:760px;line-height:1.7}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin:1.3rem 0}
+.info-card,.formula-card,.step-card{padding:1.2rem 1.3rem;border:1px solid var(--border);border-radius:16px;background:var(--surface,rgba(128,128,128,.045))}
+.info-card p,.step-card p{margin:.35rem 0 0;line-height:1.65}
+.kicker{font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--flight-accent);font-weight:700}
+figure{margin:1.5rem 0}
+figure img{display:block;max-width:100%;max-height:620px;width:auto;height:auto;margin:0 auto;border-radius:14px;border:1px solid var(--border);object-fit:contain}
+figcaption{font-size:.86rem;line-height:1.5;color:var(--text-muted,var(--text-secondary));margin:.7rem auto 0;max-width:850px;text-align:center}
+.image-wide img{width:100%;max-height:560px;object-fit:contain}
+.data-table{width:100%;border-collapse:collapse;margin:1.1rem 0;font-size:.95rem}
+.data-table th,.data-table td{text-align:left;padding:.8rem .9rem;border-bottom:1px solid var(--border);vertical-align:top}
+.data-table th{background:var(--flight-accent-soft);font-weight:700}
+.formula-card{margin:1rem 0;padding:1.4rem;overflow-x:auto}
+.formula{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:clamp(1rem,2.4vw,1.22rem);line-height:1.8;white-space:normal}
+.formula .main-equation{display:block;font-size:1.15em;font-weight:700;margin:.4rem 0}
+.formula-note{font-size:.92rem;line-height:1.65;color:var(--text-muted,var(--text-secondary))}
+.mathline{display:block;margin:.55rem 0}
+.calc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem;margin:1rem 0}
+.calc-grid .formula-card{margin:0}
+.calc-grid strong{display:block;margin:.4rem 0}
+.flow{display:grid;grid-template-columns:minmax(0,1fr);gap:.45rem;max-width:760px;margin:1.5rem auto}
+.flow-node{border:1px solid var(--border);border-radius:14px;padding:1rem 1.2rem;text-align:center;background:var(--surface,rgba(128,128,128,.045))}
+.flow-node strong{display:block;margin-bottom:.3rem}
+.flow-node span{font-size:.92rem;line-height:1.5;color:var(--text-muted,var(--text-secondary))}
+.flow-arrow{height:25px;display:flex;justify-content:center;align-items:center;color:var(--flight-accent);font-size:1.5rem;font-weight:700}
+.flow-node.accent{background:var(--flight-accent-soft);border-color:var(--flight-accent)}
+.note{border-left:3px solid var(--flight-accent);padding:.8rem 1rem;background:var(--flight-accent-soft);border-radius:0 10px 10px 0;line-height:1.65;margin:1rem 0}
+.footer-panel{margin-top:2.5rem;padding:2rem;border-radius:20px;background:var(--flight-accent-soft);text-align:center}
+.smallprint{font-size:.88rem;line-height:1.6;color:var(--text-muted,var(--text-secondary))}
+@media(max-width:700px){.grid-2,.calc-grid{grid-template-columns:1fr}.presentation{padding-top:1.2rem}.section{padding:2.3rem 0}.data-table{font-size:.85rem}.data-table th,.data-table td{padding:.65rem .5rem}}
+@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+ <div class="container header-inner">
+  <a class="brand" href="../index.html" aria-label="Les Hyperion — home"><img class="brand-face" src="../assets/brand/silvi-face.png" alt="" width="55" height="59"><span class="brand-name" aria-hidden="true">LES HYPERI<svg class="compass-o" viewBox="0 0 36 46" aria-hidden="true"><circle cx="18" cy="23" r="14.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="m18 1 4 17 14 5-14 4-4 18-4-18L0 23l14-5Z" fill="currentColor"/></svg>N</span></a>
+  <nav class="desktop-nav" aria-label="Main navigation">
+   <a href="../index.html">Home</a><a href="../research.html">Research</a><a href="../notebooks.html">Notebooks</a><a href="../carbon.html">Carbon</a><a href="carbon-presentation.html" aria-current="page">Carbon presentation</a><a href="../about.html">About</a><a href="../cv.html">CV</a>
+  </nav>
+  <div class="header-actions"><button class="icon-button theme-toggle" data-theme-toggle aria-label="Switch colour theme"><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.6 13.7A8.8 8.8 0 0 1 10.3 3.4a8.8 8.8 0 1 0 10.3 10.3Z"/></svg><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button><button class="icon-button menu-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="mobile-nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button></div>
+ </div>
+ <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" hidden><a href="../index.html">Home</a><a href="../research.html">Research</a><a href="../notebooks.html">Notebooks</a><a href="../carbon.html">Carbon</a><a href="carbon-presentation.html" aria-current="page">Carbon presentation</a><a href="../about.html">About</a><a href="../cv.html">CV</a></nav>
+</header>
+<main id="main" class="presentation">
+<section class="hero-panel">
+ <p class="eyebrow">Wild Impact Tracker · Technical presentation</p>
+ <h1>Flight calculations: from route to CO<sub>2</sub></h1>
+ <p class="lead">How the aircraft module turns a route, aircraft reference data and passenger details into an estimate of flight-related carbon dioxide emissions.</p>
+ <div class="hero-meta"><span class="pill">Aircraft module</span><span class="pill">ICAO fuel curves</span><span class="pill">Browser-based tracker</span></div>
+</section>
+<section class="section">
+ <p class="eyebrow">01 / The tracker</p><h2>One recording system, shared rules</h2>
+ <p class="section-intro">The Wild Impact Tracker is being developed to record travel activity consistently across Wild Impact landscapes. This presentation focuses on the aircraft module; the e-bike module was presented separately. The tracker replaces scattered manual calculations with a repeatable workflow and a common record structure.</p>
+ <figure class="image-wide"><img src="assets/tracker-overview.png" alt="Overview of the Wild Impact Carbon Tracker interface"><figcaption>The tracker interface and its travel-recording modules.</figcaption></figure>
+ <div class="grid-2">
+  <article class="info-card"><span class="kicker">Flights</span><h3>Route-based estimates</h3><p>Records the traveller, landscape, date, route, airline, aircraft, cabin and passenger count. Flight emissions are estimated from aircraft fuel curves and allocation factors.</p></article>
+  <article class="info-card"><span class="kicker">Reporting</span><h3>Records into usable outputs</h3><p>Stores records in the local browser, displays summaries and charts, and supports Excel export. SharePoint synchronisation through Power Automate remains planned work.</p></article>
+ </div>
+ <div class="note"><strong>Scope:</strong> vehicles and boats are reserved for future versions. The current operational modules are flights and e-bikes.</div>
+</section>
+<section class="section">
+ <p class="eyebrow">02 / Why build it?</p><h2>From spreadsheet effort to repeatable records</h2>
+ <div class="grid-2">
+  <article class="info-card"><h3>Consistent recording</h3><p>Use the same fields and reference tables across projects and landscapes rather than maintaining disconnected spreadsheets.</p></article>
+  <article class="info-card"><h3>Calculations in the background</h3><p>Users enter activity details; the tracker applies the calculation rules and records the resulting estimates.</p></article>
+  <article class="info-card"><h3>Reporting-ready outputs</h3><p>Monthly summaries and Excel export make records easier to review and reuse.</p></article>
+  <article class="info-card"><h3>Expandable design</h3><p>The same recording pattern can later support vehicles, boats and additional emission calculations.</p></article>
+ </div>
+ <figure><img src="assets/module-selection.png" alt="Aircraft and e-bike module selection screen"><figcaption>The currently available modules: aircraft and e-bikes.</figcaption></figure>
+</section>
+<section class="section">
+ <p class="eyebrow">03 / User workflow</p><h2>From activity entry to report</h2>
+ <p class="section-intro">The user-facing workflow is deliberately short. The technical work happens behind the form, using reference data bundled with the site.</p>
+ <div class="grid-2">
+  <article class="step-card"><span class="kicker">Step 1</span><h3>Choose a module</h3><p>Select Aircrafts for flight records or E-Bikes for ranger travel.</p><img src="assets/module-selection.png" alt="Module selection" style="width:100%;max-height:230px;object-fit:contain;margin-top:1rem;border-radius:10px"></article>
+  <article class="step-card"><span class="kicker">Step 2</span><h3>Enter the activity</h3><p>Record the date, person involved and the landscape associated with the trip.</p><img src="assets/activity-entry.png" alt="Activity entry form" style="width:100%;max-height:230px;object-fit:contain;margin-top:1rem;border-radius:10px"></article>
+  <article class="step-card"><span class="kicker">Step 3</span><h3>Select route references</h3><p>For flights, choose domestic or international travel, departure and arrival airports, airline, aircraft and cabin details.</p><img src="assets/airport-selection.png" alt="Departure and arrival airport selectors" style="width:100%;max-height:230px;object-fit:contain;margin-top:1rem;border-radius:10px"></article>
+  <article class="step-card"><span class="kicker">Step 4</span><h3>Calculate and save</h3><p>The tracker applies the model, displays the calculation steps and saves the record in the browser used to enter it.</p><img src="assets/flight-calculation-example.png" alt="Flight calculation example displayed by the tracker" style="width:100%;max-height:230px;object-fit:contain;margin-top:1rem;border-radius:10px"></article>
+ </div>
+ <figure><img src="assets/emissions-over-time.png" alt="Flight emissions displayed over time"><figcaption>Example of the reporting view for flight emissions.</figcaption></figure>
+ <figure><img src="assets/excel-export.png" alt="Excel workbook exported from the tracker"><figcaption>Excel export provides a tabular output for review and downstream reporting.</figcaption></figure>
+ <div class="note"><strong>Data handling:</strong> records are saved in the user's local browser storage; they are not automatically public or shared with other users. Local browser storage is not a central database and does not automatically synchronise across browsers or devices.</div>
+</section>
+<section class="section">
+ <p class="eyebrow">04 / Reference data</p><h2>What feeds the calculation?</h2>
+ <p class="section-intro">The tracker uses local JSON reference files to populate the interface and supply model inputs.</p>
+ <table class="data-table"><thead><tr><th>Reference file / source</th><th>Role in the tracker</th></tr></thead><tbody>
+ <tr><td><code>airport-reference.json</code></td><td>Airport identifiers and locations; approximately 10,533 records.</td></tr>
+ <tr><td><code>aircraft-reference.json</code></td><td>Aircraft types and specifications; approximately 86 types.</td></tr>
+ <tr><td><code>airline-reference.json</code></td><td>Airline and operator choices; approximately 83 entries.</td></tr>
+ <tr><td><code>flight-configurations.json</code></td><td>Published cabin-layout profiles, seat counts and seat-space factors.</td></tr>
+ <tr><td>ICAO fuel curves</td><td>Reference fuel consumption by aircraft and distance, drawing on ICAO methodology versions 9 (2014) and 13.1 (2024).</td></tr>
+ <tr><td><code>landscape-reference.json</code></td><td>Wild Impact landscape choices and their associated countries.</td></tr>
+ </tbody></table>
+</section>
+<section class="section">
+ <p class="eyebrow">05 / Calculation 1</p><h2>Route distance: great-circle distance</h2>
+ <p class="section-intro">The distance between the departure and arrival airports is calculated as a great-circle distance (GCD): the shortest path between two points on a sphere. It is not the same as a rhumb-line distance, and it is not a record of the aircraft's actual flown track.</p>
+ <figure><img src="assets/great-circle-distance.jpg" alt="Illustration comparing a rhumb line and great-circle distance"><figcaption>Great-circle distance represents the shortest surface path on a spherical Earth.</figcaption></figure>
+ <div class="formula-card"><div class="kicker">Route adjustment</div><div class="formula"><span class="main-equation">Adjusted distance = GCD + route allowance</span></div><p class="formula-note">A fixed allowance is added to approximate additional distance associated with routing, holding and operational detours. It is a model assumption, not a measurement of a particular flight.</p></div>
+ <table class="data-table"><thead><tr><th>Great-circle distance</th><th>Allowance added</th></tr></thead><tbody><tr><td>Less than 550 km</td><td>50 km</td></tr><tr><td>550–5,500 km</td><td>100 km</td></tr><tr><td>More than 5,500 km</td><td>125 km</td></tr></tbody></table>
+</section>
+<section class="section">
+ <p class="eyebrow">06 / Calculation 2</p><h2>Fuel consumption: linear interpolation</h2>
+ <p class="section-intro">ICAO fuel curves provide reference fuel values at specified distances. If the adjusted route distance falls between two reference points, linear interpolation estimates the fuel value between them.</p>
+ <div class="formula-card"><div class="kicker">Interpolation formula</div><div class="formula"><span class="main-equation">F(x) = F<sub>1</sub> + <span style="white-space:nowrap">(x − x<sub>1</sub>) / (x<sub>2</sub> − x<sub>1</sub>)</span> × (F<sub>2</sub> − F<sub>1</sub>)</span></div><p class="formula-note"><em>x</em> is the required distance; <em>x</em><sub>1</sub> and <em>x</em><sub>2</sub> are the lower and upper reference distances; <em>F</em><sub>1</sub> and <em>F</em><sub>2</sub> are the corresponding reference fuel values.</p></div>
+ <h3>Worked example</h3>
+ <p>Suppose the lower reference point is 250 nautical miles (nm), with fuel consumption of 2,703 kg. The upper point is 500 nm, with fuel consumption of 3,788 kg. We want an estimate at 300 nm.</p>
+ <div class="calc-grid">
+  <div class="formula-card"><span class="kicker">1 · Interpolation fraction</span><div class="formula"><span class="mathline">(300 − 250) / (500 − 250)</span><span class="main-equation">= 0.2</span></div><p class="formula-note">The required distance is 20% of the way through the reference interval.</p></div>
+  <div class="formula-card"><span class="kicker">2 · Fuel difference</span><div class="formula"><span class="mathline">ΔF = F<sub>2</sub> − F<sub>1</sub></span><span class="main-equation">= 3,788 − 2,703 = 1,085 kg</span></div><p class="formula-note">This is the difference between the two reference fuel values.</p></div>
+  <div class="formula-card"><span class="kicker">3 · Additional fuel</span><div class="formula"><span class="mathline">0.2 × 1,085 kg</span><span class="main-equation">= 217 kg</span></div><p class="formula-note">Take 20% of the fuel difference.</p></div>
+  <div class="formula-card"><span class="kicker">4 · Estimated fuel</span><div class="formula"><span class="mathline">F(x) = 2,703 + 217</span><span class="main-equation">= 2,920 kg</span></div><p class="formula-note">Add the interpolated increment to the lower reference value.</p></div>
+ </div>
+ <div class="note">The example is illustrative. The selected aircraft's own ICAO reference curve and the tracker’s adjusted route distance determine the value used for an actual record.</div>
+ <p class="smallprint">Method reference: <a href="https://icec.icao.int/Documents/Methodology%20ICAO%20Carbon%20Emissions%20Calculator_v13_Final.pdf" target="_blank" rel="noopener noreferrer">ICAO Carbon Emissions Calculator methodology, version 13</a>.</p>
+</section>
+<section class="section">
+ <p class="eyebrow">07 / Calculation 3</p><h2>Allocate emissions to passengers</h2>
+ <p class="section-intro">Estimated fuel consumption is converted to CO<sub>2</sub> and allocated across the flight's passenger capacity, passenger load and cabin configuration. The cabin factor represents the space allocation associated with the selected cabin class.</p>
+ <div class="formula-card"><div class="kicker">Per-passenger estimate</div><div class="formula"><span class="main-equation">kg CO<sub>2</sub> per passenger = [Fuel × 3.16 × cargo allocation ÷ (Seats × passenger load factor)] × cabin allocation</span></div><p class="formula-note">Fuel is expressed in kilograms. The factor 3.16 converts a mass of aviation fuel into the corresponding mass of CO<sub>2</sub> under the model's combustion assumption. Seat count, load factor and cabin allocation distribute the estimate rather than measure an individual's marginal fuel use.</p></div>
+ <div class="grid-2"><article class="info-card"><h3>Fuel × 3.16</h3><p>Converts estimated fuel mass to estimated CO<sub>2</sub> mass using the tracker’s emission factor.</p></article><article class="info-card"><h3>Seats × load factor</h3><p>Approximates the occupied passenger capacity over which emissions are allocated.</p></article><article class="info-card"><h3>Cargo allocation</h3><p>Accounts for the share of fuel/emissions assigned to passenger transport under the selected methodology.</p></article><article class="info-card"><h3>Cabin allocation</h3><p>Adjusts the passenger allocation for the space associated with the selected cabin class.</p></article></div>
+</section>
+<section class="section">
+ <p class="eyebrow">08 / Calculation 4</p><h2>From one passenger to the recorded trip</h2>
+ <div class="formula-card"><div class="formula"><span class="main-equation">Flight total CO<sub>2</sub> (kg) = kg CO<sub>2</sub> per passenger × passenger count</span><span class="main-equation">Flight total CO<sub>2</sub> (tonnes) = Flight total CO<sub>2</sub> (kg) ÷ 1,000</span></div></div>
+ <p class="section-intro">The passenger count scales the per-passenger estimate to the number of people represented by the record. The tracker then converts kilograms to tonnes for reporting.</p>
+ <figure><img src="assets/flight-calculation-example.png" alt="Example of the aircraft calculation output"><figcaption>The calculation view makes the estimated steps inspectable rather than presenting only a final number.</figcaption></figure>
+ <div class="note"><strong>Interpretation boundary:</strong> these are model-based CO<sub>2</sub> estimates. They do not represent direct measurements of fuel burned on a specific flight and do not include non-CO<sub>2</sub> aviation effects such as contrails or aviation-induced changes in cloudiness.</div>
+</section>
+<section class="section">
+ <p class="eyebrow">09 / System architecture</p><h2>How the system is intended to work</h2>
+ <p class="section-intro">The browser handles data entry and local calculations. A separate synchronisation pathway is planned to move selected records into Wild Impact’s SharePoint-hosted Excel workbook. That integration is not yet implemented.</p>
+ <div class="flow" aria-label="Planned tracker data flow">
+  <div class="flow-node accent"><strong>1. User enters a flight record</strong><span>Date, traveller, landscape, route, aircraft and passenger details.</span></div><div class="flow-arrow" aria-hidden="true">↓</div>
+  <div class="flow-node"><strong>2. Browser reads reference JSON</strong><span>Airport, airline, aircraft, configuration and fuel-curve data support the calculation.</span></div><div class="flow-arrow" aria-hidden="true">↓</div>
+  <div class="flow-node"><strong>3. Estimate and save locally</strong><span>The tracker calculates emissions and stores the record in browser storage.</span></div><div class="flow-arrow" aria-hidden="true">↓</div>
+  <div class="flow-node"><strong>4. Netlify Function — planned</strong><span>A server-side bridge would prepare and send records securely; this step is not yet built.</span></div><div class="flow-arrow" aria-hidden="true">↓</div>
+  <div class="flow-node"><strong>5. Power Automate — planned</strong><span>A flow would receive the payload and write the record to SharePoint / Excel.</span></div><div class="flow-arrow" aria-hidden="true">↓</div>
+  <div class="flow-node accent"><strong>6. Wild Impact reporting workbook</strong><span>A centralised record table for review, reporting and downstream analysis.</span></div>
+ </div>
+ <div class="note"><strong>Important distinction:</strong> hosting the front-end on GitHub Pages or Netlify does not, by itself, make local browser records available to Power Automate. A deliberate server-side hand-off and an authenticated Power Automate endpoint are still required. Private source-code repositories also do not make a published website private; anyone with the public site URL can visit it unless access controls are added.</div>
+</section>
+<section class="section">
+ <p class="eyebrow">10 / Boundaries and next steps</p><h2>What the current version can — and cannot — claim</h2>
+ <div class="grid-2"><article class="info-card"><h3>Available now</h3><p>Flight CO<sub>2</sub> estimates, aircraft fuel-curve interpolation, passenger and cabin allocation, local browser records, summaries and Excel export.</p></article><article class="info-card"><h3>Not yet available</h3><p>Central synchronisation through Power Automate, vehicle and boat modules, direct flight fuel measurements, and non-CO<sub>2</sub> aviation effects.</p></article></div>
+ <p class="section-intro">The immediate next step is to complete and test the synchronisation pathway, including authentication, duplicate handling, error reporting and a clear policy for which records are sent to SharePoint.</p>
+</section>
+<div class="footer-panel"><p class="eyebrow">Wild Impact Tracker</p><h2>Thank you</h2><p class="lead" style="margin:0 auto">A repeatable route from travel activity to transparent, reviewable emissions estimates.</p><figure><img src="assets/presentation-closing.png" alt="Wild Impact Carbon Tracker presentation closing graphic"></figure><p class="smallprint"><a href="../carbon.html">Return to the Carbon page</a> · <a href="../notebooks.html">Browse notebooks</a></p></div>
+</main>
+<script src="../js/site.js"></script>
+</body></html>
